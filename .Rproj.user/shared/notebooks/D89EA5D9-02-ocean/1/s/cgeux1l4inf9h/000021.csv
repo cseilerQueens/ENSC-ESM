@@ -1,7 +1,0 @@
-"0",""
-"0","time <- seq(1, 30000, 1)"
-"0","rate <- 0.02/1000 # change in Sv per 1000 years"
-"0","intercept <- -0.3 # Sv"
-"0","hosing <- rate * time + intercept"
-"0",""
-"0","plot(x = time, y = hosing, main = ""Freshwater Hosing between 20-50 Deg Latitude"", xlab = ""Time (years)"", ylab = ""Freshawater hosing (Sv)"", type = ""l"")"

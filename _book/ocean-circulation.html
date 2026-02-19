@@ -673,11 +673,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li><p><code>./runme -rs -q medium -w 60:00:00</code> runs the model and tells the HPC how much computational resources the model requires</p></li>
 <li><p><code>-o $output/$outdir/hyst2050/up</code> tells the HPC where to store the output</p></li>
-<li><p><code>-p ctl.nyears=30000</code> sets the parameter <code>ctl.nyears</code> to a value of 30,000. That means that the model simulates 30,000 years.</p></li>
-<li></li>
+<li><p><code>-p</code> sets the parameters. The meaning of each parameter is outlined in the different namelist files (<code>.nml</code>)located in <code>/CLIMBER-X/climber-x/nml/</code></p></li>
+<li><p>You can find the meaning of each parameter as follows:</p></li>
 </ul>
-<p>./runme -rs -q medium -w 60:00:00 –omp 32 -o <span class="math inline">\(output/\)</span>outdir/hyst2050/down -p ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=0.3 ocn.hosing_trend=-0.02 ocn.lat_min_hosing=20 ocn.lat_max_hosing=50</p>
-<p>```</p>
+<div class="sourceCode" id="cb32"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb32-1"><a href="ocean-circulation.html#cb32-1" tabindex="-1"></a><span class="co"># go to the directory where the namelist files are stored</span></span>
+<span id="cb32-2"><a href="ocean-circulation.html#cb32-2" tabindex="-1"></a><span class="bu">cd</span> /CLIMBER-X/climber-x/nml/</span>
+<span id="cb32-3"><a href="ocean-circulation.html#cb32-3" tabindex="-1"></a></span>
+<span id="cb32-4"><a href="ocean-circulation.html#cb32-4" tabindex="-1"></a><span class="co"># search for the parameter in all namelist files:</span></span>
+<span id="cb32-5"><a href="ocean-circulation.html#cb32-5" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">&quot;nyears&quot;</span> <span class="pp">*</span>.nml</span></code></pre></div>
+<p>Here a list of all the parameters that were set for this experiment:</p>
+<ul>
+<li><p><code>ctl.nyears=30000</code>: number of simulation years</p></li>
+<li><p><code>ocn.l_hosing=T</code>: apply additional freshwater hosing? (<span class="math inline">\(T\)</span> stands for TRUE, <span class="math inline">\(F\)</span> for FALSE)</p></li>
+<li><p><code>ocn.hosing_ini=-0.3</code>: Sv, inital/constant value of hosing flux</p></li>
+<li><p><code>ocn.hosing_trend=0.02</code>: Sv/kyr, rate at which hosing flux is increased/decreased</p></li>
+<li><p><code>ocn.lat_min_hosing=20</code>: lower latitude bound for region of freshwater flux</p></li>
+<li><p><code>ocn.lat_max_hosing=50</code>: higher latitude bound for region of freshwater flux</p></li>
+</ul>
+<p>The command to run the freshwater hosing experiment only mentions a few parameters. For all other parameter, the default setting is chosen. For instance, the atmospheric CO<sub>2</sub> concentration is set to a constant value of 280 ppmv. Recall that Sv = Sverdrup = 10<sup>6</sup> km<sup>2</sup> s<sup>-1</sup>. Let’s now translate the command below into words:</p>
+<div class="sourceCode" id="cb33"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb33-1"><a href="ocean-circulation.html#cb33-1" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/up   <span class="at">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=-0.3 ocn.hosing_trend=0.02  ocn.lat_min_hosing=20 ocn.lat_max_hosing=50</span></code></pre></div>
+<p>This means: simulate 30,000 years starting with an initial freshwater input of -0.3 Sv between 20 and 50 degrees latitude in the North Atlantic. The freshwater flux is increased by a rate of 0.02 Sv/1000 years, causing it to increase from -0.3 Sv to +0.3 Sv after 30,000 years. What does a negative freshwater flux mean? A negative freshwater flux means that freshwater is taken out of the ocean (evaporation &gt; precipitation), increasing the seawater’s salinity.</p>
+<ul>
+<li>Q: Reproduce the figure below to illuistrate how the hosing changes over time</li>
+</ul>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="ocean-circulation.html#cb34-1" tabindex="-1"></a><span class="co"># Add your code here</span></span></code></pre></div>
+<p><img src="_main_files/figure-html/unnamed-chunk-32-1.png" width="480" /></p>
+<p>We will also conduct another experiment:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb35-1"><a href="ocean-circulation.html#cb35-1" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/down <span class="at">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=0.3  ocn.hosing_trend=-0.02 ocn.lat_min_hosing=20 ocn.lat_max_hosing=50</span></code></pre></div>
+<ul>
+<li><p>Q: Explain what this simulation does, and make a figure similar to the one above that illustrates how the freshwater hosing changes over time</p></li>
+<li><p>A: ___</p></li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="ocean-circulation.html#cb36-1" tabindex="-1"></a><span class="co"># Add your code here</span></span></code></pre></div>
+<p>The AMOC strength is defined as the maximum of the Atlantic meridional streamfunction
+deeper than 700 m. The initial condition for both
+these experiments is a pre-industrial equilibrium simulation
+run for 10 000 years with 280 ppm of CO2 and present-day
+ice sheets.</p>
+<p>until 0.5 Sv or
+starting from +0.5 Sv hosing flux and gradually decreasing
+it until −0.5 Sv.</p>
+<pre><code>./runme -rs -q medium -w 60:00:00 --omp 32 -o $output/$outdir/hyst2050/down -p ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=0.3  ocn.hosing_trend=-0.02 ocn.lat_min_hosing=20 ocn.lat_max_hosing=50
+</code></pre>
 
 </div>
 </div>

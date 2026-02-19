@@ -1,6 +1,0 @@
-"0",""
-"0","plot(results$lambda, results$y,"
-"0","     pch=16,"
-"0","     xlab=expression(lambda),"
-"0","     ylab=""Equilibrium y"","
-"0","     main=""(b) Temperature contrast (y)"")"
