@@ -1,0 +1,14 @@
+h1:linear-algebra Linear Algebra
+h2:matrix-multiplication Matrix Multiplication
+h2:matrix-transposition Matrix Transposition
+h2:matrix-inversion Matrix Inversion
+h2:transformation Transformation
+h2:eigenvectors-and-eigenvalues Eigenvectors and eigenvalues
+h2:determinant Determinant
+h2:jacobian-matrix Jacobian Matrix
+h2:numerical-example Numerical example
+h3:step-1-set-the-odes-to-zero-and-solving-for-each-variable Step (1): Set the ODEs to zero and solving for each variable
+h3:step-2-apply-the-jacobian-matrix-to-the-odes Step (2): Apply the Jacobian matrix to the ODEs
+h3:step-3-calculate-the-eigenvalues Step (3) Calculate the eigenvalues
+h3:step-4-calculate-the-equilibrium-eigenvalues Step (4): Calculate the equilibrium eigenvalues
+

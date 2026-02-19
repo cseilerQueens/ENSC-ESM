@@ -1,0 +1,4 @@
+"0",""
+"0","box.HL <- c(34, 2) # salinity and temperature of high-latitude box"
+"0","box.LL <- c(36, 25) # salinity and temperature of high-latitude box"
+"0","points(x = box.HL[1], y = box.HL[2], col = ""blue"", pch = 16) # high-latitude"
