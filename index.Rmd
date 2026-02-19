@@ -1,0 +1,32 @@
+--- 
+# title: "Earth System Modelling"
+# author: "Dr. Christian Seiler"
+# date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://bookdown.org/yihui/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: "ESM"
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# Course Overview
+
+abc
+
+##  Assessments
+
+|Assignment | Type | Weight | Due Date|
+|:----------|:-----|:-------|:--------|
+| Tutorial Report | Individual | 50% | Tue, Dec 3, 2024|
+| Project Presentation | Group | 10% | Fri, Mar 21, 2025|
+| Project Report | Group | 40% | Mon, Apr 7, 2025|
+
+## Contact
+
+* Instructor: Dr. Christian Seiler
+* Email: christian.seiler@queensu.ca
+* Office: Biosciences Complex, Room 3240, 116 Barrie Street
+* Office hours: Tuesdays 2-4 PM
