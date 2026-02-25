@@ -29,10 +29,10 @@ step-3-calculate-the-eigenvalues
 step-4-calculate-the-equilibrium-eigenvalues
 ocean-circulation
 the-stommel-model
-exercise-ts--diagram-xx-points
-exercise-initial-conditions-xx-points
-exercise-phase-portrait-xx-points
-exercise-equillibrium-points-xx-points
+temperature---salinity-diagram
+phase-diagram
 jacobian-matrix-and-equilibrium-eigenvalues
 bifurcation-diagram
 climber-x-hosing-experiments
+hysteresis
+reflection
