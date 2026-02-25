@@ -1,0 +1,660 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{lmodern}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\usepackage[margin=1in]{geometry}
+\usepackage{graphicx}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\ifLuaTeX
+  \usepackage{selnolig}  % disable illegal ligatures
+\fi
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same} % disable monospaced font for URLs
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{\vspace{-2.5em}}
+
+\begin{document}
+
+\hypertarget{linear-algebra}{%
+\section{Linear Algebra}\label{linear-algebra}}
+
+This section introduces the basic mathematical concepts required for
+understanding tipping points.
+
+\hypertarget{matrix-multiplication}{%
+\subsection{Matrix Multiplication}\label{matrix-multiplication}}
+
+\[
+\begin{bmatrix}
+1 & 2 \\
+3 & 4
+\end{bmatrix}
+\begin{bmatrix}
+5 \\
+6
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 \cdot 5 + 2 \cdot 6 \\
+3 \cdot 5 + 4 \cdot 6
+\end{bmatrix}
+=
+\begin{bmatrix}
+17 \\
+39
+\end{bmatrix}
+\]
+
+\hypertarget{matrix-transposition}{%
+\subsection{Matrix Transposition}\label{matrix-transposition}}
+
+\[
+\mathbf{A} =
+\begin{bmatrix}
+1 & 2 \\
+3 & 4 \\
+5 & 6
+\end{bmatrix}
+\quad \Rightarrow \quad
+\mathbf{A}^\top =
+\begin{bmatrix}
+1 & 3 & 5 \\
+2 & 4 & 6
+\end{bmatrix}
+\]
+
+\hypertarget{matrix-inversion}{%
+\subsection{Matrix Inversion}\label{matrix-inversion}}
+
+For a square matrix \(\mathbf{A}\), the inverse \(\mathbf{A}^{-1}\)
+satisfies:
+
+\[
+\mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}
+\] where \(\mathbf{I}\) is the identity matrix. Note that only
+non-singular (invertible) matrices have an inverse. For a \(2 \times 2\)
+matrix:
+
+\[
+\mathbf{A} =
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\quad \Rightarrow \quad
+\mathbf{A}^{-1} = \frac{1}{ad - bc}
+\begin{bmatrix}
+d & -b \\
+-c & a
+\end{bmatrix}
+\quad \text{if } ad - bc \neq 0
+\]
+
+\hypertarget{transformation}{%
+\subsection{Transformation}\label{transformation}}
+
+If we multiply a matrix with a vector, we apply a linear transformation
+to the vector. This produces a new vector. Depending on the
+transformation, the new vector may have new coordinates, a different
+length, and possibly a different direction. For example consider the
+matrix \(\mathbf{A}\) and the vector \(\mathbf{v}\):
+
+\[
+\mathbf{A} = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\text{ and }
+\mathbf{v} = \begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+\] Let's multiply the two:
+
+\[
+\mathbf{Av} =
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+=
+\begin{bmatrix}
+ax + by \\
+cx + dy
+\end{bmatrix}
+\]
+
+The matrix transforms the vector. It produces a new vector whose length,
+direction, or coordinates may change. So matrices do not just store
+numbers, they describe how vectors and shapes are transformed. Consider
+the matrix \(\mathbf{A}\) and the two vectors \(\mathbf{v_1}\) and
+\(\mathbf{v_2}\)
+
+\[
+\mathbf{A} =
+\begin{bmatrix}
+2 & 1 \\
+1 & 3 \\
+\end{bmatrix}
+\mathbf{v_1} =
+\begin{bmatrix}
+1 \\
+0 \\
+\end{bmatrix}
+\mathbf{v_2} =
+\begin{bmatrix}
+0 \\
+1 \\
+\end{bmatrix}
+\] The two vectors span a unit square in the plane. Applying the matrix
+transforms that square into a parallelogram:
+
+\[
+\mathbf{Av_1} = 
+\begin{bmatrix}
+2 \\
+1 \\
+\end{bmatrix}
+\mathbf{Av_2} = 
+\begin{bmatrix}
+1 \\
+3 \\
+\end{bmatrix}
+\]
+
+\hypertarget{eigenvectors-and-eigenvalues}{%
+\subsection{Eigenvectors and
+eigenvalues}\label{eigenvectors-and-eigenvalues}}
+
+Consider the following transformation:
+
+\[
+\mathbf{Av} = \mathbf{v'}
+\]
+
+In general, \(\mathbf{v'}\) points in a different direction than
+\(\mathbf{v}\). But some vectors are special, they don't change the
+direction under the transformation. These special vectors are called
+eigenvectors. For these eigenvectors \(\mathbf{v}\), the matrix
+\(\mathbf{A}\) only stretches or shrinks them:
+
+\[
+\mathbf{Av} = \lambda \mathbf{v}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(\lambda\) is called the eigenvalue corresponding to that eigenvector
+\item
+  \(|\lambda|>1\): vector is stretched
+\item
+  \(|\lambda|<1\): vector is shrunk
+\item
+  \(\lambda<0\): vector flips direction
+\end{itemize}
+
+For example, let's stretch a vector by a factor of two using a matrix:
+
+\[
+\mathbf{Av} =
+\begin{bmatrix}
+1 & 2 \\
+1 & 0
+\end{bmatrix}
+\begin{bmatrix}
+2 \\
+1
+\end{bmatrix}
+=
+\begin{bmatrix}
+2 + 2 \\
+2 + 0
+\end{bmatrix}
+=
+\begin{bmatrix}
+4 \\
+2
+\end{bmatrix}
+= 2 \begin{bmatrix}
+2 \\
+1
+\end{bmatrix}
+= \lambda \mathbf{v}
+\] Here, \(\mathbf{v}\) is the eigenvector, and the corresponding
+eigenvalue \(\lambda\) is the factor by which the vector is being
+stretched (\(\lambda = 2\)). The eigenvalues can help us to understand
+how a system behaves close to its equilibrium points, as will be
+explained a little further below.
+
+\hypertarget{determinant}{%
+\subsection{Determinant}\label{determinant}}
+
+A matrix transforms the shape spanned by vectors. The determinant tells
+us how the shape's area changes, for example, whether it expands,
+shrinks, or collapses into a line. Consider the matrix:
+
+\[
+\mathbf{A} =
+\begin{bmatrix}
+a & b \\
+c & d \\
+\end{bmatrix}
+\]
+
+The determinant of matrix \(\mathbf{A}\) is defined as:
+
+\[
+\det(\mathbf{A}) = ad -bc
+\] For example:
+
+\[
+\mathbf{A} =
+\begin{bmatrix}
+1 & 2 \\
+1 & 0 \\
+\end{bmatrix}
+\]
+
+\[
+\det(\mathbf{A}) = 1*0 - 2*1 = -2
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  \(|\det({\mathbf{A}})|>1\): area expands
+\item
+  \(|\det({\mathbf{A}})|<1\): area shrinks
+\item
+  \(|\det({\mathbf{A}})|=0\): area collapses
+\end{itemize}
+
+In this case, the determinant tells us that applying the matrix
+\(\mathbf{A}\) will expand the area spanned by vectors (\(|-2|>1\)). The
+determinant allows us to to calculate the eigenvalues \(\lambda\):
+
+\[
+\mathbf{A} \mathbf{v} = \lambda \mathbf{v}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Let's rewrite this equation:
+  \(\mathbf{A} \mathbf{v} - \lambda \mathbf{v} = 0\)
+\item
+  Rearrange: \((\mathbf{A} - \lambda \mathbf{I}) \mathbf{v} = 0\)
+\item
+  Where \(\mathbf{I}\) is the identity matrix:
+\end{itemize}
+
+\[
+\mathbf{I} = 
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\] If \(\mathbf{v} \ne 0\), then:
+
+\[
+\det(\mathbf{A} - \lambda \mathbf{I}) = 0
+\] The determinant can therefore be used to calculate the eigenvalues.
+For instance:
+
+\[
+\mathbf{A} - \lambda \mathbf{I} = \begin{bmatrix} 2-\lambda & 3 \\ 1 & 4-\lambda \end{bmatrix}
+\]
+
+\[
+\det(\mathbf{A} - \lambda \mathbf{I}) = (2-\lambda)(4-\lambda) - 3 \times 1
+\]
+
+\[
+= (2-\lambda)(4-\lambda) - 3
+\]
+
+\[
+= 2 \times 4 - 2\lambda - 4\lambda + \lambda^2 - 3 = 8 - 6\lambda + \lambda^2 - 3
+\]
+
+\[
+= \lambda^2 - 6\lambda + 5
+\]
+
+\[
+\lambda^2 - 6\lambda + 5 = 0
+\]
+
+\[
+\lambda = \frac{6 \pm \sqrt{36 - 20}}{2} = \frac{6 \pm \sqrt{16}}{2} = \frac{6 \pm 4}{2}
+\]
+
+\[
+\Rightarrow \quad \lambda_1 = 5, \quad \lambda_2 = 1
+\]
+
+\hypertarget{jacobian-matrix}{%
+\subsection{Jacobian Matrix}\label{jacobian-matrix}}
+
+In dynamical systems theory, the matrix that we will be using is the
+Jacobian matrix \(\mathbf{J}\). The Jacobian matrix is a matrix of
+partial derivatives that describes how a multivariable function changes
+locally. For instance:
+
+\[
+\mathbf{f}(\mathbf{x}) =
+\begin{bmatrix}
+f_1(x, y, z) \\
+f_2(x, y, z) \\
+f_3(x, y, z)
+\end{bmatrix}
+\mathbf{J} =
+\begin{bmatrix}
+\frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} & \frac{\partial f_1}{\partial z} \\
+\frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y} & \frac{\partial f_2}{\partial z} \\
+\frac{\partial f_3}{\partial x} & \frac{\partial f_3}{\partial y} & \frac{\partial f_3}{\partial z}
+\end{bmatrix}
+\]
+
+So the eigenvalue problem becomes:
+
+\[
+\det(\mathbf{J} - \lambda \mathbf{I}) = 0
+\] The eigenvalues \(\lambda_i\) of the Jacobian \(\mathbf{J}\)
+determine the local stability and type of the equilibrium point. If all
+eigenvalues have negative real parts, the equilibrium is locally
+asymptotically stable (perturbations decay). If any eigenvalue has a
+positive real part, the equilibrium is unstable (perturbations grow). If
+eigenvalues have zero real parts, the system may be marginally stable.
+
+\hypertarget{numerical-example}{%
+\subsection{Numerical example}\label{numerical-example}}
+
+The goal is to identify and characterize equilibrium points. The main
+steps are:
+
+\begin{itemize}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \tightlist
+  \item
+    Set the ODEs to zero and solving for each variable
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{1}
+  \tightlist
+  \item
+    Apply the Jacobian matrix to the ODEs
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{2}
+  \tightlist
+  \item
+    Calculate the eigenvalues
+  \end{enumerate}
+\item
+  \begin{enumerate}
+  \def\labelenumi{(\arabic{enumi})}
+  \setcounter{enumi}{3}
+  \tightlist
+  \item
+    Calculate the equilibrium eigenvalues
+  \end{enumerate}
+\end{itemize}
+
+The equilibrium eigenvalues (\(\lambda\)) characterize the equilibrium
+point, e.g.:
+
+\begin{itemize}
+\tightlist
+\item
+  If all \(\lambda > 0\): unstable node
+\item
+  If all \(\lambda < 0\): stable node
+\item
+  If the sign varies among \(\lambda\): saddle (unstable)
+\item
+  If any \(\lambda = 0\): tipping point
+\end{itemize}
+
+\hypertarget{step-1-set-the-odes-to-zero-and-solving-for-each-variable}{%
+\subsubsection{Step (1): Set the ODEs to zero and solving for each
+variable}\label{step-1-set-the-odes-to-zero-and-solving-for-each-variable}}
+
+Consider the following set of ordinary differential equations:
+
+\[f_1: \frac{dx}{dt} = \mu - x^2 \] \[f_2: \frac{dy}{dt} = -y \]
+
+At equilibrium, \(\frac{dx}{dt} = 0\) and \(\frac{dy}{dt} = 0\). Find
+the values of \(x\) and \(y\) for which \(f_1\) and \(f_2\) equal zero.
+These values are denoted as \(x^*\) and \(y^*\).
+
+\begin{itemize}
+\tightlist
+\item
+  \(0 = \mu - x^2\)
+\item
+  \(\Leftrightarrow x^2 = \mu\)
+\item
+  Therefore: \(x^* = \pm \sqrt{\mu}\)
+\item
+  And \(y^* = 0\)
+\end{itemize}
+
+We conclude that
+
+\begin{itemize}
+\tightlist
+\item
+  For \(\mu>0\) the equilibria are found at: \((\sqrt{\mu}, 0)\) and
+  \((-\sqrt{\mu}, 0)\)
+\item
+  For \(\mu=0\) the equilibrium is found at: \((0, 0)\)
+\item
+  For \(\mu<0\) there is no equilibrium point
+\end{itemize}
+
+\hypertarget{step-2-apply-the-jacobian-matrix-to-the-odes}{%
+\subsubsection{Step (2): Apply the Jacobian matrix to the
+ODEs}\label{step-2-apply-the-jacobian-matrix-to-the-odes}}
+
+\begin{itemize}
+\item
+  Recall our ODES: \$f\_1: \frac{dx}{dt} = \mu - x\^{}2 \$ and \$f\_2:
+  \frac{dy}{dt} = -y \$
+\item
+  We now apply the Jacobian matrix to these ODEs:
+\end{itemize}
+
+\[
+\mathbf{J} =
+\begin{bmatrix}
+\frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\
+\frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-2x & 0 \\
+0 & -1 \\
+\end{bmatrix}
+\]
+
+\hypertarget{step-3-calculate-the-eigenvalues}{%
+\subsubsection{Step (3) Calculate the
+eigenvalues}\label{step-3-calculate-the-eigenvalues}}
+
+\begin{itemize}
+\tightlist
+\item
+  Recall that eigenvalues \(\lambda\) satisfy
+  \(\det(\mathbf{J} - \lambda \mathbf{I}) = 0\) , where \(\mathbf{I}\)
+  is the identity matrix:
+\end{itemize}
+
+\[
+\mathbf{I} = 
+\begin{bmatrix}
+1 & 0 \\
+0 & 1 \\
+\end{bmatrix}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Therefore:
+\end{itemize}
+
+\[
+\mathbf{J} - \lambda \mathbf{I} = 
+\begin{bmatrix}
+-2x & 0 \\
+0 & -1 \\
+\end{bmatrix}
+-
+\begin{bmatrix}
+\lambda & 0 \\
+0 & \lambda \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-2x-\lambda & 0 \\
+0 & -1-\lambda \\
+\end{bmatrix}
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Compute the determinant:
+\end{itemize}
+
+\[
+\det(\mathbf{J} - \lambda \mathbf{I}) = (-2x-\lambda) (-1-\lambda)
+\]
+
+\begin{itemize}
+\tightlist
+\item
+  Set the determinant equal to zero:
+\end{itemize}
+
+\[ (-2x-\lambda) (-1-\lambda) = 0 \]
+
+\begin{itemize}
+\tightlist
+\item
+  This is possible if \((-2x-\lambda)\) and/or \((-1-\lambda)\) equal
+  zero:
+\end{itemize}
+
+\[(-2x-\lambda) = 0 \text{ and } -1-\lambda = 0\]
+
+\begin{itemize}
+\tightlist
+\item
+  Solving for \(\lambda\) gives the two eigenvalues \(\lambda_1\) and
+  \(\lambda_2\):
+\end{itemize}
+
+\[\lambda_1 = -2x \text{ and }\lambda_2 = -1\]
+
+\hypertarget{step-4-calculate-the-equilibrium-eigenvalues}{%
+\subsubsection{Step (4): Calculate the equilibrium
+eigenvalues}\label{step-4-calculate-the-equilibrium-eigenvalues}}
+
+\begin{itemize}
+\tightlist
+\item
+  At \((x^*, y^*) = (\sqrt{\mu}, 0)\):
+\end{itemize}
+
+\[\lambda_1 = -2\sqrt{\mu}<0 \text{ and }\lambda_2 = -1 < 0\]
+
+\begin{itemize}
+\item
+  Here, both eigenvalues are negative. This is a stable node.
+\item
+  At \((x^*, y^*) = (-\sqrt{\mu}, 0)\):
+\end{itemize}
+
+\[\lambda_1 = 2\sqrt{\mu} > 0 \text{ and }\lambda_2 = -1 < 0\]
+
+\begin{itemize}
+\item
+  Here, we have one positive and one negative eigenvalue. This is a
+  saddle (unstable)
+\item
+  At \((x^*, y^*) = (0, 0)\):
+\end{itemize}
+
+\[\lambda_1 = 0 \text{ and }\lambda_2 = -1 < 0\]
+
+\begin{itemize}
+\tightlist
+\item
+  Here, one eigenvalue is zero. This is a tipping point.
+\end{itemize}
+
+\end{document}

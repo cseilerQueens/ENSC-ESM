@@ -1,0 +1,206 @@
+# Running CLIMBER-X
+
+## Model configuration
+
+* The main model configuration is defined in 
+
+```{bash, eval=FALSE, echo=TRUE}
+/CLIMBER-X/climber-x/nml/control.nml
+```
+
+* Here you find:
+
+```{bash, eval=FALSE, echo=TRUE}
+ flag_co2         = F        ! use interactive co2?
+ flag_ch4         = F        ! use interactive ch4?
+ flag_n2o         = F        ! use interactive n2o?
+ flag_atm         = T        ! use atmosphere model?
+ flag_ocn         = T        ! use ocean model?
+ flag_bgc         = F        ! use ocean biogeochemistry model?
+ flag_sic         = T        ! use sea ice model?
+ flag_lnd         = T        ! use land model?
+ flag_dust        = T        ! use dust model?
+ flag_lakes       = F        ! use lake model?
+ flag_geo         = F        ! use interactive geography/topography?
+ flag_smb         = F        ! use surface mass balance model?
+ flag_bmb         = F        ! use basal mass balance model?
+ flag_ice         = F        ! use ice sheet model?
+ ice_model_name   = 'yelmo'  ! select which ice sheet model to use, 'sico' or 'yelmo'
+ ice_domain_name  = 'NH-32KM' !'ANT-32KM'      ! name of ice sheet domanin(s) to be used
+```
+
+
+## Simulations
+
+* historical evaluation
+* abrupt 4 x CO2
+* doubling CO~2~
+* Vegetation feedbacks
+* Last glacial maximum
+* freshwater hosing experiments
+* Zero Emissions Commitment Model Intercomparison Project (ZECMIP)
+* SSP scenarios
+
+
+* Go to the directory where the CLIMBER-X code is located, e.g.
+
+```{bash, eval=FALSE, echo=TRUE}
+cd /CLIMBER-X/climber-x
+```
+
+* If you are running the model for the first time, create the runme configuration file from the template
+
+```{bash, eval=FALSE, echo=TRUE}
+cp .runme/runme_config .runme_config
+```
+
+* Edit the ```.runme_config``` as below. Replace ```your.email@queensu.ca``` with your email address:
+
+```{bash, eval=FALSE, echo=TRUE}
+{
+    "hpc"           : "Frontenac",
+    "account"       : "def-hpcg2003", 
+    "jobname"       : "ClimberX",
+    "omp"           : 32,
+    "mem"           : -1,
+
+    "queues_file"   : ".runme/queues.json",
+    "info_file"     : ".runme/climberx_info.json",
+
+    "email"         : "your.email@queensu.ca",
+    "mail_type"     : ["FAIL", "REQUEUE"],
+    "qos"           : "normal"
+
+}
+```
+
+## Setting up an experiment
+
+* Here is a minimum example for submitting a run:
+
+```{bash, eval=FALSE, echo=TRUE}
+./runme -rs -o RUNDIR
+```
+
+* where ```RUNDIR``` is the output directory, ```-r``` means that the job should actually be run and ```-s``` specifies that the job should be run on the cluster
+
+* You can change parameter values using the ```-p``` option, e.g.:
+
+```{bash, eval=FALSE, echo=TRUE}
+./runme -rs -o RUNDIR -p ctl.n_accel=10
+```
+
+* ```ctl``` refers to the namelist group control as defined in ```.runme/climberx_info.json```. This json file looks as follows:
+
+```{bash, eval=FALSE, echo=TRUE}
+{
+
+    "exe_default" : "climber",
+
+    "par_path_as_argument" : false,
+
+    "exe_aliases" : 
+        {   "climber" : "climber.x",
+            "mapping" : "mapping.x"
+        },
+    
+    "grp_aliases" :
+        {   "ctl"  : "control",
+            "atm"  : "atm_par",
+            "bgc"  : "bgc_par",
+            "geo"  : "geo_par",
+            "bmb"  : "bmb_par",
+            "lnd"  : "lnd_par",
+            "ocn"  : "ocn_par",
+            "sic"  : "sic_par",
+            "smb"  : "smb_par",
+            "hose" : "hyster_hosing",
+            "icey" : "ice_yelmo_par",
+            "ices" : "ice_sico_par"
+            
+        },
+
+    "par_paths" :
+        {   "climber"  : [ "nml/control.nml",
+                           "nml/atm_par.nml",
+                           "nml/lnd_par.nml",
+                           "nml/sic_par.nml",
+                           "nml/bgc_par.nml",
+                           "nml/geo_par.nml",
+                           "nml/bmb_par.nml",
+                           "nml/ocn_par.nml",
+                           "nml/smb_par.nml",
+                           "nml/ice_yelmo_par.nml",
+                           "nml/ice_sico_par.nml",
+                           "nml/hyster_ctrl.nml" ]
+        },
+
+    "files" : 
+        ["nml/ice_grids.nml"], 
+
+    "dir-special" :
+    {
+        "restart/vilma" : "vilma_restart"
+    },
+
+    "links" : 
+        ["input", "maps", "restart"]
+
+}
+```
+
+* So, ```ctl``` refers to ```control```. The control parameters are defined in the control namelist file:
+
+```{bash, eval=FALSE, echo=TRUE}
+/CLIMBER-X/climber-x/nml/control.nml
+```
+
+* For instance, the ``` n_accel``` is defined in ```control.nml``` as:
+
+```{bash, eval=FALSE, echo=TRUE}
+ n_accel = 1 ! acceleration factor of climate to ice sheet model
+```
+
+## Runme options
+
+* Type ```runme -h``` to see all options:
+
+```
+[cseiler@rorqual1 climber-x]$ ./runme -h
+usage: runme [-h] [-e EXE] [-r] [-s] [-q QUEUE] [-w WALL] [--part PARTITION] [--qos QOS] [-m MEM] [--omp OMP] [--email EMAIL] [--account ACCOUNT] [-x] [-v] [-p KEY=VALUE [KEY=VALUE ...]]
+             -o RUNDIR
+
+options:
+  -h, --help            show this help message and exit
+  -e EXE, --exe EXE     Define the executable file to use here. Shortcuts: climber=climber.x; mapping=mapping.x
+  -r, --run             Run the executable after preparing the job?
+  -s, --submit          Run the executable after preparing the job by submitting to the queue?
+  -q QUEUE, --queue QUEUE
+                        Alias of the queue the job should be submitted to.
+  -w WALL, --wall WALL  HPC wall time "hh:mm:ss" specification to allow for submitted jobs (overrides settings given by queue alias)
+  --part PARTITION      HPC partition specification (overrides settings given by queue alias)
+  --qos QOS             HPC quality of service specification (overrides settings given by queue alias)
+  -m MEM, --mem MEM     HPC max memory per node specification (overrides settings given by queue alias)
+  --omp OMP             Specify number of threads for running with OpenMP (default = 1 implies no parallel computation)
+  --email EMAIL         Email address to send job notifications from cluster (overrides config settings).
+  --account ACCOUNT     HPC account associated with job, often set for resource permissions (overrides config settings).
+  -x                    This argument is used when the script called by jobrun
+  -v                    Verbose script output?
+  -p KEY=VALUE [KEY=VALUE ...]
+                        Set a number of key-value pairs (do not put spaces before or after the = sign). If a value contains spaces, you should define it with double quotes: foo="this is a
+                        sentence". Note that values are always treated as strings.
+
+required named arguments:
+  -o RUNDIR             Path where simulation will run and store output.
+```
+
+
+## Submitting an ensemble
+
+To submit an ensemble of runs with different parameter vales:
+
+```{bash, eval=FALSE, echo=TRUE}
+jobrun ./runme -rs -o OUTDIR -p ctl.n_accel=1,5,10
+```
+
+* where the individual runs will all be stored in ```OUTDIR```

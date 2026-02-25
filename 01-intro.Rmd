@@ -25,11 +25,11 @@ system <- function(t, state, parameters) {
   x <- state[1]
   y <- state[2]
   z <- state[3]
-  
+
   dx <- -x - y - v * z
   dy <- -p * z + r * y - s * y^2 - y^3
   dz <- -q * (x + z)
-  
+
   list(c(dx, dy, dz))
 }
 
@@ -61,7 +61,7 @@ plot(
   ylim = c(-2, 2),
   ylab = "(-)",
   xlab = "Time (10 ky)",
-  xlim = c(0,30)
+  xlim = c(0, 30)
 )
 lines(x = df$time, df$y, col = "red")
 lines(x = df$time, df$z, col = "blue")
@@ -72,7 +72,8 @@ legend(
   col = c("black", "red", "blue"),
   pch = 16,
   bty = "n",
-  horiz = TRUE)
+  horiz = TRUE
+)
 ```
 
 
@@ -81,14 +82,15 @@ Impact of Milankovitch cycle
 ```{r}
 library(palinsol)
 
-year <- seq(from = -500000, to = 0, by = 1000) 
+year <- seq(from = -500000, to = 0, by = 1000)
 
-latitude <- 65 * pi/180 # (radians)
+latitude <- 65 * pi / 180 # (radians)
 
-insolation <- function(times, astrosol=ber78)
-sapply(times, function(tt) Insol(orbit=astrosol(tt), long = pi/2, lat = latitude))
+insolation <- function(times, astrosol = ber78) {
+  sapply(times, function(tt) Insol(orbit = astrosol(tt), long = pi / 2, lat = latitude))
+}
 
-# Daily mean incoming solar radiation at TOA (W/m2) 
+# Daily mean incoming solar radiation at TOA (W/m2)
 isl <- insolation(year, ber78)
 
 # Normalized anomalies
@@ -98,22 +100,24 @@ isl.norm <- (isl - mean(isl)) / sd(isl)
 my.min <- min(isl.norm)
 my.max <- max(abs(isl.norm))
 
-Rvec <- (isl.norm/my.max)
+Rvec <- (isl.norm / my.max)
 
-plot(year, isl, typ='l', 
-     main = "Daily mean solar radiation for June 20 (Solstice)",
-     xlab = "Years",
-     ylab = "Insolation at TOA (W/m2)")
-legend("topleft", paste("Latitude =", latitude * 180/pi, "N"), bty = "n")
+plot(year, isl,
+  typ = "l",
+  main = "Daily mean solar radiation for June 20 (Solstice)",
+  xlab = "Years",
+  ylab = "Insolation at TOA (W/m2)"
+)
+legend("topleft", paste("Latitude =", latitude * 180 / pi, "N"), bty = "n")
 abline(h = 480.05, col = "grey")
 
-plot(year, Rvec, typ='l', 
-     main = "Non-dimensionalized insolation R (-)",
-     xlab = "Years",
-     ylab = "(-)")
-legend("topleft", paste("Latitude =", latitude * 180/pi, "N"), bty = "n")
-
-
+plot(year, Rvec,
+  typ = "l",
+  main = "Non-dimensionalized insolation R (-)",
+  xlab = "Years",
+  ylab = "(-)"
+)
+legend("topleft", paste("Latitude =", latitude * 180 / pi, "N"), bty = "n")
 ```
 
 Le
@@ -135,14 +139,14 @@ system <- function(t, state, parameters) {
   x <- state[1]
   y <- state[2]
   z <- state[3]
-  
+
   k <- floor(t / dt) + 1
   Rt <- Rvec[k]
-  
+
   dx <- -x - y - v * z - u * Rt
   dy <- -p * z + r * y - s * y^2 - y^3
   dz <- -q * (x + z)
-  
+
   list(c(dx, dy, dz))
 }
 
@@ -153,7 +157,7 @@ initial_conditions <- c(1, -1, -1)
 
 # Time span
 
-dt <- 1/10
+dt <- 1 / 10
 times <- seq(0, 50, by = dt)
 
 # Solve ODEs for each initial condition
@@ -176,7 +180,7 @@ plot(
   ylim = c(-2, 2),
   ylab = "(-)",
   xlab = "Time (10 ky)",
-  xlim = c(0,50)
+  xlim = c(0, 50)
 )
 lines(x = df$time, df$y, col = "red")
 lines(x = df$time, df$z, col = "blue")
@@ -187,5 +191,6 @@ legend(
   col = c("black", "red", "blue"),
   pch = 16,
   bty = "n",
-  horiz = TRUE)
+  horiz = TRUE
+)
 ```

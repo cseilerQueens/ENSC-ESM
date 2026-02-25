@@ -1,0 +1,293 @@
+# Ocean Circulation
+
+Student Name: ___
+
+```{r, include = FALSE}
+# template code chunk
+
+student_id <- "12345678" # Replace with your Student ID
+
+.libPaths("/global/home/hpc5112/Rlibs_ESM")
+styler::style_dir()
+
+library(jsonlite)
+
+answers <- list()
+
+record_answer <- function(id, value) {
+  answers[[id]] <<- value
+}
+```
+
+## The Stommel Model
+
+Henry Stommel developed a conceptual model of the thermohaline circulation, which he published in a seminal [paper](https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.2153-3490.1961.tb00079.x) in 1961. The model consists of two idealized ocean boxes representing low-latitude warm water and high-latitude cold water. The circulation between the boxes is driven by density differences: denser water sinks in the high-latitude box, flows equatorward at depth, and returns poleward near the surface, conserving mass. The strength of the circulation increases with the density contrast between the boxes. Water density depends on both temperature and salinity: higher salinity increases density, whereas higher temperature decreases it.
+
+In the low-latitude box, the temperature is warmer because the overlying atmosphere is warmer, and the salinity is higher because prescribed evaporation exceeds precipitation. In the high-latitude box, the temperature is colder because the overlying atmosphere is colder, and the salinity is lower because prescribed precipitation exceeds evaporation. The temperature in both boxes is strongly constrained by the atmosphere through restoring toward atmospheric temperatures, although exchange of water between the boxes can transport heat. The salinity, however, is directly affected by the circulation: stronger circulation transports salt between the boxes and tends to reduce the salinity contrast.
+
+The flow is driven by density differences, which depend on both temperature and salinity with opposing effects: higher temperature decreases density, whereas higher salinity increases it. Thus, the low-latitude box is warm and salty, while the high-latitude box is cold and fresher.
+
+Two types of circulation are possible. If density differences are dominated by temperature, the high-latitude box is denser than the low-latitude box, and water flows from high to low latitudes in the deep branch with a compensating surface return flow. This is the thermally dominated circulation. If density differences are dominated by salinity, the low-latitude box becomes denser, and the overturning circulation reverses, with deep flow toward high latitudes. This is the salinity-dominated circulation.
+
+Because circulation transports salt between the boxes, stronger flow reduces the salinity contrast. This tends to stabilize thermally dominated circulation but weaken salinity-dominated circulation.
+
+To better understand this, let's assess how density is affected by temperature and salinity. The relationship is non-linear, and determined by the Thermodynamic Equation of Sea Water 2010 (TEOS-10). The Figure below gives the sea water density (blue contours in kg m^-3^) as a function of salinity and temperature. 
+
+
+
+### Exercise: TS- Diagram (XX Points)
+
+* Q: The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?
+
+* A: ___
+
+* Q: The blue dot has a higher density compared to the red dot. Is this due to the salinity contrast or the temperature contrast?
+
+* A: ___
+
+* Q: Let's reduce salinity of the blue dot by 6 g/kg. Which dot would show the higher density?
+
+* A: ___
+
+* Q: How would this affect the direction of flow?
+
+* A: ___
+
+* Q: Explain the relevance of this finding for the context of climate change
+
+In the Stommel model, we use a linearlized version of the equation of state:
+
+$$
+\rho = \rho_0 (1 - \alpha (T- T_0)  + \beta (S-S_0)
+$$
+
+where $\rho$ is the sea water density (kg m$^{-3}$), $T$ and $S$ are temperature and salinity anomalies, respectively and $\alpha$ is the thermal contraction ($\alpha = 1.5 \times 10^{-4}$ K) and $\beta$ is the saline expansion ($\beta = 8 \times10^{-4}$ psu^-1^). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. $T_0$ and $S_0$ are reference temperature and salinity ($T_0$ = 10$^{\circ}$C, $S_0$ = 35 g kg^-1^). Let's create a T-S diagram with this linearlized version of the equation of state.
+
+
+
+You can see that the density values are similar, but not identical. However, using a linearlized equation of state keeps the math below more simple. Let's now finally get to the Stommel model.
+
+The Stommel model consists of two ODEs, which represent the non-dimensional salinity contrast ($x$), non-dimensional temperature contrast ($y$) (page 227 in respective paper):
+
+
+$$ \frac{dx}{d\tau} = \delta(1-x) - \frac{x}{\lambda} |-y +Rx| $$
+$$ \frac{dy}{d\tau} = 1 - y - \frac{y}{\lambda}|-y + Rx|$$
+
+Let's define each variable:
+
+* $x$ (-) is the non-dimensional salinity contrast between box 1 (polar) and box 2 (tropical): $x = \frac{\Delta S}{\Delta S^*}$, where $\Delta S^*$ is the typical salinity contrast between both boxes. In the model, $S^*$ denotes the salinity of the imposed boundary conditions. If $x<1$ then that means that the contrast is smaller than the imposed contrast.
+
+* $y$ (-) is the non-dimensional temperature contrast between box 1 (polar) and box 2 (tropical): $y = \frac{\Delta T}{\Delta T^*}$, where $\Delta T^*$ is the typical temperature contrast between both boxes. In the model, $T^*$ denotes the salinity in the adjacent ocean basin. If $y<1$ then that means that the contrast is smaller than the imposed contrast.
+
+* $\delta$ (-) is the ratio of the salinity transfer coefficient ($d$, in s^-1^) and temperature transfer coefficient ($c$, in s^-1^): $\delta = \frac{d}{c}$. If $\delta<1$ then the temperature transfer rate exceeds the salinity transfer rate.
+
+* $\tau$ (-) is the non-dimensional time variable: $\tau = ct$ 
+
+* $R$ (-) is a ratio that expresses the relative effect of salinity and temperature on seawater density: $R = \frac{\beta \Delta S^*}{\alpha \Delta T^*}$
+
+* $\alpha$ (K^-1^) is the thermal contraction ($\alpha = 1.5 \times 10^{-4}$ K^-1^)
+
+* $\beta$ (psu^-1^) is the saline expansion ($\beta = 8 \times10^{-4}$ psu^-1^)
+
+* $\lambda$ (-) measures the relative strength of flow resistance to thermal forcing: $\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k$. The larger $\lambda$, the weaker the circulation response to temperature contrast.
+
+* $k$ (kg m$^{-3}$ s) is the resistance of the capillary tube: $q=\frac{1}{k}(\rho_1-\rho_2)$
+
+* $q$ (s$^{-1}$) is the flow rate: $q=\frac{1}{k}(\rho_1-\rho_2)$
+
+
+To summarize, the Stommel model has three main parameters: $R$, $\delta$, and $\lambda$. Let us begin by plotting the free solution of the dynamical system for $R$ = 2, $\delta$ = 1/6, and $\lambda$ = 1/5, as well as initial conditions of $x = 0.1$ and $y = 0.1$:
+
+
+
+
+### Exercise: Initial conditions (XX Points)
+
+Change the initial conditions to $x = 0.1$ and $y = 0.1$ to reproduce the figure below.
+
+
+
+* Q: What do you conclude from these figures?
+
+* A: ___
+
+* Q: Compare the four figures above with Figure 7 in Stommel's 1961 paper. Explain why your figures above are consistent with what you see in Stommel's Figure 7.
+
+* A: ___
+
+### Exercise: Phase portrait (XX Points)
+
+We can use the same function to plot non-dimensional salinity contrast ($x$) against non-dimensional temperature contrast ($y$) for different initial conditions. This leads to a so-called phase portrait.
+
+
+* Q: Identify at least one equilibrium point
+
+* A: ___
+
+### Exercise: Equillibrium points (XX Points) 
+
+The phase portrait above identified three equilibrium points. Let us know calculate those equilibrium points from the equations. In the section on linear algebra, we did this by setting the ODEs to zero and solving for each variable. For more complicated ODEs, we can also approximate the equilibrium points numerically, which is what we will do here.
+
+
+
+Let's plot these three equilibrium points into our phase portrait. Do this by copying the code from above and then add ```points(x = 0.1350, y = 0.4836), pch = 16, col = "red"``` below. Do this for all three points.
+
+
+
+
+* Q: Are our calculated equilibrium points consistent with Stommel's Figure 7?
+* A: ___
+
+### Jacobian matrix and equilibrium eigenvalues
+
+Let's recall our set of ODEs:
+
+$$ \frac{dx}{d\tau} = \delta(1-x) - \frac{x}{\lambda} |-y +Rx| $$
+$$ \frac{dy}{d\tau} = 1 - y - \frac{y}{\lambda}|-y + Rx|$$
+
+Recall the Jacobian matrix:
+
+$$
+\mathbf{J} =
+\begin{bmatrix}
+\frac{\partial f_1}{\partial x} & \frac{\partial f_1}{\partial y} \\
+\frac{\partial f_2}{\partial x} & \frac{\partial f_2}{\partial y} \\
+\end{bmatrix}
+$$
+
+The elements of this matrix are:
+
+Rather than calculating the derivatives analytically, we will approach them numerically:
+
+
+Recall that the equilibrium eigenvalues characterize the equilibrium point, e.g.:
+
+* If all eigenvalues $>0$: unstable node
+* If all eigenvalues $<0$: stable node
+* If the sign varies among eigenvalues: saddle (unstable)
+* If any $\lambda = 0$: tipping point
+
+The second equilibrium point is described by a complex number with a real and an imaginary component. Here we are only concerend with the real component of the number. 
+
+* Q: Classify each of the three equilibrium points
+
+* A: ___
+
+### Bifurcation diagram
+
+Recall that $\lambda$ (-) measures the relative strength of flow resistance to thermal forcing:
+
+$$\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k$$. The larger $\lambda$, the weaker the circulation response to temperature contrast. Let us now vary the parameter $\lambda$ and calculate the equilibrium points for different values of $\lambda$. This will result in the bifurcation diagram below.
+
+
+
+* Q: Which are the stable and which are the unstable branches for the bifurcation diagram?
+
+* A: ___
+
+From the equilibrium $x$ (non-dimensional salinity contrast) and $y$ (non-dimensional temperature contrast) values, we can calculated the corresponding dimensionless flow rate $f$:
+
+$$f = (-y + Rx) /\lambda $$
+
+* If $f<0$ then the circulation is in a temperature-mode (T-mode): the deep branch flow is in the direction set by temperature contrast (from cold to warm = from high to low latitudes)
+
+* If $f>0$ then the circulation is in a salinity mode (S-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)
+
+
+* Q: Consider you are in the T-mode and $\lambda$ = 0.3. Let's say that $\lambda$ increases to 0.35. What will happen with the direction of the flow?
+
+* A: __
+
+* Q: Next, imagine $\lambda$ then returns from 0.35 back to 0.3. How will this affect the flow.
+
+* A: __
+
+* Q: Have another look at your phase diagram. Calculate $f$ for each point and evaluate Which of the equilibrium points corresponds to the T-mode, and which to the S-mode?
+
+* A: ___
+
+## CLIMBER-X: Hosing experiments
+
+We are now going to look at the hosing experiments 
+
+```{bash, eval=FALSE, echo=TRUE}
+./runme -rs -q medium -w 60:00:00 --omp 32 -o $output/$outdir/hyst2050/up   -p ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=-0.3 ocn.hosing_trend=0.02  ocn.lat_min_hosing=20 ocn.lat_max_hosing=50
+```
+
+
+Let's assess what this means:
+
+* ```./runme -rs -q medium -w 60:00:00``` runs the model and tells the HPC how much computational resources the model requires
+
+* ```-o $output/$outdir/hyst2050/up``` tells the HPC where to store the output
+
+* ```-p ``` sets the parameters. The meaning of each parameter is outlined in the different namelist files (```.nml```)located in ```/CLIMBER-X/climber-x/nml/```
+
+*  You can find the meaning of each parameter as follows:
+
+```{bash, eval=FALSE, echo=TRUE}
+# go to the directory where the namelist files are stored
+cd /CLIMBER-X/climber-x/nml/
+
+# search for the parameter in all namelist files:
+grep -r "nyears" *.nml
+```
+
+Here a list of all the parameters that were set for this experiment:
+
+* ```ctl.nyears=30000```: number of simulation years
+
+* ```ocn.l_hosing=T```: apply additional freshwater hosing? ($T$ stands for TRUE, $F$ for FALSE)
+
+* ```ocn.hosing_ini=-0.3```: Sv, inital/constant value of hosing flux
+
+* ```ocn.hosing_trend=0.02```: Sv/kyr, rate at which hosing flux is increased/decreased 
+
+* ```ocn.lat_min_hosing=20```: lower latitude bound for region of freshwater flux
+
+* ```ocn.lat_max_hosing=50```: higher latitude bound for region of freshwater flux
+
+The command to run the freshwater hosing experiment only mentions a few parameters. For all other parameter, the default setting is chosen. For instance, the atmospheric CO~2~ concentration is set to a constant value of 280 ppmv. Recall that Sv = Sverdrup = 10^6^ km^2^ s^-1^. Let's now translate the command below into words:
+
+```{bash, eval=FALSE, echo=TRUE}
+./runme -rs -q medium -w 60:00:00 --omp 32 -o $output/$outdir/hyst2050/up   -p ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=-0.3 ocn.hosing_trend=0.02  ocn.lat_min_hosing=20 ocn.lat_max_hosing=50
+```
+
+This means: simulate 30,000 years starting with an initial freshwater input of -0.3 Sv  between 20 and 50 degrees latitude in the North Atlantic. The freshwater flux is increased by a rate of 0.02 Sv/1000 years, causing it to increase from -0.3 Sv to +0.3 Sv after 30,000 years. What does a negative freshwater flux mean? A negative freshwater flux means that freshwater is taken out of the ocean (evaporation > precipitation), increasing the seawater's salinity. 
+
+* Q: Reproduce the figure below to illuistrate how the hosing changes over time
+
+
+
+We will also conduct another experiment:
+
+```{bash, eval=FALSE, echo=TRUE}
+./runme -rs -q medium -w 60:00:00 --omp 32 -o $output/$outdir/hyst2050/down -p ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=0.3  ocn.hosing_trend=-0.02 ocn.lat_min_hosing=20 ocn.lat_max_hosing=50
+```
+
+* Q: Explain what this simulation does, and make a figure similar to the one above that illustrates how the freshwater hosing changes over time.
+
+* A: ___
+
+
+
+### Exercise: Hysteresis
+
+The AMOC strength is defined as the maximum of the Atlantic meridional streamfunction deeper than 700 m. The initial condition for both these experiments (up, and down) is a pre-industrial equilibrium simulation run for 10 000 years with 280 ppm of CO2 and present-day ice sheets. Let's now visualize the results from both experiments.
+
+
+
+Let's plot how the AMOC looks like when it is on (high salinity) and off (low salinity)
+
+
+Let us now plot the AMOC strength at 26 degrees northern latitude as a function of depth, where each line represents an increase in freshwater hosing.
+
+
+
+
+
+
+
+
+
+

@@ -1,1 +1,0 @@
-"0","plot(df$y, df$z, type = ""l"", xlab = ""y"", ylab = ""z"", main = ""y vs z"")"

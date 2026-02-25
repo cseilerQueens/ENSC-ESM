@@ -1,0 +1,18 @@
+# Glacial Oscillations
+
+Saltzman and Maasch (1990) (SM90) developed a conceptual model to simulate glacial cycles during the late Cenozoic era (300 kyr BCE). The ODEs below present the nondimensional form of the model, where $x$, $y$, and $z$ are nondimensional variables representing global ice mass, atmospheric CO$_2$ concentration, and deep ocean temperature, respectively:
+
+$$ \frac{dx}{dt} = -x - y - vz, $$
+$$ \frac{dy}{dt} = - pz + ry - sy^2 - y^3, $$
+$$ \frac{dz}{dt} = -qx -qz, $$
+where $p$ = 1, $q$= 2.5, $r$ = 1.3, $s$ = 0.6, and $v$ = 0.2. 
+
+Note that this version of the model ignores changes in incoming solar radiation in response to the Milankovitch cycle and is intended for studying the internal oscillation of the system. Let us begin by plotting the free solution of the dynamical system.
+
+
+
+Impact of Milankovitch cycle
+
+
+Le
+

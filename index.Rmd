@@ -12,9 +12,14 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
+```{r, eval = TRUE, echo = FALSE}
+.libPaths("/global/home/hpc5112/Rlibs_ESM")
+styler::style_dir()
+```
+
 # Course Overview
 
-abc
+This website is under development
 
 ##  Assessments
 

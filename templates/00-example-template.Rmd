@@ -1,0 +1,80 @@
+# Example
+
+```{r setup, include=FALSE}
+# template code chunk
+
+library(jsonlite)
+
+student_id <- "12345678" # student fills in
+
+answers <- list()
+
+record_answer <- function(id, value) {
+  answers[[id]] <<- value
+}
+```
+
+## Question 1
+
+Fit a linear model and compute the slope.
+
+```{r}
+# template code chunk
+
+# Students write their code here
+x <- 1:10
+y <- 2 * x + rnorm(10)
+
+model <- lm(y ~ x)
+summary(model)
+```
+
+Final Answer (Slope):
+
+```{r}
+# template code chunk
+
+# STUDENT: replace NA with your final numeric answer
+Q1_answer <- 2
+
+record_answer("Q1", Q1_answer)
+Q1_answer
+```
+
+## Question 2
+
+Compute the equilibrium of:
+
+\[
+\frac{dx}{dt} = 3 - 2x
+\]
+
+**Final Answer (Equilibrium value):**
+
+```{r}
+# template code chunk
+
+Q2_answer <- 3 / 2
+
+record_answer("Q2", Q2_answer)
+Q2_answer
+```
+
+---
+
+## Export Answers
+
+```{r, include=FALSE}
+# template code chunk
+
+output <- list(
+  student_id = student_id,
+  answers = answers
+)
+
+write_json(output, "answers.json", pretty = TRUE)
+```
+
+Submit:
+- report.html
+- answers.json
