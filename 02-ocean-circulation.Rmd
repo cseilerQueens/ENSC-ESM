@@ -43,7 +43,7 @@ Because circulation transports salt between the boxes, stronger flow reduces the
 To better understand this, let's assess how density is affected by temperature and salinity. The relationship is non-linear, and determined by the Thermodynamic Equation of Sea Water 2010 (TEOS-10). The Figure below gives the sea water density (blue contours in kg m^-3^) as a function of salinity and temperature. 
 
 
-```{r, fig.width = 5, fig.height = 5, echo = FALSE}
+```{r, fig.width = 5, fig.height = 5, echo = TRUE}
 # template code chunk
 
 library(gsw)

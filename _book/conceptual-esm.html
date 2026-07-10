@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Conceptual ESM | _main.knit</title>
+  <meta name="description" content="ESM" />
+  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Conceptual ESM | _main.knit" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="ESM" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Conceptual ESM | _main.knit" />
+  
+  <meta name="twitter:description" content="ESM" />
+  
+
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="running-climber-x.html"/>
+<link rel="next" href="energy-balance.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> title: “Earth System Modelling”</a></li>
+<li class="chapter" data-level="2" data-path="climber-x.html"><a href="climber-x.html"><i class="fa fa-check"></i><b>2</b> CLIMBER-X</a></li>
+<li class="chapter" data-level="3" data-path="running-climber-x.html"><a href="running-climber-x.html"><i class="fa fa-check"></i><b>3</b> Running CLIMBER-X</a></li>
+<li class="chapter" data-level="4" data-path="conceptual-esm.html"><a href="conceptual-esm.html"><i class="fa fa-check"></i><b>4</b> Conceptual ESM</a></li>
+<li class="chapter" data-level="5" data-path="energy-balance.html"><a href="energy-balance.html"><i class="fa fa-check"></i><b>5</b> Energy Balance</a></li>
+<li class="chapter" data-level="6" data-path="global-carbon-cycle.html"><a href="global-carbon-cycle.html"><i class="fa fa-check"></i><b>6</b> Global Carbon Cycle</a></li>
+<li class="chapter" data-level="7" data-path="glacial-oscillations.html"><a href="glacial-oscillations.html"><i class="fa fa-check"></i><b>7</b> Glacial Oscillations</a></li>
+<li class="chapter" data-level="8" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>8</b> Linear Algebra</a></li>
+<li class="chapter" data-level="9" data-path="ocean-circulation.html"><a href="ocean-circulation.html"><i class="fa fa-check"></i><b>9</b> Ocean Circulation</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="conceptual-esm" class="section level1 hasAnchor" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Conceptual ESM<a href="conceptual-esm.html#conceptual-esm" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Main features:</p>
+<ul>
+<li>Two-latitude surface EBM (low/high)</li>
+<li>Deep ocean temperature</li>
+<li>Stommel circulation</li>
+<li>Salinity feedback</li>
+<li>Two-latitude upper-ocean carbon boxes with temperature-dependent air–ocean exchange</li>
+<li>Land carbon with temperature effects on photosynthesis and respiration, plus CO2 fertilization effect</li>
+<li>Atmospheric carbon</li>
+<li>Stefan–Boltzmann radiation, ice-albedo feedback, and lumped fast climate feedbacks (lapse rate, water vapor, clouds)</li>
+</ul>
+<p>State Variables</p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="72%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(T_L(t)\)</span></td>
+<td>Low-latitude surface temperature (K)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(T_H(t)\)</span></td>
+<td>High-latitude surface temperature (K)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(T_D(t)\)</span></td>
+<td>Deep ocean temperature (K)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta S(t)\)</span></td>
+<td>Salinity contrast (psu)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(Q(t)\)</span></td>
+<td>Thermohaline circulation strength (conceptual units)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(C_{atm}(t)\)</span></td>
+<td>Atmospheric carbon (PgC)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(C_L(t)\)</span></td>
+<td>Low-latitude upper ocean carbon (PgC)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(C_H(t)\)</span></td>
+<td>High-latitude upper ocean carbon (PgC)</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(C_{land}(t)\)</span></td>
+<td>Land carbon (PgC)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(E(t)\)</span></td>
+<td>Anthropogenic emissions (PgC/yr)</td>
+</tr>
+</tbody>
+</table>
+<p>Surface Energy Balance - Low Latitude:</p>
+<p><span class="math display">\[
+H_L \frac{dT_L}{dt} =
+S_L (1 - \alpha_L)
+- \varepsilon \sigma T_L^4
+- D (T_L - T_H)
+- \gamma Q (T_L - T_H)
++ \lambda F_{CO2}(C_{atm})
+\]</span></p>
+<p>Surface Energy Balance — High Latitude</p>
+<p><span class="math display">\[
+\alpha_H(T_H) = \alpha_{ice} + \frac{\alpha_{water}-\alpha_{ice}}{2} \left[ 1 + \tanh\left(\frac{T_H - T_c}{\Delta_T}\right) \right]
+\]</span></p>
+<p><span class="math display">\[
+H_H \frac{dT_H}{dt} =
+S_H (1 - \alpha_H(T_H))
+- \varepsilon \sigma T_H^4
++ D (T_L - T_H)
++ \gamma Q (T_L - T_H)
+- \kappa (T_H - T_D)
++ \lambda F_{CO2}(C_{atm})
+\]</span></p>
+<p>Deep Ocean Temperature</p>
+<p><span class="math display">\[
+H_D \frac{dT_D}{dt} = \kappa (T_H - T_D)
+\]</span></p>
+<p>Thermohaline Circulation (Stommel)</p>
+<p><span class="math display">\[
+\frac{dQ}{dt} = \lambda_Q \left[ \alpha_T (T_L - T_H) - \alpha_S \Delta S - \mu Q \right]
+\]</span></p>
+<p>Salinity Contrast</p>
+<p><span class="math display">\[
+\frac{d\Delta S}{dt} = F_{fw}(T_H) - Q \Delta S
+\]</span></p>
+<p><span class="math display">\[
+F_{fw}(T_H) = F_0 + \eta (T_H - T_{ref})
+\]</span></p>
+<p>Ocean Carbon — Low Latitude Box</p>
+<p><span class="math display">\[
+\frac{dC_L}{dt} = k_{ao,L}(T_L) \left( C_{atm} - C_L \right) - Q (C_L - C_H)
+\]</span></p>
+<p>Ocean Carbon — High Latitude Box</p>
+<p><span class="math display">\[
+\frac{dC_H}{dt} = k_{ao,H}(T_H) \left( C_{atm} - C_H \right) + Q (C_L - C_H) - k_{oc} (C_H - C_{deep})
+\]</span></p>
+<p>Land Carbon</p>
+<p><span class="math display">\[
+\frac{dC_{land}}{dt} = P(T_L, C_{atm}) - R(T_L) C_{land}
+\]</span></p>
+<p><span class="math display">\[
+P(T_L, C_{atm}) = P_0 f(T_L) \left( 1 + \phi \ln \frac{C_{atm}}{C_{ref}} \right) \\
+R(T_L) = R_0 \exp[ \gamma_R (T_L - T_{ref}) ] \\
+f(T_L) = \exp\left[ - \frac{(T_L - T_{opt})^2}{\Delta_T^2} \right]
+\]</span>
+Atmospheric Carbon</p>
+<p><span class="math display">\[
+\frac{dC_{atm}}{dt} =
+- k_{ao,L}(T_L) (C_{atm} - C_L)
+- k_{ao,H}(T_H) (C_{atm} - C_H)
+- P(T_L, C_{atm}) + R(T_L) C_{land} + E(t)
+\]</span></p>
+<p>Radiative Forcing</p>
+<p><span class="math display">\[
+F_{CO2}(C_{atm}) = \xi \ln \frac{C_{atm}}{C_{ref}}
+\]</span></p>
+<p>Temperature-dependent air-ocean exchange</p>
+<p><span class="math display">\[
+k_{ao,L}(T_L) = k_{ao,0} [ 1 - \beta (T_L - T_{ref}) ] \\
+k_{ao,H}(T_H) = k_{ao,0} [ 1 - \beta (T_H - T_{ref}) ]
+\]</span></p>
+<p>Parameter Values</p>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="39%" />
+<col width="44%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Meaning</th>
+<th>Value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(H_L\)</span></td>
+<td>Surface heat capacity, low lat</td>
+<td><span class="math inline">\(1.0\times10^8\)</span> J m<span class="math inline">\(^{-2}\)</span> K<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(H_H\)</span></td>
+<td>Surface heat capacity, high lat</td>
+<td><span class="math inline">\(1.0\times10^8\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(H_D\)</span></td>
+<td>Deep ocean heat capacity</td>
+<td><span class="math inline">\(5.0\times10^9\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(S_L\)</span></td>
+<td>Insolation low lat</td>
+<td>340 W m<span class="math inline">\(^{-2}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(S_H\)</span></td>
+<td>Insolation high lat</td>
+<td>280 W m<span class="math inline">\(^{-2}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\alpha_L\)</span></td>
+<td>Low-lat albedo</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\alpha_{ice}\)</span></td>
+<td>High-lat ice albedo</td>
+<td>0.6</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\alpha_{water}\)</span></td>
+<td>High-lat water albedo</td>
+<td>0.3</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(T_c\)</span></td>
+<td>Ice transition temp</td>
+<td>263 K</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\Delta_T\)</span></td>
+<td>Albedo transition width</td>
+<td>5 K</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\varepsilon\)</span></td>
+<td>Emissivity</td>
+<td>1.0</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma\)</span></td>
+<td>Stefan-Boltzmann</td>
+<td><span class="math inline">\(5.67\times10^{-8}\)</span> W m<span class="math inline">\(^{-2}\)</span> K<span class="math inline">\(^{-4}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(D\)</span></td>
+<td>Atmospheric heat transport</td>
+<td>1.0 W m<span class="math inline">\(^{-2}\)</span> K<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\gamma\)</span></td>
+<td>Ocean heat transport</td>
+<td>0.5 W m<span class="math inline">\(^{-2}\)</span> K<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\kappa\)</span></td>
+<td>Deep ocean coupling</td>
+<td>0.1 W m<span class="math inline">\(^{-2}\)</span> K<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\lambda\)</span></td>
+<td>Climate sensitivity factor</td>
+<td>0.8 (W m<span class="math inline">\(^{-2}\)</span>)<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\xi\)</span></td>
+<td>CO<span class="math inline">\(_2\)</span> forcing coefficient</td>
+<td>5.35 W m<span class="math inline">\(^{-2}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\alpha_T\)</span></td>
+<td>Thermal contribution to <span class="math inline">\(Q\)</span></td>
+<td>0.1</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\alpha_S\)</span></td>
+<td>Salinity contribution to <span class="math inline">\(Q\)</span></td>
+<td>0.08</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\mu\)</span></td>
+<td>Circulation damping</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\lambda_Q\)</span></td>
+<td>Circulation timescale</td>
+<td>0.5 yr<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(F_0\)</span></td>
+<td>Baseline freshwater</td>
+<td>0 psu/yr</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\eta\)</span></td>
+<td>Freshwater temp sensitivity</td>
+<td>0.01 psu/K</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(T_{ref}\)</span></td>
+<td>Reference temperature</td>
+<td>288 K</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(k_{ao,0}\)</span></td>
+<td>Base air-ocean carbon exchange</td>
+<td>0.3 yr<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\beta\)</span></td>
+<td>Temp dependence exchange</td>
+<td>0.005 K<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(k_{oc}\)</span></td>
+<td>Ocean to deep ocean exchange</td>
+<td>0.05 yr<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(P_0\)</span></td>
+<td>Base photosynthesis</td>
+<td>90 PgC/yr</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(T_{opt}\)</span></td>
+<td>Optimum photosynthesis temp</td>
+<td>293 K</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\phi\)</span></td>
+<td>CO<span class="math inline">\(_2\)</span> fertilization</td>
+<td>0.2</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(R_0\)</span></td>
+<td>Base respiration</td>
+<td>0.02 yr<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\gamma_R\)</span></td>
+<td>Respiration temp sensitivity</td>
+<td>0.08 K<span class="math inline">\(^{-1}\)</span></td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(C_{ref}\)</span></td>
+<td>Reference carbon</td>
+<td>280 PgC</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="running-climber-x.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="energy-balance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": null,
+    "text": null
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": null,
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

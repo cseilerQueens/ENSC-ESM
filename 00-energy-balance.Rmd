@@ -1,0 +1,151 @@
+# Energy Balance
+
+Student Name: ___
+
+```{r, include = FALSE}
+# template code chunk
+
+student_id <- "12345678" # Replace with your Student ID
+
+.libPaths("/global/home/hpc5112/Rlibs_ESM")
+styler::style_dir()
+
+library(jsonlite)
+
+answers <- list()
+answerKeys <- list()
+
+record_answer <- function(value) {
+  id <- knitr::opts_current$get("label")
+  answers[[id]] <<- value
+}
+
+record_answerKey <- function(value) {
+  id <- knitr::opts_current$get("label")
+  answerKeys[[id]] <<- value
+}
+```
+
+## Budyko–Sellers type EBM
+
+## Carbon cycle
+
+$$
+C \frac{dT}{dt} = (1 - \alpha(T)) Q - \epsilon \sigma T^4
+$$
+
+$$
+\alpha(T) = 0.5 - 0.2 \tanh \left( \frac{T-265}{10} \right) 
+$$
+
+* $Q$ is the mean incoming solar radiation: $Q = \frac{1}{4} S_0$, where $S_0$ = 1368 W m$^{-2}$ is the solar constant, such that $Q$ = 342 W m$^{-2}$
+* $C$ = planetary heat capacity ($C$ = 5 $\times$ 10$^8$ J m$^{-2}$ K$^{-1}$) [Schwartz (2007)](https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/2007JD008746)
+
+
+```{r, fig.width = 5, fig.height = 5}
+
+T <- seq(220, 310, 1)
+
+# Outgoing radiation following the Stefan-Boltzmann law
+emissivity <- 0.6
+sigma <- 5.67 * 10^(-8) # Stefan-Boltzmann constant in W m-2 K-4
+E_out <- emissivity * sigma * T^4
+
+# Incoming radiation
+Q <- 1368/4 # mean incoming solar radiation in W m-2
+albedo <- 0.5 - 0.2 * tanh((T-265)/10)
+E_in <- (1 - albedo) * Q
+
+plot(T, E_out, type = "l", col = "red", 
+     xlab = "Temperature (K)",
+     ylab = "Radiative Flux (W/m2)")
+lines(T, E_in, col = "blue")
+grid()
+legend("topleft", c("Incoming radiation", "Outgoing radiation"), pch = 16, col = c("blue", "red"), bty = "n")
+```
+
+
+
+```{r, fig.width = 5, fig.height = 5}
+
+Q <- 1368/4 # mean incoming solar radiation in W m-2
+# C <- 5 * 10^8 # planetary heat capacity in J m$^{-2}$ K$^{-1}$) [Schwartz (2007)](https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/2007JD008746)
+emissivity <- 0.6
+sigma <- 5.67 * 10^(-8) # Stefan-Boltzmann constant in W m-2 K-4
+
+T <- seq(220, 310, 1)
+albedo <- 0.5 - 0.2 * tanh((T-265)/10)
+CdTdt <- (1 - albedo) * Q - emissivity * sigma * T^4
+
+plot(T, CdTdt, type = "l", xlab = "Temperature (K)", ylab = "Energy Flux (W/m2)")
+grid()
+abline(h = 0)
+```
+
+
+```{r, fig.width = 5, fig.height = 5, eval = TRUE, echo = FALSE, warning = FALSE}
+# template code chunk
+
+# ----------------------------
+# Parameters
+# ----------------------------
+
+Q0 <- 1368/4
+emissivity <- 0.6
+sigma <- 5.67e-8
+
+# ----------------------------
+# Equilibrium function
+# ----------------------------
+
+Ffun <- function(T, mu) {
+  Q <- mu * Q0
+  albedo <- 0.5 - 0.2 * tanh((T - 265)/10)
+  result <- (1 - albedo) * Q - emissivity * sigma * T^4
+  return(result)
+}
+
+# ----------------------------
+# Parameter sweep
+# ----------------------------
+
+mu_vals <- seq(0.7, 1.4, length.out = 300)
+
+T_all <- c()
+mu_all <- c()
+
+T_grid <- seq(200, 330, by = 0.5)
+
+for (mu in mu_vals) {
+  
+  Fvals <- Ffun(T_grid, mu)
+  sign_change <- which(diff(sign(Fvals)) != 0)
+  
+  if (length(sign_change) > 0) {
+    
+    for (idx in sign_change) {
+      
+      root <- uniroot(Ffun,
+                      interval = c(T_grid[idx], T_grid[idx+1]),
+                      mu = mu)$root
+      
+      T_all <- c(T_all, root)
+      mu_all <- c(mu_all, mu)
+    }
+  }
+}
+
+# ----------------------------
+# Plot bifurcation diagram
+# ----------------------------
+
+plot(mu_all, T_all,
+     pch = 16,
+     cex = 0.6,
+     xlab = expression(Q/Q[0]),
+     ylab = "Equilibrium Temperature (K)")
+
+grid()
+
+```
+

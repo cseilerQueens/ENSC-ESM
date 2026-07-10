@@ -170,7 +170,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="temperature---salinity-diagram" class="section level3 hasAnchor" number="6.1.1">
 <h3><span class="header-section-number">6.1.1</span> Temperature - Salinity Diagram<a href="ocean-circulation.html#temperature---salinity-diagram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>To better understand this, let’s assess how density is affected by temperature and salinity. The relationship is non-linear, and determined by the Thermodynamic Equation of Sea Water 2010 (TEOS-10). The Figure below gives the sea water density (blue contours in kg m<sup>-3</sup>) as a function of salinity and temperature.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-17-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-17-1.png" alt="" width="480" /></p>
 <p><strong>Q: The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?</strong></p>
 <ul>
 <li>(A): low-latitude = red, high-latitude = blue</li>
@@ -208,7 +208,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \rho = \rho_0 (1 - \alpha (T- T_0)  + \beta (S-S_0)
 \]</span></p>
 <p>where <span class="math inline">\(\rho\)</span> is the sea water density (kg m<span class="math inline">\(^{-3}\)</span>), <span class="math inline">\(T\)</span> and <span class="math inline">\(S\)</span> are temperature and salinity anomalies, respectively and <span class="math inline">\(\alpha\)</span> is the thermal contraction (<span class="math inline">\(\alpha = 1.5 \times 10^{-4}\)</span> K) and <span class="math inline">\(\beta\)</span> is the saline expansion (<span class="math inline">\(\beta = 8 \times10^{-4}\)</span> psu<sup>-1</sup>). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. <span class="math inline">\(T_0\)</span> and <span class="math inline">\(S_0\)</span> are reference temperature and salinity (<span class="math inline">\(T_0\)</span> = 10<span class="math inline">\(^{\circ}\)</span>C, <span class="math inline">\(S_0\)</span> = 35 g kg<sup>-1</sup>). Let’s create a T-S diagram with this linearlized version of the equation of state.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-28-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-28-1.png" alt="" width="480" /></p>
 <p>You can see that the density values are similar, but not identical. However, using a linearlized equation of state keeps the math below more simple. Let’s now finally get to the Stommel model.</p>
 </div>
 <div id="phase-diagram" class="section level3 hasAnchor" number="6.1.2">
@@ -230,7 +230,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><span class="math inline">\(q\)</span> (s<span class="math inline">\(^{-1}\)</span>) is the flow rate: <span class="math inline">\(q=\frac{1}{k}(\rho_1-\rho_2)\)</span></p></li>
 </ul>
 <p>Let us begin by plotting the free solution of the dynamical system for <span class="math inline">\(R\)</span> = 2, <span class="math inline">\(\delta\)</span> = 1/6, and <span class="math inline">\(\lambda\)</span> = 1/5, as well as initial conditions of <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span>:</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-29-1.png" alt="" width="960" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-29-1.png" alt="" width="960" /></p>
 <p>Rerun the code from the previous figure for initial conditions of <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span>.</p>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="ocean-circulation.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># template code chunk</span></span></code></pre></div>
 <p><strong>Q: How does the change in initial conditions affect the equilibrium solution of the salinity contrast?</strong></p>
@@ -249,7 +249,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
 <p>We can use the same function to plot non-dimensional salinity contrast (<span class="math inline">\(x\)</span>) against non-dimensional temperature contrast (<span class="math inline">\(y\)</span>) for different initial conditions. This leads to a so-called phase portrait, and corresponds to Stommel’s Figure 7.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-36-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-36-1.png" alt="" width="480" /></p>
 <p><strong>Q: Which of the points below corresponds to an equilibrium point?</strong></p>
 <ul>
 <li>(A): x = 0.4, y = 0.6</li>
@@ -265,7 +265,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## [3,] 0.3518 0.7651</code></pre>
 <p>Let’s plot these three equilibrium points into our phase portrait. Do this by copying the code from above and then add <code>points(x = 0.1350, y = 0.4836), pch = 16, col = "red"</code> below. Do this for all three points.</p>
 <div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="ocean-circulation.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># template code chunk</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-41-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-41-1.png" alt="" width="480" /></p>
 </div>
 <div id="jacobian-matrix-and-equilibrium-eigenvalues" class="section level3 hasAnchor" number="6.1.3">
 <h3><span class="header-section-number">6.1.3</span> Jacobian matrix and equilibrium eigenvalues<a href="ocean-circulation.html#jacobian-matrix-and-equilibrium-eigenvalues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -305,7 +305,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.1.4</span> Bifurcation diagram<a href="ocean-circulation.html#bifurcation-diagram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Recall that <span class="math inline">\(\lambda\)</span> (-) measures the relative strength of flow resistance to thermal forcing:</p>
 <p><span class="math display">\[\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k\]</span>. The larger <span class="math inline">\(\lambda\)</span>, the weaker the circulation response to temperature contrast. Let us now vary the parameter <span class="math inline">\(\lambda\)</span> and calculate the equilibrium points for different values of <span class="math inline">\(\lambda\)</span>. This will result in the bifurcation diagram below.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-45-1.png" alt="" width="960" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-45-1.png" alt="" width="960" /></p>
 <p><strong>Q: The blue horizontal lines separate the stable form the unstable branches. Which are the stable and which are the unstable branches?</strong></p>
 <ul>
 <li>(A): top = unstable, middle = stable, bottom = unstable</li>
@@ -320,7 +320,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>If <span class="math inline">\(f&lt;0\)</span> then the circulation is in a temperature-mode (T-mode): the deep branch flow is in the direction set by temperature contrast (from cold to warm = from high to low latitudes)</p></li>
 <li><p>If <span class="math inline">\(f&gt;0\)</span> then the circulation is in a salinity mode (S-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)</p></li>
 </ul>
-<p><img src="_main_files/figure-html/unnamed-chunk-48-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-48-1.png" alt="" width="480" /></p>
 <p><strong>Q: Consider you are in the T-mode and <span class="math inline">\(\lambda\)</span> = 0.3. Let’s say that <span class="math inline">\(\lambda\)</span> increases to 0.35. What will happen with the direction of the flow?</strong></p>
 <ul>
 <li>(A): The flow stops.</li>
@@ -381,7 +381,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>This means: simulate 30,000 years starting with an initial freshwater input of -0.3 Sv between 20 and 50 degrees latitude in the North Atlantic. The freshwater flux is increased by a rate of 0.02 Sv/1000 years, causing it to increase from -0.3 Sv to +0.3 Sv after 30,000 years. What does a negative freshwater flux mean? A negative freshwater flux means that freshwater is taken out of the ocean (evaporation &gt; precipitation), increasing the seawater’s salinity.</p>
 <p><strong>Q: Reproduce the figure below to illustrate how the hosing changes over time</strong></p>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="ocean-circulation.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># template code chunk</span></span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-60-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-60-1.png" alt="" width="480" /></p>
 <p>We have also submitted another simulation:</p>
 <div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="ocean-circulation.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/down </span>
 <span id="cb41-2"><a href="ocean-circulation.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=0.3  ocn.hosing_trend=-0.02 </span>
@@ -391,7 +391,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="hysteresis" class="section level3 hasAnchor" number="6.2.1">
 <h3><span class="header-section-number">6.2.1</span> Hysteresis<a href="ocean-circulation.html#hysteresis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>The AMOC strength is defined as the maximum of the Atlantic meridional streamfunction deeper than 700 m. The initial condition for both these experiments (up, and down) is a pre-industrial equilibrium simulation run for 10 000 years with 280 ppm of CO2 and present-day ice sheets. Let’s now visualize the results from both experiments.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-63-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-63-1.png" alt="" width="480" /></p>
 <p><strong>Q: Interpret the figure above</strong></p>
 <ul>
 <li><p>(A): A reduction in salinity weakens the AMOC and may cause it to collapse beyond a tipping point. However, once salinity is increased again, the AMOC immediately returns to its original strength at exactly the same threshold at which it collapsed.</p></li>
@@ -401,9 +401,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul>
 <pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
 <p>Let’s plot how the AMOC looks like when it is on (high salinity) and off (low salinity)</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-66-1.png" alt="" width="960" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-66-1.png" alt="" width="960" /></p>
 <p>Let us now plot the AMOC strength at 26 degrees northern latitude as a function of depth, where each line represents an increase in freshwater hosing.</p>
-<p><img src="_main_files/figure-html/unnamed-chunk-67-1.png" alt="" width="480" /></p>
+<p><img src="main_files/figure-html/unnamed-chunk-67-1.png" alt="" width="480" /></p>
 </div>
 <div id="reflection" class="section level3 hasAnchor" number="6.2.2">
 <h3><span class="header-section-number">6.2.2</span> Reflection<a href="ocean-circulation.html#reflection" class="anchor-section" aria-label="Anchor link to header"></a></h3>

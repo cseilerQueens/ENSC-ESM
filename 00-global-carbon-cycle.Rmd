@@ -1,0 +1,37 @@
+
+# Global Carbon Cycle
+
+$$
+c_1\frac{dT_1}{dt} = \lambda T_1 + \kappa(T_2 - T_1) + Q_2 \ln\frac{C_A}{C^*_A}
+$$
+$$
+c_2\frac{dT_2}{dt} = -\kappa(T_2 - T_1)
+$$
+
+$$
+\frac{dC_L}{dt} = \Pi C_A - \Pi C_A^*\frac{C_L}{C_L^*} \exp(\alpha \beta T_1)
+$$
+
+$$
+\frac{dC_1}{dt} = \nu_1 \left( C_A - \epsilon(C_1) \right) - \nu_2 \left( C_1 - \frac{V_1}{V_2} C_2 \right)
+$$
+$$
+\frac{dC_2}{dt} = \nu_2 \left( C_1 - \frac{V1}{V2} C_2 \right)
+$$
+
+$$
+\Pi(C_A) = \Pi C_A^*
+$$
+* $c_1$ upper box heat capacity ($c_1$ = 7.7 W a m$^{-2}$ K$^{-1}$)
+* $c_1$ lower box heat capacity ($c_2$ = 100 W a m$^{-2}$ K$^{-1}$)
+* $T_1$ is the globally averaged temperature anomaly of the atmosphere and upper ocean in K
+* $T_2$ is the globally averaged temperature anomaly of the deep ocean in K
+* $\lambda$ is the climate feedback parameter
+* $\kappa$ is a heat transfer coefficient ($\kappa$ = 0.57 W m$^{-2}$ K$^{-1}$)
+* $Q_2$ Radiative forcing due to doubled CO2 (3.7 W m$^{-2}$) (Dessler: uses 5.35 W m$^{-2}$)
+* $C_A$ is the atmospheric carbon in ppmv
+* $C^*_A$ is the PI atmospheric carbon in ppmv ($C^*_A = 286$ ppmv)
+* $V_2/V_1$ is the ocean box volume ratio ($V_2/V_1 = 50$)
+
+
+

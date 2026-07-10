@@ -1,0 +1,159 @@
+# Conceptual ESM
+
+Main features:
+
+* Two-latitude surface EBM (low/high)
+* Deep ocean temperature
+* Stommel circulation
+* Salinity feedback
+* Two-latitude upper-ocean carbon boxes with temperature-dependent air–ocean exchange
+* Land carbon with temperature effects on photosynthesis and respiration, plus CO2 fertilization effect
+* Atmospheric carbon
+* Stefan–Boltzmann radiation, ice-albedo feedback, and lumped fast climate feedbacks (lapse rate, water vapor, clouds)
+
+State Variables
+
+| Variable       | Description                              |
+|----------------|------------------------------------------|
+| $T_L(t)$       | Low-latitude surface temperature (K)     |
+| $T_H(t)$       | High-latitude surface temperature (K)    |
+| $T_D(t)$       | Deep ocean temperature (K)               |
+| $\Delta S(t)$  | Salinity contrast (psu)                  |
+| $Q(t)$         | Thermohaline circulation strength (conceptual units) |
+| $C_{atm}(t)$   | Atmospheric carbon (PgC)                 |
+| $C_L(t)$       | Low-latitude upper ocean carbon (PgC)    |
+| $C_H(t)$       | High-latitude upper ocean carbon (PgC)   |
+| $C_{land}(t)$  | Land carbon (PgC)                        |
+| $E(t)$         | Anthropogenic emissions (PgC/yr)         |
+
+Surface Energy Balance - Low Latitude:
+
+$$
+H_L \frac{dT_L}{dt} =
+S_L (1 - \alpha_L) 
+- \varepsilon \sigma T_L^4
+- D (T_L - T_H)
+- \gamma Q (T_L - T_H)
++ \lambda F_{CO2}(C_{atm})
+$$
+
+Surface Energy Balance — High Latitude
+
+$$
+\alpha_H(T_H) = \alpha_{ice} + \frac{\alpha_{water}-\alpha_{ice}}{2} \left[ 1 + \tanh\left(\frac{T_H - T_c}{\Delta_T}\right) \right]
+$$
+
+$$
+H_H \frac{dT_H}{dt} =
+S_H (1 - \alpha_H(T_H))
+- \varepsilon \sigma T_H^4
++ D (T_L - T_H)
++ \gamma Q (T_L - T_H)
+- \kappa (T_H - T_D)
++ \lambda F_{CO2}(C_{atm})
+$$
+
+Deep Ocean Temperature
+
+$$
+H_D \frac{dT_D}{dt} = \kappa (T_H - T_D)
+$$
+
+Thermohaline Circulation (Stommel)
+
+$$
+\frac{dQ}{dt} = \lambda_Q \left[ \alpha_T (T_L - T_H) - \alpha_S \Delta S - \mu Q \right]
+$$
+
+Salinity Contrast
+
+$$
+\frac{d\Delta S}{dt} = F_{fw}(T_H) - Q \Delta S
+$$
+
+$$
+F_{fw}(T_H) = F_0 + \eta (T_H - T_{ref})
+$$
+
+Ocean Carbon — Low Latitude Box
+
+$$
+\frac{dC_L}{dt} = k_{ao,L}(T_L) \left( C_{atm} - C_L \right) - Q (C_L - C_H)
+$$
+
+Ocean Carbon — High Latitude Box
+
+$$
+\frac{dC_H}{dt} = k_{ao,H}(T_H) \left( C_{atm} - C_H \right) + Q (C_L - C_H) - k_{oc} (C_H - C_{deep})
+$$
+
+Land Carbon
+
+$$
+\frac{dC_{land}}{dt} = P(T_L, C_{atm}) - R(T_L) C_{land}
+$$
+
+$$
+P(T_L, C_{atm}) = P_0 f(T_L) \left( 1 + \phi \ln \frac{C_{atm}}{C_{ref}} \right) \\
+R(T_L) = R_0 \exp[ \gamma_R (T_L - T_{ref}) ] \\
+f(T_L) = \exp\left[ - \frac{(T_L - T_{opt})^2}{\Delta_T^2} \right]
+$$
+Atmospheric Carbon
+
+$$
+\frac{dC_{atm}}{dt} =
+- k_{ao,L}(T_L) (C_{atm} - C_L)
+- k_{ao,H}(T_H) (C_{atm} - C_H)
+- P(T_L, C_{atm}) + R(T_L) C_{land} + E(t)
+$$
+
+Radiative Forcing
+
+$$
+F_{CO2}(C_{atm}) = \xi \ln \frac{C_{atm}}{C_{ref}}
+$$
+
+Temperature-dependent air-ocean exchange
+
+$$
+k_{ao,L}(T_L) = k_{ao,0} [ 1 - \beta (T_L - T_{ref}) ] \\
+k_{ao,H}(T_H) = k_{ao,0} [ 1 - \beta (T_H - T_{ref}) ]
+$$
+
+Parameter Values
+
+| Parameter      | Meaning                              | Value                                     |
+|----------------|--------------------------------------|-------------------------------------------|
+| $H_L$          | Surface heat capacity, low lat       | $1.0\times10^8$ J m$^{-2}$ K$^{-1}$     |
+| $H_H$          | Surface heat capacity, high lat      | $1.0\times10^8$                          |
+| $H_D$          | Deep ocean heat capacity             | $5.0\times10^9$                          |
+| $S_L$          | Insolation low lat                   | 340 W m$^{-2}$                            |
+| $S_H$          | Insolation high lat                  | 280 W m$^{-2}$                            |
+| $\alpha_L$     | Low-lat albedo                        | 0.3                                       |
+| $\alpha_{ice}$ | High-lat ice albedo                   | 0.6                                       |
+| $\alpha_{water}$ | High-lat water albedo               | 0.3                                       |
+| $T_c$          | Ice transition temp                   | 263 K                                     |
+| $\Delta_T$     | Albedo transition width               | 5 K                                       |
+| $\varepsilon$  | Emissivity                            | 1.0                                       |
+| $\sigma$       | Stefan-Boltzmann                      | $5.67\times10^{-8}$ W m$^{-2}$ K$^{-4}$  |
+| $D$            | Atmospheric heat transport           | 1.0 W m$^{-2}$ K$^{-1}$                   |
+| $\gamma$       | Ocean heat transport                  | 0.5 W m$^{-2}$ K$^{-1}$                   |
+| $\kappa$       | Deep ocean coupling                   | 0.1 W m$^{-2}$ K$^{-1}$                   |
+| $\lambda$      | Climate sensitivity factor            | 0.8 (W m$^{-2}$)$^{-1}$                   |
+| $\xi$          | CO$_2$ forcing coefficient            | 5.35 W m$^{-2}$                           |
+| $\alpha_T$     | Thermal contribution to $Q$           | 0.1                                       |
+| $\alpha_S$     | Salinity contribution to $Q$          | 0.08                                      |
+| $\mu$          | Circulation damping                   | 0.2                                       |
+| $\lambda_Q$    | Circulation timescale                 | 0.5 yr$^{-1}$                             |
+| $F_0$          | Baseline freshwater                   | 0 psu/yr                                  |
+| $\eta$         | Freshwater temp sensitivity           | 0.01 psu/K                                |
+| $T_{ref}$      | Reference temperature                 | 288 K                                     |
+| $k_{ao,0}$     | Base air-ocean carbon exchange        | 0.3 yr$^{-1}$                             |
+| $\beta$        | Temp dependence exchange              | 0.005 K$^{-1}$                            |
+| $k_{oc}$       | Ocean to deep ocean exchange          | 0.05 yr$^{-1}$                            |
+| $P_0$          | Base photosynthesis                   | 90 PgC/yr                                 |
+| $T_{opt}$      | Optimum photosynthesis temp           | 293 K                                     |
+| $\phi$         | CO$_2$ fertilization                  | 0.2                                       |
+| $R_0$          | Base respiration                      | 0.02 yr$^{-1}$                            |
+| $\gamma_R$     | Respiration temp sensitivity          | 0.08 K$^{-1}$                             |
+| $C_{ref}$      | Reference carbon                      | 280 PgC                                   |
