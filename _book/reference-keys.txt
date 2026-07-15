@@ -1,4 +1,4 @@
-title-earth-system-modelling
+course-overview
 assessments
 contact
 climber-x
@@ -41,16 +41,3 @@ bifurcation-diagram
 climber-x-hosing-experiments
 hysteresis
 reflection
-state-variables
-surface-energy-balance---low-latitude
-surface-energy-balance-high-latitude
-deep-ocean-temperature
-thermohaline-circulation-stommel
-salinity-contrast
-ocean-carbon-low-latitude-box
-ocean-carbon-high-latitude-box
-land-carbon
-atmospheric-carbon
-radiative-forcing
-temperature-dependent-air-ocean-exchange
-parameter-values

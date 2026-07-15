@@ -1,200 +1,136 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 6 Ocean Circulation | _main.knit</title>
-  <meta name="description" content="ESM" />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 6 Ocean Circulation | _main.knit" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="ESM" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 6 Ocean Circulation | _main.knit" />
-  
-  <meta name="twitter:description" content="ESM" />
-  
-
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="linear-algebra.html"/>
-
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Ocean Circulation | _main.knit</title>
+<meta name="description" content="Student Name: ___  9.1 The Stommel Model Henry Stommel developed a conceptual model of the thermohaline circulation, which he published in a seminal paper in 1961. The model consists of two...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Ocean Circulation | _main.knit">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Student Name: ___  9.1 The Stommel Model Henry Stommel developed a conceptual model of the thermohaline circulation, which he published in a seminal paper in 1961. The model consists of two...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Ocean Circulation | _main.knit">
+<meta name="twitter:description" content="Student Name: ___  9.1 The Stommel Model Henry Stommel developed a conceptual model of the thermohaline circulation, which he published in a seminal paper in 1961. The model consists of two...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course Overview</a></li>
-<li class="chapter" data-level="2" data-path="climber-x.html"><a href="climber-x.html"><i class="fa fa-check"></i><b>2</b> CLIMBER-X</a></li>
-<li class="chapter" data-level="3" data-path="running-climber-x.html"><a href="running-climber-x.html"><i class="fa fa-check"></i><b>3</b> Running CLIMBER-X</a></li>
-<li class="chapter" data-level="4" data-path="glacial-oscillations.html"><a href="glacial-oscillations.html"><i class="fa fa-check"></i><b>4</b> Glacial Oscillations</a></li>
-<li class="chapter" data-level="5" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>5</b> Linear Algebra</a></li>
-<li class="chapter" data-level="6" data-path="ocean-circulation.html"><a href="ocean-circulation.html"><i class="fa fa-check"></i><b>6</b> Ocean Circulation</a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Course Overview</a></li>
+<li><a class="" href="climber-x.html"><span class="header-section-number">2</span> CLIMBER-X</a></li>
+<li><a class="" href="running-climber-x.html"><span class="header-section-number">3</span> Running CLIMBER-X</a></li>
+<li><a class="" href="conceptual-esm.html"><span class="header-section-number">4</span> Conceptual ESM</a></li>
+<li><a class="" href="energy-balance.html"><span class="header-section-number">5</span> Energy Balance</a></li>
+<li><a class="" href="global-carbon-cycle.html"><span class="header-section-number">6</span> Global Carbon Cycle</a></li>
+<li><a class="" href="glacial-oscillations.html"><span class="header-section-number">7</span> Glacial Oscillations</a></li>
+<li><a class="" href="linear-algebra.html"><span class="header-section-number">8</span> Linear Algebra</a></li>
+<li><a class="active" href="ocean-circulation.html"><span class="header-section-number">9</span> Ocean Circulation</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="ocean-circulation" class="section level1 hasAnchor" number="6">
-<h1><span class="header-section-number">Chapter 6</span> Ocean Circulation<a href="ocean-circulation.html#ocean-circulation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="ocean-circulation" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Ocean Circulation<a class="anchor" aria-label="anchor" href="#ocean-circulation"><i class="fas fa-link"></i></a>
+</h1>
 <p>Student Name: ___</p>
-<div id="the-stommel-model" class="section level2 hasAnchor" number="6.1">
-<h2><span class="header-section-number">6.1</span> The Stommel Model<a href="ocean-circulation.html#the-stommel-model" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="the-stommel-model" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> The Stommel Model<a class="anchor" aria-label="anchor" href="#the-stommel-model"><i class="fas fa-link"></i></a>
+</h2>
 <p>Henry Stommel developed a conceptual model of the thermohaline circulation, which he published in a seminal <a href="https://onlinelibrary.wiley.com/doi/epdf/10.1111/j.2153-3490.1961.tb00079.x">paper</a> in 1961. The model consists of two idealized ocean boxes representing low-latitude warm water and high-latitude cold water. The circulation between the boxes is driven by density differences: denser water sinks in the high-latitude box, flows equatorward at depth, and returns poleward near the surface, conserving mass. The strength of the circulation increases with the density contrast between the boxes. Water density depends on both temperature and salinity: higher salinity increases density, whereas higher temperature decreases it.</p>
 <p>In the low-latitude box, the temperature is warmer because the overlying atmosphere is warmer, and the salinity is higher because prescribed evaporation exceeds precipitation. In the high-latitude box, the temperature is colder because the overlying atmosphere is colder, and the salinity is lower because prescribed precipitation exceeds evaporation. The temperature in both boxes is strongly constrained by the atmosphere through restoring toward atmospheric temperatures, although exchange of water between the boxes can transport heat. The salinity, however, is directly affected by the circulation: stronger circulation transports salt between the boxes and tends to reduce the salinity contrast.</p>
 <p>The flow is driven by density differences, which depend on both temperature and salinity with opposing effects: higher temperature decreases density, whereas higher salinity increases it. Thus, the low-latitude box is warm and salty, while the high-latitude box is cold and fresher.</p>
 <p>Two types of circulation are possible. If density differences are dominated by temperature, the high-latitude box is denser than the low-latitude box, and water flows from high to low latitudes in the deep branch with a compensating surface return flow. This is the thermally dominated circulation. If density differences are dominated by salinity, the low-latitude box becomes denser, and the overturning circulation reverses, with deep flow toward high latitudes. This is the salinity-dominated circulation.</p>
 <p>Because circulation transports salt between the boxes, stronger flow reduces the salinity contrast. This tends to stabilize thermally dominated circulation but weaken salinity-dominated circulation.</p>
-<div id="temperature---salinity-diagram" class="section level3 hasAnchor" number="6.1.1">
-<h3><span class="header-section-number">6.1.1</span> Temperature - Salinity Diagram<a href="ocean-circulation.html#temperature---salinity-diagram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="temperature---salinity-diagram" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">9.1.1</span> Temperature - Salinity Diagram<a class="anchor" aria-label="anchor" href="#temperature---salinity-diagram"><i class="fas fa-link"></i></a>
+</h3>
 <p>To better understand this, let’s assess how density is affected by temperature and salinity. The relationship is non-linear, and determined by the Thermodynamic Equation of Sea Water 2010 (TEOS-10). The Figure below gives the sea water density (blue contours in kg m<sup>-3</sup>) as a function of salinity and temperature.</p>
-<p><img src="main_files/figure-html/unnamed-chunk-17-1.png" alt="" width="480" /></p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># template code chunk</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://teos-10.github.io/GSW-R/">gsw</a></span><span class="op">)</span></span>
+<span><span class="co"># Define ranges</span></span>
+<span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="co"># y-axis (temperature)</span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">30</span>, <span class="fl">40</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="co"># x-axis (salinity)</span></span>
+<span></span>
+<span><span class="co"># Compute density using outer</span></span>
+<span><span class="co"># outer(T, S) -&gt; rows = T, cols = S</span></span>
+<span><span class="va">rho_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/outer.html">outer</a></span><span class="op">(</span><span class="cn">T</span>, <span class="va">S</span>, <span class="kw">function</span><span class="op">(</span><span class="va">T</span>, <span class="va">S</span><span class="op">)</span> <span class="fu"><a href="http://teos-10.github.io/GSW-R/reference/gsw_rho.html">gsw_rho</a></span><span class="op">(</span>SA <span class="op">=</span> <span class="va">S</span>, CT <span class="op">=</span> <span class="cn">T</span>, p <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Transpose so contour interprets correctly</span></span>
+<span><span class="va">rho_matrix</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">rho_matrix</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/contour.html">contour</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">S</span>, y <span class="op">=</span> <span class="cn">T</span>, z <span class="op">=</span> <span class="va">rho_matrix</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Salinity (g/kg)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Temperature (°C)"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"T-S Diagram with TEOS-10 Density"</span>,</span>
+<span>  levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">500</span>, <span class="fl">2000</span>, by <span class="op">=</span> <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"blue"</span>, lwd <span class="op">=</span> <span class="fl">1</span>, labcex <span class="op">=</span> <span class="fl">1.0</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">box.HL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">34</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># salinity and temperature of high-latitude box</span></span>
+<span><span class="va">box.LL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">36</span>, <span class="fl">25</span><span class="op">)</span> <span class="co"># salinity and temperature of high-latitude box</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"blue"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># high-latitude</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># low-latitude</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-21-1.png" alt="" width="480"></div>
 <p><strong>Q: The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?</strong></p>
 <ul>
 <li>(A): low-latitude = red, high-latitude = blue</li>
 <li>(B): low-latitude = blue, high-latitude = red</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p><strong>Q: The blue dot has a higher density compared to the red dot. Is this due to the:</strong></p>
 <ul>
 <li>(A): salinity contrast</li>
 <li>(B): temperature contrast</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p><strong>Q: Let’s reduce salinity of the blue dot by 6 g/kg. Which dot would show the higher density?</strong></p>
 <ul>
 <li>(A): red</li>
 <li>(B): blue</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p><strong>Q: How would this affect the direction of flow in the lower branch?</strong></p>
 <ul>
 <li>(A): The flow would be directed from low to high latitudes</li>
 <li>(B): The flow would be directed from high to low latitudes</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p><strong>Q: What is the relevance of this finding for the context of climate change?</strong></p>
 <ul>
 <li>(A): Climate change causes ice sheets to melt, reducing the salinity of North Atlantic seawater, decreasing water density, and strengthening the Atlantic Meridional Overturning Circulation.</li>
@@ -202,17 +138,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): Climate change causes ice sheets to melt, increasing freshwater input to the North Atlantic, increasing water density, and weakening the Atlantic Meridional Overturning Circulation.</li>
 <li>(D): Climate change causes ice sheets to melt, freshening the North Atlantic, but the resulting salinity change has no significant influence on the Atlantic Meridional Overturning Circulation because temperature is the dominant control on density.</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p>In the Stommel model, we use a linearlized version of the equation of state:</p>
 <p><span class="math display">\[
 \rho = \rho_0 (1 - \alpha (T- T_0)  + \beta (S-S_0)
 \]</span></p>
 <p>where <span class="math inline">\(\rho\)</span> is the sea water density (kg m<span class="math inline">\(^{-3}\)</span>), <span class="math inline">\(T\)</span> and <span class="math inline">\(S\)</span> are temperature and salinity anomalies, respectively and <span class="math inline">\(\alpha\)</span> is the thermal contraction (<span class="math inline">\(\alpha = 1.5 \times 10^{-4}\)</span> K) and <span class="math inline">\(\beta\)</span> is the saline expansion (<span class="math inline">\(\beta = 8 \times10^{-4}\)</span> psu<sup>-1</sup>). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. <span class="math inline">\(T_0\)</span> and <span class="math inline">\(S_0\)</span> are reference temperature and salinity (<span class="math inline">\(T_0\)</span> = 10<span class="math inline">\(^{\circ}\)</span>C, <span class="math inline">\(S_0\)</span> = 35 g kg<sup>-1</sup>). Let’s create a T-S diagram with this linearlized version of the equation of state.</p>
-<p><img src="main_files/figure-html/unnamed-chunk-28-1.png" alt="" width="480" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-32-1.png" alt="" width="480"></div>
 <p>You can see that the density values are similar, but not identical. However, using a linearlized equation of state keeps the math below more simple. Let’s now finally get to the Stommel model.</p>
 </div>
-<div id="phase-diagram" class="section level3 hasAnchor" number="6.1.2">
-<h3><span class="header-section-number">6.1.2</span> Phase Diagram<a href="ocean-circulation.html#phase-diagram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="phase-diagram" class="section level3" number="9.1.2">
+<h3>
+<span class="header-section-number">9.1.2</span> Phase Diagram<a class="anchor" aria-label="anchor" href="#phase-diagram"><i class="fas fa-link"></i></a>
+</h3>
 <p>The Stommel model consists of two ODEs, which represent the non-dimensional salinity contrast (<span class="math inline">\(x\)</span>), non-dimensional temperature contrast (<span class="math inline">\(y\)</span>) (page 227 in respective paper):</p>
 <p><span class="math display">\[ \frac{dx}{d\tau} = \delta(1-x) - \frac{x}{\lambda} |-y +Rx| \]</span>
 <span class="math display">\[ \frac{dy}{d\tau} = 1 - y - \frac{y}{\lambda}|-y + Rx|\]</span></p>
@@ -230,16 +168,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><span class="math inline">\(q\)</span> (s<span class="math inline">\(^{-1}\)</span>) is the flow rate: <span class="math inline">\(q=\frac{1}{k}(\rho_1-\rho_2)\)</span></p></li>
 </ul>
 <p>Let us begin by plotting the free solution of the dynamical system for <span class="math inline">\(R\)</span> = 2, <span class="math inline">\(\delta\)</span> = 1/6, and <span class="math inline">\(\lambda\)</span> = 1/5, as well as initial conditions of <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span>:</p>
-<p><img src="main_files/figure-html/unnamed-chunk-29-1.png" alt="" width="960" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-33-1.png" alt="" width="960"></div>
 <p>Rerun the code from the previous figure for initial conditions of <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span>.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="ocean-circulation.html#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># template code chunk</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># template code chunk</span></span></code></pre></div>
 <p><strong>Q: How does the change in initial conditions affect the equilibrium solution of the salinity contrast?</strong></p>
 <ul>
 <li>(A): The equilibrium salinity contrast increases to a value between 0.7 and 0.8</li>
 <li>(B): The equilibrium salinity contrast decreases to a value between 0.1 and 0.2</li>
 <li>(C): The equilibrium salinity contrast remains the same</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p><strong>Q: Compare the four figures above with Figure 7 in Stommel’s 1961 paper. Are your figures above consistent with what you see in Stommel’s Figure 7.</strong></p>
 <ul>
 <li>(A): No, I only found 2 equilibrium solutions, while Stommel’s figure finds 3 equilibrium solutions.</li>
@@ -247,9 +186,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): Yes, depending what initial conditions I choose I will end up at equilibrium point (a) or (c).</li>
 <li>(D): Yes, depending what initial conditions I choose I will end up at equilibrium point (b) or (c).</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p>We can use the same function to plot non-dimensional salinity contrast (<span class="math inline">\(x\)</span>) against non-dimensional temperature contrast (<span class="math inline">\(y\)</span>) for different initial conditions. This leads to a so-called phase portrait, and corresponds to Stommel’s Figure 7.</p>
-<p><img src="main_files/figure-html/unnamed-chunk-36-1.png" alt="" width="480" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-40-1.png" alt="" width="480"></div>
 <p><strong>Q: Which of the points below corresponds to an equilibrium point?</strong></p>
 <ul>
 <li>(A): x = 0.4, y = 0.6</li>
@@ -257,18 +196,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): x = 0.2, y = 1.0</li>
 <li>(D): x = 0.2, y = 0.0</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p>The phase portrait above identified three equilibrium points. Let us know calculate those equilibrium points from the equations. In the section on linear algebra, we did this by setting the ODEs to zero and solving for each variable. For more complicated ODEs, we can also approximate the equilibrium points numerically, which is what we will do here.</p>
 <pre><code>##        [,1]   [,2]
 ## [1,] 0.1350 0.4836
 ## [2,] 0.4321 0.8203
 ## [3,] 0.3518 0.7651</code></pre>
 <p>Let’s plot these three equilibrium points into our phase portrait. Do this by copying the code from above and then add <code>points(x = 0.1350, y = 0.4836), pch = 16, col = "red"</code> below. Do this for all three points.</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="ocean-circulation.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="co"># template code chunk</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-41-1.png" alt="" width="480" /></p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># template code chunk</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-45-1.png" alt="" width="480"></div>
 </div>
-<div id="jacobian-matrix-and-equilibrium-eigenvalues" class="section level3 hasAnchor" number="6.1.3">
-<h3><span class="header-section-number">6.1.3</span> Jacobian matrix and equilibrium eigenvalues<a href="ocean-circulation.html#jacobian-matrix-and-equilibrium-eigenvalues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="jacobian-matrix-and-equilibrium-eigenvalues" class="section level3" number="9.1.3">
+<h3>
+<span class="header-section-number">9.1.3</span> Jacobian matrix and equilibrium eigenvalues<a class="anchor" aria-label="anchor" href="#jacobian-matrix-and-equilibrium-eigenvalues"><i class="fas fa-link"></i></a>
+</h3>
 <p>Let’s recall our set of ODEs:</p>
 <p><span class="math display">\[ \frac{dx}{d\tau} = \delta(1-x) - \frac{x}{\lambda} |-y +Rx| \]</span>
 <span class="math display">\[ \frac{dy}{d\tau} = 1 - y - \frac{y}{\lambda}|-y + Rx|\]</span></p>
@@ -299,13 +241,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): stable node, stable node, unstable saddle</li>
 <li>(D): stable node, stable node, unstable saddle</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 </div>
-<div id="bifurcation-diagram" class="section level3 hasAnchor" number="6.1.4">
-<h3><span class="header-section-number">6.1.4</span> Bifurcation diagram<a href="ocean-circulation.html#bifurcation-diagram" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="bifurcation-diagram" class="section level3" number="9.1.4">
+<h3>
+<span class="header-section-number">9.1.4</span> Bifurcation diagram<a class="anchor" aria-label="anchor" href="#bifurcation-diagram"><i class="fas fa-link"></i></a>
+</h3>
 <p>Recall that <span class="math inline">\(\lambda\)</span> (-) measures the relative strength of flow resistance to thermal forcing:</p>
 <p><span class="math display">\[\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k\]</span>. The larger <span class="math inline">\(\lambda\)</span>, the weaker the circulation response to temperature contrast. Let us now vary the parameter <span class="math inline">\(\lambda\)</span> and calculate the equilibrium points for different values of <span class="math inline">\(\lambda\)</span>. This will result in the bifurcation diagram below.</p>
-<p><img src="main_files/figure-html/unnamed-chunk-45-1.png" alt="" width="960" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-49-1.png" alt="" width="960"></div>
 <p><strong>Q: The blue horizontal lines separate the stable form the unstable branches. Which are the stable and which are the unstable branches?</strong></p>
 <ul>
 <li>(A): top = unstable, middle = stable, bottom = unstable</li>
@@ -313,14 +257,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): top = unstable, middle = stable, bottom = stable</li>
 <li>(D): top = stable, middle = unstable, bottom = stable</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p>From the equilibrium <span class="math inline">\(x\)</span> (non-dimensional salinity contrast) and <span class="math inline">\(y\)</span> (non-dimensional temperature contrast) values, we can calculated the corresponding dimensionless flow rate <span class="math inline">\(f\)</span>:</p>
 <p><span class="math display">\[f = (-y + Rx) /\lambda \]</span></p>
 <ul>
 <li><p>If <span class="math inline">\(f&lt;0\)</span> then the circulation is in a temperature-mode (T-mode): the deep branch flow is in the direction set by temperature contrast (from cold to warm = from high to low latitudes)</p></li>
 <li><p>If <span class="math inline">\(f&gt;0\)</span> then the circulation is in a salinity mode (S-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)</p></li>
 </ul>
-<p><img src="main_files/figure-html/unnamed-chunk-48-1.png" alt="" width="480" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-52-1.png" alt="" width="480"></div>
 <p><strong>Q: Consider you are in the T-mode and <span class="math inline">\(\lambda\)</span> = 0.3. Let’s say that <span class="math inline">\(\lambda\)</span> increases to 0.35. What will happen with the direction of the flow?</strong></p>
 <ul>
 <li>(A): The flow stops.</li>
@@ -328,7 +272,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): The deep flow reverses direction, switching from equatorward to poleward transport.</li>
 <li>(D): The deep flow reverses direction, switching from poleward to equatorward transport.</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p><strong>Q: Next, imagine <span class="math inline">\(\lambda\)</span> then returns from 0.35 back to 0.3. How will this affect the flow?</strong></p>
 <ul>
 <li>(A): The flow stops.</li>
@@ -336,7 +280,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): The deep flow reverses direction, switching from equatorward to poleward transport.</li>
 <li>(D): The deep flow reverses direction, switching from poleward to equatorward transport.</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p><strong>Q: Have another look at your phase diagram. Calculate <span class="math inline">\(f\)</span> for each point and evaluate which of the equilibrium points corresponds to the T-mode, and which to the S-mode?</strong></p>
 <ul>
 <li>(A): red (x=0.13, y = 0.48) = T-mode, blue (x = 0.43, y = 0.82) = S-mode, green (x = 0.35, y = 0.76) (T-mode)</li>
@@ -344,15 +288,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>(C): red (x=0.13, y = 0.48) = T-mode, blue (x = 0.43, y = 0.82) = S-mode, green (x = 0.35, y = 0.76) (S-mode)</li>
 <li>(D): red (x=0.13, y = 0.48) = S-mode, blue (x = 0.43, y = 0.82) = S-mode, green (x = 0.35, y = 0.76) (T-mode)</li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 </div>
 </div>
-<div id="climber-x-hosing-experiments" class="section level2 hasAnchor" number="6.2">
-<h2><span class="header-section-number">6.2</span> CLIMBER-X: Hosing experiments<a href="ocean-circulation.html#climber-x-hosing-experiments" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="climber-x-hosing-experiments" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> CLIMBER-X: Hosing experiments<a class="anchor" aria-label="anchor" href="#climber-x-hosing-experiments"><i class="fas fa-link"></i></a>
+</h2>
 <p>We are now going to look at the hosing experiment conducted with CLIMBER-X. To conduct the hosing experiment, we run to he following line of code</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb37-1"><a href="ocean-circulation.html#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/up </span>
-<span id="cb37-2"><a href="ocean-circulation.html#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=-0.3 ocn.hosing_trend=0.02</span>
-<span id="cb37-3"><a href="ocean-circulation.html#cb37-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ocn.lat_min_hosing=20</span> ocn.lat_max_hosing=50</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="ocean-circulation.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/up </span>
+<span id="cb38-2"><a href="ocean-circulation.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=-0.3 ocn.hosing_trend=0.02</span>
+<span id="cb38-3"><a href="ocean-circulation.html#cb38-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ocn.lat_min_hosing=20</span> ocn.lat_max_hosing=50</span></code></pre></div>
 <p>Let’s assess what this means:</p>
 <ul>
 <li><p><code>./runme -rs -q medium -w 60:00:00</code> runs the model and tells the HPC how much computational resources the model requires</p></li>
@@ -360,11 +306,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>-p</code> sets the parameters. The meaning of each parameter is outlined in the different namelist files (<code>.nml</code>)located in <code>/CLIMBER-X/climber-x/nml/</code></p></li>
 <li><p>You can find the meaning of each parameter as follows:</p></li>
 </ul>
-<div class="sourceCode" id="cb38"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb38-1"><a href="ocean-circulation.html#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go to the directory where the namelist files are stored</span></span>
-<span id="cb38-2"><a href="ocean-circulation.html#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /CLIMBER-X/climber-x/nml/</span>
-<span id="cb38-3"><a href="ocean-circulation.html#cb38-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-4"><a href="ocean-circulation.html#cb38-4" aria-hidden="true" tabindex="-1"></a><span class="co"># search for the parameter in all namelist files:</span></span>
-<span id="cb38-5"><a href="ocean-circulation.html#cb38-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">&quot;nyears&quot;</span> <span class="pp">*</span>.nml</span></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="ocean-circulation.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># go to the directory where the namelist files are stored</span></span>
+<span id="cb39-2"><a href="ocean-circulation.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /CLIMBER-X/climber-x/nml/</span>
+<span id="cb39-3"><a href="ocean-circulation.html#cb39-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-4"><a href="ocean-circulation.html#cb39-4" aria-hidden="true" tabindex="-1"></a><span class="co"># search for the parameter in all namelist files:</span></span>
+<span id="cb39-5"><a href="ocean-circulation.html#cb39-5" aria-hidden="true" tabindex="-1"></a><span class="fu">grep</span> <span class="at">-r</span> <span class="st">"nyears"</span> <span class="pp">*</span>.nml</span></code></pre></div>
 <p>Here a list of all the parameters that were set for this experiment:</p>
 <ul>
 <li><p><code>ctl.nyears=30000</code>: number of simulation years</p></li>
@@ -375,23 +321,27 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p><code>ocn.lat_max_hosing=50</code>: higher latitude bound for region of freshwater flux</p></li>
 </ul>
 <p>The command to run the freshwater hosing experiment only mentions a few parameters. For all other parameters, the default setting is chosen. For instance, the atmospheric CO<sub>2</sub> concentration is set to a constant value of 280 ppmv. Recall that Sv = Sverdrup = 10<sup>6</sup> km<sup>2</sup> s<sup>-1</sup>. Let’s now translate the command below into words. Again:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb39-1"><a href="ocean-circulation.html#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/up </span>
-<span id="cb39-2"><a href="ocean-circulation.html#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=-0.3 ocn.hosing_trend=0.02</span>
-<span id="cb39-3"><a href="ocean-circulation.html#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ocn.lat_min_hosing=20</span> ocn.lat_max_hosing=50</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb40-1"><a href="ocean-circulation.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/up </span>
+<span id="cb40-2"><a href="ocean-circulation.html#cb40-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=-0.3 ocn.hosing_trend=0.02</span>
+<span id="cb40-3"><a href="ocean-circulation.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ocn.lat_min_hosing=20</span> ocn.lat_max_hosing=50</span></code></pre></div>
 <p>This means: simulate 30,000 years starting with an initial freshwater input of -0.3 Sv between 20 and 50 degrees latitude in the North Atlantic. The freshwater flux is increased by a rate of 0.02 Sv/1000 years, causing it to increase from -0.3 Sv to +0.3 Sv after 30,000 years. What does a negative freshwater flux mean? A negative freshwater flux means that freshwater is taken out of the ocean (evaporation &gt; precipitation), increasing the seawater’s salinity.</p>
 <p><strong>Q: Reproduce the figure below to illustrate how the hosing changes over time</strong></p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="ocean-circulation.html#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># template code chunk</span></span></code></pre></div>
-<p><img src="main_files/figure-html/unnamed-chunk-60-1.png" alt="" width="480" /></p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># template code chunk</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-64-1.png" alt="" width="480"></div>
 <p>We have also submitted another simulation:</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb41-1"><a href="ocean-circulation.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/down </span>
-<span id="cb41-2"><a href="ocean-circulation.html#cb41-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=0.3  ocn.hosing_trend=-0.02 </span>
-<span id="cb41-3"><a href="ocean-circulation.html#cb41-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ocn.lat_min_hosing=20</span> ocn.lat_max_hosing=50</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb42-1"><a href="ocean-circulation.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="ex">./runme</span> <span class="at">-rs</span> <span class="at">-q</span> medium <span class="at">-w</span> 60:00:00 <span class="at">--omp</span> 32 <span class="at">-o</span> <span class="va">$output</span>/<span class="va">$outdir</span>/hyst2050/down </span>
+<span id="cb42-2"><a href="ocean-circulation.html#cb42-2" aria-hidden="true" tabindex="-1"></a><span class="ex">-p</span> ctl.nyears=30000 ocn.l_hosing=T ocn.hosing_ini=0.3  ocn.hosing_trend=-0.02 </span>
+<span id="cb42-3"><a href="ocean-circulation.html#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="ex">ocn.lat_min_hosing=20</span> ocn.lat_max_hosing=50</span></code></pre></div>
 <p><strong>Q: Make a figure similar to the one above that illustrates how the freshwater hosing changes over time.</strong></p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="ocean-circulation.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># template code chunk</span></span></code></pre></div>
-<div id="hysteresis" class="section level3 hasAnchor" number="6.2.1">
-<h3><span class="header-section-number">6.2.1</span> Hysteresis<a href="ocean-circulation.html#hysteresis" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># template code chunk</span></span></code></pre></div>
+<div id="hysteresis" class="section level3" number="9.2.1">
+<h3>
+<span class="header-section-number">9.2.1</span> Hysteresis<a class="anchor" aria-label="anchor" href="#hysteresis"><i class="fas fa-link"></i></a>
+</h3>
 <p>The AMOC strength is defined as the maximum of the Atlantic meridional streamfunction deeper than 700 m. The initial condition for both these experiments (up, and down) is a pre-industrial equilibrium simulation run for 10 000 years with 280 ppm of CO2 and present-day ice sheets. Let’s now visualize the results from both experiments.</p>
-<p><img src="main_files/figure-html/unnamed-chunk-63-1.png" alt="" width="480" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-67-1.png" alt="" width="480"></div>
 <p><strong>Q: Interpret the figure above</strong></p>
 <ul>
 <li><p>(A): A reduction in salinity weakens the AMOC and may cause it to collapse beyond a tipping point. However, once salinity is increased again, the AMOC immediately returns to its original strength at exactly the same threshold at which it collapsed.</p></li>
@@ -399,14 +349,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>(C): A decrease in salinity strengthens the AMOC up to a critical threshold, beyond which the circulation abruptly collapses. Increasing salinity afterward further delays recovery of the system.</p></li>
 <li><p>(D): When salinity declines past a tipping point, the AMOC collapses. Once salinity is increased again, the AMOC gradually strengthens but stabilizes at a permanently weaker state, even if salinity fully returns to its initial level.</p></li>
 </ul>
-<pre><code>## [1] &quot;Add your answer here&quot;</code></pre>
+<pre><code>## [1] "Add your answer here"</code></pre>
 <p>Let’s plot how the AMOC looks like when it is on (high salinity) and off (low salinity)</p>
-<p><img src="main_files/figure-html/unnamed-chunk-66-1.png" alt="" width="960" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-70-1.png" alt="" width="960"></div>
 <p>Let us now plot the AMOC strength at 26 degrees northern latitude as a function of depth, where each line represents an increase in freshwater hosing.</p>
-<p><img src="main_files/figure-html/unnamed-chunk-67-1.png" alt="" width="480" /></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-71-1.png" alt="" width="480"></div>
 </div>
-<div id="reflection" class="section level3 hasAnchor" number="6.2.2">
-<h3><span class="header-section-number">6.2.2</span> Reflection<a href="ocean-circulation.html#reflection" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="reflection" class="section level3" number="9.2.2">
+<h3>
+<span class="header-section-number">9.2.2</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection"><i class="fas fa-link"></i></a>
+</h3>
 <p><strong>Q: Write a concise paragraph summarizing the main mechanisms or concepts you learned in this tutorial. Focus on explaining how they are connected.</strong></p>
 <ul>
 <li>Answer: ___</li>
@@ -419,72 +371,55 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li>Answer: ___</li>
 </ul>
-
 </div>
 </div>
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="linear-algebra.html"><span class="header-section-number">8</span> Linear Algebra</a></div>
+<div class="empty"></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ocean-circulation"><span class="header-section-number">9</span> Ocean Circulation</a></li>
+<li>
+<a class="nav-link" href="#the-stommel-model"><span class="header-section-number">9.1</span> The Stommel Model</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#temperature---salinity-diagram"><span class="header-section-number">9.1.1</span> Temperature - Salinity Diagram</a></li>
+<li><a class="nav-link" href="#phase-diagram"><span class="header-section-number">9.1.2</span> Phase Diagram</a></li>
+<li><a class="nav-link" href="#jacobian-matrix-and-equilibrium-eigenvalues"><span class="header-section-number">9.1.3</span> Jacobian matrix and equilibrium eigenvalues</a></li>
+<li><a class="nav-link" href="#bifurcation-diagram"><span class="header-section-number">9.1.4</span> Bifurcation diagram</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#climber-x-hosing-experiments"><span class="header-section-number">9.2</span> CLIMBER-X: Hosing experiments</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#hysteresis"><span class="header-section-number">9.2.1</span> Hysteresis</a></li>
+<li><a class="nav-link" href="#reflection"><span class="header-section-number">9.2.2</span> Reflection</a></li>
+</ul>
+</li>
+</ul>
 
-          </div>
-        </div>
-      </div>
-<a href="linear-algebra.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
 
-    </div>
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -496,7 +431,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

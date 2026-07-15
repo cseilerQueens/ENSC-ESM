@@ -13,6 +13,11 @@ simulations
 setting-up-an-experiment
 runme-options
 submitting-an-ensemble
+conceptual-esm
+energy-balance
+budykosellers-type-ebm
+carbon-cycle
+global-carbon-cycle
 glacial-oscillations
 linear-algebra
 matrix-multiplication

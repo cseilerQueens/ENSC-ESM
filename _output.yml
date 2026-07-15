@@ -1,2 +1,1 @@
-bookdown::gitbook:
-    toc_depth: 1
+bookdown::bs4_book: {}

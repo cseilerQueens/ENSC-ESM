@@ -43,7 +43,6 @@ $$
 
 
 ```{r, fig.width = 5, fig.height = 5}
-
 T <- seq(220, 310, 1)
 
 # Outgoing radiation following the Stefan-Boltzmann law
@@ -52,13 +51,15 @@ sigma <- 5.67 * 10^(-8) # Stefan-Boltzmann constant in W m-2 K-4
 E_out <- emissivity * sigma * T^4
 
 # Incoming radiation
-Q <- 1368/4 # mean incoming solar radiation in W m-2
-albedo <- 0.5 - 0.2 * tanh((T-265)/10)
+Q <- 1368 / 4 # mean incoming solar radiation in W m-2
+albedo <- 0.5 - 0.2 * tanh((T - 265) / 10)
 E_in <- (1 - albedo) * Q
 
-plot(T, E_out, type = "l", col = "red", 
-     xlab = "Temperature (K)",
-     ylab = "Radiative Flux (W/m2)")
+plot(T, E_out,
+  type = "l", col = "red",
+  xlab = "Temperature (K)",
+  ylab = "Radiative Flux (W/m2)"
+)
 lines(T, E_in, col = "blue")
 grid()
 legend("topleft", c("Incoming radiation", "Outgoing radiation"), pch = 16, col = c("blue", "red"), bty = "n")
@@ -67,14 +68,13 @@ legend("topleft", c("Incoming radiation", "Outgoing radiation"), pch = 16, col =
 
 
 ```{r, fig.width = 5, fig.height = 5}
-
-Q <- 1368/4 # mean incoming solar radiation in W m-2
+Q <- 1368 / 4 # mean incoming solar radiation in W m-2
 # C <- 5 * 10^8 # planetary heat capacity in J m$^{-2}$ K$^{-1}$) [Schwartz (2007)](https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/2007JD008746)
 emissivity <- 0.6
 sigma <- 5.67 * 10^(-8) # Stefan-Boltzmann constant in W m-2 K-4
 
 T <- seq(220, 310, 1)
-albedo <- 0.5 - 0.2 * tanh((T-265)/10)
+albedo <- 0.5 - 0.2 * tanh((T - 265) / 10)
 CdTdt <- (1 - albedo) * Q - emissivity * sigma * T^4
 
 plot(T, CdTdt, type = "l", xlab = "Temperature (K)", ylab = "Energy Flux (W/m2)")
@@ -90,7 +90,7 @@ abline(h = 0)
 # Parameters
 # ----------------------------
 
-Q0 <- 1368/4
+Q0 <- 1368 / 4
 emissivity <- 0.6
 sigma <- 5.67e-8
 
@@ -100,7 +100,7 @@ sigma <- 5.67e-8
 
 Ffun <- function(T, mu) {
   Q <- mu * Q0
-  albedo <- 0.5 - 0.2 * tanh((T - 265)/10)
+  albedo <- 0.5 - 0.2 * tanh((T - 265) / 10)
   result <- (1 - albedo) * Q - emissivity * sigma * T^4
   return(result)
 }
@@ -117,18 +117,16 @@ mu_all <- c()
 T_grid <- seq(200, 330, by = 0.5)
 
 for (mu in mu_vals) {
-  
   Fvals <- Ffun(T_grid, mu)
   sign_change <- which(diff(sign(Fvals)) != 0)
-  
+
   if (length(sign_change) > 0) {
-    
     for (idx in sign_change) {
-      
       root <- uniroot(Ffun,
-                      interval = c(T_grid[idx], T_grid[idx+1]),
-                      mu = mu)$root
-      
+        interval = c(T_grid[idx], T_grid[idx + 1]),
+        mu = mu
+      )$root
+
       T_all <- c(T_all, root)
       mu_all <- c(mu_all, mu)
     }
@@ -140,12 +138,12 @@ for (mu in mu_vals) {
 # ----------------------------
 
 plot(mu_all, T_all,
-     pch = 16,
-     cex = 0.6,
-     xlab = expression(Q/Q[0]),
-     ylab = "Equilibrium Temperature (K)")
+  pch = 16,
+  cex = 0.6,
+  xlab = expression(Q / Q[0]),
+  ylab = "Equilibrium Temperature (K)"
+)
 
 grid()
-
 ```
 

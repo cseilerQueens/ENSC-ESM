@@ -1,411 +1,285 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Glacial Oscillations | _main.knit</title>
-  <meta name="description" content="ESM" />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 4 Glacial Oscillations | _main.knit" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="ESM" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Glacial Oscillations | _main.knit" />
-  
-  <meta name="twitter:description" content="ESM" />
-  
-
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="running-climber-x.html"/>
-<link rel="next" href="linear-algebra.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 7 Glacial Oscillations | _main.knit</title>
+<meta name="description" content="Saltzman and Maasch (1990) (SM90) developed a conceptual model to simulate glacial cycles during the late Cenozoic era (300 kyr BCE). The ODEs below present the nondimensional form of the model,...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 7 Glacial Oscillations | _main.knit">
+<meta property="og:type" content="book">
+<meta property="og:description" content="Saltzman and Maasch (1990) (SM90) developed a conceptual model to simulate glacial cycles during the late Cenozoic era (300 kyr BCE). The ODEs below present the nondimensional form of the model,...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 7 Glacial Oscillations | _main.knit">
+<meta name="twitter:description" content="Saltzman and Maasch (1990) (SM90) developed a conceptual model to simulate glacial cycles during the late Cenozoic era (300 kyr BCE). The ODEs below present the nondimensional form of the model,...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course Overview</a></li>
-<li class="chapter" data-level="2" data-path="climber-x.html"><a href="climber-x.html"><i class="fa fa-check"></i><b>2</b> CLIMBER-X</a></li>
-<li class="chapter" data-level="3" data-path="running-climber-x.html"><a href="running-climber-x.html"><i class="fa fa-check"></i><b>3</b> Running CLIMBER-X</a></li>
-<li class="chapter" data-level="4" data-path="glacial-oscillations.html"><a href="glacial-oscillations.html"><i class="fa fa-check"></i><b>4</b> Glacial Oscillations</a></li>
-<li class="chapter" data-level="5" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>5</b> Linear Algebra</a></li>
-<li class="chapter" data-level="6" data-path="ocean-circulation.html"><a href="ocean-circulation.html"><i class="fa fa-check"></i><b>6</b> Ocean Circulation</a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Course Overview</a></li>
+<li><a class="" href="climber-x.html"><span class="header-section-number">2</span> CLIMBER-X</a></li>
+<li><a class="" href="running-climber-x.html"><span class="header-section-number">3</span> Running CLIMBER-X</a></li>
+<li><a class="" href="conceptual-esm.html"><span class="header-section-number">4</span> Conceptual ESM</a></li>
+<li><a class="" href="energy-balance.html"><span class="header-section-number">5</span> Energy Balance</a></li>
+<li><a class="" href="global-carbon-cycle.html"><span class="header-section-number">6</span> Global Carbon Cycle</a></li>
+<li><a class="active" href="glacial-oscillations.html"><span class="header-section-number">7</span> Glacial Oscillations</a></li>
+<li><a class="" href="linear-algebra.html"><span class="header-section-number">8</span> Linear Algebra</a></li>
+<li><a class="" href="ocean-circulation.html"><span class="header-section-number">9</span> Ocean Circulation</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="glacial-oscillations" class="section level1 hasAnchor" number="4">
-<h1><span class="header-section-number">Chapter 4</span> Glacial Oscillations<a href="glacial-oscillations.html#glacial-oscillations" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="glacial-oscillations" class="section level1" number="7">
+<h1>
+<span class="header-section-number">7</span> Glacial Oscillations<a class="anchor" aria-label="anchor" href="#glacial-oscillations"><i class="fas fa-link"></i></a>
+</h1>
 <p>Saltzman and Maasch (1990) (SM90) developed a conceptual model to simulate glacial cycles during the late Cenozoic era (300 kyr BCE). The ODEs below present the nondimensional form of the model, where <span class="math inline">\(x\)</span>, <span class="math inline">\(y\)</span>, and <span class="math inline">\(z\)</span> are nondimensional variables representing global ice mass, atmospheric CO<span class="math inline">\(_2\)</span> concentration, and deep ocean temperature, respectively:</p>
 <p><span class="math display">\[ \frac{dx}{dt} = -x - y - vz, \]</span>
 <span class="math display">\[ \frac{dy}{dt} = - pz + ry - sy^2 - y^3, \]</span>
 <span class="math display">\[ \frac{dz}{dt} = -qx -qz, \]</span>
 where <span class="math inline">\(p\)</span> = 1, <span class="math inline">\(q\)</span>= 2.5, <span class="math inline">\(r\)</span> = 1.3, <span class="math inline">\(s\)</span> = 0.6, and <span class="math inline">\(v\)</span> = 0.2.</p>
 <p>Note that this version of the model ignores changes in incoming solar radiation in response to the Milankovitch cycle and is intended for studying the internal oscillation of the system. Let us begin by plotting the free solution of the dynamical system.</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="glacial-oscillations.html#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required package</span></span>
-<span id="cb16-2"><a href="glacial-oscillations.html#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(deSolve)</span>
-<span id="cb16-3"><a href="glacial-oscillations.html#cb16-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="glacial-oscillations.html#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameters (change these to explore different behavior)</span></span>
-<span id="cb16-5"><a href="glacial-oscillations.html#cb16-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb16-6"><a href="glacial-oscillations.html#cb16-6" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
-<span id="cb16-7"><a href="glacial-oscillations.html#cb16-7" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
-<span id="cb16-8"><a href="glacial-oscillations.html#cb16-8" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fl">0.6</span></span>
-<span id="cb16-9"><a href="glacial-oscillations.html#cb16-9" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb16-10"><a href="glacial-oscillations.html#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="glacial-oscillations.html#cb16-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the system of ODEs</span></span>
-<span id="cb16-12"><a href="glacial-oscillations.html#cb16-12" aria-hidden="true" tabindex="-1"></a>system <span class="ot">&lt;-</span> <span class="cf">function</span>(t, state, parameters) {</span>
-<span id="cb16-13"><a href="glacial-oscillations.html#cb16-13" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> state[<span class="dv">1</span>]</span>
-<span id="cb16-14"><a href="glacial-oscillations.html#cb16-14" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> state[<span class="dv">2</span>]</span>
-<span id="cb16-15"><a href="glacial-oscillations.html#cb16-15" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> state[<span class="dv">3</span>]</span>
-<span id="cb16-16"><a href="glacial-oscillations.html#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="glacial-oscillations.html#cb16-17" aria-hidden="true" tabindex="-1"></a>  dx <span class="ot">&lt;-</span> <span class="sc">-</span>x <span class="sc">-</span> y <span class="sc">-</span> v <span class="sc">*</span> z</span>
-<span id="cb16-18"><a href="glacial-oscillations.html#cb16-18" aria-hidden="true" tabindex="-1"></a>  dy <span class="ot">&lt;-</span> <span class="sc">-</span>p <span class="sc">*</span> z <span class="sc">+</span> r <span class="sc">*</span> y <span class="sc">-</span> s <span class="sc">*</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> y<span class="sc">^</span><span class="dv">3</span></span>
-<span id="cb16-19"><a href="glacial-oscillations.html#cb16-19" aria-hidden="true" tabindex="-1"></a>  dz <span class="ot">&lt;-</span> <span class="sc">-</span>q <span class="sc">*</span> (x <span class="sc">+</span> z)</span>
-<span id="cb16-20"><a href="glacial-oscillations.html#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="glacial-oscillations.html#cb16-21" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">c</span>(dx, dy, dz))</span>
-<span id="cb16-22"><a href="glacial-oscillations.html#cb16-22" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb16-23"><a href="glacial-oscillations.html#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="glacial-oscillations.html#cb16-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial conditions</span></span>
-<span id="cb16-25"><a href="glacial-oscillations.html#cb16-25" aria-hidden="true" tabindex="-1"></a>initial_conditions <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="fl">0.1</span>, <span class="fl">0.8</span>, <span class="sc">-</span><span class="fl">0.2</span>)</span>
-<span id="cb16-26"><a href="glacial-oscillations.html#cb16-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-27"><a href="glacial-oscillations.html#cb16-27" aria-hidden="true" tabindex="-1"></a><span class="co"># Time span</span></span>
-<span id="cb16-28"><a href="glacial-oscillations.html#cb16-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-29"><a href="glacial-oscillations.html#cb16-29" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="fl">0.01</span></span>
-<span id="cb16-30"><a href="glacial-oscillations.html#cb16-30" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">100</span>, <span class="at">by =</span> dt)</span>
-<span id="cb16-31"><a href="glacial-oscillations.html#cb16-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-32"><a href="glacial-oscillations.html#cb16-32" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve ODEs for each initial condition</span></span>
-<span id="cb16-33"><a href="glacial-oscillations.html#cb16-33" aria-hidden="true" tabindex="-1"></a>solutions <span class="ot">&lt;-</span> <span class="fu">ode</span>(</span>
-<span id="cb16-34"><a href="glacial-oscillations.html#cb16-34" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> initial_conditions,</span>
-<span id="cb16-35"><a href="glacial-oscillations.html#cb16-35" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> times,</span>
-<span id="cb16-36"><a href="glacial-oscillations.html#cb16-36" aria-hidden="true" tabindex="-1"></a>  <span class="at">func =</span> system,</span>
-<span id="cb16-37"><a href="glacial-oscillations.html#cb16-37" aria-hidden="true" tabindex="-1"></a>  <span class="at">parms =</span> <span class="cn">NULL</span>,</span>
-<span id="cb16-38"><a href="glacial-oscillations.html#cb16-38" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;lsoda&quot;</span></span>
-<span id="cb16-39"><a href="glacial-oscillations.html#cb16-39" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-40"><a href="glacial-oscillations.html#cb16-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-41"><a href="glacial-oscillations.html#cb16-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb16-42"><a href="glacial-oscillations.html#cb16-42" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(solutions)</span>
-<span id="cb16-43"><a href="glacial-oscillations.html#cb16-43" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>)</span>
-<span id="cb16-44"><a href="glacial-oscillations.html#cb16-44" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-45"><a href="glacial-oscillations.html#cb16-45" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb16-46"><a href="glacial-oscillations.html#cb16-46" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> df<span class="sc">$</span>time,</span>
-<span id="cb16-47"><a href="glacial-oscillations.html#cb16-47" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> df<span class="sc">$</span>x,</span>
-<span id="cb16-48"><a href="glacial-oscillations.html#cb16-48" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb16-49"><a href="glacial-oscillations.html#cb16-49" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb16-50"><a href="glacial-oscillations.html#cb16-50" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;(-)&quot;</span>,</span>
-<span id="cb16-51"><a href="glacial-oscillations.html#cb16-51" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Time (10 ky)&quot;</span>,</span>
-<span id="cb16-52"><a href="glacial-oscillations.html#cb16-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">30</span>)</span>
-<span id="cb16-53"><a href="glacial-oscillations.html#cb16-53" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-54"><a href="glacial-oscillations.html#cb16-54" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> df<span class="sc">$</span>time, df<span class="sc">$</span>y, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb16-55"><a href="glacial-oscillations.html#cb16-55" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> df<span class="sc">$</span>time, df<span class="sc">$</span>z, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb16-56"><a href="glacial-oscillations.html#cb16-56" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb16-57"><a href="glacial-oscillations.html#cb16-57" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
-<span id="cb16-58"><a href="glacial-oscillations.html#cb16-58" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb16-59"><a href="glacial-oscillations.html#cb16-59" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;x = Ice&quot;</span>, <span class="st">&quot;y = CO2&quot;</span>, <span class="st">&quot;z = T_Ocean&quot;</span>),</span>
-<span id="cb16-60"><a href="glacial-oscillations.html#cb16-60" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
-<span id="cb16-61"><a href="glacial-oscillations.html#cb16-61" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
-<span id="cb16-62"><a href="glacial-oscillations.html#cb16-62" aria-hidden="true" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb16-63"><a href="glacial-oscillations.html#cb16-63" aria-hidden="true" tabindex="-1"></a>  <span class="at">horiz =</span> <span class="cn">TRUE</span></span>
-<span id="cb16-64"><a href="glacial-oscillations.html#cb16-64" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-13-1.png" alt="" width="480" /></p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load required package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define parameters (change these to explore different behavior)</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fl">2.5</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">1.3</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
+<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span></span>
+<span><span class="co"># Define the system of ODEs</span></span>
+<span><span class="va">system</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span>  <span class="va">z</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">v</span> <span class="op">*</span> <span class="va">z</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">p</span> <span class="op">*</span> <span class="va">z</span> <span class="op">+</span> <span class="va">r</span> <span class="op">*</span> <span class="va">y</span> <span class="op">-</span> <span class="va">s</span> <span class="op">*</span> <span class="va">y</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">y</span><span class="op">^</span><span class="fl">3</span></span>
+<span>  <span class="va">dz</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">q</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">z</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span>, <span class="va">dz</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Initial conditions</span></span>
+<span><span class="va">initial_conditions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0.1</span>, <span class="fl">0.8</span>, <span class="op">-</span><span class="fl">0.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Time span</span></span>
+<span></span>
+<span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">0.01</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">100</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Solve ODEs for each initial condition</span></span>
+<span><span class="va">solutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span></span>
+<span>  y <span class="op">=</span> <span class="va">initial_conditions</span>,</span>
+<span>  times <span class="op">=</span> <span class="va">times</span>,</span>
+<span>  func <span class="op">=</span> <span class="va">system</span>,</span>
+<span>  parms <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"lsoda"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">solutions</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"(-)"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time (10 ky)"</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, <span class="va">df</span><span class="op">$</span><span class="va">y</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, <span class="va">df</span><span class="op">$</span><span class="va">z</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span></span>
+<span>  <span class="st">"top"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x = Ice"</span>, <span class="st">"y = CO2"</span>, <span class="st">"z = T_Ocean"</span><span class="op">)</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span>,</span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  bty <span class="op">=</span> <span class="st">"n"</span>,</span>
+<span>  horiz <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-17-1.png" alt="" width="480"></div>
 <p>Impact of Milankovitch cycle</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="glacial-oscillations.html#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(palinsol)</span>
-<span id="cb17-2"><a href="glacial-oscillations.html#cb17-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-3"><a href="glacial-oscillations.html#cb17-3" aria-hidden="true" tabindex="-1"></a>year <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="at">from =</span> <span class="sc">-</span><span class="dv">500000</span>, <span class="at">to =</span> <span class="dv">0</span>, <span class="at">by =</span> <span class="dv">1000</span>)</span>
-<span id="cb17-4"><a href="glacial-oscillations.html#cb17-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-5"><a href="glacial-oscillations.html#cb17-5" aria-hidden="true" tabindex="-1"></a>latitude <span class="ot">&lt;-</span> <span class="dv">65</span> <span class="sc">*</span> pi <span class="sc">/</span> <span class="dv">180</span> <span class="co"># (radians)</span></span>
-<span id="cb17-6"><a href="glacial-oscillations.html#cb17-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-7"><a href="glacial-oscillations.html#cb17-7" aria-hidden="true" tabindex="-1"></a>insolation <span class="ot">&lt;-</span> <span class="cf">function</span>(times, <span class="at">astrosol =</span> ber78) {</span>
-<span id="cb17-8"><a href="glacial-oscillations.html#cb17-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">sapply</span>(times, <span class="cf">function</span>(tt) <span class="fu">Insol</span>(<span class="at">orbit =</span> <span class="fu">astrosol</span>(tt), <span class="at">long =</span> pi <span class="sc">/</span> <span class="dv">2</span>, <span class="at">lat =</span> latitude))</span>
-<span id="cb17-9"><a href="glacial-oscillations.html#cb17-9" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb17-10"><a href="glacial-oscillations.html#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="glacial-oscillations.html#cb17-11" aria-hidden="true" tabindex="-1"></a><span class="co"># Daily mean incoming solar radiation at TOA (W/m2)</span></span>
-<span id="cb17-12"><a href="glacial-oscillations.html#cb17-12" aria-hidden="true" tabindex="-1"></a>isl <span class="ot">&lt;-</span> <span class="fu">insolation</span>(year, ber78)</span>
-<span id="cb17-13"><a href="glacial-oscillations.html#cb17-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-14"><a href="glacial-oscillations.html#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Normalized anomalies</span></span>
-<span id="cb17-15"><a href="glacial-oscillations.html#cb17-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-16"><a href="glacial-oscillations.html#cb17-16" aria-hidden="true" tabindex="-1"></a>isl.norm <span class="ot">&lt;-</span> (isl <span class="sc">-</span> <span class="fu">mean</span>(isl)) <span class="sc">/</span> <span class="fu">sd</span>(isl)</span>
-<span id="cb17-17"><a href="glacial-oscillations.html#cb17-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-18"><a href="glacial-oscillations.html#cb17-18" aria-hidden="true" tabindex="-1"></a>my.min <span class="ot">&lt;-</span> <span class="fu">min</span>(isl.norm)</span>
-<span id="cb17-19"><a href="glacial-oscillations.html#cb17-19" aria-hidden="true" tabindex="-1"></a>my.max <span class="ot">&lt;-</span> <span class="fu">max</span>(<span class="fu">abs</span>(isl.norm))</span>
-<span id="cb17-20"><a href="glacial-oscillations.html#cb17-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-21"><a href="glacial-oscillations.html#cb17-21" aria-hidden="true" tabindex="-1"></a>Rvec <span class="ot">&lt;-</span> (isl.norm <span class="sc">/</span> my.max)</span>
-<span id="cb17-22"><a href="glacial-oscillations.html#cb17-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-23"><a href="glacial-oscillations.html#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(year, isl,</span>
-<span id="cb17-24"><a href="glacial-oscillations.html#cb17-24" aria-hidden="true" tabindex="-1"></a>  <span class="at">typ =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb17-25"><a href="glacial-oscillations.html#cb17-25" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Daily mean solar radiation for June 20 (Solstice)&quot;</span>,</span>
-<span id="cb17-26"><a href="glacial-oscillations.html#cb17-26" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Years&quot;</span>,</span>
-<span id="cb17-27"><a href="glacial-oscillations.html#cb17-27" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;Insolation at TOA (W/m2)&quot;</span></span>
-<span id="cb17-28"><a href="glacial-oscillations.html#cb17-28" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-29"><a href="glacial-oscillations.html#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="fu">paste</span>(<span class="st">&quot;Latitude =&quot;</span>, latitude <span class="sc">*</span> <span class="dv">180</span> <span class="sc">/</span> pi, <span class="st">&quot;N&quot;</span>), <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span>
-<span id="cb17-30"><a href="glacial-oscillations.html#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="fl">480.05</span>, <span class="at">col =</span> <span class="st">&quot;grey&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-14-1.png" alt="" width="672" /></p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="glacial-oscillations.html#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(year, Rvec,</span>
-<span id="cb18-2"><a href="glacial-oscillations.html#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">typ =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb18-3"><a href="glacial-oscillations.html#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">main =</span> <span class="st">&quot;Non-dimensionalized insolation R (-)&quot;</span>,</span>
-<span id="cb18-4"><a href="glacial-oscillations.html#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Years&quot;</span>,</span>
-<span id="cb18-5"><a href="glacial-oscillations.html#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;(-)&quot;</span></span>
-<span id="cb18-6"><a href="glacial-oscillations.html#cb18-6" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-7"><a href="glacial-oscillations.html#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(<span class="st">&quot;topleft&quot;</span>, <span class="fu">paste</span>(<span class="st">&quot;Latitude =&quot;</span>, latitude <span class="sc">*</span> <span class="dv">180</span> <span class="sc">/</span> pi, <span class="st">&quot;N&quot;</span>), <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-14-2.png" alt="" width="672" /></p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mcrucifix/palinsol">palinsol</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span>from <span class="op">=</span> <span class="op">-</span><span class="fl">500000</span>, to <span class="op">=</span> <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">latitude</span> <span class="op">&lt;-</span> <span class="fl">65</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">180</span> <span class="co"># (radians)</span></span>
+<span></span>
+<span><span class="va">insolation</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">times</span>, <span class="va">astrosol</span> <span class="op">=</span> <span class="va">ber78</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">times</span>, <span class="kw">function</span><span class="op">(</span><span class="va">tt</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/pkg/palinsol/man/Insol.html">Insol</a></span><span class="op">(</span>orbit <span class="op">=</span> <span class="fu">astrosol</span><span class="op">(</span><span class="va">tt</span><span class="op">)</span>, long <span class="op">=</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">2</span>, lat <span class="op">=</span> <span class="va">latitude</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Daily mean incoming solar radiation at TOA (W/m2)</span></span>
+<span><span class="va">isl</span> <span class="op">&lt;-</span> <span class="fu">insolation</span><span class="op">(</span><span class="va">year</span>, <span class="va">ber78</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Normalized anomalies</span></span>
+<span></span>
+<span><span class="va">isl.norm</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">isl</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">isl</span><span class="op">)</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">isl</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my.min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">isl.norm</span><span class="op">)</span></span>
+<span><span class="va">my.max</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">isl.norm</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Rvec</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">isl.norm</span> <span class="op">/</span> <span class="va">my.max</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">isl</span>,</span>
+<span>  typ <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Daily mean solar radiation for June 20 (Solstice)"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Years"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Insolation at TOA (W/m2)"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Latitude ="</span>, <span class="va">latitude</span> <span class="op">*</span> <span class="fl">180</span> <span class="op">/</span> <span class="va">pi</span>, <span class="st">"N"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">480.05</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-18-1.png" alt="" width="672"></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">year</span>, <span class="va">Rvec</span>,</span>
+<span>  typ <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Non-dimensionalized insolation R (-)"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Years"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"(-)"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="st">"Latitude ="</span>, <span class="va">latitude</span> <span class="op">*</span> <span class="fl">180</span> <span class="op">/</span> <span class="va">pi</span>, <span class="st">"N"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-18-2.png" alt="" width="672"></div>
 <p>Le</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="glacial-oscillations.html#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Load required package</span></span>
-<span id="cb19-2"><a href="glacial-oscillations.html#cb19-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(deSolve)</span>
-<span id="cb19-3"><a href="glacial-oscillations.html#cb19-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-4"><a href="glacial-oscillations.html#cb19-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Define parameters (change these to explore different behavior)</span></span>
-<span id="cb19-5"><a href="glacial-oscillations.html#cb19-5" aria-hidden="true" tabindex="-1"></a>p <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb19-6"><a href="glacial-oscillations.html#cb19-6" aria-hidden="true" tabindex="-1"></a>q <span class="ot">&lt;-</span> <span class="fl">2.5</span></span>
-<span id="cb19-7"><a href="glacial-oscillations.html#cb19-7" aria-hidden="true" tabindex="-1"></a>r <span class="ot">&lt;-</span> <span class="fl">1.3</span></span>
-<span id="cb19-8"><a href="glacial-oscillations.html#cb19-8" aria-hidden="true" tabindex="-1"></a>s <span class="ot">&lt;-</span> <span class="fl">0.6</span></span>
-<span id="cb19-9"><a href="glacial-oscillations.html#cb19-9" aria-hidden="true" tabindex="-1"></a>v <span class="ot">&lt;-</span> <span class="fl">0.2</span></span>
-<span id="cb19-10"><a href="glacial-oscillations.html#cb19-10" aria-hidden="true" tabindex="-1"></a>u <span class="ot">&lt;-</span> <span class="fl">0.5</span></span>
-<span id="cb19-11"><a href="glacial-oscillations.html#cb19-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-12"><a href="glacial-oscillations.html#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co"># Define the system of ODEs</span></span>
-<span id="cb19-13"><a href="glacial-oscillations.html#cb19-13" aria-hidden="true" tabindex="-1"></a>system <span class="ot">&lt;-</span> <span class="cf">function</span>(t, state, parameters) {</span>
-<span id="cb19-14"><a href="glacial-oscillations.html#cb19-14" aria-hidden="true" tabindex="-1"></a>  x <span class="ot">&lt;-</span> state[<span class="dv">1</span>]</span>
-<span id="cb19-15"><a href="glacial-oscillations.html#cb19-15" aria-hidden="true" tabindex="-1"></a>  y <span class="ot">&lt;-</span> state[<span class="dv">2</span>]</span>
-<span id="cb19-16"><a href="glacial-oscillations.html#cb19-16" aria-hidden="true" tabindex="-1"></a>  z <span class="ot">&lt;-</span> state[<span class="dv">3</span>]</span>
-<span id="cb19-17"><a href="glacial-oscillations.html#cb19-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-18"><a href="glacial-oscillations.html#cb19-18" aria-hidden="true" tabindex="-1"></a>  k <span class="ot">&lt;-</span> <span class="fu">floor</span>(t <span class="sc">/</span> dt) <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb19-19"><a href="glacial-oscillations.html#cb19-19" aria-hidden="true" tabindex="-1"></a>  Rt <span class="ot">&lt;-</span> Rvec[k]</span>
-<span id="cb19-20"><a href="glacial-oscillations.html#cb19-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-21"><a href="glacial-oscillations.html#cb19-21" aria-hidden="true" tabindex="-1"></a>  dx <span class="ot">&lt;-</span> <span class="sc">-</span>x <span class="sc">-</span> y <span class="sc">-</span> v <span class="sc">*</span> z <span class="sc">-</span> u <span class="sc">*</span> Rt</span>
-<span id="cb19-22"><a href="glacial-oscillations.html#cb19-22" aria-hidden="true" tabindex="-1"></a>  dy <span class="ot">&lt;-</span> <span class="sc">-</span>p <span class="sc">*</span> z <span class="sc">+</span> r <span class="sc">*</span> y <span class="sc">-</span> s <span class="sc">*</span> y<span class="sc">^</span><span class="dv">2</span> <span class="sc">-</span> y<span class="sc">^</span><span class="dv">3</span></span>
-<span id="cb19-23"><a href="glacial-oscillations.html#cb19-23" aria-hidden="true" tabindex="-1"></a>  dz <span class="ot">&lt;-</span> <span class="sc">-</span>q <span class="sc">*</span> (x <span class="sc">+</span> z)</span>
-<span id="cb19-24"><a href="glacial-oscillations.html#cb19-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-25"><a href="glacial-oscillations.html#cb19-25" aria-hidden="true" tabindex="-1"></a>  <span class="fu">list</span>(<span class="fu">c</span>(dx, dy, dz))</span>
-<span id="cb19-26"><a href="glacial-oscillations.html#cb19-26" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb19-27"><a href="glacial-oscillations.html#cb19-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-28"><a href="glacial-oscillations.html#cb19-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial conditions</span></span>
-<span id="cb19-29"><a href="glacial-oscillations.html#cb19-29" aria-hidden="true" tabindex="-1"></a><span class="co"># initial_conditions &lt;- c(0.1, 0.8, -0.2)</span></span>
-<span id="cb19-30"><a href="glacial-oscillations.html#cb19-30" aria-hidden="true" tabindex="-1"></a><span class="co"># initial_conditions &lt;- c(0.5, -0.8, -0.2)</span></span>
-<span id="cb19-31"><a href="glacial-oscillations.html#cb19-31" aria-hidden="true" tabindex="-1"></a>initial_conditions <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="sc">-</span><span class="dv">1</span>)</span>
-<span id="cb19-32"><a href="glacial-oscillations.html#cb19-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-33"><a href="glacial-oscillations.html#cb19-33" aria-hidden="true" tabindex="-1"></a><span class="co"># Time span</span></span>
-<span id="cb19-34"><a href="glacial-oscillations.html#cb19-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-35"><a href="glacial-oscillations.html#cb19-35" aria-hidden="true" tabindex="-1"></a>dt <span class="ot">&lt;-</span> <span class="dv">1</span> <span class="sc">/</span> <span class="dv">10</span></span>
-<span id="cb19-36"><a href="glacial-oscillations.html#cb19-36" aria-hidden="true" tabindex="-1"></a>times <span class="ot">&lt;-</span> <span class="fu">seq</span>(<span class="dv">0</span>, <span class="dv">50</span>, <span class="at">by =</span> dt)</span>
-<span id="cb19-37"><a href="glacial-oscillations.html#cb19-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-38"><a href="glacial-oscillations.html#cb19-38" aria-hidden="true" tabindex="-1"></a><span class="co"># Solve ODEs for each initial condition</span></span>
-<span id="cb19-39"><a href="glacial-oscillations.html#cb19-39" aria-hidden="true" tabindex="-1"></a>solutions <span class="ot">&lt;-</span> <span class="fu">ode</span>(</span>
-<span id="cb19-40"><a href="glacial-oscillations.html#cb19-40" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> initial_conditions,</span>
-<span id="cb19-41"><a href="glacial-oscillations.html#cb19-41" aria-hidden="true" tabindex="-1"></a>  <span class="at">times =</span> times,</span>
-<span id="cb19-42"><a href="glacial-oscillations.html#cb19-42" aria-hidden="true" tabindex="-1"></a>  <span class="at">func =</span> system,</span>
-<span id="cb19-43"><a href="glacial-oscillations.html#cb19-43" aria-hidden="true" tabindex="-1"></a>  <span class="at">parms =</span> <span class="cn">NULL</span>,</span>
-<span id="cb19-44"><a href="glacial-oscillations.html#cb19-44" aria-hidden="true" tabindex="-1"></a>  <span class="at">method =</span> <span class="st">&quot;lsoda&quot;</span></span>
-<span id="cb19-45"><a href="glacial-oscillations.html#cb19-45" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-46"><a href="glacial-oscillations.html#cb19-46" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-47"><a href="glacial-oscillations.html#cb19-47" aria-hidden="true" tabindex="-1"></a><span class="co"># Plot</span></span>
-<span id="cb19-48"><a href="glacial-oscillations.html#cb19-48" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(solutions)</span>
-<span id="cb19-49"><a href="glacial-oscillations.html#cb19-49" aria-hidden="true" tabindex="-1"></a><span class="fu">colnames</span>(df) <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;time&quot;</span>, <span class="st">&quot;x&quot;</span>, <span class="st">&quot;y&quot;</span>, <span class="st">&quot;z&quot;</span>)</span>
-<span id="cb19-50"><a href="glacial-oscillations.html#cb19-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-51"><a href="glacial-oscillations.html#cb19-51" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(</span>
-<span id="cb19-52"><a href="glacial-oscillations.html#cb19-52" aria-hidden="true" tabindex="-1"></a>  <span class="at">x =</span> df<span class="sc">$</span>time,</span>
-<span id="cb19-53"><a href="glacial-oscillations.html#cb19-53" aria-hidden="true" tabindex="-1"></a>  <span class="at">y =</span> df<span class="sc">$</span>x,</span>
-<span id="cb19-54"><a href="glacial-oscillations.html#cb19-54" aria-hidden="true" tabindex="-1"></a>  <span class="at">type =</span> <span class="st">&quot;l&quot;</span>,</span>
-<span id="cb19-55"><a href="glacial-oscillations.html#cb19-55" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylim =</span> <span class="fu">c</span>(<span class="sc">-</span><span class="dv">2</span>, <span class="dv">2</span>),</span>
-<span id="cb19-56"><a href="glacial-oscillations.html#cb19-56" aria-hidden="true" tabindex="-1"></a>  <span class="at">ylab =</span> <span class="st">&quot;(-)&quot;</span>,</span>
-<span id="cb19-57"><a href="glacial-oscillations.html#cb19-57" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlab =</span> <span class="st">&quot;Time (10 ky)&quot;</span>,</span>
-<span id="cb19-58"><a href="glacial-oscillations.html#cb19-58" aria-hidden="true" tabindex="-1"></a>  <span class="at">xlim =</span> <span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">50</span>)</span>
-<span id="cb19-59"><a href="glacial-oscillations.html#cb19-59" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-60"><a href="glacial-oscillations.html#cb19-60" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> df<span class="sc">$</span>time, df<span class="sc">$</span>y, <span class="at">col =</span> <span class="st">&quot;red&quot;</span>)</span>
-<span id="cb19-61"><a href="glacial-oscillations.html#cb19-61" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="at">x =</span> df<span class="sc">$</span>time, df<span class="sc">$</span>z, <span class="at">col =</span> <span class="st">&quot;blue&quot;</span>)</span>
-<span id="cb19-62"><a href="glacial-oscillations.html#cb19-62" aria-hidden="true" tabindex="-1"></a><span class="fu">abline</span>(<span class="at">h =</span> <span class="dv">0</span>, <span class="at">lty =</span> <span class="dv">2</span>)</span>
-<span id="cb19-63"><a href="glacial-oscillations.html#cb19-63" aria-hidden="true" tabindex="-1"></a><span class="fu">legend</span>(</span>
-<span id="cb19-64"><a href="glacial-oscillations.html#cb19-64" aria-hidden="true" tabindex="-1"></a>  <span class="st">&quot;top&quot;</span>,</span>
-<span id="cb19-65"><a href="glacial-oscillations.html#cb19-65" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">&quot;x = Ice&quot;</span>, <span class="st">&quot;y = CO2&quot;</span>, <span class="st">&quot;z = T_Ocean&quot;</span>),</span>
-<span id="cb19-66"><a href="glacial-oscillations.html#cb19-66" aria-hidden="true" tabindex="-1"></a>  <span class="at">col =</span> <span class="fu">c</span>(<span class="st">&quot;black&quot;</span>, <span class="st">&quot;red&quot;</span>, <span class="st">&quot;blue&quot;</span>),</span>
-<span id="cb19-67"><a href="glacial-oscillations.html#cb19-67" aria-hidden="true" tabindex="-1"></a>  <span class="at">pch =</span> <span class="dv">16</span>,</span>
-<span id="cb19-68"><a href="glacial-oscillations.html#cb19-68" aria-hidden="true" tabindex="-1"></a>  <span class="at">bty =</span> <span class="st">&quot;n&quot;</span>,</span>
-<span id="cb19-69"><a href="glacial-oscillations.html#cb19-69" aria-hidden="true" tabindex="-1"></a>  <span class="at">horiz =</span> <span class="cn">TRUE</span></span>
-<span id="cb19-70"><a href="glacial-oscillations.html#cb19-70" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div>
-<p><img src="_main_files/figure-html/unnamed-chunk-15-1.png" alt="" width="480" /></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load required package</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define parameters (change these to explore different behavior)</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fl">2.5</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">1.3</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
+<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
+<span></span>
+<span><span class="co"># Define the system of ODEs</span></span>
+<span><span class="va">system</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span>  <span class="va">z</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="va">k</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html">floor</a></span><span class="op">(</span><span class="va">t</span> <span class="op">/</span> <span class="va">dt</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span></span>
+<span>  <span class="va">Rt</span> <span class="op">&lt;-</span> <span class="va">Rvec</span><span class="op">[</span><span class="va">k</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">v</span> <span class="op">*</span> <span class="va">z</span> <span class="op">-</span> <span class="va">u</span> <span class="op">*</span> <span class="va">Rt</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">p</span> <span class="op">*</span> <span class="va">z</span> <span class="op">+</span> <span class="va">r</span> <span class="op">*</span> <span class="va">y</span> <span class="op">-</span> <span class="va">s</span> <span class="op">*</span> <span class="va">y</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">y</span><span class="op">^</span><span class="fl">3</span></span>
+<span>  <span class="va">dz</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">q</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span> <span class="op">+</span> <span class="va">z</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span>, <span class="va">dz</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Initial conditions</span></span>
+<span><span class="co"># initial_conditions &lt;- c(0.1, 0.8, -0.2)</span></span>
+<span><span class="co"># initial_conditions &lt;- c(0.5, -0.8, -0.2)</span></span>
+<span><span class="va">initial_conditions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span>, <span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Time span</span></span>
+<span></span>
+<span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">10</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Solve ODEs for each initial condition</span></span>
+<span><span class="va">solutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span></span>
+<span>  y <span class="op">=</span> <span class="va">initial_conditions</span>,</span>
+<span>  times <span class="op">=</span> <span class="va">times</span>,</span>
+<span>  func <span class="op">=</span> <span class="va">system</span>,</span>
+<span>  parms <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"lsoda"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">solutions</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"x"</span>, <span class="st">"y"</span>, <span class="st">"z"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"(-)"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time (10 ky)"</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">50</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, <span class="va">df</span><span class="op">$</span><span class="va">y</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, <span class="va">df</span><span class="op">$</span><span class="va">z</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span></span>
+<span>  <span class="st">"top"</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x = Ice"</span>, <span class="st">"y = CO2"</span>, <span class="st">"z = T_Ocean"</span><span class="op">)</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"black"</span>, <span class="st">"red"</span>, <span class="st">"blue"</span><span class="op">)</span>,</span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  bty <span class="op">=</span> <span class="st">"n"</span>,</span>
+<span>  horiz <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-19-1.png" alt="" width="480"></div>
 
 </div>
-            </section>
+  <div class="chapter-nav">
+<div class="prev"><a href="global-carbon-cycle.html"><span class="header-section-number">6</span> Global Carbon Cycle</a></div>
+<div class="next"><a href="linear-algebra.html"><span class="header-section-number">8</span> Linear Algebra</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav"><li><a class="nav-link" href="#glacial-oscillations"><span class="header-section-number">7</span> Glacial Oscillations</a></li></ul>
 
-          </div>
-        </div>
-      </div>
-<a href="running-climber-x.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="linear-algebra.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -417,7 +291,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>

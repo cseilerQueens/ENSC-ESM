@@ -1,167 +1,71 @@
 <!DOCTYPE html>
-<html lang="" xml:lang="">
+<html lang="en">
 <head>
-
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 5 Linear Algebra | _main.knit</title>
-  <meta name="description" content="ESM" />
-  <meta name="generator" content="bookdown 0.46 and GitBook 2.6.7" />
-
-  <meta property="og:title" content="Chapter 5 Linear Algebra | _main.knit" />
-  <meta property="og:type" content="book" />
-  
-  <meta property="og:description" content="ESM" />
-  <meta name="github-repo" content="rstudio/bookdown-demo" />
-
-  <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 5 Linear Algebra | _main.knit" />
-  
-  <meta name="twitter:description" content="ESM" />
-  
-
-
-
-
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-  
-  
-<link rel="prev" href="glacial-oscillations.html"/>
-<link rel="next" href="ocean-circulation.html"/>
-<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
-<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
-<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
-
-
-
-
-
-
-
-
-<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
-<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
-<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
-
-
-<style type="text/css">
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-    color: #aaaaaa;
-  }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-}
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
-</style>
-
-<style type="text/css">
-  
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-</style>
-
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 8 Linear Algebra | _main.knit</title>
+<meta name="description" content="This section introduces the basic mathematical concepts required for understanding tipping points.  8.1 Matrix Multiplication \[ \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix} \begin{bmatrix} 5 \\ 6...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 8 Linear Algebra | _main.knit">
+<meta property="og:type" content="book">
+<meta property="og:description" content="This section introduces the basic mathematical concepts required for understanding tipping points.  8.1 Matrix Multiplication \[ \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix} \begin{bmatrix} 5 \\ 6...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 8 Linear Algebra | _main.knit">
+<meta name="twitter:description" content="This section introduces the basic mathematical concepts required for understanding tipping points.  8.1 Matrix Multiplication \[ \begin{bmatrix} 1 &amp; 2 \\ 3 &amp; 4 \end{bmatrix} \begin{bmatrix} 5 \\ 6...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.10.0/transition.js"></script><script src="libs/bs3compat-0.10.0/tabs.js"></script><script src="libs/bs3compat-0.10.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
 </head>
+<body data-spy="scroll" data-target="#toc">
 
-<body>
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
 
-
-
-  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
-
-    <div class="book-summary">
-      <nav role="navigation">
-
-<ul class="summary">
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Course Overview</a></li>
-<li class="chapter" data-level="2" data-path="climber-x.html"><a href="climber-x.html"><i class="fa fa-check"></i><b>2</b> CLIMBER-X</a></li>
-<li class="chapter" data-level="3" data-path="running-climber-x.html"><a href="running-climber-x.html"><i class="fa fa-check"></i><b>3</b> Running CLIMBER-X</a></li>
-<li class="chapter" data-level="4" data-path="glacial-oscillations.html"><a href="glacial-oscillations.html"><i class="fa fa-check"></i><b>4</b> Glacial Oscillations</a></li>
-<li class="chapter" data-level="5" data-path="linear-algebra.html"><a href="linear-algebra.html"><i class="fa fa-check"></i><b>5</b> Linear Algebra</a></li>
-<li class="chapter" data-level="6" data-path="ocean-circulation.html"><a href="ocean-circulation.html"><i class="fa fa-check"></i><b>6</b> Ocean Circulation</a></li>
-</ul>
-
-      </nav>
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
     </div>
 
-    <div class="book-body">
-      <div class="body-inner">
-        <div class="book-header" role="navigation">
-          <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
-          </h1>
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Course Overview</a></li>
+<li><a class="" href="climber-x.html"><span class="header-section-number">2</span> CLIMBER-X</a></li>
+<li><a class="" href="running-climber-x.html"><span class="header-section-number">3</span> Running CLIMBER-X</a></li>
+<li><a class="" href="conceptual-esm.html"><span class="header-section-number">4</span> Conceptual ESM</a></li>
+<li><a class="" href="energy-balance.html"><span class="header-section-number">5</span> Energy Balance</a></li>
+<li><a class="" href="global-carbon-cycle.html"><span class="header-section-number">6</span> Global Carbon Cycle</a></li>
+<li><a class="" href="glacial-oscillations.html"><span class="header-section-number">7</span> Glacial Oscillations</a></li>
+<li><a class="active" href="linear-algebra.html"><span class="header-section-number">8</span> Linear Algebra</a></li>
+<li><a class="" href="ocean-circulation.html"><span class="header-section-number">9</span> Ocean Circulation</a></li>
+</ul>
+
+        <div class="book-extra">
+          
         </div>
-
-        <div class="page-wrapper" tabindex="-1" role="main">
-          <div class="page-inner">
-
-            <section class="normal" id="section-">
-<div id="linear-algebra" class="section level1 hasAnchor" number="5">
-<h1><span class="header-section-number">Chapter 5</span> Linear Algebra<a href="linear-algebra.html#linear-algebra" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="linear-algebra" class="section level1" number="8">
+<h1>
+<span class="header-section-number">8</span> Linear Algebra<a class="anchor" aria-label="anchor" href="#linear-algebra"><i class="fas fa-link"></i></a>
+</h1>
 <p>This section introduces the basic mathematical concepts required for understanding tipping points.</p>
-<div id="matrix-multiplication" class="section level2 hasAnchor" number="5.1">
-<h2><span class="header-section-number">5.1</span> Matrix Multiplication<a href="linear-algebra.html#matrix-multiplication" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="matrix-multiplication" class="section level2" number="8.1">
+<h2>
+<span class="header-section-number">8.1</span> Matrix Multiplication<a class="anchor" aria-label="anchor" href="#matrix-multiplication"><i class="fas fa-link"></i></a>
+</h2>
 <p><span class="math display">\[
 \begin{bmatrix}
 1 &amp; 2 \\
@@ -183,8 +87,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{bmatrix}
 \]</span></p>
 </div>
-<div id="matrix-transposition" class="section level2 hasAnchor" number="5.2">
-<h2><span class="header-section-number">5.2</span> Matrix Transposition<a href="linear-algebra.html#matrix-transposition" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="matrix-transposition" class="section level2" number="8.2">
+<h2>
+<span class="header-section-number">8.2</span> Matrix Transposition<a class="anchor" aria-label="anchor" href="#matrix-transposition"><i class="fas fa-link"></i></a>
+</h2>
 <p><span class="math display">\[
 \mathbf{A} =
 \begin{bmatrix}
@@ -200,8 +106,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 \end{bmatrix}
 \]</span></p>
 </div>
-<div id="matrix-inversion" class="section level2 hasAnchor" number="5.3">
-<h2><span class="header-section-number">5.3</span> Matrix Inversion<a href="linear-algebra.html#matrix-inversion" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="matrix-inversion" class="section level2" number="8.3">
+<h2>
+<span class="header-section-number">8.3</span> Matrix Inversion<a class="anchor" aria-label="anchor" href="#matrix-inversion"><i class="fas fa-link"></i></a>
+</h2>
 <p>For a square matrix <span class="math inline">\(\mathbf{A}\)</span>, the inverse <span class="math inline">\(\mathbf{A}^{-1}\)</span> satisfies:</p>
 <p><span class="math display">\[
 \mathbf{A} \mathbf{A}^{-1} = \mathbf{A}^{-1} \mathbf{A} = \mathbf{I}
@@ -222,8 +130,10 @@ d &amp; -b \\
 \quad \text{if } ad - bc \neq 0
 \]</span></p>
 </div>
-<div id="transformation" class="section level2 hasAnchor" number="5.4">
-<h2><span class="header-section-number">5.4</span> Transformation<a href="linear-algebra.html#transformation" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="transformation" class="section level2" number="8.4">
+<h2>
+<span class="header-section-number">8.4</span> Transformation<a class="anchor" aria-label="anchor" href="#transformation"><i class="fas fa-link"></i></a>
+</h2>
 <p>If we multiply a matrix with a vector, we apply a linear transformation to the vector. This produces a new vector. Depending on the transformation, the new vector may have new coordinates, a different length, and possibly a different direction. For example consider the matrix <span class="math inline">\(\mathbf{A}\)</span> and the vector <span class="math inline">\(\mathbf{v}\)</span>:</p>
 <p><span class="math display">\[
 \mathbf{A} = \begin{bmatrix}
@@ -285,21 +195,27 @@ The two vectors span a unit square in the plane. Applying the matrix transforms 
 \end{bmatrix}
 \]</span></p>
 </div>
-<div id="eigenvectors-and-eigenvalues" class="section level2 hasAnchor" number="5.5">
-<h2><span class="header-section-number">5.5</span> Eigenvectors and eigenvalues<a href="linear-algebra.html#eigenvectors-and-eigenvalues" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="eigenvectors-and-eigenvalues" class="section level2" number="8.5">
+<h2>
+<span class="header-section-number">8.5</span> Eigenvectors and eigenvalues<a class="anchor" aria-label="anchor" href="#eigenvectors-and-eigenvalues"><i class="fas fa-link"></i></a>
+</h2>
 <p>Consider the following transformation:</p>
 <p><span class="math display">\[
-\mathbf{Av} = \mathbf{v&#39;}
+\mathbf{Av} = \mathbf{v'}
 \]</span></p>
-<p>In general, <span class="math inline">\(\mathbf{v&#39;}\)</span> points in a different direction than <span class="math inline">\(\mathbf{v}\)</span>. But some vectors are special, they don’t change the direction under the transformation. These special vectors are called eigenvectors. For these eigenvectors <span class="math inline">\(\mathbf{v}\)</span>, the matrix <span class="math inline">\(\mathbf{A}\)</span> only stretches or shrinks them:</p>
+<p>In general, <span class="math inline">\(\mathbf{v'}\)</span> points in a different direction than <span class="math inline">\(\mathbf{v}\)</span>. But some vectors are special, they don’t change the direction under the transformation. These special vectors are called eigenvectors. For these eigenvectors <span class="math inline">\(\mathbf{v}\)</span>, the matrix <span class="math inline">\(\mathbf{A}\)</span> only stretches or shrinks them:</p>
 <p><span class="math display">\[
 \mathbf{Av} = \lambda \mathbf{v}
 \]</span></p>
 <ul>
-<li><span class="math inline">\(\lambda\)</span> is called the eigenvalue corresponding to that eigenvector</li>
-<li><span class="math inline">\(|\lambda|&gt;1\)</span>: vector is stretched</li>
-<li><span class="math inline">\(|\lambda|&lt;1\)</span>: vector is shrunk</li>
-<li><span class="math inline">\(\lambda&lt;0\)</span>: vector flips direction</li>
+<li>
+<span class="math inline">\(\lambda\)</span> is called the eigenvalue corresponding to that eigenvector</li>
+<li>
+<span class="math inline">\(|\lambda|&gt;1\)</span>: vector is stretched</li>
+<li>
+<span class="math inline">\(|\lambda|&lt;1\)</span>: vector is shrunk</li>
+<li>
+<span class="math inline">\(\lambda&lt;0\)</span>: vector flips direction</li>
 </ul>
 <p>For example, let’s stretch a vector by a factor of two using a matrix:</p>
 <p><span class="math display">\[
@@ -330,8 +246,10 @@ The two vectors span a unit square in the plane. Applying the matrix transforms 
 \]</span>
 Here, <span class="math inline">\(\mathbf{v}\)</span> is the eigenvector, and the corresponding eigenvalue <span class="math inline">\(\lambda\)</span> is the factor by which the vector is being stretched (<span class="math inline">\(\lambda = 2\)</span>). The eigenvalues can help us to understand how a system behaves close to its equilibrium points, as will be explained a little further below.</p>
 </div>
-<div id="determinant" class="section level2 hasAnchor" number="5.6">
-<h2><span class="header-section-number">5.6</span> Determinant<a href="linear-algebra.html#determinant" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="determinant" class="section level2" number="8.6">
+<h2>
+<span class="header-section-number">8.6</span> Determinant<a class="anchor" aria-label="anchor" href="#determinant"><i class="fas fa-link"></i></a>
+</h2>
 <p>A matrix transforms the shape spanned by vectors. The determinant tells us how the shape’s area changes, for example, whether it expands, shrinks, or collapses into a line. Consider the matrix:</p>
 <p><span class="math display">\[
 \mathbf{A} =
@@ -356,17 +274,22 @@ For example:</p>
 \det(\mathbf{A}) = 1*0 - 2*1 = -2
 \]</span></p>
 <ul>
-<li><span class="math inline">\(|\det({\mathbf{A}})|&gt;1\)</span>: area expands</li>
-<li><span class="math inline">\(|\det({\mathbf{A}})|&lt;1\)</span>: area shrinks</li>
-<li><span class="math inline">\(|\det({\mathbf{A}})|=0\)</span>: area collapses</li>
+<li>
+<span class="math inline">\(|\det({\mathbf{A}})|&gt;1\)</span>: area expands</li>
+<li>
+<span class="math inline">\(|\det({\mathbf{A}})|&lt;1\)</span>: area shrinks</li>
+<li>
+<span class="math inline">\(|\det({\mathbf{A}})|=0\)</span>: area collapses</li>
 </ul>
 <p>In this case, the determinant tells us that applying the matrix <span class="math inline">\(\mathbf{A}\)</span> will expand the area spanned by vectors (<span class="math inline">\(|-2|&gt;1\)</span>). The determinant allows us to to calculate the eigenvalues <span class="math inline">\(\lambda\)</span>:</p>
 <p><span class="math display">\[
 \mathbf{A} \mathbf{v} = \lambda \mathbf{v}
 \]</span></p>
 <ul>
-<li>Let’s rewrite this equation: <span class="math inline">\(\mathbf{A} \mathbf{v} - \lambda \mathbf{v} = 0\)</span></li>
-<li>Rearrange: <span class="math inline">\((\mathbf{A} - \lambda \mathbf{I}) \mathbf{v} = 0\)</span></li>
+<li>Let’s rewrite this equation: <span class="math inline">\(\mathbf{A} \mathbf{v} - \lambda \mathbf{v} = 0\)</span>
+</li>
+<li>Rearrange: <span class="math inline">\((\mathbf{A} - \lambda \mathbf{I}) \mathbf{v} = 0\)</span>
+</li>
 <li>Where <span class="math inline">\(\mathbf{I}\)</span> is the identity matrix:</li>
 </ul>
 <p><span class="math display">\[
@@ -406,8 +329,10 @@ The determinant can therefore be used to calculate the eigenvalues. For instance
 \Rightarrow \quad \lambda_1 = 5, \quad \lambda_2 = 1
 \]</span></p>
 </div>
-<div id="jacobian-matrix" class="section level2 hasAnchor" number="5.7">
-<h2><span class="header-section-number">5.7</span> Jacobian Matrix<a href="linear-algebra.html#jacobian-matrix" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="jacobian-matrix" class="section level2" number="8.7">
+<h2>
+<span class="header-section-number">8.7</span> Jacobian Matrix<a class="anchor" aria-label="anchor" href="#jacobian-matrix"><i class="fas fa-link"></i></a>
+</h2>
 <p>In dynamical systems theory, the matrix that we will be using is the Jacobian matrix <span class="math inline">\(\mathbf{J}\)</span>. The Jacobian matrix is a matrix of partial derivatives that describes how a multivariable function changes locally. For instance:</p>
 <p><span class="math display">\[
 \mathbf{f}(\mathbf{x}) =
@@ -429,8 +354,10 @@ f_3(x, y, z)
 \]</span>
 The eigenvalues <span class="math inline">\(\lambda_i\)</span> of the Jacobian <span class="math inline">\(\mathbf{J}\)</span> determine the local stability and type of the equilibrium point. If all eigenvalues have negative real parts, the equilibrium is locally asymptotically stable (perturbations decay). If any eigenvalue has a positive real part, the equilibrium is unstable (perturbations grow). If eigenvalues have zero real parts, the system may be marginally stable.</p>
 </div>
-<div id="numerical-example" class="section level2 hasAnchor" number="5.8">
-<h2><span class="header-section-number">5.8</span> Numerical example<a href="linear-algebra.html#numerical-example" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="numerical-example" class="section level2" number="8.8">
+<h2>
+<span class="header-section-number">8.8</span> Numerical example<a class="anchor" aria-label="anchor" href="#numerical-example"><i class="fas fa-link"></i></a>
+</h2>
 <p>The goal is to identify and characterize equilibrium points. The main steps are:</p>
 <ul>
 <li><ol style="list-style-type: decimal">
@@ -453,8 +380,10 @@ The eigenvalues <span class="math inline">\(\lambda_i\)</span> of the Jacobian <
 <li>If the sign varies among <span class="math inline">\(\lambda\)</span>: saddle (unstable)</li>
 <li>If any <span class="math inline">\(\lambda = 0\)</span>: tipping point</li>
 </ul>
-<div id="step-1-set-the-odes-to-zero-and-solving-for-each-variable" class="section level3 hasAnchor" number="5.8.1">
-<h3><span class="header-section-number">5.8.1</span> Step (1): Set the ODEs to zero and solving for each variable<a href="linear-algebra.html#step-1-set-the-odes-to-zero-and-solving-for-each-variable" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="step-1-set-the-odes-to-zero-and-solving-for-each-variable" class="section level3" number="8.8.1">
+<h3>
+<span class="header-section-number">8.8.1</span> Step (1): Set the ODEs to zero and solving for each variable<a class="anchor" aria-label="anchor" href="#step-1-set-the-odes-to-zero-and-solving-for-each-variable"><i class="fas fa-link"></i></a>
+</h3>
 <p>Consider the following set of ordinary differential equations:</p>
 <p><span class="math display">\[f_1: \frac{dx}{dt} = \mu - x^2 \]</span>
 <span class="math display">\[f_2: \frac{dy}{dt} = -y \]</span></p>
@@ -462,18 +391,24 @@ The eigenvalues <span class="math inline">\(\lambda_i\)</span> of the Jacobian <
 <ul>
 <li><span class="math inline">\(0 = \mu - x^2\)</span></li>
 <li><span class="math inline">\(\Leftrightarrow x^2 = \mu\)</span></li>
-<li>Therefore: <span class="math inline">\(x^* = \pm \sqrt{\mu}\)</span></li>
-<li>And <span class="math inline">\(y^* = 0\)</span></li>
+<li>Therefore: <span class="math inline">\(x^* = \pm \sqrt{\mu}\)</span>
+</li>
+<li>And <span class="math inline">\(y^* = 0\)</span>
+</li>
 </ul>
 <p>We conclude that</p>
 <ul>
-<li>For <span class="math inline">\(\mu&gt;0\)</span> the equilibria are found at: <span class="math inline">\((\sqrt{\mu}, 0)\)</span> and <span class="math inline">\((-\sqrt{\mu}, 0)\)</span></li>
-<li>For <span class="math inline">\(\mu=0\)</span> the equilibrium is found at: <span class="math inline">\((0, 0)\)</span></li>
+<li>For <span class="math inline">\(\mu&gt;0\)</span> the equilibria are found at: <span class="math inline">\((\sqrt{\mu}, 0)\)</span> and <span class="math inline">\((-\sqrt{\mu}, 0)\)</span>
+</li>
+<li>For <span class="math inline">\(\mu=0\)</span> the equilibrium is found at: <span class="math inline">\((0, 0)\)</span>
+</li>
 <li>For <span class="math inline">\(\mu&lt;0\)</span> there is no equilibrium point</li>
 </ul>
 </div>
-<div id="step-2-apply-the-jacobian-matrix-to-the-odes" class="section level3 hasAnchor" number="5.8.2">
-<h3><span class="header-section-number">5.8.2</span> Step (2): Apply the Jacobian matrix to the ODEs<a href="linear-algebra.html#step-2-apply-the-jacobian-matrix-to-the-odes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="step-2-apply-the-jacobian-matrix-to-the-odes" class="section level3" number="8.8.2">
+<h3>
+<span class="header-section-number">8.8.2</span> Step (2): Apply the Jacobian matrix to the ODEs<a class="anchor" aria-label="anchor" href="#step-2-apply-the-jacobian-matrix-to-the-odes"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li><p>Recall our ODES: $f_1: = - x^2 $ and <span class="math inline">\(f_2: \frac{dy}{dt} = -y\)</span></p></li>
 <li><p>We now apply the Jacobian matrix to these ODEs:</p></li>
@@ -491,8 +426,10 @@ The eigenvalues <span class="math inline">\(\lambda_i\)</span> of the Jacobian <
 \end{bmatrix}
 \]</span></p>
 </div>
-<div id="step-3-calculate-the-eigenvalues" class="section level3 hasAnchor" number="5.8.3">
-<h3><span class="header-section-number">5.8.3</span> Step (3) Calculate the eigenvalues<a href="linear-algebra.html#step-3-calculate-the-eigenvalues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="step-3-calculate-the-eigenvalues" class="section level3" number="8.8.3">
+<h3>
+<span class="header-section-number">8.8.3</span> Step (3) Calculate the eigenvalues<a class="anchor" aria-label="anchor" href="#step-3-calculate-the-eigenvalues"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>Recall that eigenvalues <span class="math inline">\(\lambda\)</span> satisfy <span class="math inline">\(\det(\mathbf{J} - \lambda \mathbf{I}) = 0\)</span> , where <span class="math inline">\(\mathbf{I}\)</span> is the identity matrix:</li>
 </ul>
@@ -542,8 +479,10 @@ The eigenvalues <span class="math inline">\(\lambda_i\)</span> of the Jacobian <
 </ul>
 <p><span class="math display">\[\lambda_1 = -2x \text{ and }\lambda_2 = -1\]</span></p>
 </div>
-<div id="step-4-calculate-the-equilibrium-eigenvalues" class="section level3 hasAnchor" number="5.8.4">
-<h3><span class="header-section-number">5.8.4</span> Step (4): Calculate the equilibrium eigenvalues<a href="linear-algebra.html#step-4-calculate-the-equilibrium-eigenvalues" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="step-4-calculate-the-equilibrium-eigenvalues" class="section level3" number="8.8.4">
+<h3>
+<span class="header-section-number">8.8.4</span> Step (4): Calculate the equilibrium eigenvalues<a class="anchor" aria-label="anchor" href="#step-4-calculate-the-equilibrium-eigenvalues"><i class="fas fa-link"></i></a>
+</h3>
 <ul>
 <li>At <span class="math inline">\((x^*, y^*) = (\sqrt{\mu}, 0)\)</span>:</li>
 </ul>
@@ -561,72 +500,56 @@ The eigenvalues <span class="math inline">\(\lambda_i\)</span> of the Jacobian <
 <ul>
 <li>Here, one eigenvalue is zero. This is a tipping point.</li>
 </ul>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="glacial-oscillations.html"><span class="header-section-number">7</span> Glacial Oscillations</a></div>
+<div class="next"><a href="ocean-circulation.html"><span class="header-section-number">9</span> Ocean Circulation</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#linear-algebra"><span class="header-section-number">8</span> Linear Algebra</a></li>
+<li><a class="nav-link" href="#matrix-multiplication"><span class="header-section-number">8.1</span> Matrix Multiplication</a></li>
+<li><a class="nav-link" href="#matrix-transposition"><span class="header-section-number">8.2</span> Matrix Transposition</a></li>
+<li><a class="nav-link" href="#matrix-inversion"><span class="header-section-number">8.3</span> Matrix Inversion</a></li>
+<li><a class="nav-link" href="#transformation"><span class="header-section-number">8.4</span> Transformation</a></li>
+<li><a class="nav-link" href="#eigenvectors-and-eigenvalues"><span class="header-section-number">8.5</span> Eigenvectors and eigenvalues</a></li>
+<li><a class="nav-link" href="#determinant"><span class="header-section-number">8.6</span> Determinant</a></li>
+<li><a class="nav-link" href="#jacobian-matrix"><span class="header-section-number">8.7</span> Jacobian Matrix</a></li>
+<li>
+<a class="nav-link" href="#numerical-example"><span class="header-section-number">8.8</span> Numerical example</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#step-1-set-the-odes-to-zero-and-solving-for-each-variable"><span class="header-section-number">8.8.1</span> Step (1): Set the ODEs to zero and solving for each variable</a></li>
+<li><a class="nav-link" href="#step-2-apply-the-jacobian-matrix-to-the-odes"><span class="header-section-number">8.8.2</span> Step (2): Apply the Jacobian matrix to the ODEs</a></li>
+<li><a class="nav-link" href="#step-3-calculate-the-eigenvalues"><span class="header-section-number">8.8.3</span> Step (3) Calculate the eigenvalues</a></li>
+<li><a class="nav-link" href="#step-4-calculate-the-equilibrium-eigenvalues"><span class="header-section-number">8.8.4</span> Step (4): Calculate the equilibrium eigenvalues</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
 
 </div>
-</div>
-</div>
-            </section>
+</div> <!-- .container -->
 
-          </div>
-        </div>
-      </div>
-<a href="glacial-oscillations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="ocean-circulation.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
-    </div>
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
   </div>
-<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
-<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
-<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
-<script>
-gitbook.require(["gitbook"], function(gitbook) {
-gitbook.start({
-  "sharing": {
-    "github": false,
-    "facebook": true,
-    "twitter": true,
-    "linkedin": false,
-    "weibo": false,
-    "instapaper": false,
-    "vk": false,
-    "whatsapp": false,
-    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
-  },
-  "fontsettings": {
-    "theme": "white",
-    "family": "sans",
-    "size": 2
-  },
-  "edit": {
-    "link": null,
-    "text": null
-  },
-  "history": {
-    "link": null,
-    "text": null
-  },
-  "view": {
-    "link": null,
-    "text": null
-  },
-  "download": null,
-  "search": {
-    "engine": "fuse",
-    "options": null
-  },
-  "toc": {
-    "collapse": "subsection"
-  }
-});
-});
-</script>
 
-<!-- dynamically load mathjax for compatibility with self-contained -->
-<script>
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
   (function () {
     var script = document.createElement("script");
     script.type = "text/javascript";
@@ -638,7 +561,22 @@ gitbook.start({
     script.src = src;
     document.getElementsByTagName("head")[0].appendChild(script);
   })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
 </script>
 </body>
-
 </html>
