@@ -1,0 +1,83 @@
+::: {.include}
+# Topic
+
+```{r, include = FALSE}
+# Add your Name and Student ID here:
+Name <- "Christian Seiler"
+ID <- "12345678"
+print(paste("Student Name:", Name, ", Student ID:", ID))
+```
+
+```{r, include = FALSE}
+# Do not alter this code chunk
+
+.libPaths("/global/home/hpc5112/Rlibs_ESM")
+styler::style_dir()
+
+library(jsonlite)
+
+answers <- list()
+answerKeys <- list()
+
+record_answer <- function(value) {
+  id <- knitr::opts_current$get("label")
+  answers[[id]] <<- value
+}
+
+record_answerKey <- function(value) {
+  id <- knitr::opts_current$get("label")
+  answerKeys[[id]] <<- value
+}
+```
+:::
+
+Some random text.
+
+::: {.question answer="A"}
+
+**Q: The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?**
+
+* (A): low-latitude = red, high-latitude = blue
+* (B): low-latitude = blue, high-latitude = red
+
+```{r, echo = FALSE}
+answer <- "X"
+record_answer(answer)
+print(answer)
+```
+:::
+
+More random text.
+
+```{r, include=FALSE}
+tutorialName <- "ocean-circulation"
+
+output <- list(
+  student_id = student_id,
+  tutorial   = tutorialName,
+  timestamp  = Sys.time(),
+  answers    = answers
+)
+
+filename <- paste0("answers_", tutorialName, "_", student_id, ".json")
+jsonlite::write_json(output, filename, pretty = TRUE)
+rm(output)
+```
+
+```{r generate_solution_JSON, include=FALSE}
+# Generate solution JSON file for this tutorial
+
+library(jsonlite)
+
+# Build the answer key object
+output <- list(
+  tutorial = tutorialName,
+  generated_at = Sys.time(),
+  answers = answerKeys
+)
+
+# Write JSON file
+filename <- paste0("answerKey_", tutorialName, ".json")
+jsonlite::write_json(output, filename, pretty = TRUE)
+```
+

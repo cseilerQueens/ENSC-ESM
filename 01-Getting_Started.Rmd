@@ -1,0 +1,19 @@
+---
+title: "01-Getting_Started"
+output: html_document
+---
+
+# Starting RStudio
+
+* Log into: https://login.cac.queensu.ca/
+* Click on "Jupyter Server"
+* Select Python version 3.11.5
+* Click on "Launch"
+* Click on "Connect to Jupyter" once the button appears
+* One the top left you see "Filter available modules ..."
+* Inside that box write "rstudio"
+* Under Available Modules, hover over "rstudio-server/4.5" and click on the load button
+* In the Launcher/Notebook, click on the RStudio icon. 
+* A new window appears with RStudio
+
+

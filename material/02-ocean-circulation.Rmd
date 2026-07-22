@@ -1,11 +1,15 @@
+::: {.include}
 # Ocean Circulation
 
-Student Name: ___
+```{r, include = FALSE}
+# Add your Name and Student ID here:
+Name <- "Christian Seiler"
+ID <- "12345678"
+print(paste("Student Name:", Name, ", Student ID:", ID))
+```
 
 ```{r, include = FALSE}
-# template code chunk
-
-student_id <- "12345678" # Replace with your Student ID
+# Do not alter this code chunk
 
 .libPaths("/global/home/hpc5112/Rlibs_ESM")
 styler::style_dir()
@@ -25,6 +29,7 @@ record_answerKey <- function(value) {
   answerKeys[[id]] <<- value
 }
 ```
+:::
 
 ## The Stommel Model
 
@@ -44,8 +49,6 @@ To better understand this, let's assess how density is affected by temperature a
 
 
 ```{r, fig.width = 5, fig.height = 5, echo = TRUE}
-# template code chunk
-
 library(gsw)
 # Define ranges
 T <- seq(0, 30, by = 0.1) # y-axis (temperature)
@@ -75,22 +78,28 @@ points(x = box.LL[1], y = box.LL[2], col = "red", pch = 16) # low-latitude
 grid()
 ```
 
+::: {.include}
+
 **Q: The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?**
 
 * (A): low-latitude = red, high-latitude = blue
 * (B): low-latitude = blue, high-latitude = red
 
 ```{r, echo = FALSE}
-# template code chunk
-answer <- "Add your answer here" # (e.g. "A")
+answer <- "X"
 record_answer(answer)
 print(answer)
 ```
+:::
 
+::: {.answer}
 ```{r, include = FALSE}
 answerKey <- "A"
 record_answerKey(answerKey)
 ```
+:::
+
+::: {.include}
 
 **Q: The blue dot has a higher density compared to the red dot. Is this due to the:**
 
@@ -98,11 +107,11 @@ record_answerKey(answerKey)
 * (B): temperature contrast
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
 ```
+:::
 
 ```{r, include = FALSE}
 answerKey <- "B"
@@ -115,7 +124,6 @@ record_answerKey(answerKey)
 * (B): blue
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -132,7 +140,6 @@ record_answerKey(answerKey)
 * (B): The flow would be directed from high to low latitudes
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -151,11 +158,12 @@ record_answerKey(answerKey)
 * (D): Climate change causes ice sheets to melt, freshening the North Atlantic, but the resulting salinity change has no significant influence on the Atlantic Meridional Overturning Circulation because temperature is the dominant control on density.
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
 ```
+
+
 
 ```{r, include = FALSE}
 answerKey <- "B"
@@ -171,8 +179,6 @@ $$
 where $\rho$ is the sea water density (kg m$^{-3}$), $T$ and $S$ are temperature and salinity anomalies, respectively and $\alpha$ is the thermal contraction ($\alpha = 1.5 \times 10^{-4}$ K) and $\beta$ is the saline expansion ($\beta = 8 \times10^{-4}$ psu^-1^). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. $T_0$ and $S_0$ are reference temperature and salinity ($T_0$ = 10$^{\circ}$C, $S_0$ = 35 g kg^-1^). Let's create a T-S diagram with this linearlized version of the equation of state.
 
 ```{r, fig.width = 5, fig.height = 5, eval = TRUE, echo = FALSE}
-# template code chunk
-
 # Define ranges
 T <- seq(0, 30, by = 0.1) # y-axis (temperature)
 S <- seq(30, 40, by = 0.1) # x-axis (salinity)
@@ -247,8 +253,6 @@ To summarize, the Stommel model has two variables ($x$ and $y$) and three main p
 Let us begin by plotting the free solution of the dynamical system for $R$ = 2, $\delta$ = 1/6, and $\lambda$ = 1/5, as well as initial conditions of $x = 0.1$ and $y = 0.1$:
 
 ```{r, echo = FALSE, fig.width = 10, fig.height = 5}
-# template code chunk
-
 # Load required package
 library(deSolve)
 
@@ -316,7 +320,6 @@ grid()
 Rerun the code from the previous figure for initial conditions of $x = 0.1$ and $y = 0.1$.
 
 ```{r, fig.width = 10, fig.height = 5}
-# template code chunk
 ```
 
 ```{r, fig.width = 10, fig.height = 5, include = FALSE}
@@ -392,7 +395,6 @@ grid()
 * (C): The equilibrium salinity contrast remains the same
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -412,7 +414,6 @@ record_answerKey(answerKey)
 * (D): Yes, depending what initial conditions I choose I will end up at equilibrium point (b) or (c).
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -426,8 +427,6 @@ record_answerKey(answerKey)
 We can use the same function to plot non-dimensional salinity contrast ($x$) against non-dimensional temperature contrast ($y$) for different initial conditions. This leads to a so-called phase portrait, and corresponds to Stommel's Figure 7.
 
 ```{r, fig.width = 5, fig.height = 5, eval = TRUE, echo = FALSE}
-# template code chunk
-
 # Define parameters (change these to explore different behavior)
 R <- 2
 delta <- 1 / 6
@@ -510,7 +509,6 @@ grid()
 * (D): x = 0.2, y = 0.0
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -524,8 +522,6 @@ record_answerKey(answerKey)
 The phase portrait above identified three equilibrium points. Let us know calculate those equilibrium points from the equations. In the section on linear algebra, we did this by setting the ODEs to zero and solving for each variable. For more complicated ODEs, we can also approximate the equilibrium points numerically, which is what we will do here.
 
 ```{r, eval = TRUE, echo = FALSE}
-# template code chunk
-
 library(rootSolve)
 
 R <- 2
@@ -568,7 +564,6 @@ print(unique_solutions)
 Let's plot these three equilibrium points into our phase portrait. Do this by copying the code from above and then add ```points(x = 0.1350, y = 0.4836), pch = 16, col = "red"``` below. Do this for all three points.
 
 ```{r, fig.width = 5, fig.height = 5}
-# template code chunk
 ```
 
 
@@ -671,8 +666,6 @@ $$
 Rather than calculating the derivatives analytically, we will approach them numerically:
 
 ```{r, echo = FALSE, message = FALSE}
-# template code chunk
-
 library(numDeriv)
 
 # constants
@@ -729,7 +722,6 @@ The second equilibrium point is described by a complex number with a real and an
 * (D): stable node, stable node, unstable saddle
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -747,8 +739,6 @@ Recall that $\lambda$ (-) measures the relative strength of flow resistance to t
 $$\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k$$. The larger $\lambda$, the weaker the circulation response to temperature contrast. Let us now vary the parameter $\lambda$ and calculate the equilibrium points for different values of $\lambda$. This will result in the bifurcation diagram below.
 
 ```{r, fig.width = 10, fig.height = 5, eval = TRUE, echo = FALSE, warning  = FALSE}
-# template code chunk
-
 library(rootSolve)
 
 R <- 2
@@ -847,7 +837,6 @@ abline(h = 0.68, col = "blue")
 * (D): top = stable, middle = unstable, bottom = stable
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -867,8 +856,6 @@ $$f = (-y + Rx) /\lambda $$
 * If $f>0$ then the circulation is in a salinity mode (S-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)
 
 ```{r, fig.width = 5, fig.height = 5, eval = TRUE, echo = FALSE, warning = FALSE}
-# template code chunk
-
 library(rootSolve)
 
 R <- 2
@@ -963,7 +950,6 @@ abline(h = 0, col = "red")
 * (D): The deep flow reverses direction, switching from poleward to equatorward transport.
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -982,7 +968,6 @@ record_answerKey(answerKey)
 * (D): The deep flow reverses direction, switching from poleward to equatorward transport.
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -1022,7 +1007,6 @@ print(f3)
 ```
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -1088,7 +1072,6 @@ This means: simulate 30,000 years starting with an initial freshwater input of -
 **Q: Reproduce the figure below to illustrate how the hosing changes over time**
 
 ```{r, fig.width = 5, fig.height = 5}
-# template code chunk
 ```
 
 ```{r, fig.width = 5, fig.height = 5, eval = TRUE, echo = FALSE}
@@ -1112,7 +1095,6 @@ ocn.lat_min_hosing=20 ocn.lat_max_hosing=50
 **Q: Make a figure similar to the one above that illustrates how the freshwater hosing changes over time.**
 
 ```{r}
-# template code chunk
 ```
 
 
@@ -1122,8 +1104,6 @@ The AMOC strength is defined as the maximum of the Atlantic meridional streamfun
 
 
 ```{r, fig.width = 5, fig.height = 5, warning = FALSE, echo = FALSE, message = FALSE}
-# template code chunk
-
 library(clover)
 library(ncdf4)
 library(fields)
@@ -1193,7 +1173,6 @@ grid()
 * (D): When salinity declines past a tipping point, the AMOC collapses. Once salinity is increased again, the AMOC gradually strengthens but stabilizes at a permanently weaker state, even if salinity fully returns to its initial level.
 
 ```{r, echo = FALSE}
-# template code chunk
 answer <- "Add your answer here" # (e.g. "A")
 record_answer(answer)
 print(answer)
@@ -1207,8 +1186,6 @@ record_answerKey(answerKey)
 Let's plot how the AMOC looks like when it is on (high salinity) and off (low salinity)
 
 ```{r, fig.width = 10, fig.height = 5, eval = TRUE, echo = FALSE}
-# template code chunk
-
 # down experiment
 dataDir <- "/global/home/hpc5112/output/bench_v1.4.0/hyst2050/up"
 ncFileName <- "ocn.nc"
@@ -1278,8 +1255,6 @@ contour(latv1, levw, data.fresh, add = TRUE)
 Let us now plot the AMOC strength at 26 degrees northern latitude as a function of depth, where each line represents an increase in freshwater hosing.
 
 ```{r, fig.width = 5, fig.height = 5, eval = TRUE, echo = FALSE}
-# template code chunk
-
 # down experiment
 
 dataDir <- "/global/home/hpc5112/output/bench_v1.4.0/hyst2050/up"
@@ -1338,7 +1313,6 @@ grid()
 * Answer: ___
 
 ```{r, include=FALSE}
-# template code chunk
 tutorialName <- "ocean-circulation"
 
 output <- list(
