@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 1 Week 1: Building a Simple Carbon Cycle Model | Earth System Modelling</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 1 Week 1: Building a Simple Carbon Cycle Model | Earth System Modelling">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 1 Week 1: Building a Simple Carbon Cycle Model | Earth System Modelling">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="1.1 Motivation In this tutorial, you will learn how to: Access Queen’s University High Performance Computer Build a simple numerical model Run Queen’s University Conceptual Earth System Model...">
+<meta property="og:description" content="1.1 Motivation In this tutorial, you will learn how to: Access Queen’s University High Performance Computer Build a simple numerical model Run Queen’s University Conceptual Earth System Model...">
+<meta name="twitter:description" content="1.1 Motivation In this tutorial, you will learn how to: Access Queen’s University High Performance Computer Build a simple numerical model Run Queen’s University Conceptual Earth System Model...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Earth System Modelling</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Earth System Modelling</a></li>
+<li><a class="active" href="week-1-building-a-simple-carbon-cycle-model.html"><span class="header-section-number">1</span> Week 1: Building a Simple Carbon Cycle Model</a></li>
+<li><a class="" href="week-2-atmospheric-energy-balance.html"><span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance</a></li>
+<li><a class="" href="week-3-ocean-circulation-dynamics.html"><span class="header-section-number">3</span> Week 3: Ocean Circulation Dynamics</a></li>
+<li><a class="" href="week-4-ocean-carbon-chemistry.html"><span class="header-section-number">4</span> Week 4: Ocean Carbon Chemistry</a></li>
+<li><a class="" href="week-5-marine-biology.html"><span class="header-section-number">5</span> Week 5: Marine Biology</a></li>
+<li><a class="" href="week-6-terrestrial-carbon-cycle.html"><span class="header-section-number">6</span> Week 6: Terrestrial Carbon Cycle</a></li>
+<li><a class="" href="week-7-cryosphere.html"><span class="header-section-number">7</span> Week 7: Cryosphere</a></li>
+<li><a class="" href="week-8-earth-system-dynamics.html"><span class="header-section-number">8</span> Week 8: Earth System Dynamics</a></li>
+<li><a class="" href="week-9-model-emulation.html"><span class="header-section-number">9</span> Week 9: Model Emulation</a></li>
+<li><a class="" href="week-10-paleoclimatic-simulations.html"><span class="header-section-number">10</span> Week 10: Paleoclimatic Simulations</a></li>
+<li><a class="" href="week-11-future-climate-simulations.html"><span class="header-section-number">11</span> Week 11: Future Climate Simulations</a></li>
+<li><a class="" href="week-12-research-project.html"><span class="header-section-number">12</span> Week 12: Research Project</a></li>
+<li><a class="" href="appendix-linear-algebra.html"><span class="header-section-number">13</span> Appendix: Linear Algebra</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-1-building-a-simple-carbon-cycle-model" class="section level1" number="1">
+<h1>
+<span class="header-section-number">1</span> Week 1: Building a Simple Carbon Cycle Model<a class="anchor" aria-label="anchor" href="#week-1-building-a-simple-carbon-cycle-model"><i class="fas fa-link"></i></a>
+</h1>
+<div id="motivation" class="section level2" number="1.1">
+<h2>
+<span class="header-section-number">1.1</span> Motivation<a class="anchor" aria-label="anchor" href="#motivation"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this tutorial, you will learn how to:</p>
+<ul>
+<li>Access Queen’s University High Performance Computer</li>
+<li>Build a simple numerical model</li>
+<li>Run Queen’s University Conceptual Earth System Model (QUEST</li>
+</ul>
+<p>All this work involves the programming languag R. Rather than learning R systematically, we will introduce R concepts as we need them. Let’s now start by gaining access to Queen’s University High Performance Computer.</p>
+</div>
+<div id="queens-university-high-performance-computer" class="section level2" number="1.2">
+<h2>
+<span class="header-section-number">1.2</span> Queen’s University High Performance Computer<a class="anchor" aria-label="anchor" href="#queens-university-high-performance-computer"><i class="fas fa-link"></i></a>
+</h2>
+<p>Follow these steps to run RStudio on Queen’s High Performance Computer:</p>
+<ul>
+<li>Log into: <a href="https://login.cac.queensu.ca/" class="uri">https://login.cac.queensu.ca/</a>
+</li>
+<li>Click on “Jupyter Server”</li>
+<li>Select Python version 3.11.5</li>
+<li>Select your Slurm Account</li>
+<li>Set your Memory (GB) to 16</li>
+<li>Set your Runtime (in hours) to the number of hours you wish to work (e.g. 3)</li>
+<li>Click on “Launch”</li>
+<li>Click on “Connect to Jupyter” once the button appears</li>
+<li>On the top left you see “Filter available modules …”</li>
+<li>Inside that box write “rstudio”</li>
+<li>Under Available Modules, hover over “rstudio-server/4.5” and click on the load button. It is important that you choose version 4.5. No other version will work properly.</li>
+<li>In the Launcher/Notebook, click on the RStudio icon</li>
+<li>A new window appears with RStudio</li>
+<li>Copy the tutorial template to your home directory:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="st">"/global/home/hpc5112/ENSC430/shared_files/W01_FirstName_LastName.Rmd"</span>,</span>
+<span>  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Open the <code>W01_FirstName_LastName.Rmd</code> file that you just copied</p></li>
+<li><p>This is a template R Markdown file for completing the tutorial</p></li>
+<li><p>Markdown allows you to integrate text, code, and figures</p></li>
+<li><p>You can run any code inside code chunks and add any comments as text outside the code chunks</p></li>
+<li><p>Each week you will complete one tutorial and submit it in onQ</p></li>
+<li><p>All questions are directly answered in onQ</p></li>
+<li><p>Let’s begin by learning the basic R syntax</p></li>
+</ul>
+</div>
+<div id="rstudio" class="section level2" number="1.3">
+<h2>
+<span class="header-section-number">1.3</span> RStudio<a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will use RStudio to work with R. RStudio provides several areas that you will use throughout the course:</p>
+<ul>
+<li>Source: Where you write and save your R code and R Markdown documents.</li>
+<li>Console: Where R executes your code and displays the results.</li>
+<li>Environment: Where you can see the objects that you have created in R.</li>
+<li>Files: Where you can access the files in your current project.</li>
+<li>Plots: Where R displays figures that you create.</li>
+</ul>
+</div>
+<div id="r-markdown" class="section level2" number="1.4">
+<h2>
+<span class="header-section-number">1.4</span> R Markdown<a class="anchor" aria-label="anchor" href="#r-markdown"><i class="fas fa-link"></i></a>
+</h2>
+<p>You will complete the tutorials using R Markdown. R Markdown allows you to combine text, R code, and figures in a single document. This makes it possible to document your analysis and produce a complete report from the same file. R Markdown uses simple formatting rules. For example, one hash symbol (<code>#</code>) creates a large heading. Two hash symbols (<code>##</code>) creates a smaller heading. An asterisk (<code>*</code>) creates a bullet point. R code is placed inside code chunks. A code chunk begins with three backticks followed by the letter r enclosed in curly brackets and ends with three backticks.</p>
+</div>
+<div id="from-math-to-code" class="section level2" number="1.5">
+<h2>
+<span class="header-section-number">1.5</span> From math to code<a class="anchor" aria-label="anchor" href="#from-math-to-code"><i class="fas fa-link"></i></a>
+</h2>
+<p>The purpose of this exercise is to translate a mathematical model into computer code in order to solve the model numerically. We will start with the simple carbon cycle model discussed in class. To recall, the model consists of a set of two Ordinary Differential Equations (ODEs):</p>
+<p><span class="math display">\[
+\frac{dA}{dt} = k_{ba} B - k_{ab} A
+\]</span></p>
+<p><span class="math display">\[
+\frac{dB}{dt} = k_{ab} A - k_{ba} B
+\]</span></p>
+<p>where <span class="math inline">\(A\)</span> is the atmospheric carbon pool and <span class="math inline">\(B\)</span> is the biosphere carbon pool. Let us now learn step-by-step how to implement this in R.</p>
+</div>
+<div id="basics" class="section level2" number="1.6">
+<h2>
+<span class="header-section-number">1.6</span> Basics<a class="anchor" aria-label="anchor" href="#basics"><i class="fas fa-link"></i></a>
+</h2>
+<p>In your R markdown document, write:</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">800</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">200</span></span></code></pre></div>
+<p>The symbol <code>&lt;-</code> assigns a value to a variable. After running this code, <code>A</code> contains the value 800 and <code>B</code> contains the value 200. You can run the code line-by-line by putting the cursor in the first line and then hit <code>Ctrl Enter</code>. The instructions appear in the console at the bottom. This technique is very helpful for trying to understand what the code is doing. Another way to run the code is by clicking on the icons on the top-right of each code chunk. You can inspect the values by simply typing their names in the console or by looking at the Environment panel on your right-hand side:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">A</span></span>
+<span><span class="va">B</span></span></code></pre></div>
+<p>You can also perform calculations:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">A</span> <span class="op">+</span> <span class="va">B</span></span>
+<span><span class="va">A</span> <span class="op">/</span> <span class="va">B</span></span></code></pre></div>
+<p>Our model contains two exchange rates expressed in per unit of time (e.g. per year):</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">k_ba</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span><span class="va">k_ab</span> <span class="op">&lt;-</span> <span class="fl">0.08</span></span></code></pre></div>
+<p>We can use these parameters in calculations:</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dA</span> <span class="op">&lt;-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span> <span class="op">-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span></span>
+<span><span class="va">dB</span> <span class="op">&lt;-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span> <span class="op">-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span></span></code></pre></div>
+<p>Here, <code>A</code> and <code>B</code> are the carbon pools (PgC) in the atmosphere and biosphere, respectively. The variables <code>dA</code> and <code>dB</code> are the corresponding time derivatives. They show how both pools change over time. Notice that R uses <code>*</code> for multiplication.</p>
+<p><strong>Quiz Question 1:</strong> What are the units of <code>dA</code> and <code>dB</code>?</p>
+<p>Inspect the calculated tendencies.</p>
+<p><strong>Quiz Question 2:</strong> Is the atmosphere gaining or losing carbon at the initial state?</p>
+<!--  The atmosphere is losing carbon-->
+<p><strong>Quiz Question 3:</strong> Is the biosphere gaining or losing carbon at the initial state?</p>
+<!--  The biosphere is gaining carbon -->
+<p><strong>Quiz Question 4:</strong> What is the sum of dA and dB?</p>
+<!--  dA + dB = 0 -->
+</div>
+<div id="time" class="section level2" number="1.7">
+<h2>
+<span class="header-section-number">1.7</span> Time<a class="anchor" aria-label="anchor" href="#time"><i class="fas fa-link"></i></a>
+</h2>
+<p>Numerical models calculate how a system changes over time. Here we use a time step of one year and simulate 50 years:</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">t_end</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span></code></pre></div>
+<p>Note that <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> creates a sequence of numbers. Let’s inspect the variable time:</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 5:</strong> How many time points are included in the simulation?</p>
+<!-- The time series has 50 time steps -->
+</div>
+<div id="numerical-integration" class="section level2" number="1.8">
+<h2>
+<span class="header-section-number">1.8</span> Numerical Integration<a class="anchor" aria-label="anchor" href="#numerical-integration"><i class="fas fa-link"></i></a>
+</h2>
+<p>Euler integration is the most basic numerical integration technique. The idea behind Euler integration is simple. All you do is you take the current state and add the change for the next time step:</p>
+<p><span class="math display">\[
+A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
+\]</span></p>
+<p>In R, we can write:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">dA</span> <span class="op">*</span> <span class="va">dt</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="va">B</span> <span class="op">+</span> <span class="va">dB</span> <span class="op">*</span> <span class="va">dt</span></span></code></pre></div>
+<p>Run both lines and inspect the new values of A and B. We have advanced the model by one time step.</p>
+<p><strong>Quiz Question 6:</strong> Has the amount of carbon in the atmosphere increased or decreased during the first time step?</p>
+<!-- The amount of atmospheric carbon has decreased from 800 PgC to 746 PgC  -->
+</div>
+<div id="for-loops" class="section level2" number="1.9">
+<h2>
+<span class="header-section-number">1.9</span> For Loops<a class="anchor" aria-label="anchor" href="#for-loops"><i class="fas fa-link"></i></a>
+</h2>
+<p>We want to repeat this calculation for each time step. R uses a for loop to repeat a block of code:</p>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>The variable <code>i</code> takes the values 1, 2, 3, 4, and 5. Everything between { and } is repeated for each value of <code>i</code>. Our model will use a loop to advance the simulation one time step at a time. Before doing this, however, we need somewhere to store the results.</p>
+</div>
+<div id="storing-model-output" class="section level2" number="1.10">
+<h2>
+<span class="header-section-number">1.10</span> Storing model output<a class="anchor" aria-label="anchor" href="#storing-model-output"><i class="fas fa-link"></i></a>
+</h2>
+<p>We want to save the value of <code>A</code> and <code>B</code> at every time step. The function <code><a href="https://rdrr.io/r/base/numeric.html">numeric()</a></code> creates an empty numerical vector:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">A_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">B_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p>Inspect <code>A_out</code> and <code>B_out</code>. Let us now store the initial conditions in the first position:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">A_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">A</span></span>
+<span><span class="va">B_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">B</span></span></code></pre></div>
+<p>Square brackets are used to access individual elements of a vector. Inspect <code>A_out</code> and <code>B_out</code> again. The first position exists, but the second position has not yet been filled with a model result.</p>
+</div>
+<div id="building-a-model" class="section level2" number="1.11">
+<h2>
+<span class="header-section-number">1.11</span> Building a model<a class="anchor" aria-label="anchor" href="#building-a-model"><i class="fas fa-link"></i></a>
+</h2>
+<p>We can now put everything together</p>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Initial values</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">800</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
+<span></span>
+<span><span class="co"># Parameter values</span></span>
+<span><span class="va">k_ba</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span><span class="va">k_ab</span> <span class="op">&lt;-</span> <span class="fl">0.08</span></span>
+<span></span>
+<span><span class="co"># Integration settings</span></span>
+<span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">t_end</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store results</span></span>
+<span><span class="va">A_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">B_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store initial values</span></span>
+<span><span class="va">A_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">A</span></span>
+<span><span class="va">B_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">B</span></span>
+<span></span>
+<span><span class="co"># Euler integration</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Calculate tendencies</span></span>
+<span>  <span class="va">dA</span> <span class="op">&lt;-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span> <span class="op">-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span></span>
+<span>  <span class="va">dB</span> <span class="op">&lt;-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span> <span class="op">-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span></span>
+<span></span>
+<span>  <span class="co"># Update state variables</span></span>
+<span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">dA</span> <span class="op">*</span> <span class="va">dt</span></span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="va">B</span> <span class="op">+</span> <span class="va">dB</span> <span class="op">*</span> <span class="va">dt</span></span>
+<span></span>
+<span>  <span class="co"># Store results</span></span>
+<span>  <span class="va">A_out</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">A</span></span>
+<span>  <span class="va">B_out</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">B</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Inspect <code>A_out</code> and <code>B_out</code>.</p>
+<p><strong>Quiz Question 7:</strong> What happens to the atmospheric carbon pool over the course of the simulation?</p>
+<!-- The atmospheric pool decreases from 800 to 385 PgC -->
+<p><strong>Quiz Question 8:</strong> What happens to the biosphere carbon pool?</p>
+<!-- The biosphere pool increases from 200 to 615 PgC -->
+</div>
+<div id="conservation-of-mass" class="section level2" number="1.12">
+<h2>
+<span class="header-section-number">1.12</span> Conservation of mass<a class="anchor" aria-label="anchor" href="#conservation-of-mass"><i class="fas fa-link"></i></a>
+</h2>
+<p>Our model only transfers carbon between the atmosphere and biosphere. It does not add or remove carbon from the system. Therefore, the total amount of carbon (<span class="math inline">\(A + B\)</span>) should remain constant over time. We can calculate the total carbon at every time step to verify whether carbon is conserved:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">total_out</span> <span class="op">&lt;-</span> <span class="va">A_out</span> <span class="op">+</span> <span class="va">B_out</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">total_out</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 9:</strong> Does the total amount of carbon change during the simulation?</p>
+<!-- No, the amount remains constant at 1000 PgC -->
+<p>This is an important model diagnostic. It is possible to artificially create or destroy carbon due to coding errors or a numerical integration time step that is too large.</p>
+</div>
+<div id="data-frame" class="section level2" number="1.13">
+<h2>
+<span class="header-section-number">1.13</span> Data frame<a class="anchor" aria-label="anchor" href="#data-frame"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s combine the results in a data frame:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  time <span class="op">=</span> <span class="va">times</span>,</span>
+<span>  A <span class="op">=</span> <span class="va">A_out</span>,</span>
+<span>  B <span class="op">=</span> <span class="va">B_out</span>,</span>
+<span>  total <span class="op">=</span> <span class="va">total_out</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>A data frame is a table containing different variables. You can inspect it using:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
+<p>Individual columns can be accessed using <code>$</code>. For example, we can find the maximum atmospheric carbon pool:</p>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">A</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 10:</strong> What is the maximum atmospheric carbon pool during the simulation?</p>
+<!-- 800 PgC -->
+</div>
+<div id="data-vizualization" class="section level2" number="1.14">
+<h2>
+<span class="header-section-number">1.14</span> Data vizualization<a class="anchor" aria-label="anchor" href="#data-vizualization"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let’s plot the output from our simple carbon cycle model. The most simple plotting code would be:</p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">A</span><span class="op">)</span></span></code></pre></div>
+<p>This only includes one variable. To add another variable use the <code><a href="https://rdrr.io/r/graphics/lines.html">lines()</a></code> command:</p>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">A</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">B</span><span class="op">)</span></span></code></pre></div>
+<p>Now, let’s use only lines (<code>type</code>), add colors (<code>col</code>) and a legend (<code>legend</code>), and ensure that the y-axis encloses all values (<code>range</code>):</p>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">A</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Carbon pool"</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">A</span>, <span class="va">output</span><span class="op">$</span><span class="va">B</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">B</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"darkgreen"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topright"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"darkgreen"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Atmosphere"</span>, <span class="st">"Biosphere"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="modifying-the-model" class="section level2" number="1.15">
+<h2>
+<span class="header-section-number">1.15</span> Modifying the model<a class="anchor" aria-label="anchor" href="#modifying-the-model"><i class="fas fa-link"></i></a>
+</h2>
+<p>Change the exchange rate: The advantage of implementing a model in code is that we can easily change its assumptions and investigate what happens. Run the model again after changing <code>k_ba &lt;- 0.05</code> to <code>k_ba &lt;- 0.10</code>.</p>
+<p><strong>Quiz Question 11:</strong> How does increasing the rate of transfer from the biosphere to the atmosphere affect the equilibrium carbon pools?</p>
+<!-- More carbon in atmosphere and less in biosphere -->
+<p>Change the initial conditions: Reset <code>k_ba</code> to 0.05, change the initial conditions so that A = 500 and B = 500, and rerun the model.</p>
+<p><strong>Quiz Question 12:</strong> How do the equilibrium carbon pools compare with those from the original simulation?
+<!-- Almost no impact --></p>
+<p>Change the time step: Reset the initial conditions to A = 800 and B = 200. Now change the step size to 10 years (<code>dt &lt;- 10</code>) and rerun the model.</p>
+<p><strong>Quiz Question 13:</strong> How does increasing the time step affect the numerical solution?
+<!-- The final values are similar, but the path to those values differ. The curve is not smooth and there are overshoots --></p>
+<p>Let’s increase the simulation length to 50 years and choose a step size of 1000 years</p>
+<p><strong>Quiz Question 14:</strong> Do we still conserve carbon?
+<!-- Carbon is no longer conserved. The biosphere now has a negative carbon pool and the result is unphysical. --></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-23-1.png" alt="" width="672"></div>
+</div>
+<div id="quest" class="section level2" number="1.16">
+<h2>
+<span class="header-section-number">1.16</span> QUEST<a class="anchor" aria-label="anchor" href="#quest"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this course you will run climate simulations using Queen’s University Conceptual Earth System Model (QUEST). Run the code chunk below to create a <code>run_quest</code> folder and to copy the QUEST configuration files into it:</p>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">myDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">myDir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="st">"/global/home/hpc5112/ENSC-ESM/shared_files"</span>,</span>
+<span>  to <span class="op">=</span> <span class="va">myDir</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Let’s conduct a test run:</p>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest/config"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define the simulation years (start year BC, end year, time step):</span></span>
+<span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1850</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run QUEST:</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span><span class="va">config</span>, times <span class="op">=</span> <span class="va">years</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning in mean.default(out$N_total): argument is not numeric or logical: returning NA</code></pre>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot QUEST output:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1950</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>The <code><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot()</a></code> function produces a PNG file with the model output (<code>output.png</code>). If all went well, the resulting figure file is now in your home directory. Open it using the <code>Files</code> panel on your right and have a look at at its content. Blue lines represent model output. Red lines, if available, represent observations.</p></li>
+<li><p>Sometimes we just want to quickly plot individual variables. You can define your variables of interest using the <code>variables</code> option, and turn off the generation of a PNG file by setting the <code>PNGfile</code> option to FALSE:</p></li>
+</ul>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_global"</span>, <span class="st">"F_CO2"</span>, <span class="st">"A_sic"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-26-1.png" alt="" width="960"></div>
+<p><strong>Quiz Question 15: </strong> Interpret the relationship between the three variables.</p>
+<!-- Increase in radiative forcing due to emission of CO2 -> melting of sea ice concentration -> both causing increase in GMST -->
+<p>You can also explore the output directly. Let’s make a statistical summary of all variables:</p>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
+<p>You can store your output as a <code>.rds</code> file for later use:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"testRun.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>Then you can access the file content like this:</p>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"testRun.rds"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>To extract a single variable:</li>
+</ul>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">times</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">C_atm_ppmv</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>The way how you will conduct experiments with QUEST is by conducting experiments using different model configurations. Let’s see what type of model configurations there are:</p>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                        Length Class      Mode     
+## config.path             1     -none-     character
+## params_ranges          89     -none-     list     
+## flags                  11     -none-     list     
+## spy                     1     -none-     numeric  
+## obs_tran                5     data.frame list     
+## var_meta               98     -none-     list     
+## cost_weights            6     -none-     list     
+## params                 89     -none-     list     
+## prescribed_values       2     -none-     list     
+## forcing                 3     -none-     list     
+## spd                     1     -none-     numeric  
+## prescribed_diagnostics  1     -none-     list     
+## prescribed_fluxes       9     -none-     list     
+## initial_values         35     -none-     numeric  
+## gC_to_molN              1     -none-     numeric  
+## params_max             58     -none-     list     
+## params_min             58     -none-     list     
+## obs                    38     -none-     list     
+## params_calib           58     -none-     list</code></pre>
+<p>You see there are many different configuration settings. One of the more important ones is <code>flags</code>:</p>
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $run_AirSeaCarbon
+## [1] FALSE
+## 
+## $run_atmosphere
+## [1] TRUE
+## 
+## $run_ocean
+## [1] TRUE
+## 
+## $run_npzd
+## [1] FALSE
+## 
+## $run_land
+## [1] FALSE
+## 
+## $run_sic
+## [1] FALSE
+## 
+## $run_icesheets
+## [1] FALSE
+## 
+## $anthropogenic_emissions
+## [1] FALSE
+## 
+## $prescribed_CO2
+## [1] TRUE
+## 
+## $prescribed_seaice
+## [1] TRUE
+## 
+## $diagnose_carbonates
+## [1] FALSE</code></pre>
+<p>For instance, if <code>$run_ocean</code> is <code>TRUE</code> then you have configured the model such that the ocean dynamically evolves. If it is set to <code>FALSE</code> then all its prognostic variables remain static and do not evolve in time. You can change those settings by editing the <code>config_flags.R</code> file located in <code>run_quest/config</code>.</p>
+</div>
+<div id="quest-simulations" class="section level2" number="1.17">
+<h2>
+<span class="header-section-number">1.17</span> QUEST simulations<a class="anchor" aria-label="anchor" href="#quest-simulations"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Run an experiment using a different model configuration and plot variables of your choice.</li>
+</ul>
+</div>
+<div id="reflection" class="section level2" number="1.18">
+<h2>
+<span class="header-section-number">1.18</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
+</div>
+<div id="appendix" class="section level2" number="1.19">
+<h2>
+<span class="header-section-number">1.19</span> Appendix<a class="anchor" aria-label="anchor" href="#appendix"><i class="fas fa-link"></i></a>
+</h2>
+<p>If you enjoy R and want to learn more, I invite you to review the tutorial below. This is voluntary and will not be graded. The main elements of the tutorial below are:</p>
+<ul>
+<li>Operators: <code>+, -, *, /, ^</code>
+</li>
+<li>R objects (vector, data frame, matrix, array, list)</li>
+<li>Subset objects</li>
+<li>Control structure: loops, if-else statements</li>
+<li>Generating data: sequence and random data</li>
+<li>Defining a function</li>
+<li>Plotting data</li>
+</ul>
+<div id="operators" class="section level3" number="1.19.1">
+<h3>
+<span class="header-section-number">1.19.1</span> Operators<a class="anchor" aria-label="anchor" href="#operators"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>In R, you use the following syntax to assign a value to a variable.</li>
+</ul>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>The variable x used above is an example of an R object. The <code>print</code> statement prints the value of the object x.</li>
+<li>Once you assign values to R objects, you can use the following arithmetic operators to perform calculations.</li>
+</ul>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fl">3</span></span>
+<span></span>
+<span><span class="co"># Addition</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subtraction</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">-</span> <span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Multiplication</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">*</span> <span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Division</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">/</span> <span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Exponentiation</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="va">a</span><span class="op">^</span><span class="va">b</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">c</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Paste the code above into your markdown document and run it</p></li>
+<li><p>See what happens when you insert a <code>#</code>, e.g. <code># print(c)</code></p></li>
+</ul>
+</div>
+<div id="objects" class="section level3" number="1.19.2">
+<h3>
+<span class="header-section-number">1.19.2</span> Objects<a class="anchor" aria-label="anchor" href="#objects"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>All objects have two intrinsic attributes: mode and length</li>
+<li>The mode is the basic type of the elements of the object</li>
+<li>There are four main modes: numeric, character, complex, and logical (FALSE or TRUE)</li>
+</ul>
+<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="st">"apple"</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">+</span> <span class="fl">2i</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/class.html">class</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>The length of an object is the number of elements of the object</li>
+</ul>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">7</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>What is the length of <code>b &lt;- c(1:10)</code>?</p></li>
+<li><p>Next to mode and length, there are different types of objects, namely vector, data frame, matrix, array, and list</p></li>
+</ul>
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Vector with one element</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Vector with four elements</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">9</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">b</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Data frame</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">7</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">67</span>, <span class="fl">21</span>, <span class="fl">33</span><span class="op">)</span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Matrix: in R, a matrix has 2 dimensions only)</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="va">x</span>, nrow <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Array: an array has more than 2 dimensions</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">5</span>, <span class="fl">6</span>, <span class="fl">7</span>, <span class="fl">8</span>, <span class="fl">9</span><span class="op">)</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">x</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">a</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># List</span></span>
+<span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span>, <span class="fl">5</span>, <span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">b</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span></span>
+<span><span class="va">c</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"apples"</span>, <span class="st">"pears"</span>, <span class="st">"plums"</span><span class="op">)</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="fl">5</span></span>
+<span></span>
+<span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span>, <span class="va">c</span>, <span class="va">d</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Make a vector with a length equal to 5</p></li>
+<li><p>Make a data frame with 4 columns and 5 rows</p></li>
+<li><p>Make a matrix with 4 columns and 5 rows</p></li>
+<li><p>Make an array with 4 columns, 5 rows, and 3 layers</p></li>
+<li><p>Make a list that contains numbers and words (i.e. strings)</p></li>
+<li><p>Let’s learn how to subset vectors, data frames, matrices, arrays, and lists</p></li>
+<li><p>Example: Vector</p></li>
+</ul>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a vector</span></span>
+<span><span class="va">vector_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">20</span>, <span class="fl">30</span>, <span class="fl">40</span>, <span class="fl">50</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the vector</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Vector:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">vector_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Index</span></span>
+<span><span class="va">third_element</span> <span class="op">&lt;-</span> <span class="va">vector_data</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Third element:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">third_element</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Multiple Indices</span></span>
+<span><span class="va">subset_indices</span> <span class="op">&lt;-</span> <span class="va">vector_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (First, Third, and Fifth elements):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_indices</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Logical Condition</span></span>
+<span><span class="va">subset_condition</span> <span class="op">&lt;-</span> <span class="va">vector_data</span><span class="op">[</span><span class="va">vector_data</span> <span class="op">&gt;</span> <span class="fl">25</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (Elements greater than 25):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_condition</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you subset the fourth and fifth element of the vector</p></li>
+<li><p>Example: data frame</p></li>
+</ul>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a data frame</span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  Name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Alice"</span>, <span class="st">"Bob"</span>, <span class="st">"Charlie"</span>, <span class="st">"David"</span>, <span class="st">"Eve"</span><span class="op">)</span>,</span>
+<span>  Age <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">23</span>, <span class="fl">25</span>, <span class="fl">30</span>, <span class="fl">22</span>, <span class="fl">29</span><span class="op">)</span>,</span>
+<span>  Gender <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"F"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"M"</span>, <span class="st">"F"</span><span class="op">)</span>,</span>
+<span>  Score <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">90</span>, <span class="fl">75</span>, <span class="fl">88</span>, <span class="fl">92</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the data frame</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Data Frame:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Columns</span></span>
+<span><span class="va">subset_columns</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Name"</span>, <span class="st">"Score"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset by Columns (Name and Score):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_columns</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Rows and Columns</span></span>
+<span><span class="va">subset_rows_cols</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Name"</span>, <span class="st">"Age"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset by Rows and Columns (First 3 rows, Name and Age):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_rows_cols</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Condition</span></span>
+<span><span class="va">subset_condition</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span><span class="op">(</span><span class="va">data</span>, <span class="va">Age</span> <span class="op">&gt;</span> <span class="fl">25</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset by Condition (Age &gt; 25):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_condition</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you only extract the Age. This can be done by writing <code>data$Age</code></p></li>
+<li><p>Example: matrix</p></li>
+</ul>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a matrix</span></span>
+<span><span class="va">matrix_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span></span>
+<span>  <span class="fl">1</span><span class="op">:</span><span class="fl">12</span>, <span class="co"># Data</span></span>
+<span>  nrow <span class="op">=</span> <span class="fl">4</span>, <span class="co"># Number of rows</span></span>
+<span>  ncol <span class="op">=</span> <span class="fl">3</span>, <span class="co"># Number of columns</span></span>
+<span>  byrow <span class="op">=</span> <span class="cn">TRUE</span> <span class="co"># Fill the matrix by rows</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the matrix</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Matrix:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">matrix_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Rows and Columns</span></span>
+<span><span class="va">subset_rows_cols</span> <span class="op">&lt;-</span> <span class="va">matrix_data</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (First 2 rows, First 2 columns):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_rows_cols</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Specific Rows</span></span>
+<span><span class="va">subset_specific_rows</span> <span class="op">&lt;-</span> <span class="va">matrix_data</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (First and Third rows):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_specific_rows</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Specific Columns</span></span>
+<span><span class="va">subset_specific_cols</span> <span class="op">&lt;-</span> <span class="va">matrix_data</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Subset (Second and Third columns):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_specific_cols</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you only show the second column.</p></li>
+<li><p>Example: array</p></li>
+</ul>
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create an array</span></span>
+<span><span class="va">array_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html">array</a></span><span class="op">(</span></span>
+<span>  <span class="fl">1</span><span class="op">:</span><span class="fl">24</span>, <span class="co"># Data</span></span>
+<span>  dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">4</span>, <span class="fl">2</span><span class="op">)</span> <span class="co"># Dimensions (3x4x2 array)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the array</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full Array:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">array_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Indices</span></span>
+<span><span class="va">element</span> <span class="op">&lt;-</span> <span class="va">array_data</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Element at (1, 2, 1):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">element</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Slices</span></span>
+<span><span class="va">slice</span> <span class="op">&lt;-</span> <span class="va">array_data</span><span class="op">[</span>, , <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"First slice (all elements in the first third dimension):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">slice</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Specific Rows and Columns in a Specific Dimension</span></span>
+<span><span class="va">subset_array</span> <span class="op">&lt;-</span> <span class="va">array_data</span><span class="op">[</span><span class="fl">1</span>, , <span class="fl">2</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"First row, all columns, in the second slice:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">subset_array</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you only show the second slice</p></li>
+<li><p>Example: list</p></li>
+</ul>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create a list</span></span>
+<span><span class="va">list_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  Name <span class="op">=</span> <span class="st">"Alice"</span>,</span>
+<span>  Age <span class="op">=</span> <span class="fl">25</span>,</span>
+<span>  Scores <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">85</span>, <span class="fl">90</span>, <span class="fl">88</span><span class="op">)</span>,</span>
+<span>  Address <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    Street <span class="op">=</span> <span class="st">"123 Princess St"</span>,</span>
+<span>    City <span class="op">=</span> <span class="st">"Kingston"</span>,</span>
+<span>    Postal <span class="op">=</span> <span class="st">"K7L4L1"</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the list</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Full List:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">list_data</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Element Name</span></span>
+<span><span class="va">name</span> <span class="op">&lt;-</span> <span class="va">list_data</span><span class="op">$</span><span class="va">Name</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Name element:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">name</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting by Index</span></span>
+<span><span class="va">age</span> <span class="op">&lt;-</span> <span class="va">list_data</span><span class="op">[[</span><span class="fl">2</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Second element (Age):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">age</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Subsetting a Nested List</span></span>
+<span><span class="va">city</span> <span class="op">&lt;-</span> <span class="va">list_data</span><span class="op">$</span><span class="va">Address</span><span class="op">$</span><span class="va">City</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"City element in Address:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">city</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Change the code so that you only show the postal code</li>
+</ul>
+</div>
+<div id="control-structure" class="section level3" number="1.19.3">
+<h3>
+<span class="header-section-number">1.19.3</span> Control structure<a class="anchor" aria-label="anchor" href="#control-structure"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li><p>Control structures determine the order in which statements are executed in a program. Two important examples are loops and conditional statements</p></li>
+<li><p>Loop example</p></li>
+</ul>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># For loop to print numbers from 1 to 5</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<ul>
+<li><p>Change the code so that you loop over the strings apple, grape, and mango</p></li>
+<li><p>Conditional statement example</p></li>
+</ul>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define a number</span></span>
+<span><span class="va">number</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">3</span></span>
+<span></span>
+<span><span class="co"># If-else statement to check the sign of the number</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="va">number</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"The number is positive."</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">number</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"The number is negative."</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"The number is zero."</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+</div>
+<div id="generating-data" class="section level3" number="1.19.4">
+<h3>
+<span class="header-section-number">1.19.4</span> Generating data<a class="anchor" aria-label="anchor" href="#generating-data"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Many times you need to generate data, e.g. a sequence that ranges from 1 to 10. Instead of writing out each number, there are functions that do that for you.</li>
+</ul>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Sequence from 1 to 10 with step size 1</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Sequence from 1 to 10 with step size 0.5</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span>, <span class="fl">0.5</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Vector that repeats the value one for ten times</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Random sequences with uniform distribution between zero and one</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">5</span>, min <span class="op">=</span> <span class="fl">0</span>, max <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Generate 10 random values that range between 5 and 10</li>
+</ul>
+</div>
+<div id="defining-a-function" class="section level3" number="1.19.5">
+<h3>
+<span class="header-section-number">1.19.5</span> Defining a function<a class="anchor" aria-label="anchor" href="#defining-a-function"><i class="fas fa-link"></i></a>
+</h3>
+<ul>
+<li>Often you need to execute the same operation many times. To do this efficiently you can define a function and then apply this function whenever you need it.</li>
+</ul>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Define a function to add two numbers</span></span>
+<span><span class="va">add_numbers</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">a</span>, <span class="va">b</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Calculate the sum</span></span>
+<span>  <span class="va">sum</span> <span class="op">&lt;-</span> <span class="va">a</span> <span class="op">+</span> <span class="va">b</span></span>
+<span>  <span class="co"># Return the sum</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">sum</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Print the function definition</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Function Definition:"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">add_numbers</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Call the function with arguments 3 and 5</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu">add_numbers</span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Print the result</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"Result of add_numbers(3, 5):"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">result</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Define a function that multiplies numbers</li>
+</ul>
+</div>
+<div id="plotting-data" class="section level3" number="1.19.6">
+<h3>
+<span class="header-section-number">1.19.6</span> Plotting data<a class="anchor" aria-label="anchor" href="#plotting-data"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Add x and y labels using <code>xlab</code> and <code>ylab</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"ENSC430 lectures attended"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Academic Performance"</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Make it a line plot using <code>type = "l"</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Add more lines using <code><a href="https://rdrr.io/r/graphics/lines.html">lines()</a></code>
+</li>
+</ul>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Make each line a different color using <code>col</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Adjust x and y axis using <code>xlim</code> and <code>ylim</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="fl">10</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">20</span>, <span class="fl">100</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Making square axis using <code>par(pty="s")</code> and <code>asp = 1</code>
+</li>
+</ul>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">y1</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">2</span></span>
+<span><span class="va">y2</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">^</span><span class="fl">3</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>pty <span class="op">=</span> <span class="st">"s"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y1</span>, type <span class="op">=</span> <span class="st">"l"</span>, asp <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y2</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>Plot the sinus function with x values ranging from 0 to 10</li>
+</ul>
+<p>Many times we need to add fancy text that includes Greek letters, exponents, and subscripts in Figures. That can be done using the LaTeX language, which is made available in R through the <code>latex</code> package. Text written in LaTeX is enclosed by dollar signs. Here some examples:</p>
+<ul>
+<li><p>Greek letters: <code>$\alpha$</code> yields <span class="math inline">\(\alpha\)</span></p></li>
+<li><p>Exponents: <code>$m^{-2}$</code> yields <span class="math inline">\(m^{-2}\)</span></p></li>
+<li><p>Subscripts: <code>$x_i</code> yields <span class="math inline">\(x_i\)</span></p></li>
+</ul>
+</div>
+<div id="review" class="section level3" number="1.19.7">
+<h3>
+<span class="header-section-number">1.19.7</span> Review<a class="anchor" aria-label="anchor" href="#review"><i class="fas fa-link"></i></a>
+</h3>
+<p>Congratulations, you made it to the end of this tutorial. Let’s list the key concepts you have learned today:</p>
+<ul>
+<li>Operators: <code>+, -, *, /, ^</code>
+</li>
+<li>Objects: vector <code><a href="https://rdrr.io/r/base/c.html">c()</a></code>, data frame <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code>, matrix <code><a href="https://rdrr.io/r/base/matrix.html">matrix()</a></code>, array <code><a href="https://rdrr.io/r/base/array.html">array()</a></code>, list <code><a href="https://rdrr.io/r/base/list.html">list()</a></code>,</li>
+<li>Subset objects</li>
+<li>Control structure: loops, if-else statements</li>
+<li>Generating data: sequence and random data</li>
+<li>Defining a function</li>
+<li>Plotting data</li>
+</ul>
+</div>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html">Earth System Modelling</a></div>
+<div class="next"><a href="week-2-atmospheric-energy-balance.html"><span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-1-building-a-simple-carbon-cycle-model"><span class="header-section-number">1</span> Week 1: Building a Simple Carbon Cycle Model</a></li>
+<li><a class="nav-link" href="#motivation"><span class="header-section-number">1.1</span> Motivation</a></li>
+<li><a class="nav-link" href="#queens-university-high-performance-computer"><span class="header-section-number">1.2</span> Queen’s University High Performance Computer</a></li>
+<li><a class="nav-link" href="#rstudio"><span class="header-section-number">1.3</span> RStudio</a></li>
+<li><a class="nav-link" href="#r-markdown"><span class="header-section-number">1.4</span> R Markdown</a></li>
+<li><a class="nav-link" href="#from-math-to-code"><span class="header-section-number">1.5</span> From math to code</a></li>
+<li><a class="nav-link" href="#basics"><span class="header-section-number">1.6</span> Basics</a></li>
+<li><a class="nav-link" href="#time"><span class="header-section-number">1.7</span> Time</a></li>
+<li><a class="nav-link" href="#numerical-integration"><span class="header-section-number">1.8</span> Numerical Integration</a></li>
+<li><a class="nav-link" href="#for-loops"><span class="header-section-number">1.9</span> For Loops</a></li>
+<li><a class="nav-link" href="#storing-model-output"><span class="header-section-number">1.10</span> Storing model output</a></li>
+<li><a class="nav-link" href="#building-a-model"><span class="header-section-number">1.11</span> Building a model</a></li>
+<li><a class="nav-link" href="#conservation-of-mass"><span class="header-section-number">1.12</span> Conservation of mass</a></li>
+<li><a class="nav-link" href="#data-frame"><span class="header-section-number">1.13</span> Data frame</a></li>
+<li><a class="nav-link" href="#data-vizualization"><span class="header-section-number">1.14</span> Data vizualization</a></li>
+<li><a class="nav-link" href="#modifying-the-model"><span class="header-section-number">1.15</span> Modifying the model</a></li>
+<li><a class="nav-link" href="#quest"><span class="header-section-number">1.16</span> QUEST</a></li>
+<li><a class="nav-link" href="#quest-simulations"><span class="header-section-number">1.17</span> QUEST simulations</a></li>
+<li><a class="nav-link" href="#reflection"><span class="header-section-number">1.18</span> Reflection</a></li>
+<li>
+<a class="nav-link" href="#appendix"><span class="header-section-number">1.19</span> Appendix</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#operators"><span class="header-section-number">1.19.1</span> Operators</a></li>
+<li><a class="nav-link" href="#objects"><span class="header-section-number">1.19.2</span> Objects</a></li>
+<li><a class="nav-link" href="#control-structure"><span class="header-section-number">1.19.3</span> Control structure</a></li>
+<li><a class="nav-link" href="#generating-data"><span class="header-section-number">1.19.4</span> Generating data</a></li>
+<li><a class="nav-link" href="#defining-a-function"><span class="header-section-number">1.19.5</span> Defining a function</a></li>
+<li><a class="nav-link" href="#plotting-data"><span class="header-section-number">1.19.6</span> Plotting data</a></li>
+<li><a class="nav-link" href="#review"><span class="header-section-number">1.19.7</span> Review</a></li>
+</ul>
+</li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Earth System Modelling</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

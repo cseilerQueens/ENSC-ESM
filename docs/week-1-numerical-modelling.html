@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 2 Week 1: Numerical Modelling | _main.knit</title>
+<meta name="description" content="2.1 Rstudio Follow these steps to run RStudio on Queen’s High Performance Computer: Log into: https://login.cac.queensu.ca/ Click on “Jupyter Server” Select Python version 3.11.5 Set your Memory...">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 2 Week 1: Numerical Modelling | _main.knit">
+<meta property="og:type" content="book">
+<meta property="og:description" content="2.1 Rstudio Follow these steps to run RStudio on Queen’s High Performance Computer: Log into: https://login.cac.queensu.ca/ Click on “Jupyter Server” Select Python version 3.11.5 Set your Memory...">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 2 Week 1: Numerical Modelling | _main.knit">
+<meta name="twitter:description" content="2.1 Rstudio Follow these steps to run RStudio on Queen’s High Performance Computer: Log into: https://login.cac.queensu.ca/ Click on “Jupyter Server” Select Python version 3.11.5 Set your Memory...">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title=""></a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html"><span class="header-section-number">1</span> Earth System Modelling</a></li>
+<li><a class="active" href="week-1-numerical-modelling.html"><span class="header-section-number">2</span> Week 1: Numerical Modelling</a></li>
+<li><a class="" href="week-2-atmosphere---energy-balance.html"><span class="header-section-number">3</span> Week 2: Atmosphere - Energy Balance</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-1-numerical-modelling" class="section level1" number="2">
+<h1>
+<span class="header-section-number">2</span> Week 1: Numerical Modelling<a class="anchor" aria-label="anchor" href="#week-1-numerical-modelling"><i class="fas fa-link"></i></a>
+</h1>
+<div id="rstudio" class="section level2" number="2.1">
+<h2>
+<span class="header-section-number">2.1</span> Rstudio<a class="anchor" aria-label="anchor" href="#rstudio"><i class="fas fa-link"></i></a>
+</h2>
+<p>Follow these steps to run RStudio on Queen’s High Performance Computer:</p>
+<ul>
+<li>Log into: <a href="https://login.cac.queensu.ca/" class="uri">https://login.cac.queensu.ca/</a>
+</li>
+<li>Click on “Jupyter Server”</li>
+<li>Select Python version 3.11.5</li>
+<li>Set your Memory (GB) to 16</li>
+<li>Set your Runtime (in hours) to the number of hours you wish to work (e.g. 3)</li>
+<li>Click on “Launch”</li>
+<li>Click on “Connect to Jupyter” once the button appears</li>
+<li>On the top left you see “Filter available modules …”</li>
+<li>Inside that box write “rstudio”</li>
+<li>Under Available Modules, hover over “rstudio-server/4.5” and click on the load button. It is important that you choose version 4.5. No other version will work properly.</li>
+<li>In the Launcher/Notebook, click on the RStudio icon.</li>
+<li>A new window appears with RStudio</li>
+<li>Copy the tutorial template to your home directory:</li>
+</ul>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="st">"/global/home/hpc5112/ENSC-ESM/templates"</span>,</span>
+<span>  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li><p>Open the <code>Week01_ENSC-ESM.Rmd</code> file that you just copied</p></li>
+<li><p>This is a template for completing the tutorial</p></li>
+<li><p>You can run any code inside code chunks and add any comments as text outside the code chunks</p></li>
+<li><p>Each week you will complete one of those tutorials and submit them in onQ</p></li>
+<li><p>All questions are directly answered in onQ</p></li>
+<li><p>Let’s begin by learning the basic R syntax</p></li>
+</ul>
+</div>
+<div id="r-syntax" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> R Syntax<a class="anchor" aria-label="anchor" href="#r-syntax"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>add R tutorial here …</li>
+</ul>
+</div>
+<div id="numerical-integration" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Numerical Integration<a class="anchor" aria-label="anchor" href="#numerical-integration"><i class="fas fa-link"></i></a>
+</h2>
+<p>The chunk below gives an example of a simple numerical model. The model consists of a set of two Ordinary Differential Equations (ODEs):</p>
+<p><span class="math display">\[
+\frac{dA}{dt} = k_{ba} B - k_{ab} A
+\]</span></p>
+<p><span class="math display">\[
+\frac{dB}{dt} = k_{ab} A - k_{ba} B
+\]</span></p>
+<p>where <span class="math inline">\(A\)</span> is the atmospheric carbon pool and <span class="math inline">\(B\)</span> is the biosphere carbon pool. The code below integrates this set of ODEs forward in time. The model thereby simulates the exchange of carbon between the atmosphere and the biosphere</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Initial values</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">800</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
+<span></span>
+<span><span class="co"># Parameter values</span></span>
+<span><span class="va">k_ba</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
+<span><span class="va">k_ab</span> <span class="op">&lt;-</span> <span class="fl">0.08</span></span>
+<span></span>
+<span><span class="co"># Integration settings</span></span>
+<span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="co"># Time step</span></span>
+<span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fl">50</span> <span class="co"># End time</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">t_end</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store results</span></span>
+<span><span class="va">A_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">B_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">total_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store initial values</span></span>
+<span><span class="va">A_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">A</span></span>
+<span><span class="va">B_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">B</span></span>
+<span></span>
+<span><span class="co"># Euler integration</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Calculate tendencies using values</span></span>
+<span>  <span class="co"># from the previous time step</span></span>
+<span>  <span class="va">dA</span> <span class="op">&lt;-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span> <span class="op">-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span></span>
+<span>  <span class="va">dB</span> <span class="op">&lt;-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span> <span class="op">-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span></span>
+<span></span>
+<span>  <span class="co"># Update state variables</span></span>
+<span>  <span class="va">A</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">dA</span> <span class="op">*</span> <span class="va">dt</span></span>
+<span>  <span class="va">B</span> <span class="op">&lt;-</span> <span class="va">B</span> <span class="op">+</span> <span class="va">dB</span> <span class="op">*</span> <span class="va">dt</span></span>
+<span></span>
+<span>  <span class="va">total</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span></span>
+<span></span>
+<span>  <span class="co"># Store results</span></span>
+<span>  <span class="va">A_out</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">A</span></span>
+<span>  <span class="va">B_out</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">B</span></span>
+<span>  <span class="va">total_out</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">total</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Combine results</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  time <span class="op">=</span> <span class="va">times</span>,</span>
+<span>  A <span class="op">=</span> <span class="va">A_out</span>,</span>
+<span>  B <span class="op">=</span> <span class="va">B_out</span>,</span>
+<span>  total <span class="op">=</span> <span class="va">total_out</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Plot</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">A</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Pool size"</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">A</span>, <span class="va">output</span><span class="op">$</span><span class="va">B</span>, <span class="va">output</span><span class="op">$</span><span class="va">total</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">B</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"green"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">total</span>,</span>
+<span>  col <span class="op">=</span> <span class="st">"red"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span></span>
+<span>  <span class="st">"bottomright"</span>,</span>
+<span>  legend <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A"</span>, <span class="st">"B"</span>, <span class="st">"Total"</span><span class="op">)</span>,</span>
+<span>  lty <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"green"</span>, <span class="st">"red"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-4-1.png" alt="" width="672"></div>
+<p>Answer all questions in onQ</p>
+<ol style="list-style-type: decimal">
+<li>Question: Which variables are the prognostic variables?</li>
+<li>Question: Which variables is the diagnostic variable?</li>
+<li>Question: What happens if the integration time step is 10?</li>
+</ol>
+<ul>
+<li>Reservoirs and fluxes</li>
+<li>Prognostic and diagnostic variables</li>
+<li>Numerical integration</li>
+<li>Conservation of mass and energy</li>
+</ul>
+</div>
+<div id="quest-set-up" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> QUEST Set-up<a class="anchor" aria-label="anchor" href="#quest-set-up"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this course you will run climate simulations using Queen’s University Conceptual Earth System Model (QUEST). Run the code chunk below to create a <code>run_quest</code> folder and to copy the QUEST configuration files into it:</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">myDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">myDir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="st">"/global/home/hpc5112/ENSC-ESM/QUEST/QUEST/inst/config"</span>,</span>
+<span>  to <span class="op">=</span> <span class="va">myDir</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Let’s conduct a test run:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest/config"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Define the simulation years (start year BC, end year, time step):</span></span>
+<span><span class="va">years</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1850</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run QUEST:</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span><span class="va">config</span>, times <span class="op">=</span> <span class="va">years</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning in mean.default(out$N_total): argument is not numeric or logical: returning
+## NA</code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Plot QUEST output:</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1950</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## png 
+##   2</code></pre>
+<ul>
+<li><p>The <code><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot()</a></code> function produces a PNG file with the model output (<code>output.png</code>). If all went well, the resulting figure file is now in your home directory. Open it using the Files panel on your right and have a look at at its content.</p></li>
+<li><p>Sometimes we just want to quickly plot individual variables. You can define your variables of interest using the <code>variables</code> option, and turn off the generation of a PNG file by setting the <code>PNGfile</code> option to FALSE:</p></li>
+</ul>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_global"</span>, <span class="st">"F_CO2"</span>, <span class="st">"A_sic"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>You can also explore the output directly. Let’s make a statistical summary of all variables:</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##      times         T_atm_L         T_atm_H          C_atm          T_ocn_SL    
+##  Min.   :1850   Min.   :293.9   Min.   :268.6   Min.   :604.8   Min.   :292.0  
+##  1st Qu.:1894   1st Qu.:294.7   1st Qu.:269.1   1st Qu.:625.9   1st Qu.:293.7  
+##  Median :1937   Median :294.8   Median :269.2   Median :658.6   Median :293.7  
+##  Mean   :1937   Mean   :294.9   Mean   :269.4   Mean   :683.3   Mean   :293.7  
+##  3rd Qu.:1980   3rd Qu.:295.0   3rd Qu.:269.7   3rd Qu.:720.6   3rd Qu.:293.8  
+##  Max.   :2024   Max.   :295.5   Max.   :270.6   Max.   :901.4   Max.   :294.3  
+##     T_ocn_SH        T_ocn_DL        T_ocn_DH        S_ocn_SL        S_ocn_SH    
+##  Min.   :271.8   Min.   :277.3   Min.   :274.0   Min.   :35.11   Min.   :33.59  
+##  1st Qu.:272.5   1st Qu.:277.3   1st Qu.:274.1   1st Qu.:35.11   1st Qu.:34.51  
+##  Median :272.8   Median :277.4   Median :274.3   Median :35.12   Median :34.64  
+##  Mean   :272.8   Mean   :277.4   Mean   :274.4   Mean   :35.13   Mean   :34.51  
+##  3rd Qu.:273.0   3rd Qu.:277.4   3rd Qu.:274.6   3rd Qu.:35.14   3rd Qu.:34.66  
+##  Max.   :275.4   Max.   :277.4   Max.   :274.9   Max.   :35.17   Max.   :34.67  
+##     S_ocn_DL        S_ocn_DH         DIC_SL          DIC_SH          DIC_DL     
+##  Min.   :34.72   Min.   :34.60   Min.   :2.126   Min.   :2.196   Min.   :2.317  
+##  1st Qu.:34.72   1st Qu.:34.60   1st Qu.:2.211   1st Qu.:2.207   1st Qu.:2.319  
+##  Median :34.73   Median :34.61   Median :2.263   Median :2.248   Median :2.321  
+##  Mean   :34.73   Mean   :34.61   Mean   :2.246   Mean   :2.244   Mean   :2.321  
+##  3rd Qu.:34.73   3rd Qu.:34.61   3rd Qu.:2.290   3rd Qu.:2.277   3rd Qu.:2.323  
+##  Max.   :34.73   Max.   :34.66   Max.   :2.303   Max.   :2.293   Max.   :2.325  
+##      DIC_DH          Alk_SL          Alk_SH          Alk_DL          Alk_DH     
+##  Min.   :2.278   Min.   :2.301   Min.   :2.395   Min.   :2.500   Min.   :2.535  
+##  1st Qu.:2.278   1st Qu.:2.387   1st Qu.:2.406   1st Qu.:2.502   1st Qu.:2.543  
+##  Median :2.280   Median :2.442   Median :2.446   Median :2.504   Median :2.556  
+##  Mean   :2.284   Mean   :2.425   Mean   :2.442   Mean   :2.504   Mean   :2.560  
+##  3rd Qu.:2.288   3rd Qu.:2.472   3rd Qu.:2.475   3rd Qu.:2.506   3rd Qu.:2.576  
+##  Max.   :2.300   Max.   :2.488   Max.   :2.491   Max.   :2.507   Max.   :2.600  
+##     C_lnd_L        C_lnd_H          A_sic            h_ice        DIN_ocn_SL   
+##  Min.   :1296   Min.   :743.8   Min.   :0.1821   Min.   :1000   Min.   :0.008  
+##  1st Qu.:1296   1st Qu.:743.8   1st Qu.:0.2152   1st Qu.:1000   1st Qu.:0.008  
+##  Median :1296   Median :743.8   Median :0.2381   Median :1000   Median :0.008  
+##  Mean   :1296   Mean   :743.8   Mean   :0.2267   Mean   :1000   Mean   :0.008  
+##  3rd Qu.:1296   3rd Qu.:743.8   3rd Qu.:0.2381   3rd Qu.:1000   3rd Qu.:0.008  
+##  Max.   :1296   Max.   :743.8   Max.   :0.2381   Max.   :1000   Max.   :0.008  
+##    DIN_ocn_SH      DIN_ocn_DL      DIN_ocn_DH      P_bio_SL        
+##  Min.   :0.022   Min.   :0.033   Min.   :0.03   Min.   :0.0006831  
+##  1st Qu.:0.022   1st Qu.:0.033   1st Qu.:0.03   1st Qu.:0.0006831  
+##  Median :0.022   Median :0.033   Median :0.03   Median :0.0006831  
+##  Mean   :0.022   Mean   :0.033   Mean   :0.03   Mean   :0.0006831  
+##  3rd Qu.:0.022   3rd Qu.:0.033   3rd Qu.:0.03   3rd Qu.:0.0006831  
+##  Max.   :0.022   Max.   :0.033   Max.   :0.03   Max.   :0.0006831  
+##     P_bio_SH            Z_bio_SL            Z_bio_SH           DET_ocn_SL   
+##  Min.   :0.0006831   Min.   :0.0003839   Min.   :0.0003839   Min.   :0.003  
+##  1st Qu.:0.0006831   1st Qu.:0.0003839   1st Qu.:0.0003839   1st Qu.:0.003  
+##  Median :0.0006831   Median :0.0003839   Median :0.0003839   Median :0.003  
+##  Mean   :0.0006831   Mean   :0.0003839   Mean   :0.0003839   Mean   :0.003  
+##  3rd Qu.:0.0006831   3rd Qu.:0.0003839   3rd Qu.:0.0003839   3rd Qu.:0.003  
+##  Max.   :0.0006831   Max.   :0.0003839   Max.   :0.0003839   Max.   :0.003  
+##    DET_ocn_SH      DET_ocn_DL      DET_ocn_DH         time          F_fw_L       
+##  Min.   :0.005   Min.   :0.002   Min.   :0.002   Min.   :1850   Min.   :-465035  
+##  1st Qu.:0.005   1st Qu.:0.002   1st Qu.:0.002   1st Qu.:1894   1st Qu.:-377335  
+##  Median :0.005   Median :0.002   Median :0.002   Median :1937   Median :-334280  
+##  Mean   :0.005   Mean   :0.002   Mean   :0.002   Mean   :1937   Mean   :-344728  
+##  3rd Qu.:0.005   3rd Qu.:0.002   3rd Qu.:0.002   3rd Qu.:1980   3rd Qu.:-317029  
+##  Max.   :0.005   Max.   :0.002   Max.   :0.002   Max.   :2024   Max.   :-279840  
+##      F_fw_H         F_fw_ice_L   F_fw_ice_H      F_L         F_H       NPP_lnd 
+##  Min.   :279840   Min.   :0    Min.   :0    Min.   :0   Min.   :0   Min.   :0  
+##  1st Qu.:317029   1st Qu.:0    1st Qu.:0    1st Qu.:0   1st Qu.:0   1st Qu.:0  
+##  Median :334280   Median :0    Median :0    Median :0   Median :0   Median :0  
+##  Mean   :344728   Mean   :0    Mean   :0    Mean   :0   Mean   :0   Mean   :0  
+##  3rd Qu.:377335   3rd Qu.:0    3rd Qu.:0    3rd Qu.:0   3rd Qu.:0   3rd Qu.:0  
+##  Max.   :465035   Max.   :0    Max.   :0    Max.   :0   Max.   :0   Max.   :0  
+##      RH_lnd    R_net_TOA             Q             S_ocn_global     Alk_global   
+##  Min.   :0   Min.   :-0.6307   Min.   :12206497   Min.   :34.71   Min.   :2.513  
+##  1st Qu.:0   1st Qu.:-0.5748   1st Qu.:26614503   1st Qu.:34.71   1st Qu.:2.513  
+##  Median :0   Median :-0.4841   Median :27206345   Median :34.71   Median :2.513  
+##  Mean   :0   Mean   :-0.3998   Mean   :26278624   Mean   :34.71   Mean   :2.513  
+##  3rd Qu.:0   3rd Qu.:-0.2314   3rd Qu.:27502328   3rd Qu.:34.71   3rd Qu.:2.513  
+##  Max.   :0   Max.   : 0.1463   Max.   :27603735   Max.   :34.71   Max.   :2.513  
+##    DIC_global      DIC_total         rho_SL         rho_SH         rho_DL    
+##  Min.   :2.307   Min.   :37174   Min.   :1025   Min.   :1027   Min.   :1027  
+##  1st Qu.:2.307   1st Qu.:37174   1st Qu.:1025   1st Qu.:1028   1st Qu.:1027  
+##  Median :2.307   Median :37174   Median :1025   Median :1028   Median :1027  
+##  Mean   :2.307   Mean   :37174   Mean   :1025   Mean   :1028   Mean   :1027  
+##  3rd Qu.:2.307   3rd Qu.:37174   3rd Qu.:1025   3rd Qu.:1028   3rd Qu.:1027  
+##  Max.   :2.307   Max.   :37174   Max.   :1025   Max.   :1028   Max.   :1027  
+##      rho_DH       C_atm_ppmv        F_CO2         T_atm_global      alpha_H      
+##  Min.   :1028   Min.   :280.0   Min.   :0.0000   Min.   :287.0   Min.   :0.2458  
+##  1st Qu.:1028   1st Qu.:294.6   1st Qu.:0.3052   1st Qu.:287.3   1st Qu.:0.2570  
+##  Median :1028   Median :310.0   Median :0.6098   Median :287.4   Median :0.2648  
+##  Mean   :1028   Mean   :320.9   Mean   :0.7833   Mean   :287.5   Mean   :0.2610  
+##  3rd Qu.:1028   3rd Qu.:337.6   3rd Qu.:1.1231   3rd Qu.:287.6   3rd Qu.:0.2648  
+##  Max.   :1028   Max.   :420.9   Max.   :2.4452   Max.   :288.2   Max.   :0.2648  
+##   Energy_total       Energy_conserved     Carbon_total  
+##  Min.   :1.531e+27   Min.   :1.532e+27   Min.   :37779  
+##  1st Qu.:1.531e+27   1st Qu.:1.532e+27   1st Qu.:37800  
+##  Median :1.532e+27   Median :1.532e+27   Median :37833  
+##  Mean   :1.532e+27   Mean   :1.532e+27   Mean   :37857  
+##  3rd Qu.:1.532e+27   3rd Qu.:1.532e+27   3rd Qu.:37895  
+##  Max.   :1.532e+27   Max.   :1.532e+27   Max.   :38075</code></pre>
+<p>You can store your output as a <code>.rds</code> file for later use:</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"testRun.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>Then you can access the file content like this:</p>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"testRun.rds"</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>To extract a single variable:</li>
+</ul>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">times</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">C_atm_ppmv</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-11-1.png" alt="" width="672"></div>
+<p>The way how you will conduct experiments with QUEST is by conducting expeirments using different model configurations. Let’s see what type of model configurations there are:</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<pre><code>##                        Length Class      Mode     
+## config.path             1     -none-     character
+## params_ranges          89     -none-     list     
+## flags                  11     -none-     list     
+## spy                     1     -none-     numeric  
+## obs_tran                5     data.frame list     
+## var_meta               98     -none-     list     
+## cost_weights            6     -none-     list     
+## params                 89     -none-     list     
+## prescribed_values       2     -none-     list     
+## forcing                 3     -none-     list     
+## spd                     1     -none-     numeric  
+## prescribed_diagnostics  1     -none-     list     
+## prescribed_fluxes       9     -none-     list     
+## initial_values         35     -none-     numeric  
+## gC_to_molN              1     -none-     numeric  
+## params_max             58     -none-     list     
+## params_min             58     -none-     list     
+## obs                    38     -none-     list     
+## params_calib           58     -none-     list</code></pre>
+<p>You see there are many different configuration settings. One of the more important ones is <code>flags</code>:</p>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## $run_AirSeaCarbon
+## [1] FALSE
+## 
+## $run_atmosphere
+## [1] TRUE
+## 
+## $run_ocean
+## [1] TRUE
+## 
+## $run_npzd
+## [1] FALSE
+## 
+## $run_land
+## [1] FALSE
+## 
+## $run_sic
+## [1] FALSE
+## 
+## $run_icesheets
+## [1] FALSE
+## 
+## $anthropogenic_emissions
+## [1] FALSE
+## 
+## $prescribed_CO2
+## [1] TRUE
+## 
+## $prescribed_seaice
+## [1] TRUE
+## 
+## $diagnose_carbonates
+## [1] FALSE</code></pre>
+<p>For instance, if <code>$run_ocean</code> is <code>TRUE</code> then you have configured the model such that the ocean dynamically evolves. If it is set to <code>FALSE</code> then all its prognostic variables remain static and do not evolve in time. You can change those settings by editing the <code>config_flags.R</code> file located in <code>run_quest/config</code>.</p>
+</div>
+<div id="quest-simulations" class="section level2" number="2.5">
+<h2>
+<span class="header-section-number">2.5</span> QUEST simulations<a class="anchor" aria-label="anchor" href="#quest-simulations"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Run three different experiments using different model configurations and plot one variable from each experiment in the same graph.</li>
+<li>I will add more detailed instructions later.</li>
+</ul>
+</div>
+<div id="reflection" class="section level2" number="2.6">
+<h2>
+<span class="header-section-number">2.6</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="index.html"><span class="header-section-number">1</span> Earth System Modelling</a></div>
+<div class="next"><a href="week-2-atmosphere---energy-balance.html"><span class="header-section-number">3</span> Week 2: Atmosphere - Energy Balance</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-1-numerical-modelling"><span class="header-section-number">2</span> Week 1: Numerical Modelling</a></li>
+<li><a class="nav-link" href="#rstudio"><span class="header-section-number">2.1</span> Rstudio</a></li>
+<li><a class="nav-link" href="#r-syntax"><span class="header-section-number">2.2</span> R Syntax</a></li>
+<li><a class="nav-link" href="#numerical-integration"><span class="header-section-number">2.3</span> Numerical Integration</a></li>
+<li><a class="nav-link" href="#quest-set-up"><span class="header-section-number">2.4</span> QUEST Set-up</a></li>
+<li><a class="nav-link" href="#quest-simulations"><span class="header-section-number">2.5</span> QUEST simulations</a></li>
+<li><a class="nav-link" href="#reflection"><span class="header-section-number">2.6</span> Reflection</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong></strong>" was written by . </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

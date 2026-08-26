@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Earth System Modelling</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Earth System Modelling">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Earth System Modelling">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="A book created with bookdown.">
+<meta property="og:description" content="A book created with bookdown.">
+<meta name="twitter:description" content="A book created with bookdown.">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Earth System Modelling</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="active" href="index.html">Earth System Modelling</a></li>
+<li><a class="" href="week-1-building-a-simple-carbon-cycle-model.html"><span class="header-section-number">1</span> Week 1: Building a Simple Carbon Cycle Model</a></li>
+<li><a class="" href="week-2-atmospheric-energy-balance.html"><span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance</a></li>
+<li><a class="" href="week-3-ocean-circulation-dynamics.html"><span class="header-section-number">3</span> Week 3: Ocean Circulation Dynamics</a></li>
+<li><a class="" href="week-4-ocean-carbon-chemistry.html"><span class="header-section-number">4</span> Week 4: Ocean Carbon Chemistry</a></li>
+<li><a class="" href="week-5-marine-biology.html"><span class="header-section-number">5</span> Week 5: Marine Biology</a></li>
+<li><a class="" href="week-6-terrestrial-carbon-cycle.html"><span class="header-section-number">6</span> Week 6: Terrestrial Carbon Cycle</a></li>
+<li><a class="" href="week-7-cryosphere.html"><span class="header-section-number">7</span> Week 7: Cryosphere</a></li>
+<li><a class="" href="week-8-earth-system-dynamics.html"><span class="header-section-number">8</span> Week 8: Earth System Dynamics</a></li>
+<li><a class="" href="week-9-model-emulation.html"><span class="header-section-number">9</span> Week 9: Model Emulation</a></li>
+<li><a class="" href="week-10-paleoclimatic-simulations.html"><span class="header-section-number">10</span> Week 10: Paleoclimatic Simulations</a></li>
+<li><a class="" href="week-11-future-climate-simulations.html"><span class="header-section-number">11</span> Week 11: Future Climate Simulations</a></li>
+<li><a class="" href="week-12-research-project.html"><span class="header-section-number">12</span> Week 12: Research Project</a></li>
+<li><a class="" href="appendix-linear-algebra.html"><span class="header-section-number">13</span> Appendix: Linear Algebra</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><!--bookdown:title:end--><!--bookdown:title:start--><div id="earth-system-modelling" class="section level1 unnumbered">
+<h1>Earth System Modelling<a class="anchor" aria-label="anchor" href="#earth-system-modelling"><i class="fas fa-link"></i></a>
+</h1>
+<p>Welcome to the ENSC 480/880 course website. Understanding Earth’s past and future climate is, at its core, a question of how we make sense of complex systems. This course is designed for students who are curious about how dynamical interactions among physical, chemical, and biological processes generate nonlinear behaviour and emergent phenomena through feedbacks. The course treats modelling as a way of thinking, translating scientific concepts into equations and code, using numerical models to explore their consequences, and applying dynamical analysis to develop a deeper understanding of how the climate system works.
+The course begins with the foundations of numerical modelling. Students build a simple carbon cycle model from scratch, developing fundamental concepts including pools and fluxes, differential equations, numerical integration, stability, and conservation. With these foundations in place, they turn to the Queen’s University Conceptual Earth System Model (QUEST) to explore the atmosphere, ocean circulation, ocean carbon chemistry, marine biology, terrestrial carbon cycling, and cryosphere. Through a series of increasingly complex model experiments, they investigate how individual components of the Earth system behave and interact, while learning modelling approaches suited to the processes being studied, including dynamical-systems analysis, sensitivity analysis, and parameter optimization.
+The course then brings these components together to investigate the coupled Earth system. Using QUEST, students explore the dynamics that emerge from interactions among its components, examine the behaviour of the fully coupled system, and investigate climate dynamics across different timescales. They explore abrupt transitions in the paleoclimate record, possible future climate trajectories, and the use of Gaussian process emulation to efficiently explore the behaviour of computationally demanding models.
+In the final week, students apply what they have learned through an independent modelling exercise, selecting from a range of questions about the climate system and using QUEST to conduct a focused set of scientific experiments. They have the opportunity to pursue questions of particular interest within a structured modelling framework and communicate their findings through scientific analysis.
+Through mathematical and computational experiments, students develop an intuitive understanding of how feedbacks and nonlinear interactions shape the climate system, and why human perturbations to such a complex system can have profound and far-reaching consequences. Along the way, they develop practical skills in programming, numerical modelling, computational experimentation, high-performance computing, machine learning, and systems thinking.</p>
+<div id="course-overview" class="section level2 unnumbered">
+<h2>Course Overview<a class="anchor" aria-label="anchor" href="#course-overview"><i class="fas fa-link"></i></a>
+</h2>
+<div class="inline-table"><table class="table table-sm">
+<colgroup>
+<col width="3%">
+<col width="31%">
+<col width="65%">
+</colgroup>
+<thead><tr class="header">
+<th>Week</th>
+<th>Module</th>
+<th>Topic</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Building a Simple Carbon Cycle Model</td>
+<td>Pools and fluxes, ordinary differential equations, prognostic and diagnostic variables, numerical integration, numerical stability, mass and energy conservation</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Atmospheric Energy Balance</td>
+<td>Radiation, radiative forcing and feedback, equilibrium vs. transient response, climate sensitivity</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Ocean Circulation Dynamics</td>
+<td>Thermohaline circulation, Jacobian, eigenvalues, phase portraits, bifurcation analysis</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>Ocean Carbon Chemistry</td>
+<td>Air-sea carbon exchange, dissolved inorganic carbon, alkalinity, ocean acidification</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>Marine Biology</td>
+<td>Dynamical interactions among nutrients, phytoplankton, zooplankton, and detritus; carbon-nitrogen cycle coupling, emergent oscillations</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>Terrestrial Carbon Cycle</td>
+<td>Net primary productivity, heterotrophic respiration, global sensitivity analysis and parameter optimization</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>Cryosphere</td>
+<td>Freshwater and albedo feedbacks, thresholds and tipping behaviour, timescale separation</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>Earth System Dynamics</td>
+<td>Dynamical analysis of the fully coupled system, component interactions and feedbacks, emergent behaviour</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>Model Emulation</td>
+<td>Gaussian Process emulation, computational acceleration, predictive accuracy, dynamical fidelity</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>Paleoclimatic Simulations</td>
+<td>Paleoclimate forcing, abrupt transitions, nonlinear ice sheet and ocean dynamics</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>Future Climate Simulation</td>
+<td>Climate change scenarios, concentration-driven versus emission-driven projections, long-term climate change</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>Research Project</td>
+<td>Models as scientific experiments: hypothesis testing, interpretation, communication</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div id="course-learning-outcomes" class="section level2 unnumbered">
+<h2>Course Learning Outcomes<a class="anchor" aria-label="anchor" href="#course-learning-outcomes"><i class="fas fa-link"></i></a>
+</h2>
+<p>On successful completion of this course, students will be able to:</p>
+<ol style="list-style-type: decimal">
+<li>Describe the major components of the Earth system and explain how they interact through physical, chemical, and biological processes and feedbacks.</li>
+<li>Represent climate processes as dynamical systems, formulate them as differential equations, and perform numerical integration using a conceptual climate model.</li>
+<li>Analyze the behaviour of dynamical systems using tools such as Jacobians, eigenvalues, phase portraits, and bifurcation analysis.</li>
+<li>Explain how interactions among Earth system components give rise to emergent behaviour, feedbacks, thresholds, and timescale-dependent dynamics.</li>
+<li>Evaluate model behaviour and uncertainty using sensitivity analysis, parameter optimization, and Gaussian process emulation.</li>
+<li>Design and conduct computational experiments using a conceptual Earth system model to investigate questions about the climate system, and interpret and communicate the results.</li>
+</ol>
+</div>
+<div id="assessment" class="section level2 unnumbered">
+<h2>Assessment<a class="anchor" aria-label="anchor" href="#assessment"><i class="fas fa-link"></i></a>
+</h2>
+<p>The final grade is based on 40% weekly assignments and 60% the final examination. All tutorials will be conducted using Queen’s University’s high-performance computing (HPC) resources. The weekly assignments are designed to be completed during the scheduled tutorial sessions. Students are expected to actively participate in the tutorial activities and work toward completing the assignment during class. At the end of each tutorial, students must submit a knitted PDF report of their completed tutorial to onQ and complete the corresponding tutorial questions in onQ.</p>
+<p>To provide flexibility for unforeseen circumstances, completed assignments may be submitted up to 72 hours after the tutorial without penalty. After this grace period, submissions will not be accepted. Additional flexibility is provided by counting only the best 10 of the 12 assignments toward the final assignment grade. Students experiencing longer-term extenuating circumstances should follow the University’s Academic Consideration procedures.</p>
+</div>
+<div id="contact" class="section level2 unnumbered">
+<h2>Contact<a class="anchor" aria-label="anchor" href="#contact"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Course Instructor: Dr. Christian Seiler</li>
+<li>Contact Information: <a href="mailto:christian.seiler@queensu.ca" class="email">christian.seiler@queensu.ca</a>
+</li>
+<li>Office Hours &amp; Location: Thu, 14:00-16:00, Biosciences Complex, Room 3240 until Sep, then Room 3128</li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="empty"></div>
+<div class="next"><a href="week-1-building-a-simple-carbon-cycle-model.html"><span class="header-section-number">1</span> Week 1: Building a Simple Carbon Cycle Model</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#earth-system-modelling">Earth System Modelling</a></li>
+<li><a class="nav-link" href="#course-overview">Course Overview</a></li>
+<li><a class="nav-link" href="#course-learning-outcomes">Course Learning Outcomes</a></li>
+<li><a class="nav-link" href="#assessment">Assessment</a></li>
+<li><a class="nav-link" href="#contact">Contact</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Earth System Modelling</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
