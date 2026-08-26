@@ -17,14 +17,6 @@ modifying-the-model
 quest
 quest-simulations
 reflection
-appendix
-operators
-objects
-control-structure
-generating-data
-defining-a-function
-plotting-data
-review
 week-2-atmospheric-energy-balance
 budykosellers-type-ebm
 week-3-ocean-circulation-dynamics
@@ -40,7 +32,7 @@ week-9-model-emulation
 week-10-paleoclimatic-simulations
 week-11-future-climate-simulations
 week-12-research-project
-appendix-linear-algebra
+appendix-i-linear-algebra
 matrix-multiplication
 matrix-transposition
 matrix-inversion
@@ -53,3 +45,12 @@ step-1-set-the-odes-to-zero-and-solving-for-each-variable
 step-2-apply-the-jacobian-matrix-to-the-odes
 step-3-calculate-the-eigenvalues
 step-4-calculate-the-equilibrium-eigenvalues
+appendix-ii-r-programming-language
+appendix
+operators
+objects
+control-structure
+generating-data
+defining-a-function
+plotting-data
+review

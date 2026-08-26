@@ -55,7 +55,8 @@
 <li><a class="" href="week-10-paleoclimatic-simulations.html"><span class="header-section-number">10</span> Week 10: Paleoclimatic Simulations</a></li>
 <li><a class="" href="week-11-future-climate-simulations.html"><span class="header-section-number">11</span> Week 11: Future Climate Simulations</a></li>
 <li><a class="" href="week-12-research-project.html"><span class="header-section-number">12</span> Week 12: Research Project</a></li>
-<li><a class="" href="appendix-linear-algebra.html"><span class="header-section-number">13</span> Appendix: Linear Algebra</a></li>
+<li><a class="" href="appendix-i-linear-algebra.html"><span class="header-section-number">13</span> Appendix (I): Linear Algebra</a></li>
+<li><a class="" href="appendix-ii-r-programming-language.html"><span class="header-section-number">14</span> Appendix (II): R Programming Language</a></li>
 </ul>
 
         <div class="book-extra">
@@ -81,7 +82,7 @@
 <span class="header-section-number">3.1.1</span> Temperature - Salinity Diagram<a class="anchor" aria-label="anchor" href="#temperature---salinity-diagram"><i class="fas fa-link"></i></a>
 </h3>
 <p>To better understand this, let’s assess how density is affected by temperature and salinity. The relationship is non-linear, and determined by the Thermodynamic Equation of Sea Water 2010 (TEOS-10). The Figure below gives the sea water density (blue contours in kg m<sup>-3</sup>) as a function of salinity and temperature.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://teos-10.github.io/GSW-R/">gsw</a></span><span class="op">)</span></span>
 <span><span class="co"># Define ranges</span></span>
 <span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="co"># y-axis (temperature)</span></span>
@@ -109,7 +110,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"blue"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># high-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># low-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-59-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-58-1.png" alt="" width="480"></div>
 <p><strong>Q: The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?</strong></p>
 <ul>
 <li>(A): low-latitude = red, high-latitude = blue</li>
@@ -142,7 +143,7 @@
 \rho = \rho_0 (1 - \alpha (T- T_0)  + \beta (S-S_0)
 \]</span></p>
 <p>where <span class="math inline">\(\rho\)</span> is the sea water density (kg m<span class="math inline">\(^{-3}\)</span>), <span class="math inline">\(T\)</span> and <span class="math inline">\(S\)</span> are temperature and salinity anomalies, respectively and <span class="math inline">\(\alpha\)</span> is the thermal contraction (<span class="math inline">\(\alpha = 1.5 \times 10^{-4}\)</span> K) and <span class="math inline">\(\beta\)</span> is the saline expansion (<span class="math inline">\(\beta = 8 \times10^{-4}\)</span> psu<sup>-1</sup>). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. <span class="math inline">\(T_0\)</span> and <span class="math inline">\(S_0\)</span> are reference temperature and salinity (<span class="math inline">\(T_0\)</span> = 10<span class="math inline">\(^{\circ}\)</span>C, <span class="math inline">\(S_0\)</span> = 35 g kg<sup>-1</sup>). Let’s create a T-S diagram with this linearlized version of the equation of state.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-60-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-59-1.png" alt="" width="480"></div>
 <p>You can see that the density values are similar, but not identical. However, using a linearlized equation of state keeps the math below more simple. Let’s now finally get to the Stommel model.</p>
 </div>
 <div id="phase-diagram" class="section level3" number="3.1.2">
