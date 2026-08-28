@@ -16,6 +16,7 @@ data-vizualization
 modifying-the-model
 quest
 quest-simulations
+graduate-students
 reflection
 week-2-atmospheric-energy-balance
 budykosellers-type-ebm
