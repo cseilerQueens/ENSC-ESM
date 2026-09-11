@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="2.1 Budyko–Sellers type EBM \[ C \frac{dT}{dt} = (1 - \alpha(T)) Q - \epsilon \sigma T^4 \] \[ \alpha(T) = 0.5 - 0.2 \tanh \left( \frac{T-265}{10} \right) \] \(Q\) is the mean incoming solar...">
-<meta property="og:description" content="2.1 Budyko–Sellers type EBM \[ C \frac{dT}{dt} = (1 - \alpha(T)) Q - \epsilon \sigma T^4 \] \[ \alpha(T) = 0.5 - 0.2 \tanh \left( \frac{T-265}{10} \right) \] \(Q\) is the mean incoming solar...">
-<meta name="twitter:description" content="2.1 Budyko–Sellers type EBM \[ C \frac{dT}{dt} = (1 - \alpha(T)) Q - \epsilon \sigma T^4 \] \[ \alpha(T) = 0.5 - 0.2 \tanh \left( \frac{T-265}{10} \right) \] \(Q\) is the mean incoming solar...">
+<meta name="description" content="2.1 Budyko Energy Balance Model The Budyko Energy Balance Model can be expressed as: \[ \frac{dT}{dt} = \left( (1 - \alpha(T))Q - (A + BT) \right) / H \] \(Q\) is the mean incoming solar...">
+<meta property="og:description" content="2.1 Budyko Energy Balance Model The Budyko Energy Balance Model can be expressed as: \[ \frac{dT}{dt} = \left( (1 - \alpha(T))Q - (A + BT) \right) / H \] \(Q\) is the mean incoming solar...">
+<meta name="twitter:description" content="2.1 Budyko Energy Balance Model The Budyko Energy Balance Model can be expressed as: \[ \frac{dT}{dt} = \left( (1 - \alpha(T))Q - (A + BT) \right) / H \] \(Q\) is the mean incoming solar...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -68,31 +68,42 @@
 <h1>
 <span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance<a class="anchor" aria-label="anchor" href="#week-2-atmospheric-energy-balance"><i class="fas fa-link"></i></a>
 </h1>
-<div id="budykosellers-type-ebm" class="section level2" number="2.1">
+<div id="budyko-energy-balance-model" class="section level2" number="2.1">
 <h2>
-<span class="header-section-number">2.1</span> Budyko–Sellers type EBM<a class="anchor" aria-label="anchor" href="#budykosellers-type-ebm"><i class="fas fa-link"></i></a>
+<span class="header-section-number">2.1</span> Budyko Energy Balance Model<a class="anchor" aria-label="anchor" href="#budyko-energy-balance-model"><i class="fas fa-link"></i></a>
 </h2>
+<p>The Budyko Energy Balance Model can be expressed as:</p>
 <p><span class="math display">\[
-C \frac{dT}{dt} = (1 - \alpha(T)) Q - \epsilon \sigma T^4
-\]</span></p>
-<p><span class="math display">\[
-\alpha(T) = 0.5 - 0.2 \tanh \left( \frac{T-265}{10} \right)
+\frac{dT}{dt} = \left( (1 - \alpha(T))Q - (A + BT) \right) / H
 \]</span></p>
 <ul>
 <li>
 <span class="math inline">\(Q\)</span> is the mean incoming solar radiation: <span class="math inline">\(Q = \frac{1}{4} S_0\)</span>, where <span class="math inline">\(S_0\)</span> = 1368 W m<span class="math inline">\(^{-2}\)</span> is the solar constant, such that <span class="math inline">\(Q\)</span> = 342 W m<span class="math inline">\(^{-2}\)</span>
 </li>
 <li>
-<span class="math inline">\(C\)</span> = planetary heat capacity (<span class="math inline">\(C\)</span> = 5 <span class="math inline">\(\times\)</span> 10<span class="math inline">\(^8\)</span> J m<span class="math inline">\(^{-2}\)</span> K<span class="math inline">\(^{-1}\)</span>) <a href="https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/2007JD008746">Schwartz (2007)</a>
+<span class="math inline">\(H\)</span> = planetary heat capacity (<span class="math inline">\(H\)</span> = 5 <span class="math inline">\(\times\)</span> 10<span class="math inline">\(^8\)</span> J m<span class="math inline">\(^{-2}\)</span> K<span class="math inline">\(^{-1}\)</span>) <a href="https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/2007JD008746">Schwartz (2007)</a>
+</li>
+<li>A = 203.3 W m<sup>-2</sup>
+</li>
+<li>B = 2.09 W m<sup>-2</sup> Celsius<sup>-1</sup>
 </li>
 </ul>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<p>The albedo <span class="math inline">\(\alpha\)</span> is a function of temperature <span class="math inline">\(T\)</span>
+<span class="math display">\[
+\alpha(T) = 0.5 - 0.2 \tanh \left( \frac{T-265}{10} \right)
+\]</span></p>
+<p>Plot this function in R for a temperature range of 220 K to 310 K. Your result should look like this</p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-60-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 1:</strong> What is the albedo at 260K?
+<!-- 0.5924234 --></p>
+<p>Using the terms in the Budyko energy balance model, let us plot the incoming and outgoing radiation for different global mean surface temperatures:</p>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">220</span>, <span class="fl">310</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Outgoing radiation following the Stefan-Boltzmann law</span></span>
-<span><span class="va">emissivity</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
-<span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">5.67</span> <span class="op">*</span> <span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">8</span><span class="op">)</span> <span class="co"># Stefan-Boltzmann constant in W m-2 K-4</span></span>
-<span><span class="va">E_out</span> <span class="op">&lt;-</span> <span class="va">emissivity</span> <span class="op">*</span> <span class="va">sigma</span> <span class="op">*</span> <span class="cn">T</span><span class="op">^</span><span class="fl">4</span></span>
+<span><span class="co"># Outgoing radiation</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">203.3</span> <span class="co"># W m-2</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">2.09</span> <span class="co"># W m-2 C-1</span></span>
+<span><span class="va">E_out</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">273.15</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Incoming radiation</span></span>
 <span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">1368</span> <span class="op">/</span> <span class="fl">4</span> <span class="co"># mean incoming solar radiation in W m-2</span></span>
@@ -107,23 +118,393 @@ C \frac{dT}{dt} = (1 - \alpha(T)) Q - \epsilon \sigma T^4
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="cn">T</span>, <span class="va">E_in</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Incoming radiation"</span>, <span class="st">"Outgoing radiation"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-52-1.png" alt="" width="480"></div>
-<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">1368</span> <span class="op">/</span> <span class="fl">4</span> <span class="co"># mean incoming solar radiation in W m-2</span></span>
-<span><span class="co"># C &lt;- 5 * 10^8 # planetary heat capacity in J m$^{-2}$ K$^{-1}$) [Schwartz (2007)](https://agupubs.onlinelibrary.wiley.com/doi/epdf/10.1029/2007JD008746)</span></span>
-<span><span class="va">emissivity</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
-<span><span class="va">sigma</span> <span class="op">&lt;-</span> <span class="fl">5.67</span> <span class="op">*</span> <span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">8</span><span class="op">)</span> <span class="co"># Stefan-Boltzmann constant in W m-2 K-4</span></span>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-61-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 2:</strong> How many equilibria do you see?</p>
+<!-- There are 3 equilibria -->
+<p>Let us now plot the temperature tendency against temperature:</p>
+<div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">220</span>, <span class="fl">310</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">220</span>, <span class="fl">310</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="co"># Specific heat capacity</span></span>
+<span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">10</span><span class="op">^</span><span class="fl">8</span> <span class="co"># J m-2 K-1</span></span>
+<span></span>
+<span><span class="co"># Outgoing radiation</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">203.3</span> <span class="co"># W m-2</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">2.09</span> <span class="co"># W m-2 C-1</span></span>
+<span><span class="va">E_out</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">273.15</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Incoming radiation</span></span>
+<span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">1368</span> <span class="op">/</span> <span class="fl">4</span> <span class="co"># mean incoming solar radiation in W m-2</span></span>
 <span><span class="va">albedo</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Hyperbolic.html">tanh</a></span><span class="op">(</span><span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">265</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></span>
-<span><span class="va">CdTdt</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">albedo</span><span class="op">)</span> <span class="op">*</span> <span class="va">Q</span> <span class="op">-</span> <span class="va">emissivity</span> <span class="op">*</span> <span class="va">sigma</span> <span class="op">*</span> <span class="cn">T</span><span class="op">^</span><span class="fl">4</span></span>
+<span><span class="va">E_in</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">albedo</span><span class="op">)</span> <span class="op">*</span> <span class="va">Q</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="cn">T</span>, <span class="va">CdTdt</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Temperature (K)"</span>, ylab <span class="op">=</span> <span class="st">"Energy Flux (W/m2)"</span><span class="op">)</span></span>
+<span><span class="co"># Temperature tendency</span></span>
+<span></span>
+<span><span class="va">dT</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">E_in</span> <span class="op">-</span> <span class="va">E_out</span><span class="op">)</span> <span class="op">/</span> <span class="va">H</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">T</span>, y <span class="op">=</span> <span class="va">dT</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Temperature (K)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Temperature Tendency (K/s)"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-53-1.png" alt="" width="480"></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-54-1.png" alt="" width="480"></div>
-
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-62-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 3:</strong> Which of the equilibria are stable (from left to right)?
+<!-- 1 and 3 are stable --></p>
+<p><strong>Quiz Question 4:</strong> Which of the equilibria are unstable (from left to right)?
+<!-- 2 is unstable --></p>
+<p>Let’s integrate our tendency equation forward in time using an initial temperature of 260 K and plot how global mean surface temperature (GMST) changes with time:</p>
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Parameter</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">203.3</span> <span class="co"># W m-2 (Budyko model coefficient)</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">2.09</span> <span class="co"># W m-2 C-1 (Budyko model coefficient)</span></span>
+<span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">10</span><span class="op">^</span><span class="fl">8</span> <span class="co"># J m-2 K-1 # Specific heat capacity</span></span>
+<span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">1368</span> <span class="op">/</span> <span class="fl">4</span> <span class="co"># mean incoming solar radiation in W m-2</span></span>
+<span></span>
+<span></span>
+<span><span class="co"># Initial values</span></span>
+<span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fl">260</span></span>
+<span></span>
+<span><span class="co"># Integration settings</span></span>
+<span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">t_end</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store results</span></span>
+<span><span class="va">T_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store initial values</span></span>
+<span><span class="va">T_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">T</span></span>
+<span></span>
+<span><span class="co"># Euler integration</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Calculate tendencies</span></span>
+<span>  </span>
+<span><span class="co"># Outgoing radiation</span></span>
+<span><span class="va">E_out</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">273.15</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Incoming radiation</span></span>
+<span><span class="va">albedo</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Hyperbolic.html">tanh</a></span><span class="op">(</span><span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">265</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">E_in</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">albedo</span><span class="op">)</span> <span class="op">*</span> <span class="va">Q</span></span>
+<span></span>
+<span><span class="co"># Temperature tendency (K/year)</span></span>
+<span><span class="co"># We need to convert the tendency equation from K/s to K/year</span></span>
+<span><span class="co"># We do this by multiplying the rate with seconds per year</span></span>
+<span></span>
+<span><span class="va">dT</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">E_in</span> <span class="op">-</span> <span class="va">E_out</span><span class="op">)</span> <span class="op">/</span> <span class="va">H</span> <span class="op">*</span> <span class="op">(</span><span class="fl">86400</span> <span class="op">*</span> <span class="fl">365.25</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Update the state variable</span></span>
+<span>  <span class="cn">T</span> <span class="op">&lt;-</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">dT</span> <span class="op">*</span> <span class="va">dt</span></span>
+<span></span>
+<span>  <span class="co"># Store results</span></span>
+<span>  <span class="va">T_out</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">T</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  time <span class="op">=</span> <span class="va">times</span>,</span>
+<span>  T <span class="op">=</span> <span class="va">T_out</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="cn">T</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time (years)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"GMST (K)"</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-63-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 5:</strong> How does this new figure relate to the previous figure?
+<!-- We started out at 260K and the GMST returned to its cold stable equilibrium --></p>
+<p><strong>Quiz Question 6:</strong> At what initial value would we end up at the warm stable equilibrium?
+<!-- Multiple choice: TRUE: > 270 K, FALSE: < 260 K --></p>
+<p>Verify your answer by running the same code above but using a different initial condition.</p>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Parameter</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">203.3</span> <span class="co"># W m-2 (Budyko model coefficient)</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">2.09</span> <span class="co"># W m-2 C-1 (Budyko model coefficient)</span></span>
+<span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">10</span><span class="op">^</span><span class="fl">8</span> <span class="co"># J m-2 K-1 # Specific heat capacity</span></span>
+<span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">1368</span> <span class="op">/</span> <span class="fl">4</span> <span class="co"># mean incoming solar radiation in W m-2</span></span>
+<span></span>
+<span><span class="co"># Initial values</span></span>
+<span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fl">280</span></span>
+<span></span>
+<span><span class="co"># Integration settings</span></span>
+<span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
+<span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">t_end</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store results</span></span>
+<span><span class="va">T_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Store initial values</span></span>
+<span><span class="va">T_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">T</span></span>
+<span></span>
+<span><span class="co"># Euler integration</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Calculate tendencies</span></span>
+<span>  </span>
+<span><span class="co"># Outgoing radiation</span></span>
+<span><span class="va">E_out</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">273.15</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Incoming radiation</span></span>
+<span><span class="va">albedo</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Hyperbolic.html">tanh</a></span><span class="op">(</span><span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">265</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">E_in</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">albedo</span><span class="op">)</span> <span class="op">*</span> <span class="va">Q</span></span>
+<span></span>
+<span><span class="co"># Temperature tendency (K/year)</span></span>
+<span><span class="co"># We need to convert the tendency equation from K/s to K/year</span></span>
+<span><span class="co"># We do this by multiplying the rate with seconds per year</span></span>
+<span></span>
+<span><span class="va">dT</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">E_in</span> <span class="op">-</span> <span class="va">E_out</span><span class="op">)</span> <span class="op">/</span> <span class="va">H</span> <span class="op">*</span> <span class="op">(</span><span class="fl">86400</span> <span class="op">*</span> <span class="fl">365.25</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Update the state variable</span></span>
+<span>  <span class="cn">T</span> <span class="op">&lt;-</span> <span class="cn">T</span> <span class="op">+</span> <span class="va">dT</span> <span class="op">*</span> <span class="va">dt</span></span>
+<span></span>
+<span>  <span class="co"># Store results</span></span>
+<span>  <span class="va">T_out</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">T</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  time <span class="op">=</span> <span class="va">times</span>,</span>
+<span>  T <span class="op">=</span> <span class="va">T_out</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
+<span>  <span class="va">output</span><span class="op">$</span><span class="cn">T</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Time (years)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"GMST (K)"</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="cn">T</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-64-1.png" alt="" width="480"></div>
+<p>Now, the location of the equilibria could change if we change some of the parameter values. Plot temperature versus temperature tendency but increase the incoming solar radiation by 30%</p>
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">220</span>, <span class="fl">310</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Specific heat capacity</span></span>
+<span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">10</span><span class="op">^</span><span class="fl">8</span> <span class="co"># J m-2 K-1</span></span>
+<span></span>
+<span><span class="co"># Outgoing radiation</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">203.3</span> <span class="co"># W m-2</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">2.09</span> <span class="co"># W m-2 C-1</span></span>
+<span><span class="va">E_out</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">273.15</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Incoming radiation</span></span>
+<span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="fl">1368</span> <span class="op">/</span> <span class="fl">4</span> <span class="op">*</span> <span class="fl">1.3</span> <span class="co"># mean incoming solar radiation in W m-2</span></span>
+<span><span class="va">albedo</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Hyperbolic.html">tanh</a></span><span class="op">(</span><span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">265</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">E_in</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">albedo</span><span class="op">)</span> <span class="op">*</span> <span class="va">Q</span></span>
+<span></span>
+<span><span class="co"># Temperature tendency</span></span>
+<span></span>
+<span><span class="va">dT</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">E_in</span> <span class="op">-</span> <span class="va">E_out</span><span class="op">)</span> <span class="op">/</span> <span class="va">H</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="cn">T</span>, y <span class="op">=</span> <span class="va">dT</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Temperature (K)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Temperature Tendency (K/s)"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-65-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 7:</strong> How does the location of the unstable equilibrium change if we increase the incoming solar radiation by 30%?
+<!-- The unstable equilibrium moved to a colder temperature --></p>
+<p>We can conclude that the position of the equilibria can change as we change model parameters. We can therefore plot the equilibrium temperatures for different values of incoming solar radiation. Run the code below to do this. The code is a little complicated and you are not expected to understand this code in detail.</p>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Parameter</span></span>
+<span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">203.3</span> <span class="co"># W m-2 (Budyko model coefficient)</span></span>
+<span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">2.09</span> <span class="co"># W m-2 C-1 (Budyko model coefficient)</span></span>
+<span><span class="va">H</span> <span class="op">&lt;-</span> <span class="fl">5</span> <span class="op">*</span> <span class="fl">10</span><span class="op">^</span><span class="fl">8</span> <span class="co"># J m-2 K-1 # Specific heat capacity</span></span>
+<span><span class="va">Q0</span> <span class="op">&lt;-</span> <span class="fl">1368</span> <span class="op">/</span> <span class="fl">4</span> <span class="co"># mean incoming solar radiation in W m-2</span></span>
+<span></span>
+<span><span class="co"># ----------------------------</span></span>
+<span><span class="co"># Equilibrium function</span></span>
+<span><span class="co"># ----------------------------</span></span>
+<span></span>
+<span><span class="va">Ffun</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">T</span>, <span class="va">mu</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">Q</span> <span class="op">&lt;-</span> <span class="va">mu</span> <span class="op">*</span> <span class="va">Q0</span></span>
+<span>  <span class="va">albedo</span> <span class="op">&lt;-</span> <span class="fl">0.5</span> <span class="op">-</span> <span class="fl">0.2</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Hyperbolic.html">tanh</a></span><span class="op">(</span><span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">265</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span><span class="op">)</span></span>
+<span>  <span class="va">E_in</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">albedo</span><span class="op">)</span> <span class="op">*</span> <span class="va">Q</span></span>
+<span>  <span class="va">E_out</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">B</span> <span class="op">*</span> <span class="op">(</span><span class="cn">T</span> <span class="op">-</span> <span class="fl">273.15</span><span class="op">)</span></span>
+<span>  <span class="va">dT</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">E_in</span> <span class="op">-</span> <span class="va">E_out</span><span class="op">)</span> <span class="op">/</span> <span class="va">H</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="va">dT</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># ----------------------------</span></span>
+<span><span class="co"># Parameter sweep</span></span>
+<span><span class="co"># ----------------------------</span></span>
+<span></span>
+<span><span class="va">mu_vals</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.7</span>, <span class="fl">1.4</span>, length.out <span class="op">=</span> <span class="fl">300</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">T_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">mu_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">T_grid</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">200</span>, <span class="fl">330</span>, by <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span></span>
+<span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">mu</span> <span class="kw">in</span> <span class="va">mu_vals</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">Fvals</span> <span class="op">&lt;-</span> <span class="fu">Ffun</span><span class="op">(</span><span class="va">T_grid</span>, <span class="va">mu</span><span class="op">)</span></span>
+<span>  <span class="va">sign_change</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sign.html">sign</a></span><span class="op">(</span><span class="va">Fvals</span><span class="op">)</span><span class="op">)</span> <span class="op">!=</span> <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sign_change</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">idx</span> <span class="kw">in</span> <span class="va">sign_change</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">root</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/uniroot.html">uniroot</a></span><span class="op">(</span><span class="va">Ffun</span>,</span>
+<span>        interval <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">T_grid</span><span class="op">[</span><span class="va">idx</span><span class="op">]</span>, <span class="va">T_grid</span><span class="op">[</span><span class="va">idx</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>        mu <span class="op">=</span> <span class="va">mu</span></span>
+<span>      <span class="op">)</span><span class="op">$</span><span class="va">root</span></span>
+<span></span>
+<span>      <span class="va">T_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">T_all</span>, <span class="va">root</span><span class="op">)</span></span>
+<span>      <span class="va">mu_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">mu_all</span>, <span class="va">mu</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># ----------------------------</span></span>
+<span><span class="co"># Plot bifurcation diagram</span></span>
+<span><span class="co"># ----------------------------</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">mu_all</span>, <span class="va">T_all</span>,</span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  cex <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">Q</span> <span class="op">/</span> <span class="va">Q</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Equilibrium Temperature (K)"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">250</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span><span class="st">"orange"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">277</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span><span class="st">"orange"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-66-1.png" alt="" width="480"></div>
+<p>This is a bifurcation diagram where each dot on the line gives the equilibrium temperature at a given parameter value. If the incoming solar radiation is only 70% of the original value, we only get one equilibrium. At 95% we start having three equilibria. A bifurcation branch can have stable and unstable branches. I have marked the different branches with the orange stippled lines.</p>
+<p><strong>Quiz Question 8:</strong> Which of the three branches are stable, and which are unstable?
+<!-- From top to bottom: stable, unstable, stable --></p>
+</div>
+<div id="quest-simulations-1" class="section level2" number="2.2">
+<h2>
+<span class="header-section-number">2.2</span> QUEST simulations<a class="anchor" aria-label="anchor" href="#quest-simulations-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In the exercises above we were able to show that the Budyko energy balance model can have multiple stable and unstable equilibria. Now we want to find out if this also applies in the case of a more complex model like QUEST. Open <code>run_quest/config/config_flags.R</code>. Depending on how you edited this file in the past, it may look like this:</p>
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>  <span class="co"># modules</span></span>
+<span>  run_AirSeaCarbon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_atmosphere <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_ocean <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_npzd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_land <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_sic <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_icesheets <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="co"># settings</span></span>
+<span>  anthropogenic_emissions <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  prescribed_CO2 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  prescribed_seaice <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  diagnose_carbonates <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>For today’s tutorial, we want to turn on only the atmosphere, ocean, and sea ice modules, so that:</p>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span><span class="co"># modules</span></span>
+<span>run_AirSeaCarbon <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>run_atmosphere   <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>run_ocean        <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>run_npzd         <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>run_land         <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>run_sic          <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>run_icesheets    <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span><span class="co"># settings</span></span>
+<span>anthropogenic_emissions <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>prescribed_CO2  <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>prescribed_seaice <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>diagnose_carbonates <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>You could achieve this by editing the file and saving it. However, it quickly becomes cumbersome changing settings by hand. Instead, we are going to overwrite the settings like this:</p>
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest/config"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span>   <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span>        <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span>         <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span>         <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span>          <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span>    <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span>  <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
+<p>Spinup the model for this configuration:</p>
+<p>Let’s have a look at some of the variables to see whether the model is spun up</p>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_global"</span>, <span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"alpha_H"</span>, <span class="st">"A_sic"</span>, <span class="st">"R_net_TOA"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-71-1.png" alt="" width="576"></div>
+<p>Let us now assess whether there are multiple equilibria. As a first step we need to generate a new initialization file. This initialization file contains the values of all state variables as they were computed during the last time step of the spinup that you completed above. The code below will produce a new file called <code>config_init.R</code>:</p>
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create initialization file from final spin-up state</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Initialization file written to: config_init.R</code></pre>
+<p><strong>Quiz Question 9:</strong> Open <code>config_init.R</code>. What is the value of the surface air temperature in the lower latitude box (<code>T_atm_L</code>)?
+<!-- T_atm_L    = 294.611569 --></p>
+<p>Running <code>config_init.R</code> creates a vector containing the initial values of all state variables in their spun-up state for the current model configuration. We will use this spun-up state as the starting point for identifying the model’s equilibria by perturbing the state variables and examining how the system responds. Before doing so, however, we need to decide which state variables can meaningfully be perturbed. We should exclude variables that are inactive because their corresponding module is switched off (e.g., marine biota). We should also exclude variables whose total quantity must be conserved when applying a perturbation (e.g., carbon pools). The variables that we will perturb are atmosphere and ocean temperature, as well as fractional sea ice area.</p>
+<p>The values that you see are the equilibrium values of the state variables. There is only one equilibrium.</p>
+<p><strong>Quiz Question 10:</strong> What is the equilibrium value of the fractional area of sea ice in the high-latitude ocean (A_sic)?
+<!-- 0.2355651 --></p>
+<p>Let us now find out whether this equilibrium is stable or unstable</p>
+<p><strong>Quiz Question 11:</strong> Is this equilibrium stable or unstable?
+<!-- stable --></p>
+<p>So, we conclude that there is only one equilibrium solution for this model configuration.
+Now, let us explore what happens when we change one of the sea ice parameter values.
+Open <code>run_quest/config/config_para.R</code> ans search for the parameters <span class="math inline">\(\beta_{ocn,atm}\)</span> and <span class="math inline">\(\beta_{ocn,sic}\)</span>:</p>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="week-2-atmospheric-energy-balance.html#cb56-1" tabindex="-1"></a>  beta_atm_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.0105512</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span>
+<span id="cb56-2"><a href="week-2-atmospheric-energy-balance.html#cb56-2" tabindex="-1"></a>  beta_ocn_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.057591</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span></code></pre></div>
+<p>We want to change those values to:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="week-2-atmospheric-energy-balance.html#cb57-1" tabindex="-1"></a>  beta_atm_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.0105512</span> <span class="sc">*</span> <span class="fl">1.5</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span>
+<span id="cb57-2"><a href="week-2-atmospheric-energy-balance.html#cb57-2" tabindex="-1"></a>  beta_ocn_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.057591</span> <span class="sc">*</span> <span class="fl">1.5</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span></code></pre></div>
+<p>But instead of doing this by hand, we will overwrite those values:</p>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">config</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">beta_atm_sic</span> <span class="op">&lt;-</span> <span class="fl">0.0105512</span> <span class="op">*</span> <span class="fl">1.5</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">beta_ocn_sic</span> <span class="op">&lt;-</span> <span class="fl">0.0105512</span> <span class="op">*</span> <span class="fl">1.5</span></span></code></pre></div>
+<p>Now you need to do the following steps:</p>
+<ul>
+<li><p>Re-run the spinup so that the simulation adjusts to this new parameter value</p></li>
+<li><p>Create initialization file from final spin-up state</p></li>
+<li><p>Find the equilibria</p></li>
+<li><p>Assess whether the equilibria are stable or unstable</p></li>
+</ul>
+<p><strong>Quiz Question 12:</strong> How many equilibria do you find now?
+<!-- 3 --></p>
+<p>The number of equilibria can change as parameter values change. Thus, the system’s internal dynamics depend on the particular combination of parameter values. Exploring this vast range of possible dynamics is challenging for a model with 60 tunable parameters.</p>
+</div>
+<div id="graduate-students-1" class="section level2" number="2.3">
+<h2>
+<span class="header-section-number">2.3</span> Graduate students<a class="anchor" aria-label="anchor" href="#graduate-students-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>The new parameter values may produce multiple equilibria, but do they also produce accurate results? Test this question by re-running the model with the new parameter values and summarize your findings in your report.</p>
+</div>
+<div id="reflection-1" class="section level2" number="2.4">
+<h2>
+<span class="header-section-number">2.4</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection-1"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -133,7 +514,10 @@ C \frac{dT}{dt} = (1 - \alpha(T)) Q - \epsilon \sigma T^4
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
 <li><a class="nav-link" href="#week-2-atmospheric-energy-balance"><span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance</a></li>
-<li><a class="nav-link" href="#budykosellers-type-ebm"><span class="header-section-number">2.1</span> Budyko–Sellers type EBM</a></li>
+<li><a class="nav-link" href="#budyko-energy-balance-model"><span class="header-section-number">2.1</span> Budyko Energy Balance Model</a></li>
+<li><a class="nav-link" href="#quest-simulations-1"><span class="header-section-number">2.2</span> QUEST simulations</a></li>
+<li><a class="nav-link" href="#graduate-students-1"><span class="header-section-number">2.3</span> Graduate students</a></li>
+<li><a class="nav-link" href="#reflection-1"><span class="header-section-number">2.4</span> Reflection</a></li>
 </ul>
 
       <div class="book-extra">

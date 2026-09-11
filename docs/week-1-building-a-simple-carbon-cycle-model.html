@@ -102,7 +102,7 @@
 <li>A new window appears with RStudio</li>
 <li>Copy the tutorial template to your home directory:</li>
 </ul>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span></span>
 <span>  from <span class="op">=</span> <span class="st">"/global/teaching-project/sg5112000/W01_FirstName_LastName.Rmd"</span>,</span>
 <span>  to <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>,</span>
@@ -155,23 +155,23 @@
 <span class="header-section-number">1.6</span> Basics<a class="anchor" aria-label="anchor" href="#basics"><i class="fas fa-link"></i></a>
 </h2>
 <p>In your R markdown document, write:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">800</span></span>
 <span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">200</span></span></code></pre></div>
 <p>The symbol <code>&lt;-</code> assigns a value to a variable. After running this code, <code>A</code> contains the value 800 and <code>B</code> contains the value 200. You can run the code line-by-line by putting the cursor in the first line and then hit <code>Ctrl Enter</code>. The instructions appear in the console at the bottom. This technique is very helpful for trying to understand what the code is doing. Another way to run the code is by clicking on the icons on the top-right of each code chunk. You can inspect the values by simply typing their names in the console or by looking at the Environment panel on your right-hand side:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span></span>
 <span><span class="va">B</span></span></code></pre></div>
 <p>You can also perform calculations:</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">+</span> <span class="va">B</span></span>
 <span><span class="va">A</span> <span class="op">/</span> <span class="va">B</span></span></code></pre></div>
 <p>Our model contains two exchange rates expressed in per unit of time (e.g. per year):</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">k_ba</span> <span class="op">&lt;-</span> <span class="fl">0.05</span></span>
 <span><span class="va">k_ab</span> <span class="op">&lt;-</span> <span class="fl">0.08</span></span></code></pre></div>
 <p>We can use these parameters in calculations:</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dA</span> <span class="op">&lt;-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span> <span class="op">-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span></span>
 <span><span class="va">dB</span> <span class="op">&lt;-</span> <span class="va">k_ab</span> <span class="op">*</span> <span class="va">A</span> <span class="op">-</span> <span class="va">k_ba</span> <span class="op">*</span> <span class="va">B</span></span></code></pre></div>
 <p>Here, <code>A</code> and <code>B</code> are the carbon pools (PgC) in the atmosphere and biosphere, respectively. The variables <code>dA</code> and <code>dB</code> are the corresponding time derivatives. They show how both pools change over time. Notice that R uses <code>*</code> for multiplication.</p>
@@ -189,12 +189,12 @@
 <span class="header-section-number">1.7</span> Time<a class="anchor" aria-label="anchor" href="#time"><i class="fas fa-link"></i></a>
 </h2>
 <p>Numerical models calculate how a system changes over time. Here we use a time step of one year and simulate 50 years:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">dt</span> <span class="op">&lt;-</span> <span class="fl">1</span></span>
 <span><span class="va">t_end</span> <span class="op">&lt;-</span> <span class="fl">50</span></span>
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">t_end</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span></code></pre></div>
 <p>Note that <code><a href="https://rdrr.io/r/base/seq.html">seq()</a></code> creates a sequence of numbers. Let’s inspect the variable time:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span></code></pre></div>
@@ -210,7 +210,7 @@
 A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 \]</span></p>
 <p>In R, we can write:</p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A</span> <span class="op">&lt;-</span> <span class="va">A</span> <span class="op">+</span> <span class="va">dA</span> <span class="op">*</span> <span class="va">dt</span></span>
 <span><span class="va">B</span> <span class="op">&lt;-</span> <span class="va">B</span> <span class="op">+</span> <span class="va">dB</span> <span class="op">*</span> <span class="va">dt</span></span></code></pre></div>
 <p>Run both lines and inspect the new values of A and B. We have advanced the model by one time step.</p>
@@ -222,7 +222,7 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span class="header-section-number">1.9</span> For Loops<a class="anchor" aria-label="anchor" href="#for-loops"><i class="fas fa-link"></i></a>
 </h2>
 <p>We want to repeat this calculation for each time step. R uses a for loop to repeat a block of code:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">i</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
@@ -233,11 +233,11 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span class="header-section-number">1.10</span> Storing model output<a class="anchor" aria-label="anchor" href="#storing-model-output"><i class="fas fa-link"></i></a>
 </h2>
 <p>We want to save the value of <code>A</code> and <code>B</code> at every time step. The function <code><a href="https://rdrr.io/r/base/numeric.html">numeric()</a></code> creates an empty numerical vector:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">B_out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Inspect <code>A_out</code> and <code>B_out</code>. Let us now store the initial conditions in the first position:</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">A_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">A</span></span>
 <span><span class="va">B_out</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">B</span></span></code></pre></div>
 <p>Square brackets are used to access individual elements of a vector. Inspect <code>A_out</code> and <code>B_out</code> again. The first position exists, but the second position has not yet been filled with a model result.</p>
@@ -247,7 +247,7 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span class="header-section-number">1.11</span> Building a model<a class="anchor" aria-label="anchor" href="#building-a-model"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can now put everything together</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Initial values</span></span>
 <span><span class="va">A</span> <span class="op">&lt;-</span> <span class="fl">800</span></span>
 <span><span class="va">B</span> <span class="op">&lt;-</span> <span class="fl">200</span></span>
@@ -294,7 +294,7 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span class="header-section-number">1.12</span> Conservation of mass<a class="anchor" aria-label="anchor" href="#conservation-of-mass"><i class="fas fa-link"></i></a>
 </h2>
 <p>Our model only transfers carbon between the atmosphere and biosphere. It does not add or remove carbon from the system. Therefore, the total amount of carbon (<span class="math inline">\(A + B\)</span>) should remain constant over time. We can calculate the total carbon at every time step to verify whether carbon is conserved:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">total_out</span> <span class="op">&lt;-</span> <span class="va">A_out</span> <span class="op">+</span> <span class="va">B_out</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">total_out</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 9:</strong> Does the total amount of carbon change during the simulation?</p>
@@ -306,7 +306,7 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span class="header-section-number">1.13</span> Data frame<a class="anchor" aria-label="anchor" href="#data-frame"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s combine the results in a data frame:</p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
 <span>  time <span class="op">=</span> <span class="va">times</span>,</span>
 <span>  A <span class="op">=</span> <span class="va">A_out</span>,</span>
@@ -314,12 +314,12 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span>  total <span class="op">=</span> <span class="va">total_out</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>A data frame is a table containing different variables. You can inspect it using:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
 <p>Individual columns can be accessed using <code>$</code>. For example, we can find the maximum atmospheric carbon pool:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">A</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 10:</strong> What is the maximum atmospheric carbon pool during the simulation?</p>
 <!-- 800 PgC -->
@@ -329,14 +329,14 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span class="header-section-number">1.14</span> Data vizualization<a class="anchor" aria-label="anchor" href="#data-vizualization"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let’s plot the output from our simple carbon cycle model. The most simple plotting code would be:</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">A</span><span class="op">)</span></span></code></pre></div>
 <p>This only includes one variable. To add another variable use the <code><a href="https://rdrr.io/r/graphics/lines.html">lines()</a></code> command:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">A</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">output</span><span class="op">$</span><span class="va">B</span><span class="op">)</span></span></code></pre></div>
 <p>Now, let’s use only lines (<code>type</code>), add colors (<code>col</code>) and a legend (<code>legend</code>), and ensure that the y-axis encloses all values (<code>range</code>):</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
 <span>  <span class="va">output</span><span class="op">$</span><span class="va">time</span>,</span>
 <span>  <span class="va">output</span><span class="op">$</span><span class="va">A</span>,</span>
@@ -378,8 +378,8 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <h2>
 <span class="header-section-number">1.16</span> QUEST<a class="anchor" aria-label="anchor" href="#quest"><i class="fas fa-link"></i></a>
 </h2>
-<p>In this course you will run climate simulations using Queen’s University Conceptual Earth System Model (QUEST). Run the code chunk below to create a <code>run_quest</code> folder and to copy the QUEST configuration files into it:</p>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<p>In this course you will run climate simulations using Queen’s University Conceptual Earth System Model (QUEST). Run the code chunk below to create a <code>run_quest</code> folder and to copy the QUEST configuration files into it. Paste the code below into the console rather than into your markdown file. This way the code runs only once.</p>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">myDir</span><span class="op">)</span></span>
 <span></span>
@@ -389,8 +389,8 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<p>Let’s conduct a test run:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<p>From here on you can paste the code into your markdownfile. Let’s conduct a test run:</p>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the QUEST package:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
 <span></span>
@@ -412,11 +412,11 @@ A_{t=2} = A_{t=1} + \frac{dA}{dt} \Delta t
 <li><p>The <code><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot()</a></code> function produces a PNG file with the model output (<code>output.png</code>). If all went well, the resulting figure file is now in your home directory. Open it using the <code>Files</code> panel on your right and have a look at at its content. Blue lines represent model output. Red lines, if available, represent observations.</p></li>
 <li><p>Sometimes we just want to quickly plot individual variables. You can define your variables of interest using the <code>variables</code> option, and turn off the generation of a PNG file by setting the <code>PNGfile</code> option to FALSE:</p></li>
 </ul>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"anthr_emissions"</span>, <span class="st">"C_atm_ppmv"</span>, <span class="st">"F_CO2"</span>, <span class="st">"A_sic"</span>, <span class="st">"T_atm_global"</span>, <span class="st">"pH_global"</span>, <span class="st">"F_fw_L"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"Q"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1850</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="inline-figure">
-<img src="figure-html/unnamed-chunk-38-1.png" alt="" width="768">
+<img src="figure-html/unnamed-chunk-46-1.png" alt="" width="768">
 Have a look at the statements below and assess whether they are true or false.</div>
 <p><strong>Quiz Question 15:</strong> Anthropogenic emissions is an external forcing driving the model away from equilibrium</p>
 <p><strong>Quiz Question 16:</strong> Atmospheric CO<sub>2</sub> concentration is an external forcing driving the model away from equilibrium</p>
@@ -425,22 +425,22 @@ Have a look at the statements below and assess whether they are true or false.</
 <p><strong>Quiz Question 19:</strong> Ocean acidity decreases</p>
 <p><strong>Quiz Question 20:</strong> The change in freshwater fluxes weakens the thermohaline circulation</p>
 <p>You can also explore the output directly. Let’s make a statistical summary of all variables:</p>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span></code></pre></div>
 <p>You can store your output as a <code>.rds</code> file for later use:</p>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"testRun.rds"</span><span class="op">)</span></span></code></pre></div>
 <p>Then you can access the file content like this:</p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"testRun.rds"</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>To extract a single variable:</li>
 </ul>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">times</span>, y <span class="op">=</span> <span class="va">data</span><span class="op">$</span><span class="va">C_atm_ppmv</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Year"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p>The way how you will conduct experiments with QUEST is by conducting experiments using different model configurations. Let’s see what type of model configurations there are:</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/summary.html">summary</a></span><span class="op">(</span><span class="va">config</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##                        Length Class      Mode   
 ## params_ranges          91     -none-     list   
@@ -461,7 +461,7 @@ Have a look at the statements below and assess whether they are true or false.</
 ## obs                    38     -none-     list   
 ## params_calib           60     -none-     list</code></pre>
 <p>You see there are many different configuration settings. One of the more important ones is <code>flags</code>:</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## $run_AirSeaCarbon
 ## [1] TRUE
@@ -501,8 +501,8 @@ Have a look at the statements below and assess whether they are true or false.</
 <h2>
 <span class="header-section-number">1.17</span> QUEST simulations<a class="anchor" aria-label="anchor" href="#quest-simulations"><i class="fas fa-link"></i></a>
 </h2>
-<p>The experiment above is driven by emissions. This experiment is referred to as emission-driven run. Alternatively, you can prescribe atmospheric CO<span class="math inline">\(_2\)</span> concentrations, which is called a concentration-driven run. To complete a concentration-driven run we need to chnage the model configuraion flags. Open <code>run_quest/config/config_flags.R</code> and set <code>anthropogenic_emissions = FALSE</code> and <code>prescribed_CO2  = TRUE</code>:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<p>The experiment above is driven by emissions. This experiment is referred to as emission-driven run. Alternatively, you can prescribe atmospheric CO<span class="math inline">\(_2\)</span> concentrations, which is called a concentration-driven run. To complete a concentration-driven run we need to change the model configuration flags. Open <code>run_quest/config/config_flags.R</code> and set <code>anthropogenic_emissions = FALSE</code> and <code>prescribed_CO2  = TRUE</code>:</p>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
 <span>  <span class="co"># modules</span></span>
 <span>  run_AirSeaCarbon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
@@ -519,7 +519,7 @@ Have a look at the statements below and assess whether they are true or false.</
 <span>  diagnose_carbonates <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now re-run QUEST and plot the same selected output variables as above.</p>
-<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the QUEST package:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
 <span></span>
@@ -535,7 +535,7 @@ Have a look at the statements below and assess whether they are true or false.</
 <span><span class="co"># Run QUEST:</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span><span class="va">config</span>, times <span class="op">=</span> <span class="va">years</span><span class="op">)</span></span></code></pre></div>
 <p>Plot selected variables:</p>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"anthr_emissions"</span>, <span class="st">"C_atm_ppmv"</span>, <span class="st">"F_CO2"</span>, <span class="st">"A_sic"</span>, <span class="st">"T_atm_global"</span>, <span class="st">"pH_global"</span>, <span class="st">"F_fw_L"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"Q"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1850</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>Explain the difference between emission-driven and concentration-driven runs. Which of those simulations do you find more interesting? Which of these simulations is more challenging? Explain your answer.</p>
@@ -544,25 +544,25 @@ Have a look at the statements below and assess whether they are true or false.</
 <h2>
 <span class="header-section-number">1.18</span> Graduate students<a class="anchor" aria-label="anchor" href="#graduate-students"><i class="fas fa-link"></i></a>
 </h2>
-<p>Edit the <code>config_flags.R</code> file such that the flags are rest to their original settings:</p>
-<div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
+<p>Edit the <code>config_flags.R</code> file such that the flags are reset to their original settings:</p>
+<div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">flags</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
-<span><span class="co"># modules</span></span>
-<span>run_AirSeaCarbon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>run_atmosphere   <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>run_ocean        <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>run_npzd         <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>run_land         <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>run_sic          <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>run_icesheets    <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span><span class="co"># settings</span></span>
-<span>anthropogenic_emissions <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>prescribed_CO2  <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>prescribed_seaice <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>diagnose_carbonates <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  <span class="co"># modules</span></span>
+<span>  run_AirSeaCarbon <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_atmosphere <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_ocean <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_npzd <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_land <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_sic <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  run_icesheets <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="co"># settings</span></span>
+<span>  anthropogenic_emissions <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  prescribed_CO2 <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  prescribed_seaice <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  diagnose_carbonates <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now re-run QUEST until the year 2500:</p>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the QUEST package:</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
 <span></span>
@@ -578,17 +578,18 @@ Have a look at the statements below and assess whether they are true or false.</
 <span><span class="co"># Run QUEST:</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span><span class="va">config</span>, times <span class="op">=</span> <span class="va">years</span><span class="op">)</span></span></code></pre></div>
 <p>Plot selected variables and summarize your findings in your report.</p>
-<div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
-<span><span class="st">"anthr_emissions"</span>, <span class="st">"C_atm_ppmv"</span>, </span>
-<span><span class="st">"C_atm"</span>, <span class="st">"C_lnd_global"</span>, </span>
-<span><span class="st">"DIC_total"</span>, <span class="st">"pH_global"</span>, </span>
-<span><span class="st">"F_CO2"</span>, <span class="st">"T_atm_global"</span>, </span>
-<span><span class="st">"F_fw_L"</span>, <span class="st">"F_fw_H"</span>,</span>
-<span><span class="st">"A_sic"</span>, <span class="st">"h_ice"</span>, </span>
-<span><span class="st">"A_ice"</span>, <span class="st">"M"</span>,</span>
-<span><span class="st">"Q"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1850</span>, <span class="fl">2500</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="st">"anthr_emissions"</span>, <span class="st">"C_atm_ppmv"</span>,</span>
+<span>  <span class="st">"C_atm"</span>, <span class="st">"C_lnd_global"</span>,</span>
+<span>  <span class="st">"DIC_total"</span>, <span class="st">"pH_global"</span>,</span>
+<span>  <span class="st">"F_CO2"</span>, <span class="st">"T_atm_global"</span>,</span>
+<span>  <span class="st">"F_fw_L"</span>, <span class="st">"F_fw_H"</span>,</span>
+<span>  <span class="st">"A_sic"</span>, <span class="st">"h_ice"</span>,</span>
+<span>  <span class="st">"A_ice"</span>, <span class="st">"M"</span>,</span>
+<span>  <span class="st">"Q"</span></span>
+<span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1850</span>, <span class="fl">2500</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div id="reflection" class="section level2" number="1.19">
 <h2>
