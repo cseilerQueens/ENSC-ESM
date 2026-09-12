@@ -82,7 +82,7 @@
 <span class="header-section-number">3.1.1</span> Temperature - Salinity Diagram<a class="anchor" aria-label="anchor" href="#temperature---salinity-diagram"><i class="fas fa-link"></i></a>
 </h3>
 <p>To better understand this, let’s assess how density is affected by temperature and salinity. The relationship is non-linear, and determined by the Thermodynamic Equation of Sea Water 2010 (TEOS-10). The Figure below gives the sea water density (blue contours in kg m<sup>-3</sup>) as a function of salinity and temperature.</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://teos-10.github.io/GSW-R/">gsw</a></span><span class="op">)</span></span>
 <span><span class="co"># Define ranges</span></span>
 <span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">30</span>, by <span class="op">=</span> <span class="fl">0.1</span><span class="op">)</span> <span class="co"># y-axis (temperature)</span></span>
@@ -110,7 +110,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"blue"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># high-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># low-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-80-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-60-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question:</strong> The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?</p>
 <ul>
 <li>(A): low-latitude = red, high-latitude = blue</li>
@@ -143,7 +143,7 @@
 \rho = \rho_0 (1 - \alpha (T- T_0)  + \beta (S-S_0)
 \]</span></p>
 <p>where <span class="math inline">\(\rho\)</span> is the sea water density (kg m<span class="math inline">\(^{-3}\)</span>), <span class="math inline">\(T\)</span> and <span class="math inline">\(S\)</span> are temperature and salinity anomalies, respectively and <span class="math inline">\(\alpha\)</span> is the thermal contraction (<span class="math inline">\(\alpha = 1.5 \times 10^{-4}\)</span> K) and <span class="math inline">\(\beta\)</span> is the saline expansion (<span class="math inline">\(\beta = 8 \times10^{-4}\)</span> psu<sup>-1</sup>). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. <span class="math inline">\(T_0\)</span> and <span class="math inline">\(S_0\)</span> are reference temperature and salinity (<span class="math inline">\(T_0\)</span> = 10<span class="math inline">\(^{\circ}\)</span>C, <span class="math inline">\(S_0\)</span> = 35 g kg<sup>-1</sup>). Let’s create a T-S diagram with this linearlized version of the equation of state.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-81-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-61-1.png" alt="" width="480"></div>
 <p>You can see that the density values are similar, but not identical. However, using a linearlized equation of state keeps the math below more simple. Let’s now finally get to the Stommel model.</p>
 </div>
 </div>
@@ -168,22 +168,22 @@
 <li><p><span class="math inline">\(q\)</span> (s<span class="math inline">\(^{-1}\)</span>) is the flow rate: <span class="math inline">\(q=\frac{1}{k}(\rho_1-\rho_2)\)</span></p></li>
 </ul>
 <p>Let us begin by plotting the free solution of the dynamical system for <span class="math inline">\(R\)</span> = 2, <span class="math inline">\(\delta\)</span> = 1/6, and <span class="math inline">\(\lambda\)</span> = 1/5, as well as initial conditions of <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span>:</p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load required package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define parameters (change these to explore different behavior)</span></span>
-<span>  <span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span>  <span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span></span>
-<span>  <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">5</span></span>
+<span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">5</span></span>
 <span></span>
 <span><span class="co"># Define the system of ODEs</span></span>
 <span><span class="va">system</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
 <span></span>
-<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span>  </span>
-<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -209,7 +209,7 @@
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">solutions</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"time"</span>, <span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
 <span>  x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>,</span>
@@ -232,9 +232,9 @@
 <span>  main <span class="op">=</span> <span class="st">"Temperature"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-82-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-62-1.png" alt="" width="480"></div>
 <p>Change the initial conditions to <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span> to reproduce the figure below.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-83-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-63-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question:</strong> What do you conclude from these figures?</p>
 <p><strong>Quiz Question:</strong> Compare the four figures above with Figure 7 in Stommel’s 1961 paper. Explain why your figures above are consistent with what you see in Stommel’s Figure 7.</p>
 </div>
@@ -243,21 +243,21 @@
 <span class="header-section-number">3.3</span> Phase portrait<a class="anchor" aria-label="anchor" href="#phase-portrait"><i class="fas fa-link"></i></a>
 </h2>
 <p>We can use the same function to plot non-dimensional salinity contrast (<span class="math inline">\(x\)</span>) against non-dimensional temperature contrast (<span class="math inline">\(y\)</span>) for different initial conditions. This leads to a so-called phase portrait.</p>
-<div class="sourceCode" id="cb61"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Define parameters (change these to explore different behavior)</span></span>
-<span>  <span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span>  <span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span></span>
-<span>  <span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">5</span></span>
+<span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">5</span></span>
 <span></span>
 <span><span class="co"># Define the system of ODEs</span></span>
 <span><span class="va">system</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">t</span>, <span class="va">state</span>, <span class="va">parameters</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
 <span></span>
-<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span>  </span>
-<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
@@ -277,48 +277,48 @@
 <span></span>
 <span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="va">n</span><span class="op">)</span>  <span class="co"># preallocate</span></span>
+<span><span class="va">result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/vector.html">vector</a></span><span class="op">(</span><span class="st">"list"</span>, <span class="va">n</span><span class="op">)</span> <span class="co"># preallocate</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span></span>
-<span>  <span class="op">{</span></span>
-<span><span class="va">x.i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
-<span><span class="va">y.i</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span><span class="op">{</span></span>
+<span>  <span class="va">x.i</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">y.i</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
 <span></span>
-<span><span class="va">initial_conditions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x.i</span>, <span class="va">y.i</span><span class="op">)</span></span>
+<span>  <span class="va">initial_conditions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">x.i</span>, <span class="va">y.i</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Solve ODEs for each initial condition</span></span>
+<span>  <span class="co"># Solve ODEs for each initial condition</span></span>
 <span></span>
-<span><span class="va">solutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span></span>
-<span>  y <span class="op">=</span> <span class="va">initial_conditions</span>,</span>
-<span>  times <span class="op">=</span> <span class="va">times</span>,</span>
-<span>  func <span class="op">=</span> <span class="va">system</span>,</span>
-<span>  parms <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  method <span class="op">=</span> <span class="st">"lsoda"</span></span>
-<span><span class="op">)</span></span>
+<span>  <span class="va">solutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/deSolve/man/ode.html">ode</a></span><span class="op">(</span></span>
+<span>    y <span class="op">=</span> <span class="va">initial_conditions</span>,</span>
+<span>    times <span class="op">=</span> <span class="va">times</span>,</span>
+<span>    func <span class="op">=</span> <span class="va">system</span>,</span>
+<span>    parms <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>    method <span class="op">=</span> <span class="st">"lsoda"</span></span>
+<span>  <span class="op">)</span></span>
 <span></span>
-<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">solutions</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span>, <span class="va">solutions</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span></span>
-<span><span class="va">result</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span></span>
-<span></span>
+<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">solutions</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span>, <span class="va">solutions</span><span class="op">[</span>, <span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span></span>
+<span>  <span class="va">result</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">x</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">y</span></span>
 <span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fl">1</span><span class="op">)</span>,</span>
-<span>     xlab <span class="op">=</span> <span class="st">"Non-dimensional salt contrast"</span>,</span>
-<span>     ylab <span class="op">=</span> <span class="st">"Non-dimensional temperature contrast"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>, xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Non-dimensional salt contrast"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Non-dimensional temperature contrast"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fl">1</span><span class="op">:</span><span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  </span>
-<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">x</span></span>
-<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">y</span></span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">x</span></span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">result</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">y</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-84-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-64-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question:</strong> Identify at least one equilibrium point</p>
 </div>
 <div id="equillibrium-points" class="section level2" number="3.4">
@@ -326,37 +326,37 @@
 <span class="header-section-number">3.4</span> Equillibrium points<a class="anchor" aria-label="anchor" href="#equillibrium-points"><i class="fas fa-link"></i></a>
 </h2>
 <p>The phase portrait above identified three equilibrium points. Let us know calculate those equilibrium points from the equations. In the section on linear algebra, we did this by setting the ODEs to zero and solving for each variable. For more complicated ODEs, we can also approximate the equilibrium points numerically, which is what we will do here.</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span></span>
-<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">5</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">5</span></span>
 <span></span>
 <span><span class="co"># system of equations</span></span>
 <span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
-<span>  </span>
-<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># grid of starting guesses</span></span>
-<span><span class="va">xstart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, length<span class="op">=</span><span class="fl">8</span><span class="op">)</span></span>
-<span><span class="va">ystart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, length<span class="op">=</span><span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">xstart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, length <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
+<span><span class="va">ystart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">2</span>, length <span class="op">=</span> <span class="fl">8</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">solutions</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">xs</span> <span class="kw">in</span> <span class="va">xstart</span><span class="op">)</span><span class="op">{</span></span>
-<span>  <span class="kw">for</span><span class="op">(</span><span class="va">ys</span> <span class="kw">in</span> <span class="va">ystart</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/multiroot.html">multiroot</a></span><span class="op">(</span><span class="va">f</span>, start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xs</span>,<span class="va">ys</span><span class="op">)</span><span class="op">)</span>, silent<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span>    <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">out</span>,<span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
-<span>      <span class="va">solutions</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">solutions</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">out</span><span class="op">$</span><span class="va">root</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">xs</span> <span class="kw">in</span> <span class="va">xstart</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">ys</span> <span class="kw">in</span> <span class="va">ystart</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/multiroot.html">multiroot</a></span><span class="op">(</span><span class="va">f</span>, start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">ys</span><span class="op">)</span><span class="op">)</span>, silent <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">solutions</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">solutions</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">out</span><span class="op">$</span><span class="va">root</span></span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span></span>
@@ -371,7 +371,7 @@
 ## [2,] 0.4321 0.8203
 ## [3,] 0.3518 0.7651</code></pre>
 <p>Let’s plot these three equilibrium points into our phase portrait. Do this by copying the code from above and then add <code>points(x = 0.1350, y = 0.4836), pch = 16, col = "red"</code> below. Do this for all three points.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-86-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-66-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question:</strong> Are our calculated equilibrium points consistent with Stommel’s Figure 7?</p>
 </div>
 <div id="jacobian-matrix-and-equilibrium-eigenvalues" class="section level2" number="3.5">
@@ -391,43 +391,38 @@
 \]</span></p>
 <p>The elements of this matrix are:</p>
 <p>Rather than calculating the derivatives analytically, we will approach them numerically:</p>
-<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://optimizer.r-forge.r-project.org/">numDeriv</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## Attaching package: 'numDeriv'</code></pre>
-<pre><code>## The following object is masked from 'package:rootSolve':
-## 
-##     hessian</code></pre>
-<div class="sourceCode" id="cb67"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># constants</span></span>
+<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://optimizer.r-forge.r-project.org/">numDeriv</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># constants</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span></span>
-<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">5</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
+<span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">5</span></span>
 <span></span>
 <span></span>
 <span><span class="va">my.ODEs</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">z</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
-<span>  </span>
-<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Equilibrium solutions</span></span>
-<span><span class="va">zstar</span> <span class="op">&lt;-</span> <span class="va">unique_solutions</span><span class="op">[</span><span class="fl">1</span>,<span class="op">]</span></span>
+<span><span class="va">zstar</span> <span class="op">&lt;-</span> <span class="va">unique_solutions</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span></span>
 <span><span class="va">J</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/numDeriv/man/jacobian.html">jacobian</a></span><span class="op">(</span>func <span class="op">=</span> <span class="va">my.ODEs</span>, x <span class="op">=</span> <span class="va">zstar</span><span class="op">)</span></span>
 <span><span class="va">eigenvalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">$</span><span class="va">values</span></span>
 <span><span class="va">eigen.01</span> <span class="op">&lt;-</span> <span class="va">eigenvalues</span></span>
 <span></span>
-<span><span class="va">zstar</span> <span class="op">&lt;-</span> <span class="va">unique_solutions</span><span class="op">[</span><span class="fl">2</span>,<span class="op">]</span></span>
+<span><span class="va">zstar</span> <span class="op">&lt;-</span> <span class="va">unique_solutions</span><span class="op">[</span><span class="fl">2</span>, <span class="op">]</span></span>
 <span><span class="va">J</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/numDeriv/man/jacobian.html">jacobian</a></span><span class="op">(</span>func <span class="op">=</span> <span class="va">my.ODEs</span>, x <span class="op">=</span> <span class="va">zstar</span><span class="op">)</span></span>
 <span><span class="va">eigenvalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">$</span><span class="va">values</span></span>
 <span><span class="va">eigen.02</span> <span class="op">&lt;-</span> <span class="va">eigenvalues</span></span>
 <span></span>
-<span><span class="va">zstar</span> <span class="op">&lt;-</span> <span class="va">unique_solutions</span><span class="op">[</span><span class="fl">3</span>,<span class="op">]</span></span>
+<span><span class="va">zstar</span> <span class="op">&lt;-</span> <span class="va">unique_solutions</span><span class="op">[</span><span class="fl">3</span>, <span class="op">]</span></span>
 <span><span class="va">J</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/numDeriv/man/jacobian.html">jacobian</a></span><span class="op">(</span>func <span class="op">=</span> <span class="va">my.ODEs</span>, x <span class="op">=</span> <span class="va">zstar</span><span class="op">)</span></span>
 <span><span class="va">eigenvalues</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/eigen.html">eigen</a></span><span class="op">(</span><span class="va">J</span><span class="op">)</span><span class="op">$</span><span class="va">values</span></span>
 <span><span class="va">eigen.03</span> <span class="op">&lt;-</span> <span class="va">eigenvalues</span></span>
@@ -453,46 +448,52 @@
 </h2>
 <p>Recall that <span class="math inline">\(\lambda\)</span> (-) measures the relative strength of flow resistance to thermal forcing:</p>
 <p><span class="math display">\[\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k\]</span>. The larger <span class="math inline">\(\lambda\)</span>, the weaker the circulation response to temperature contrast. Let us now vary the parameter <span class="math inline">\(\lambda\)</span> and calculate the equilibrium points for different values of <span class="math inline">\(\lambda\)</span>. This will result in the bifurcation diagram below.</p>
-<div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
 <span></span>
 <span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">z</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>; <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
-<span>  </span>
-<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  </span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">find_eq</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span><span class="op">{</span></span>
-<span></span>
-<span>  <span class="va">xstart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
-<span>  <span class="va">ystart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">find_eq</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">xstart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span>  <span class="va">ystart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span>  <span class="va">sols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="kw">for</span><span class="op">(</span><span class="va">xs</span> <span class="kw">in</span> <span class="va">xstart</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="kw">for</span><span class="op">(</span><span class="va">ys</span> <span class="kw">in</span> <span class="va">ystart</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">xs</span> <span class="kw">in</span> <span class="va">xstart</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">ys</span> <span class="kw">in</span> <span class="va">ystart</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/multiroot.html">multiroot</a></span><span class="op">(</span><span class="va">f</span>,</span>
+<span>          start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">ys</span><span class="op">)</span>,</span>
+<span>          lambda <span class="op">=</span> <span class="va">lambda</span></span>
+<span>        <span class="op">)</span>,</span>
+<span>        silent <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span></span>
 <span></span>
-<span>      <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/multiroot.html">multiroot</a></span><span class="op">(</span><span class="va">f</span>, start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xs</span>,<span class="va">ys</span><span class="op">)</span>,</span>
-<span>                           lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span>,</span>
-<span>                 silent<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span>      <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">out</span>,<span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>        <span class="va">root</span> <span class="op">&lt;-</span> <span class="va">out</span><span class="op">$</span><span class="va">root</span></span>
-<span>        </span>
+<span></span>
 <span>        <span class="co"># --- convergence check ---</span></span>
 <span>        <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">root</span>, <span class="va">lambda</span><span class="op">)</span></span>
-<span>        <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1e-6</span><span class="op">)</span>   <span class="co"># tolerance</span></span>
-<span>          <span class="va">sols</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">root</span></span>
+<span>        <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1e-6</span><span class="op">)</span> <span class="op">{</span> <span class="co"># tolerance</span></span>
+<span>          <span class="va">sols</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">root</span></span>
+<span>        <span class="op">}</span></span>
 <span>      <span class="op">}</span></span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span></span>
 <span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">sols</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -501,32 +502,38 @@
 <span><span class="va">lambdas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.4</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">lam</span> <span class="kw">in</span> <span class="va">lambdas</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">lam</span> <span class="kw">in</span> <span class="va">lambdas</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">eq</span> <span class="op">&lt;-</span> <span class="fu">find_eq</span><span class="op">(</span><span class="va">lam</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span><span class="op">)</span> <span class="kw">next</span></span>
-<span>  </span>
-<span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">results</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>lambda<span class="op">=</span><span class="va">lam</span>,</span>
-<span>                              x<span class="op">=</span><span class="va">eq</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,</span>
-<span>                              y<span class="op">=</span><span class="va">eq</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span><span class="op">)</span> <span class="kw">next</span></span>
+<span></span>
+<span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
+<span>    <span class="va">results</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>      lambda <span class="op">=</span> <span class="va">lam</span>,</span>
+<span>      x <span class="op">=</span> <span class="va">eq</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">eq</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># plot bifurcation diagram (x equilibrium)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">lambda</span>, <span class="va">results</span><span class="op">$</span><span class="va">x</span>,</span>
-<span>     pch<span class="op">=</span><span class="fl">16</span>,</span>
-<span>     xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span>,</span>
-<span>     ylab<span class="op">=</span><span class="st">"Equilibrium x"</span>,</span>
-<span>     main<span class="op">=</span><span class="st">"(a) Salinity contrast (x)"</span><span class="op">)</span></span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Equilibrium x"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"(a) Salinity contrast (x)"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">lambda</span>, <span class="va">results</span><span class="op">$</span><span class="va">y</span>,</span>
-<span>     pch<span class="op">=</span><span class="fl">16</span>,</span>
-<span>     xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span>,</span>
-<span>     ylab<span class="op">=</span><span class="st">"Equilibrium y"</span>,</span>
-<span>     main<span class="op">=</span><span class="st">"(b) Temperature contrast (y)"</span><span class="op">)</span></span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Equilibrium y"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"(b) Temperature contrast (y)"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-88-1.png" alt="" width="960"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-68-1.png" alt="" width="960"></div>
 <p><strong>Quiz Question:</strong> Which are the stable and which are the unstable branches for the bifurcation diagram?</p>
 <p>From the equilibrium <span class="math inline">\(x\)</span> (non-dimensional salinity contrast) and <span class="math inline">\(y\)</span> (non-dimensional temperature contrast) values, we can calculated the corresponding dimensionless flow rate <span class="math inline">\(f\)</span>:</p>
 <p><span class="math display">\[f = (-y + Rx) /\lambda \]</span></p>
@@ -534,46 +541,52 @@
 <li><p>If <span class="math inline">\(f&lt;0\)</span> then the circulation is in a temperature-mode (T-mode): the deep branch flow is in the direction set by temperature contrast (from cold to warm = from high to low latitudes)</p></li>
 <li><p>If <span class="math inline">\(f&gt;0\)</span> then the circulation is in a salinity mode (S-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)</p></li>
 </ul>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
-<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">/</span><span class="fl">6</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
 <span></span>
 <span><span class="va">f</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">z</span>, <span class="va">lambda</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>; <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
-<span>  </span>
-<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span><span class="op">*</span><span class="op">(</span><span class="fl">1</span><span class="op">-</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span><span class="op">/</span><span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span></span>
-<span>  </span>
+<span>  <span class="va">x</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span>  <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="va">delta</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="va">x</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">y</span> <span class="op">-</span> <span class="va">y</span> <span class="op">/</span> <span class="va">lambda</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">dx</span>, <span class="va">dy</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
-<span><span class="va">find_eq</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span><span class="op">{</span></span>
-<span></span>
-<span>  <span class="va">xstart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
-<span>  <span class="va">ystart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length<span class="op">=</span><span class="fl">6</span><span class="op">)</span></span>
+<span><span class="va">find_eq</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">xstart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
+<span>  <span class="va">ystart</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length <span class="op">=</span> <span class="fl">6</span><span class="op">)</span></span>
 <span>  <span class="va">sols</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="kw">for</span><span class="op">(</span><span class="va">xs</span> <span class="kw">in</span> <span class="va">xstart</span><span class="op">)</span><span class="op">{</span></span>
-<span>    <span class="kw">for</span><span class="op">(</span><span class="va">ys</span> <span class="kw">in</span> <span class="va">ystart</span><span class="op">)</span><span class="op">{</span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">xs</span> <span class="kw">in</span> <span class="va">xstart</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw">for</span> <span class="op">(</span><span class="va">ys</span> <span class="kw">in</span> <span class="va">ystart</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/multiroot.html">multiroot</a></span><span class="op">(</span><span class="va">f</span>,</span>
+<span>          start <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xs</span>, <span class="va">ys</span><span class="op">)</span>,</span>
+<span>          lambda <span class="op">=</span> <span class="va">lambda</span></span>
+<span>        <span class="op">)</span>,</span>
+<span>        silent <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>      <span class="op">)</span></span>
 <span></span>
-<span>      <span class="va">out</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/try.html">try</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/rootSolve/man/multiroot.html">multiroot</a></span><span class="op">(</span><span class="va">f</span>, start<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">xs</span>,<span class="va">ys</span><span class="op">)</span>,</span>
-<span>                           lambda<span class="op">=</span><span class="va">lambda</span><span class="op">)</span>,</span>
-<span>                 silent<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span></span>
-<span>      <span class="kw">if</span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">out</span>,<span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span><span class="op">{</span></span>
+<span>      <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/class.html">inherits</a></span><span class="op">(</span><span class="va">out</span>, <span class="st">"try-error"</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>        <span class="va">root</span> <span class="op">&lt;-</span> <span class="va">out</span><span class="op">$</span><span class="va">root</span></span>
-<span>        </span>
+<span></span>
 <span>        <span class="co"># --- convergence check ---</span></span>
 <span>        <span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">f</span><span class="op">(</span><span class="va">root</span>, <span class="va">lambda</span><span class="op">)</span></span>
-<span>        <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1e-6</span><span class="op">)</span>   <span class="co"># tolerance</span></span>
-<span>          <span class="va">sols</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span><span class="op">+</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">root</span></span>
+<span>        <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">abs</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span><span class="op">)</span> <span class="op">&lt;</span> <span class="fl">1e-6</span><span class="op">)</span> <span class="op">{</span> <span class="co"># tolerance</span></span>
+<span>          <span class="va">sols</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">root</span></span>
+<span>        <span class="op">}</span></span>
 <span>      <span class="op">}</span></span>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span></span>
 <span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span><span class="op">==</span><span class="fl">0</span><span class="op">)</span> <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">sols</span><span class="op">)</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="cn">NULL</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span><span class="op">(</span><span class="va">rbind</span>, <span class="va">sols</span><span class="op">)</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
@@ -582,14 +595,18 @@
 <span><span class="va">lambdas</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0.01</span>, <span class="fl">0.4</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">lam</span> <span class="kw">in</span> <span class="va">lambdas</span><span class="op">)</span><span class="op">{</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">lam</span> <span class="kw">in</span> <span class="va">lambdas</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">eq</span> <span class="op">&lt;-</span> <span class="fu">find_eq</span><span class="op">(</span><span class="va">lam</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span><span class="op">)</span> <span class="kw">next</span></span>
-<span>  </span>
-<span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span><span class="va">results</span>,</span>
-<span>                   <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>lambda<span class="op">=</span><span class="va">lam</span>,</span>
-<span>                              x<span class="op">=</span><span class="va">eq</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span>,</span>
-<span>                              y<span class="op">=</span><span class="va">eq</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html">is.null</a></span><span class="op">(</span><span class="va">eq</span><span class="op">)</span><span class="op">)</span> <span class="kw">next</span></span>
+<span></span>
+<span>  <span class="va">results</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html">rbind</a></span><span class="op">(</span></span>
+<span>    <span class="va">results</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>      lambda <span class="op">=</span> <span class="va">lam</span>,</span>
+<span>      x <span class="op">=</span> <span class="va">eq</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>,</span>
+<span>      y <span class="op">=</span> <span class="va">eq</span><span class="op">[</span>, <span class="fl">2</span><span class="op">]</span></span>
+<span>    <span class="op">)</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">lambda</span></span>
@@ -597,18 +614,19 @@
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">results</span><span class="op">$</span><span class="va">y</span></span>
 <span></span>
 <span></span>
-<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span><span class="op">*</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="va">lambda</span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="op">-</span><span class="va">y</span> <span class="op">+</span> <span class="va">R</span> <span class="op">*</span> <span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="va">lambda</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># plot bifurcation diagram (x equilibrium)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">results</span><span class="op">$</span><span class="va">lambda</span>, <span class="va">f</span>,</span>
-<span>     pch<span class="op">=</span><span class="fl">16</span>,</span>
-<span>     xlab<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span>,</span>
-<span>     ylab<span class="op">=</span><span class="st">"Equilibrium f"</span>,</span>
-<span>     main<span class="op">=</span><span class="st">"Dimensionless flow rate f"</span><span class="op">)</span></span>
+<span>  pch <span class="op">=</span> <span class="fl">16</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="va">lambda</span><span class="op">)</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"Equilibrium f"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Dimensionless flow rate f"</span></span>
+<span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-89-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-69-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question:</strong> Consider you are in the T-mode and <span class="math inline">\(\lambda\)</span> = 0.3. Let’s say that <span class="math inline">\(\lambda\)</span> increases to 0.35. What will happen with the direction of the flow?</p>
 <p><strong>Quiz Question:</strong> Next, imagine <span class="math inline">\(\lambda\)</span> then returns from 0.35 back to 0.3. How will this affect the flow.</p>
 <p><strong>Quiz Question:</strong> Have another look at your phase diagram. Calculate <span class="math inline">\(f\)</span> for each point and evaluate Which of the equilibrium points corresponds to the T-mode, and which to the S-mode?</p>
