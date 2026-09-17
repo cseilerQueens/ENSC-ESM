@@ -93,7 +93,7 @@
 \alpha(T) = 0.5 - 0.2 \tanh \left( \frac{T-265}{10} \right)
 \]</span></p>
 <p>Plot this function in R for a temperature range of 220 K to 310 K. Your result should look like this</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-40-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-54-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 1:</strong> What is the albedo at 260K?
 <!-- 0.5924234 --></p>
 <p>Using the terms in the Budyko energy balance model, let us plot the incoming and outgoing radiation for different global mean surface temperatures:</p>
@@ -118,7 +118,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="cn">T</span>, <span class="va">E_in</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Incoming radiation"</span>, <span class="st">"Outgoing radiation"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"blue"</span>, <span class="st">"red"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-41-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-55-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 2:</strong> How many equilibria do you see?</p>
 <!-- There are 3 equilibria -->
 <p>Let us now plot the temperature tendency against temperature:</p>
@@ -149,7 +149,7 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-42-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-56-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 3:</strong> Which of the equilibria are stable (from left to right)?
 <!-- 1 and 3 are stable --></p>
 <p><strong>Quiz Question 4:</strong> Which of the equilibria are unstable (from left to right)?
@@ -215,7 +215,7 @@
 <span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="cn">T</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-43-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-57-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 5:</strong> How does this new figure relate to the previous figure?
 <!-- We started out at 260K and the GMST returned to its cold stable equilibrium --></p>
 <p><strong>Quiz Question 6:</strong> At what initial value would we end up at the warm stable equilibrium?
@@ -280,7 +280,7 @@
 <span>  ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="cn">T</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-44-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-58-1.png" alt="" width="480"></div>
 <p>Now, the location of the equilibria could change if we change some of the parameter values. Plot temperature versus temperature tendency but increase the incoming solar radiation by 30%</p>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="cn">T</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">220</span>, <span class="fl">310</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -309,7 +309,7 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h<span class="op">=</span><span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-45-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-59-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 7:</strong> How does the location of the unstable equilibrium change if we increase the incoming solar radiation by 30%?
 <!-- The unstable equilibrium moves to a colder temperature --></p>
 <p>We can conclude that the position of the equilibria can change as we change model parameters. We can therefore plot the equilibrium temperatures for different values of incoming solar radiation. Run the code below to do this. The code is a little complicated and you are not expected to understand this code in detail.</p>
@@ -376,7 +376,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">277</span>, lty <span class="op">=</span> <span class="fl">2</span>, col <span class="op">=</span><span class="st">"orange"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-46-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-60-1.png" alt="" width="480"></div>
 <p>This is a bifurcation diagram where each dot on the line gives the equilibrium temperature at a given parameter value. If the incoming solar radiation is only 70% of the original value, we only get one equilibrium. At 95% we start having three equilibria. A bifurcation branch can have stable and unstable branches. I have marked the different branches with the orange stippled lines.</p>
 <p><strong>Quiz Question 8:</strong> Which of the three branches are stable, and which are unstable?
 <!-- From top to bottom: stable, unstable, stable --></p>
@@ -444,18 +444,20 @@
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span>  <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
-<p>Spinup the model for this configuration:</p>
+<p>Spinup the model for this configuration, To avoid long messages add this into your curly brackets: <code>r, message = FALSE, warnings = FALSE, results = FALSE</code></p>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span></code></pre></div>
 <pre><code>## Warning in mean.default(out$N_total): argument is not numeric or logical: returning NA</code></pre>
-<p>Let’s have a look at some of the variables to see whether the model is spun up</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"ouput.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>Let’s have a look at some of the variables to see whether the model is spun up</p>
+<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_global"</span>, <span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"alpha_H"</span>, <span class="st">"A_sic"</span>, <span class="st">"R_net_TOA"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-51-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-65-1.png" alt="" width="576"></div>
 <p>Let us now assess whether there are multiple equilibria. As a first step we need to generate a new initialization file. This initialization file contains the values of all state variables as they were computed during the last time step of the spinup that you completed above. The code below will produce a new file called <code>config_init.R</code>:</p>
-<div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create initialization file from final spin-up state</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
 <span>  input_file <span class="op">=</span> <span class="st">"output.rds"</span>,</span>
@@ -466,7 +468,7 @@
 <p><strong>Quiz Question 9:</strong> Open <code>config_init.R</code>. What is the value of the surface air temperature in the lower latitude box (<code>T_atm_L</code>)?
 <!-- T_atm_L    = 294.611569 --></p>
 <p>Running <code>config_init.R</code> creates a vector containing the initial values of all state variables in their spun-up state for the current model configuration. We will use this spun-up state as the starting point for identifying the model’s equilibria by perturbing the state variables and examining how the system responds. Before doing so, however, we need to decide which state variables can meaningfully be perturbed. We should exclude variables that are inactive because their corresponding module is switched off (e.g., marine biota). We should also exclude variables whose total quantity must be conserved when applying a perturbation (e.g., carbon pools). The variables that we will perturb are atmosphere and ocean temperature, as well as fractional sea ice area.</p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -480,7 +482,7 @@
 <p><strong>Quiz Question 10:</strong> What is the equilibrium value of the fractional area of sea ice in the high-latitude ocean (A_sic)?
 <!-- 0.2355651 --></p>
 <p>Let us now find out whether this equilibrium is stable or unstable</p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stability_results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvalues</span><span class="op">(</span><span class="va">config</span>,</span>
 <span>  equilibria_dimensionless <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">dimensionless</span>,</span>
 <span>  state_eq <span class="op">=</span> <span class="va">state_eq</span>,</span>
@@ -493,13 +495,13 @@
 <p>So, we conclude that there is only one equilibrium solution for this model configuration.
 Now, let us explore what happens when we change one of the sea ice parameter values.
 Open <code>run_quest/config/config_para.R</code> ans search for the parameters <span class="math inline">\(\beta_{ocn,atm}\)</span> and <span class="math inline">\(\beta_{ocn,sic}\)</span>:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="week-2-atmospheric-energy-balance.html#cb60-1" tabindex="-1"></a>  beta_atm_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.0105512</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span>
-<span id="cb60-2"><a href="week-2-atmospheric-energy-balance.html#cb60-2" tabindex="-1"></a>  beta_ocn_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.057591</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="week-2-atmospheric-energy-balance.html#cb61-1" tabindex="-1"></a>  beta_atm_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.0105512</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span>
+<span id="cb61-2"><a href="week-2-atmospheric-energy-balance.html#cb61-2" tabindex="-1"></a>  beta_ocn_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.057591</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span></code></pre></div>
 <p>We want to change those values to:</p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="week-2-atmospheric-energy-balance.html#cb61-1" tabindex="-1"></a>  beta_atm_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.0105512</span> <span class="sc">*</span> <span class="fl">1.5</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span>
-<span id="cb61-2"><a href="week-2-atmospheric-energy-balance.html#cb61-2" tabindex="-1"></a>  beta_ocn_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.057591</span> <span class="sc">*</span> <span class="fl">1.5</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="week-2-atmospheric-energy-balance.html#cb62-1" tabindex="-1"></a>  beta_atm_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.0105512</span> <span class="sc">*</span> <span class="fl">1.5</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span>
+<span id="cb62-2"><a href="week-2-atmospheric-energy-balance.html#cb62-2" tabindex="-1"></a>  beta_ocn_sic <span class="ot">=</span> <span class="fu">list</span>(<span class="at">value =</span> <span class="fl">0.057591</span> <span class="sc">*</span> <span class="fl">1.5</span>, <span class="at">min =</span> <span class="fl">0e+00</span>, <span class="at">max =</span> <span class="fl">2e-01</span>, <span class="at">domain =</span> <span class="st">"sic"</span>), </span></code></pre></div>
 <p>But instead of doing this by hand, we will overwrite those values:</p>
-<div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">config</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">beta_atm_sic</span> <span class="op">&lt;-</span> <span class="fl">0.0105512</span> <span class="op">*</span> <span class="fl">1.5</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">beta_ocn_sic</span> <span class="op">&lt;-</span> <span class="fl">0.0105512</span> <span class="op">*</span> <span class="fl">1.5</span></span></code></pre></div>
 <p>Now you need to do the following steps:</p>
@@ -509,7 +511,7 @@ Open <code>run_quest/config/config_para.R</code> ans search for the parameters <
 <li><p>Find the equilibria</p></li>
 <li><p>Assess whether the equilibria are stable or unstable</p></li>
 </ul>
-<div class="sourceCode" id="cb63"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span></span>
