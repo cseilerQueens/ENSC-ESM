@@ -29,8 +29,11 @@ temperature---salinity-diagram
 phase-diagram
 phase-portrait
 equillibrium-points
-jacobian-matrix-and-equilibrium-eigenvalues
+equilibrium-eigenvalues
 bifurcation-diagram
+quest-1
+graduate-students-2
+reflection-2
 week-4-ocean-carbon-chemistry
 week-5-marine-biology
 week-6-terrestrial-carbon-cycle

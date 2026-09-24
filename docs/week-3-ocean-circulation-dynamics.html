@@ -110,40 +110,23 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"blue"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># high-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># low-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-74-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question:</strong> The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?</p>
-<ul>
-<li>(A): low-latitude = red, high-latitude = blue</li>
-<li>(B): low-latitude = blue, high-latitude = red</li>
-</ul>
-<p><strong>Quiz Question:</strong> The blue dot has a higher density compared to the red dot. Is this due to the:**</p>
-<ul>
-<li>(A): salinity contrast</li>
-<li>(B): temperature contrast</li>
-</ul>
-<p><strong>Quiz Question:</strong> Let’s reduce salinity of the blue dot by 6 g/kg. Which dot would show the higher density?</p>
-<ul>
-<li>(A): red</li>
-<li>(B): blue</li>
-</ul>
-<p><strong>Quiz Question:</strong> How would this affect the direction of flow in the lower branch?</p>
-<ul>
-<li>(A): The flow would be directed from low to high latitudes</li>
-<li>(B): The flow would be directed from high to low latitudes</li>
-</ul>
-<p><strong>Quiz Question:</strong> What is the relevance of this finding for the context of climate change?</p>
-<ul>
-<li>(A): Climate change causes ice sheets to melt, reducing the salinity of North Atlantic seawater, decreasing water density, and strengthening the Atlantic Meridional Overturning Circulation.</li>
-<li>(B): Climate change causes ice sheets to melt, reducing the salinity of North Atlantic seawater, decreasing water density, and weakening the Atlantic Meridional Overturning Circulation.</li>
-<li>(C): Climate change causes ice sheets to melt, increasing freshwater input to the North Atlantic, increasing water density, and weakening the Atlantic Meridional Overturning Circulation.</li>
-<li>(D): Climate change causes ice sheets to melt, freshening the North Atlantic, but the resulting salinity change has no significant influence on the Atlantic Meridional Overturning Circulation because temperature is the dominant control on density.</li>
-</ul>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-75-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 1:</strong> The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?
+<!-- low-latitude = red, high-latitude = blue --></p>
+<p><strong>Quiz Question 2:</strong> The blue dot has a higher density compared to the red dot. Is this due to the salinity contrast or the temperature contrast?
+<!-- Temperature contrast--></p>
+<p><strong>Quiz Question 3:</strong> Let’s reduce the salinity of the blue dot by 6 g/kg. Which dot would show the higher density?
+<!-- red dot--></p>
+<p><strong>Quiz Question 4:</strong> How would this affect the direction of the flow in the lower branch?
+<!-- The flow would be directed from low to high latitudes --></p>
+<p><strong>Quiz Question 5:</strong> What is the relevance of this finding for the context of climate change?
+<!-- Climate change increases the freshwater flux into the high-latitude ocean, reducing the salinity of North Atlantic seawater, decreasing water density, and weakening the Atlantic Meridional Overturning Circulation. --></p>
 <p>In the Stommel model, we use a linearlized version of the equation of state:</p>
 <p><span class="math display">\[
 \rho = \rho_0 (1 - \alpha (T- T_0)  + \beta (S-S_0)
 \]</span></p>
 <p>where <span class="math inline">\(\rho\)</span> is the sea water density (kg m<span class="math inline">\(^{-3}\)</span>), <span class="math inline">\(T\)</span> and <span class="math inline">\(S\)</span> are temperature and salinity anomalies, respectively and <span class="math inline">\(\alpha\)</span> is the thermal contraction (<span class="math inline">\(\alpha = 1.5 \times 10^{-4}\)</span> K) and <span class="math inline">\(\beta\)</span> is the saline expansion (<span class="math inline">\(\beta = 8 \times10^{-4}\)</span> psu<sup>-1</sup>). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. <span class="math inline">\(T_0\)</span> and <span class="math inline">\(S_0\)</span> are reference temperature and salinity (<span class="math inline">\(T_0\)</span> = 10<span class="math inline">\(^{\circ}\)</span>C, <span class="math inline">\(S_0\)</span> = 35 g kg<sup>-1</sup>). Let’s create a T-S diagram with this linearlized version of the equation of state.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-75-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-76-1.png" alt="" width="480"></div>
 <p>You can see that the density values are similar, but not identical. However, using a linearlized equation of state keeps the math below more simple. Let’s now finally get to the Stommel model.</p>
 </div>
 </div>
@@ -172,7 +155,7 @@
 <code class="sourceCode R"><span><span class="co"># Load required package</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/tpetzoldt/deSolve/">deSolve</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Define parameters (change these to explore different behavior)</span></span>
+<span><span class="co"># Define parameters</span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
 <span><span class="va">lambda</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">5</span></span>
@@ -232,11 +215,11 @@
 <span>  main <span class="op">=</span> <span class="st">"Temperature"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-76-1.png" alt="" width="480"></div>
-<p>Change the initial conditions to <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span> to reproduce the figure below.</p>
 <div class="inline-figure"><img src="figure-html/unnamed-chunk-77-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question:</strong> What do you conclude from these figures?</p>
-<p><strong>Quiz Question:</strong> Compare the four figures above with Figure 7 in Stommel’s 1961 paper. Explain why your figures above are consistent with what you see in Stommel’s Figure 7.</p>
+<p>Change the initial conditions to <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span> to reproduce the figure below.</p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-78-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 6:</strong> What do you conclude from these figures?
+<!-- Choosing different initial values causes the model to end up at different equilibrium states --></p>
 </div>
 <div id="phase-portrait" class="section level2" number="3.3">
 <h2>
@@ -318,14 +301,15 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-78-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question:</strong> Identify at least one equilibrium point</p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-79-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 7:</strong> What does each line represent?</p>
+<!-- Each line represents the trajectory of x and y over time for different initial conditions. -->
 </div>
 <div id="equillibrium-points" class="section level2" number="3.4">
 <h2>
 <span class="header-section-number">3.4</span> Equillibrium points<a class="anchor" aria-label="anchor" href="#equillibrium-points"><i class="fas fa-link"></i></a>
 </h2>
-<p>The phase portrait above identified three equilibrium points. Let us know calculate those equilibrium points from the equations. In the section on linear algebra, we did this by setting the ODEs to zero and solving for each variable. For more complicated ODEs, we can also approximate the equilibrium points numerically, which is what we will do here.</p>
+<p>The phase portrait above identified three equilibrium points. Let us know calculate those equilibrium points from the equations. We could do this by setting the ODEs to zero and solving for each variable. For more complicated ODEs, we can also approximate the equilibrium points numerically, which is what we will do here.</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
@@ -371,35 +355,17 @@
 ## [2,] 0.4321 0.8203
 ## [3,] 0.3518 0.7651</code></pre>
 <p>Let’s plot these three equilibrium points into our phase portrait. Do this by copying the code from above and then add <code>points(x = 0.1350, y = 0.4836), pch = 16, col = "red"</code> below. Do this for all three points.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-80-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question:</strong> Are our calculated equilibrium points consistent with Stommel’s Figure 7?</p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-81-1.png" alt="" width="480"></div>
 </div>
-<div id="jacobian-matrix-and-equilibrium-eigenvalues" class="section level2" number="3.5">
+<div id="equilibrium-eigenvalues" class="section level2" number="3.5">
 <h2>
-<span class="header-section-number">3.5</span> Jacobian matrix and equilibrium eigenvalues<a class="anchor" aria-label="anchor" href="#jacobian-matrix-and-equilibrium-eigenvalues"><i class="fas fa-link"></i></a>
+<span class="header-section-number">3.5</span> Equilibrium eigenvalues<a class="anchor" aria-label="anchor" href="#equilibrium-eigenvalues"><i class="fas fa-link"></i></a>
 </h2>
-<p>Let’s recall our set of ODEs:</p>
-<p><span class="math display">\[ \frac{dx}{d\tau} = \delta(1-x) - \frac{x}{\lambda} |-y +Rx| \]</span>
-<span class="math display">\[ \frac{dy}{d\tau} = 1 - y - \frac{y}{\lambda}|-y + Rx|\]</span></p>
-<p>Recall the Jacobian matrix:</p>
-<p><span class="math display">\[
-\mathbf{J} =
-\begin{bmatrix}
-\frac{\partial f_1}{\partial x} &amp; \frac{\partial f_1}{\partial y} \\
-\frac{\partial f_2}{\partial x} &amp; \frac{\partial f_2}{\partial y} \\
-\end{bmatrix}
-\]</span></p>
-<p>The elements of this matrix are:</p>
-<p>Rather than calculating the derivatives analytically, we will approach them numerically:</p>
+<p>Let us now characterize the nature of those equilibria based on their eigenvalues. This can be done numerically:</p>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://optimizer.r-forge.r-project.org/">numDeriv</a></span><span class="op">)</span></span></code></pre></div>
-<pre><code>## 
-## Attaching package: 'numDeriv'</code></pre>
-<pre><code>## The following object is masked from 'package:rootSolve':
-## 
-##     hessian</code></pre>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># constants</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://optimizer.r-forge.r-project.org/">numDeriv</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># constants</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
@@ -439,13 +405,13 @@
 ## 2 -0.7609854 -0.9125833-1.823107i  0.7601443</code></pre>
 <p>Recall that the equilibrium eigenvalues characterize the equilibrium point, e.g.:</p>
 <ul>
-<li>If all eigenvalues <span class="math inline">\(&gt;0\)</span>: unstable node</li>
-<li>If all eigenvalues <span class="math inline">\(&lt;0\)</span>: stable node</li>
-<li>If the sign varies among eigenvalues: saddle (unstable)</li>
-<li>If any <span class="math inline">\(\lambda = 0\)</span>: tipping point</li>
+<li>If all eigenvalues <span class="math inline">\(&lt;0\)</span>: stable</li>
+<li>If any eigenvalues <span class="math inline">\(&gt;0\)</span>: unstable</li>
 </ul>
-<p>The second equilibrium point is described by a complex number with a real and an imaginary component. Here we are only concerend with the real component of the number.</p>
-<p><strong>Quiz Question:</strong> Classify each of the three equilibrium points</p>
+<p><strong>Quiz Question 8:</strong> What are the eigenvalues for the first equilibrium?
+<!-- -3.6096813 and -0.7609854 --></p>
+<p><strong>Quiz Question 9:</strong> Is this a stable or an unstable equilibrium?
+<!-- stable --></p>
 </div>
 <div id="bifurcation-diagram" class="section level2" number="3.6">
 <h2>
@@ -453,7 +419,7 @@
 </h2>
 <p>Recall that <span class="math inline">\(\lambda\)</span> (-) measures the relative strength of flow resistance to thermal forcing:</p>
 <p><span class="math display">\[\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k\]</span>. The larger <span class="math inline">\(\lambda\)</span>, the weaker the circulation response to temperature contrast. Let us now vary the parameter <span class="math inline">\(\lambda\)</span> and calculate the equilibrium points for different values of <span class="math inline">\(\lambda\)</span>. This will result in the bifurcation diagram below.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
@@ -538,15 +504,14 @@
 <span>  main <span class="op">=</span> <span class="st">"(b) Salinity contrast (y)"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-82-1.png" alt="" width="960"></div>
-<p><strong>Quiz Question:</strong> Which are the stable and which are the unstable branches for the bifurcation diagram?</p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-83-1.png" alt="" width="960"></div>
 <p>From the equilibrium <span class="math inline">\(x\)</span> (non-dimensional salinity contrast) and <span class="math inline">\(y\)</span> (non-dimensional temperature contrast) values, we can calculated the corresponding dimensionless flow rate <span class="math inline">\(f\)</span>:</p>
 <p><span class="math display">\[f = (-y + Rx) /\lambda \]</span></p>
 <ul>
-<li><p>If <span class="math inline">\(f&lt;0\)</span> then the circulation is in a temperature-mode (T-mode): the deep branch flow is in the direction set by temperature contrast (from cold to warm = from high to low latitudes)</p></li>
-<li><p>If <span class="math inline">\(f&gt;0\)</span> then the circulation is in a salinity mode (S-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)</p></li>
+<li><p>If <span class="math inline">\(f&lt;0\)</span> then the circulation is in a temperature-mode (<span class="math inline">\(T\)</span>-mode): the deep branch flow is in the direction set by temperature contrast (from cold to warm = from high to low latitudes)</p></li>
+<li><p>If <span class="math inline">\(f&gt;0\)</span> then the circulation is in a salinity mode (<span class="math inline">\(S\)</span>-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)</p></li>
 </ul>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
@@ -631,11 +596,160 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-83-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question:</strong> Consider you are in the T-mode and <span class="math inline">\(\lambda\)</span> = 0.3. Let’s say that <span class="math inline">\(\lambda\)</span> increases to 0.35. What will happen with the direction of the flow?</p>
-<p><strong>Quiz Question:</strong> Next, imagine <span class="math inline">\(\lambda\)</span> then returns from 0.35 back to 0.3. How will this affect the flow.</p>
-<p><strong>Quiz Question:</strong> Have another look at your phase diagram. Calculate <span class="math inline">\(f\)</span> for each point and evaluate Which of the equilibrium points corresponds to the T-mode, and which to the S-mode?</p>
-
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-84-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 10:</strong> Consider you are in the T-mode and <span class="math inline">\(\lambda\)</span> = 0.3. Let’s say that <span class="math inline">\(\lambda\)</span> increases to 0.35. What will happen with the direction of the flow?
+<!-- The system switches from the T-mode to the S-mode and the flow reverses --></p>
+</div>
+<div id="quest-1" class="section level2" number="3.7">
+<h2>
+<span class="header-section-number">3.7</span> QUEST<a class="anchor" aria-label="anchor" href="#quest-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>I this exercise we explore how the meridional overturning circulation responds to enhanced freshwater input into high-latitude surface seawater. Such an experiment is also referred to as a freshwater hosing experiment. Let’s begin by copying the configuration file to your local folder to ensure you have the most recent version.</p>
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">myDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">myDir</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/files.html">file.copy</a></span><span class="op">(</span></span>
+<span>  from <span class="op">=</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span>,</span>
+<span>  to <span class="op">=</span> <span class="va">myDir</span>,</span>
+<span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Next, we define our model configuration, turning on only the atmosphere and the ocean.</p>
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest/config"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span>   <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span>        <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span>         <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span>         <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span>          <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span>    <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span>  <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
+<p>Now we spin up the model for this model configuration for 1000 years. As usual, add this line into your curly brackets to avoid the many printouts: <code>r, message = FALSE, warnings = FALSE, results = FALSE</code></p>
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning in mean.default(out$N_total): argument is not numeric or logical: returning NA</code></pre>
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create initialization file from this spinup</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Let’s have a look at some of the variables to see whether the model is spun up.</p>
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output.rds"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
+<span>                                         <span class="st">"T_atm_global"</span>, </span>
+<span>                                         <span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, </span>
+<span>                                         <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span>,</span>
+<span>                                         <span class="st">"S_ocn_SL"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"S_ocn_DL"</span>, <span class="st">"S_ocn_DH"</span>,</span>
+<span>                                         <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>, <span class="st">"rho_DL"</span>, <span class="st">"rho_DH"</span></span>
+<span>                                         <span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-88-1.png" alt="" width="576"></div>
+<p><strong>Quiz Question 11:</strong> In which of the two surface ocean boxes is seawater density larger?
+<!-- high latitude surface ocean box --></p>
+<p>Let us now investigate how the meridional overturning circulation responds to an increase in the freshwater flux into the high-latitude surface ocean. In QUEST, this freshwater flux is calculated as:</p>
+<p><span class="math display">\[
+F_{fw,H} = F_0 A_H \left(1 + \gamma_{fw}(T_{atm,H} - T_{ref})\right)
+\]</span>
+where <span class="math inline">\(F_0\)</span> is a reference freshwater flux expressed in m s<span class="math inline">\(^{-1}\)</span>. We increase the freshwater flux by increasing <span class="math inline">\(F_0\)</span> by 30% and run the model for 3000 years. Remember to include <code>message = FALSE, warnings = FALSE, results = FALSE</code> inside the curly parenthesis when running the chunk below.</p>
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
+<span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span></span>
+<span><span class="co"># Make those values the initial values for the next simulation</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">initial_values</span></span>
+<span></span>
+<span><span class="co"># Increase the freshwater influx</span></span>
+<span><span class="va">F_0_default</span> <span class="op">&lt;-</span> <span class="fl">1.89819e-08</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">F_0</span> <span class="op">&lt;-</span> <span class="va">F_0_default</span> <span class="op">*</span> <span class="fl">1.3</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## Warning in mean.default(out$N_total): argument is not numeric or logical: returning NA</code></pre>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>Plot the results</p>
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
+<span>                                         <span class="st">"T_atm_global"</span>, </span>
+<span>                                         <span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, </span>
+<span>                                         <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span>,</span>
+<span>                                         <span class="st">"S_ocn_SL"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"S_ocn_DL"</span>, <span class="st">"S_ocn_DH"</span>,</span>
+<span>                                         <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>, <span class="st">"rho_DL"</span>, <span class="st">"rho_DH"</span></span>
+<span>                                         <span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3000</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-90-1.png" alt="" width="576"></div>
+<p><strong>Quiz Question 12:</strong> Does the meridional overturning circulation collapse?
+<!-- Yes --></p>
+<p><strong>Quiz Question 13:</strong> In which of the two surface ocean boxes is seawater density larger?
+<!-- low latitude surface ocean box --></p>
+<p><strong>Quiz Question 14:</strong> What happens to the near-surface air temperature as the meridional overturning circulation loses its strength?
+<!-- The low latitude air warms while the high-latitude air cools --></p>
+<p><strong>Quiz Question 15:</strong> Why does the freshwater flux into the high-latitude ocean change over time?
+<!-- Because the high-latitude air temperature cools in response to the cooling of the high-latitude surface ocean, whihc reduces precipitation --></p>
+</div>
+<div id="graduate-students-2" class="section level2" number="3.8">
+<h2>
+<span class="header-section-number">3.8</span> Graduate students<a class="anchor" aria-label="anchor" href="#graduate-students-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us now assess if the model has a hysteresis effect. We do this by continuing the simulation where we left it off, but now using the original reference freshwater flux. Describe your result. Next, repeat the same experiment, but reduce the reference freshwater flux to 20% of its original value. Describe your results.</p>
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Create initialization file from this spinup</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun up state variables</span></span>
+<span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span></span>
+<span><span class="co"># Make those values the initial values for the next simulation</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">initial_values</span></span>
+<span></span>
+<span><span class="co"># Increase the freshwater influx</span></span>
+<span><span class="va">F_0_default</span> <span class="op">&lt;-</span> <span class="fl">1.89819e-08</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">params</span><span class="op">$</span><span class="va">F_0</span> <span class="op">&lt;-</span> <span class="va">F_0_default</span> <span class="op">*</span> <span class="fl">0.2</span></span>
+<span></span>
+<span><span class="co"># Run the model</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
+<span>                                         <span class="st">"T_atm_global"</span>, </span>
+<span>                                         <span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, </span>
+<span>                                         <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span>,</span>
+<span>                                         <span class="st">"S_ocn_SL"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"S_ocn_DL"</span>, <span class="st">"S_ocn_DH"</span>,</span>
+<span>                                         <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>, <span class="st">"rho_DL"</span>, <span class="st">"rho_DH"</span></span>
+<span>                                         <span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3000</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="reflection-2" class="section level2" number="3.9">
+<h2>
+<span class="header-section-number">3.9</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection-2"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
 </div>
 </div>
   <div class="chapter-nav">
@@ -651,8 +765,11 @@
 <li><a class="nav-link" href="#phase-diagram"><span class="header-section-number">3.2</span> Phase Diagram</a></li>
 <li><a class="nav-link" href="#phase-portrait"><span class="header-section-number">3.3</span> Phase portrait</a></li>
 <li><a class="nav-link" href="#equillibrium-points"><span class="header-section-number">3.4</span> Equillibrium points</a></li>
-<li><a class="nav-link" href="#jacobian-matrix-and-equilibrium-eigenvalues"><span class="header-section-number">3.5</span> Jacobian matrix and equilibrium eigenvalues</a></li>
+<li><a class="nav-link" href="#equilibrium-eigenvalues"><span class="header-section-number">3.5</span> Equilibrium eigenvalues</a></li>
 <li><a class="nav-link" href="#bifurcation-diagram"><span class="header-section-number">3.6</span> Bifurcation diagram</a></li>
+<li><a class="nav-link" href="#quest-1"><span class="header-section-number">3.7</span> QUEST</a></li>
+<li><a class="nav-link" href="#graduate-students-2"><span class="header-section-number">3.8</span> Graduate students</a></li>
+<li><a class="nav-link" href="#reflection-2"><span class="header-section-number">3.9</span> Reflection</a></li>
 </ul>
 
       <div class="book-extra">
