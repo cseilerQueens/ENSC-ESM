@@ -34,6 +34,14 @@ bifurcation-diagram
 quest-1
 graduate-students-2
 reflection-2
+week-4-eigenanalysis
+dynamic-coupling-of-the-atmosphere-and-ocean
+jacobian
+eigenvalues
+eigenvector
+dynamic-coupling-of-the-atmosphere-ocean-and-sea-ice
+graduate-students-3
+reflection-3
 week-4-ocean-carbon-chemistry
 week-5-marine-biology
 week-6-terrestrial-carbon-cycle
