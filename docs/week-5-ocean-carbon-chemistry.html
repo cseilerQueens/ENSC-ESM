@@ -79,7 +79,7 @@
 <span class="header-section-number">5.1.1</span> Dynamic air-sea carbon exchange turned off<a class="anchor" aria-label="anchor" href="#dynamic-air-sea-carbon-exchange-turned-off"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s setup the model configuration.</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -104,7 +104,7 @@
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
 <p>Now we spin up the model for 10000 years.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W05_config_01.rds"</span><span class="op">)</span></span>
@@ -116,7 +116,7 @@
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now we conduct the eigenanalysis for this model configuration.</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W05_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -142,7 +142,7 @@
 <span class="header-section-number">5.1.2</span> Dynamic air-sea carbon exchange turned on<a class="anchor" aria-label="anchor" href="#dynamic-air-sea-carbon-exchange-turned-on"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let us repeat the same workflow but for air-sea carbon exchange turned on Spin up the model for this model configuration for 10000 years.</p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Set the flags to what we want</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
@@ -156,7 +156,7 @@
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Conduct the eigenanalysis</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W05_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -182,7 +182,7 @@
 <span class="header-section-number">5.1.3</span> Comparing the Jacobians<a class="anchor" aria-label="anchor" href="#comparing-the-jacobians"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let us now compare the results from both simulations</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Air-sea carbon exchange turned on:</span></span>
 <span><span class="va">ASC_on</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W05_stability_results_AirSeaCarbon_on.rds"</span><span class="op">)</span></span>
 <span></span>
@@ -205,7 +205,7 @@
 <h3>
 <span class="header-section-number">5.1.4</span> Comparing the eigenmodes<a class="anchor" aria-label="anchor" href="#comparing-the-eigenmodes"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Eigenvalues</span></span>
 <span><span class="va">delta_lambda</span> <span class="op">&lt;-</span> <span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -219,7 +219,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_timescales</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 4:</strong> How does dynamic air-sea carbon exchange affect the time scale of the dominant eigenmode?
 <!-- The time scale of the dominant eigenmode increases by 3.88 years --></p>
-<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># dominant eigenvector ASC on</span></span>
 <span><span class="va">domVec_ASC_on</span> <span class="op">&lt;-</span> <span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_ASC_on</span><span class="op">)</span></span>
@@ -240,7 +240,7 @@
 <span class="header-section-number">5.2</span> Anthropogenic Emissions<a class="anchor" aria-label="anchor" href="#anthropogenic-emissions"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us now simulate the effects of historical anthropogenic carbon emissions on ocean carbon chemistry. To do this, we need to make two changes to the model configuration: enable anthropogenic emissions and activate the carbonate-system diagnostics. The following chunk runs the simulation from 1800 to 2024. It may take a few minutes to complete because the carbonate-system diagnostics add substantial computational overhead.</p>
-<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb100"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W05_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -253,7 +253,7 @@
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W05_config_03.rds"</span><span class="op">)</span></span></code></pre></div>
 <p>Let us now plot the first set of variables.</p>
-<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W05_config_03.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"anthr_emissions"</span>, <span class="st">"Carbon_total"</span>, <span class="st">"C_atm_ppmv"</span>,</span>
@@ -262,8 +262,8 @@
 <p><strong>Quiz Question 8:</strong> Is the air-sea carbon flux in the low-latitude ocean acting as a carbon sink or as a carbon source?
 <!-- It switches from a carbon source to a carbon sink --></p>
 <p>Let’s us now plot the output from the carbonate system diagnostics.</p>
-<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W05_config_02.rds"</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W05_config_03.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Q"</span>, <span class="st">"DIC_global"</span>, <span class="st">"DIC_total"</span>,</span>
 <span>  <span class="st">"CO2_aq_global"</span>, <span class="st">"HCO3_global"</span>, <span class="st">"CO3_global"</span>,</span>
@@ -271,7 +271,7 @@
 <span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 9:</strong> How is dissolved inorganic carbon changing in response to anthropogenic emissions?
 <!-- Increasing --></p>
-<p><strong>Quiz Question 10:</strong> How is dissolved bicarbonate changing in response to anthropogenic emissions?
+<p><strong>Quiz Question 10:</strong> How is bicarbonate changing in response to anthropogenic emissions?
 <!-- Increasing --></p>
 <p><strong>Quiz Question 11:</strong> How is carbonate changing in response to anthropogenic emissions?
 <!-- Decreasing --></p>
@@ -281,12 +281,29 @@
 <!-- constant --></p>
 <p><strong>Quiz Question 14:</strong> How is the ocean carbon buffering capacity changing in response to anthropogenic emissions?
 <!-- decreasing --></p>
+<p>The figure you produced above examines the global values of key variables in the ocean carbonate system. Please plot these variables for each oceanic box to confirm if the documented changes in response to anthropogenic emissions are consistent across all four ocean boxes.</p>
+<p><strong>Quiz Question 15:</strong> Is the ocean carbonate system response to anthropogenic emissions consistent across all four ocean boxes?
+<!-- Yes --></p>
+<p>Let us now investigate the fate of the antropogenic carbon emissions. Extract the first and last time step of your simulation and compare the results</p>
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">timesteps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">first</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span></span>
+<span><span class="va">last</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">[</span><span class="va">timesteps</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="va">last</span> <span class="op">-</span> <span class="va">first</span></span>
+<span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span> <span class="co"># transpose so that we look at one long column rather than one long row</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 16:</strong> By the year 2024, is the change in the DIC concentration higher in the surface ocean or the deep ocean?
+<!-- Surface ocean --></p>
+<p><strong>Quiz Question 17:</strong> In which of the four ocean boxes is the change in the carbon buffering capacity the largest?
+<!-- High-latitude Surface ocean --></p>
 </div>
 <div id="graduate-students-4" class="section level2" number="5.3">
 <h2>
 <span class="header-section-number">5.3</span> Graduate Students<a class="anchor" aria-label="anchor" href="#graduate-students-4"><i class="fas fa-link"></i></a>
 </h2>
-<p>Explain why air-sea carbon exchange affect the temperature coupling between the surface ocean and atmosphere.</p>
+<p>Interpret your answers for Questions 16 and 17</p>
 </div>
 <div id="reflection-4" class="section level2" number="5.4">
 <h2>
