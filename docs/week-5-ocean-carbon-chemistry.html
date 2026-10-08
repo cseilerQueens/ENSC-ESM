@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 5 Week 5: Ocean Carbon Chemistry | Earth System Modelling</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 5 Week 5: Ocean Carbon Chemistry | Earth System Modelling">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 5 Week 5: Ocean Carbon Chemistry | Earth System Modelling">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="In the first part of this tutorial, we use eigenanalysis to assess how dynamic air–sea carbon exchange shapes the pre-industrial climate equilibrium. We conduct two experiments: one with dynamic...">
+<meta property="og:description" content="In the first part of this tutorial, we use eigenanalysis to assess how dynamic air–sea carbon exchange shapes the pre-industrial climate equilibrium. We conduct two experiments: one with dynamic...">
+<meta name="twitter:description" content="In the first part of this tutorial, we use eigenanalysis to assess how dynamic air–sea carbon exchange shapes the pre-industrial climate equilibrium. We conduct two experiments: one with dynamic...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Earth System Modelling</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Earth System Modelling</a></li>
+<li><a class="" href="week-1-building-a-simple-carbon-cycle-model.html"><span class="header-section-number">1</span> Week 1: Building a Simple Carbon Cycle Model</a></li>
+<li><a class="" href="week-2-atmospheric-energy-balance.html"><span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance</a></li>
+<li><a class="" href="week-3-ocean-circulation-dynamics.html"><span class="header-section-number">3</span> Week 3: Ocean Circulation Dynamics</a></li>
+<li><a class="" href="week-4-eigenanalysis.html"><span class="header-section-number">4</span> Week 4: Eigenanalysis</a></li>
+<li><a class="active" href="week-5-ocean-carbon-chemistry.html"><span class="header-section-number">5</span> Week 5: Ocean Carbon Chemistry</a></li>
+<li><a class="" href="week-5-marine-biology.html"><span class="header-section-number">6</span> Week 5: Marine Biology</a></li>
+<li><a class="" href="week-6-terrestrial-carbon-cycle.html"><span class="header-section-number">7</span> Week 6: Terrestrial Carbon Cycle</a></li>
+<li><a class="" href="week-7-cryosphere.html"><span class="header-section-number">8</span> Week 7: Cryosphere</a></li>
+<li><a class="" href="week-8-earth-system-dynamics.html"><span class="header-section-number">9</span> Week 8: Earth System Dynamics</a></li>
+<li><a class="" href="week-9-model-emulation.html"><span class="header-section-number">10</span> Week 9: Model Emulation</a></li>
+<li><a class="" href="week-10-paleoclimatic-simulations.html"><span class="header-section-number">11</span> Week 10: Paleoclimatic Simulations</a></li>
+<li><a class="" href="week-11-future-climate-simulations.html"><span class="header-section-number">12</span> Week 11: Future Climate Simulations</a></li>
+<li><a class="" href="week-12-research-project.html"><span class="header-section-number">13</span> Week 12: Research Project</a></li>
+<li><a class="" href="appendix-i-linear-algebra.html"><span class="header-section-number">14</span> Appendix (I): Linear Algebra</a></li>
+<li><a class="" href="appendix-ii-r-programming-language.html"><span class="header-section-number">15</span> Appendix (II): R Programming Language</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-5-ocean-carbon-chemistry" class="section level1" number="5">
+<h1>
+<span class="header-section-number">5</span> Week 5: Ocean Carbon Chemistry<a class="anchor" aria-label="anchor" href="#week-5-ocean-carbon-chemistry"><i class="fas fa-link"></i></a>
+</h1>
+<p>In the first part of this tutorial, we use eigenanalysis to assess how dynamic air–sea carbon exchange shapes the pre-industrial climate equilibrium. We conduct two experiments: one with dynamic air–sea carbon exchange turned off and one with the mechanism turned on. Comparing the eigenanalysis results from these two experiments reveals how dynamic air–sea carbon exchange affects the climate equilibrium. In the second part of the tutorial, we simulate the effects of historical anthropogenic CO<span class="math inline">\(_2\)</span> emissions on ocean carbon chemistry.</p>
+<div id="eigenanalysis" class="section level2" number="5.1">
+<h2>
+<span class="header-section-number">5.1</span> Eigenanalysis<a class="anchor" aria-label="anchor" href="#eigenanalysis"><i class="fas fa-link"></i></a>
+</h2>
+<div id="dynamic-air-sea-carbon-exchange-turned-off" class="section level3" number="5.1.1">
+<h3>
+<span class="header-section-number">5.1.1</span> Dynamic air-sea carbon exchange turned off<a class="anchor" aria-label="anchor" href="#dynamic-air-sea-carbon-exchange-turned-off"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s setup the model configuration.</p>
+<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
+<p>Now we spin up the model for 10000 years.</p>
+<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W05_config_01.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create initialization file from this spinup</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output_W05_config_01.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init_W05_config_01.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Now we conduct the eigenanalysis for this model configuration.</p>
+<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W05_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span></span>
+<span><span class="co"># Select state variables that will be perturbed</span></span>
+<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Find the equilibria</span></span>
+<span><span class="va">equilibria</span> <span class="op">&lt;-</span> <span class="fu">eval_equilibria</span><span class="op">(</span><span class="va">config</span>, <span class="va">state_eq</span>, select_variables <span class="op">=</span> <span class="va">select_variables</span>, n_starts <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Conduct eigenanalysis</span></span>
+<span><span class="va">stability_results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvalues</span><span class="op">(</span><span class="va">config</span>,</span>
+<span>  equilibria_dimensionless <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">dimensionless</span>,</span>
+<span>  state_eq <span class="op">=</span> <span class="va">state_eq</span>,</span>
+<span>  state_min_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_min_active</span>,</span>
+<span>  state_max_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_max_active</span>,</span>
+<span>  delta_time <span class="op">=</span> <span class="fl">50</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">stability_results_AirSeaCarbon_off</span> <span class="op">&lt;-</span> <span class="va">stability_results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">stability_results_AirSeaCarbon_off</span>, <span class="st">"W05_stability_results_AirSeaCarbon_off.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="dynamic-air-sea-carbon-exchange-turned-on" class="section level3" number="5.1.2">
+<h3>
+<span class="header-section-number">5.1.2</span> Dynamic air-sea carbon exchange turned on<a class="anchor" aria-label="anchor" href="#dynamic-air-sea-carbon-exchange-turned-on"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us repeat the same workflow but for air-sea carbon exchange turned on Spin up the model for this model configuration for 10000 years.</p>
+<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W05_config_02.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create initialization file from this spinup</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output_W05_config_02.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init_W05_config_02.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Conduct the eigenanalysis</p>
+<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W05_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span></span>
+<span><span class="co"># Select state variables that will be perturbed</span></span>
+<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Find the equilibria</span></span>
+<span><span class="va">equilibria</span> <span class="op">&lt;-</span> <span class="fu">eval_equilibria</span><span class="op">(</span><span class="va">config</span>, <span class="va">state_eq</span>, select_variables <span class="op">=</span> <span class="va">select_variables</span>, n_starts <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Conduct eigenanalysis</span></span>
+<span><span class="va">stability_results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvalues</span><span class="op">(</span><span class="va">config</span>,</span>
+<span>  equilibria_dimensionless <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">dimensionless</span>,</span>
+<span>  state_eq <span class="op">=</span> <span class="va">state_eq</span>,</span>
+<span>  state_min_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_min_active</span>,</span>
+<span>  state_max_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_max_active</span>,</span>
+<span>  delta_time <span class="op">=</span> <span class="fl">50</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">stability_results_AirSeaCarbon_on</span> <span class="op">&lt;-</span> <span class="va">stability_results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">stability_results_AirSeaCarbon_on</span>, <span class="st">"W05_stability_results_AirSeaCarbon_on.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="comparing-the-jacobians" class="section level3" number="5.1.3">
+<h3>
+<span class="header-section-number">5.1.3</span> Comparing the Jacobians<a class="anchor" aria-label="anchor" href="#comparing-the-jacobians"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us now compare the results from both simulations</p>
+<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Air-sea carbon exchange turned on:</span></span>
+<span><span class="va">ASC_on</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W05_stability_results_AirSeaCarbon_on.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Air-sea carbon exchange turned off:</span></span>
+<span><span class="va">ASC_off</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W05_stability_results_AirSeaCarbon_off.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Jacobian</span></span>
+<span><span class="va">delta_jacobian</span> <span class="op">&lt;-</span> <span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span> <span class="op">-</span> <span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">delta_jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 1:</strong> Does dynamic air-sea carbon exchange affect the sign of the Jacobian matrix elements?
+<!-- No --></p>
+<p><strong>Quiz Question 2:</strong> How does air-sea carbon exchange affect the temperature coupling between the surface ocean and atmosphere?
+<!-- Air-sea coupling enhances the temperature coupling from the ocean to the atmosphere --></p>
+<p><strong>Quiz Question 3:</strong> Which variable pair responds the strongest to dynamic air-sea coupling?
+<!-- The strongest effect occurs for the self-coupling of low-latitude surface-ocean temperature (T_ocn_SL), indicating that air–sea carbon exchange increases the persistence of perturbations over the 50-year interval. --></p>
+</div>
+<div id="comparing-the-eigenmodes" class="section level3" number="5.1.4">
+<h3>
+<span class="header-section-number">5.1.4</span> Comparing the eigenmodes<a class="anchor" aria-label="anchor" href="#comparing-the-eigenmodes"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Eigenvalues</span></span>
+<span><span class="va">delta_lambda</span> <span class="op">&lt;-</span> <span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_lambda</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Timescales</span></span>
+<span><span class="va">delta_timescales</span> <span class="op">&lt;-</span> <span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_timescales</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 4:</strong> How does dynamic air-sea carbon exchange affect the time scale of the dominant eigenmode?
+<!-- The time scale of the dominant eigenmode increases by 3.88 years --></p>
+<div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># dominant eigenvector ASC on</span></span>
+<span><span class="va">domVec_ASC_on</span> <span class="op">&lt;-</span> <span class="va">ASC_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_ASC_on</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># dominant eigenvector ASC off</span></span>
+<span><span class="va">domVec_ASC_off</span> <span class="op">&lt;-</span> <span class="va">ASC_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_ASC_off</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 5:</strong> Which variable contributes most to the dominant eigenmode?
+<!-- The largest contribution comes from the low-latitude deep ocean --></p>
+<p><strong>Quiz Question 6:</strong> Which of the following statements aligns best with your findings?
+<!-- Air–sea carbon exchange modifies individual ocean–atmosphere couplings but does not substantially alter the dominant mode of the coupled climate system --></p>
+<p><strong>Quiz Question 7:</strong> How does adding dynamic air-sea carbon exchange affect the balance between restoring and amplifying processes in the vicinity of the equilibrium?
+<!-- Although dynamic air–sea carbon exchange modifies several local temperature couplings, it has little effect on the structure of the dominant mode. Its principal dynamical effect is instead a small increase in the eigenvalue of this mode, corresponding to a longer decay timescale and hence a modest reduction in the stability of the equilibrium. --></p>
+</div>
+</div>
+<div id="anthropogenic-emissions" class="section level2" number="5.2">
+<h2>
+<span class="header-section-number">5.2</span> Anthropogenic Emissions<a class="anchor" aria-label="anchor" href="#anthropogenic-emissions"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us now simulate the effects of historical anthropogenic carbon emissions on ocean carbon chemistry. To do this, we need to make two changes to the model configuration: enable anthropogenic emissions and activate the carbonate-system diagnostics. The following chunk runs the simulation from 1800 to 2024. It may take a few minutes to complete because the carbonate-system diagnostics add substantial computational overhead.</p>
+<div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W05_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span></span>
+<span><span class="co"># Change model configuration</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W05_config_03.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>Let us now plot the first set of variables.</p>
+<div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W05_config_03.rds"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"anthr_emissions"</span>, <span class="st">"Carbon_total"</span>, <span class="st">"C_atm_ppmv"</span>,</span>
+<span>  <span class="st">"T_atm_global"</span>, <span class="st">"F_L"</span>, <span class="st">"F_H"</span></span>
+<span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 8:</strong> Is the air-sea carbon flux in the low-latitude ocean acting as a carbon sink or as a carbon source?
+<!-- It switches from a carbon source to a carbon sink --></p>
+<p>Let’s us now plot the output from the carbonate system diagnostics.</p>
+<div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W05_config_02.rds"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"Q"</span>, <span class="st">"DIC_global"</span>, <span class="st">"DIC_total"</span>,</span>
+<span>  <span class="st">"CO2_aq_global"</span>, <span class="st">"HCO3_global"</span>, <span class="st">"CO3_global"</span>,</span>
+<span>  <span class="st">"pH_global"</span>, <span class="st">"Alk_global"</span>, <span class="st">"Revelle_global"</span></span>
+<span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 9:</strong> How is dissolved inorganic carbon changing in response to anthropogenic emissions?
+<!-- Increasing --></p>
+<p><strong>Quiz Question 10:</strong> How is dissolved bicarbonate changing in response to anthropogenic emissions?
+<!-- Increasing --></p>
+<p><strong>Quiz Question 11:</strong> How is carbonate changing in response to anthropogenic emissions?
+<!-- Decreasing --></p>
+<p><strong>Quiz Question 12:</strong> How is ocean acidity changing in response to anthropogenic emissions?
+<!-- Increasing --></p>
+<p><strong>Quiz Question 13:</strong> How is ocean alkalinity changing in response to anthropogenic emissions?
+<!-- constant --></p>
+<p><strong>Quiz Question 14:</strong> How is the ocean carbon buffering capacity changing in response to anthropogenic emissions?
+<!-- decreasing --></p>
+</div>
+<div id="graduate-students-4" class="section level2" number="5.3">
+<h2>
+<span class="header-section-number">5.3</span> Graduate Students<a class="anchor" aria-label="anchor" href="#graduate-students-4"><i class="fas fa-link"></i></a>
+</h2>
+<p>Explain why air-sea carbon exchange affect the temperature coupling between the surface ocean and atmosphere.</p>
+</div>
+<div id="reflection-4" class="section level2" number="5.4">
+<h2>
+<span class="header-section-number">5.4</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection-4"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-4-eigenanalysis.html"><span class="header-section-number">4</span> Week 4: Eigenanalysis</a></div>
+<div class="next"><a href="week-5-marine-biology.html"><span class="header-section-number">6</span> Week 5: Marine Biology</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-5-ocean-carbon-chemistry"><span class="header-section-number">5</span> Week 5: Ocean Carbon Chemistry</a></li>
+<li>
+<a class="nav-link" href="#eigenanalysis"><span class="header-section-number">5.1</span> Eigenanalysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#dynamic-air-sea-carbon-exchange-turned-off"><span class="header-section-number">5.1.1</span> Dynamic air-sea carbon exchange turned off</a></li>
+<li><a class="nav-link" href="#dynamic-air-sea-carbon-exchange-turned-on"><span class="header-section-number">5.1.2</span> Dynamic air-sea carbon exchange turned on</a></li>
+<li><a class="nav-link" href="#comparing-the-jacobians"><span class="header-section-number">5.1.3</span> Comparing the Jacobians</a></li>
+<li><a class="nav-link" href="#comparing-the-eigenmodes"><span class="header-section-number">5.1.4</span> Comparing the eigenmodes</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#anthropogenic-emissions"><span class="header-section-number">5.2</span> Anthropogenic Emissions</a></li>
+<li><a class="nav-link" href="#graduate-students-4"><span class="header-section-number">5.3</span> Graduate Students</a></li>
+<li><a class="nav-link" href="#reflection-4"><span class="header-section-number">5.4</span> Reflection</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Earth System Modelling</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>

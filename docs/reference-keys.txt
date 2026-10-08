@@ -42,7 +42,15 @@ eigenvector
 dynamic-coupling-of-the-atmosphere-ocean-and-sea-ice
 graduate-students-3
 reflection-3
-week-4-ocean-carbon-chemistry
+week-5-ocean-carbon-chemistry
+eigenanalysis
+dynamic-air-sea-carbon-exchange-turned-off
+dynamic-air-sea-carbon-exchange-turned-on
+comparing-the-jacobians
+comparing-the-eigenmodes
+anthropogenic-emissions
+graduate-students-4
+reflection-4
 week-5-marine-biology
 week-6-terrestrial-carbon-cycle
 week-7-cryosphere

@@ -47,7 +47,7 @@
 <li><a class="" href="week-2-atmospheric-energy-balance.html"><span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance</a></li>
 <li><a class="" href="week-3-ocean-circulation-dynamics.html"><span class="header-section-number">3</span> Week 3: Ocean Circulation Dynamics</a></li>
 <li><a class="active" href="week-4-eigenanalysis.html"><span class="header-section-number">4</span> Week 4: Eigenanalysis</a></li>
-<li><a class="" href="week-4-ocean-carbon-chemistry.html"><span class="header-section-number">5</span> Week 4: Ocean Carbon Chemistry</a></li>
+<li><a class="" href="week-5-ocean-carbon-chemistry.html"><span class="header-section-number">5</span> Week 5: Ocean Carbon Chemistry</a></li>
 <li><a class="" href="week-5-marine-biology.html"><span class="header-section-number">6</span> Week 5: Marine Biology</a></li>
 <li><a class="" href="week-6-terrestrial-carbon-cycle.html"><span class="header-section-number">7</span> Week 6: Terrestrial Carbon Cycle</a></li>
 <li><a class="" href="week-7-cryosphere.html"><span class="header-section-number">8</span> Week 7: Cryosphere</a></li>
@@ -75,7 +75,7 @@
 <span class="header-section-number">4.1</span> Dynamic coupling of the atmosphere and ocean<a class="anchor" aria-label="anchor" href="#dynamic-coupling-of-the-atmosphere-and-ocean"><i class="fas fa-link"></i></a>
 </h2>
 <p>We start with an experiment where we dynamically couple the atmosphere and the ocean, turning all other modules off. Let’s begin configuring our simulation.</p>
-<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -99,8 +99,8 @@
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
-<p>Now we spin up the model for this model configuration for 1000 years. As usual, add this line into your curly brackets to avoid the many printouts: <code>r, message = FALSE, warning = FALSE, results = FALSE</code></p>
-<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
+<p>Now we spin up the model for this model configuration for 10000 years. As usual, add this line into your curly brackets to avoid the many printouts: <code>r, message = FALSE, warning = FALSE, results = FALSE</code></p>
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W04_config_AO.rds"</span><span class="op">)</span></span>
@@ -112,7 +112,7 @@
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Let’s have a look at some of the variables to see whether the model is spun up.</p>
-<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W04_config_AO.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
@@ -122,16 +122,16 @@
 <span>  <span class="st">"S_ocn_SL"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"S_ocn_DL"</span>, <span class="st">"S_ocn_DH"</span>,</span>
 <span>  <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>, <span class="st">"rho_DL"</span>, <span class="st">"rho_DH"</span></span>
 <span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-104-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-87-1.png" alt="" width="576"></div>
 <p><strong>Quiz Question 1:</strong> How can you tell that the model is in equilibrium?
 <!-- The state variables don't change with time --></p>
 <p>Let us now find the equilibrium of this spun-up state by perturbing a set of state variables that are active in the current model configuration. To avoid printing many messages begin your code chunk with <code>{r, message = FALSE, warning = FALSE, results = FALSE}</code>:</p>
-<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W04_config_AO.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
 <span><span class="co"># Select state variables that will be perturbed</span></span>
-<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span><span class="op">)</span> </span>
+<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Find the equilibria</span></span>
 <span><span class="va">equilibria</span> <span class="op">&lt;-</span> <span class="fu">eval_equilibria</span><span class="op">(</span><span class="va">config</span>, <span class="va">state_eq</span>, select_variables <span class="op">=</span> <span class="va">select_variables</span>, n_starts <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
@@ -139,7 +139,7 @@
 <p><strong>Quiz Question 2:</strong> What is the equilibrium value of the high-latitude atmospheric surface temperature (T_atm_H)?
 <!-- 270.2595 --></p>
 <p>Let us now find the dominant mode of this equilibrium using discrete time mapping with a time step of 50 years</p>
-<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stability_results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvalues</span><span class="op">(</span><span class="va">config</span>,</span>
 <span>  equilibria_dimensionless <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">dimensionless</span>,</span>
 <span>  state_eq <span class="op">=</span> <span class="va">state_eq</span>,</span>
@@ -197,13 +197,13 @@
 <!-- Mode 1 --></p>
 <p><strong>Quiz Question 10:</strong> Is the dominant mode the fastest or the slowest mode?
 <!-- slowest --></p>
-<p><strong>Quiz Question 11:</strong> Do the signs of the different variables vary in the dominate mode?
+<p><strong>Quiz Question 11:</strong> Do the signs of the different variables vary in the dominant mode?
 <!-- No --></p>
-<p><strong>Quiz Question 12:</strong> What is the largest component of the dominate mode?
+<p><strong>Quiz Question 12:</strong> What is the largest component of the dominant mode?
 <!-- T_ocn_DL -->
 <!--  Options: T_atm_L   T_atm_H  T_ocn_SL  T_ocn_SH  T_ocn_DL  T_ocn_DH --></p>
 <p>Let us now plot a phase diagram that shows the eigenvector. As a first step we need to randomly perturb the state variables in proximity of the equilibrium and run the model forward in time for each perturbation. In the code chunk below we do this for 20 perturbations, and for each perturbation we run the model for 1000 years. This calculation takes a little longer and we save the output as <code>phase_portrait_AO_mode_1.rds</code> (where AO stands for atmosphere-ocean).</p>
-<div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">v1</span> <span class="op">&lt;-</span> <span class="va">stability_results</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="st">"mode_1"</span><span class="op">]</span></span>
 <span></span>
 <span><span class="va">results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvector_perturbations</span><span class="op">(</span></span>
@@ -223,8 +223,8 @@
 <span>  file <span class="op">=</span> <span class="st">"phase_portrait_AO_mode_1.rds"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next we plot all the trajectories for different combination of variables. The figure shows how the state variables converge towards a straight line. This straight line is the eigenvector.</p>
-<div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">eval_plot_eigenvector</span><span class="op">(</span></span>
 <span>  <span class="st">"phase_portrait_AO_mode_1.rds"</span>,</span>
@@ -237,7 +237,7 @@
 <span>  <span class="st">"T_ocn_SH"</span>,</span>
 <span>  <span class="st">"T_atm_H"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-108-1.png" alt="" width="768"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-91-1.png" alt="" width="768"></div>
 <p>You see that the trajectories converge onto a straight line. This straight line is the eigenvector. Once you are on this line, the ratio of both variables is constant.</p>
 </div>
 </div>
@@ -246,7 +246,7 @@
 <span class="header-section-number">4.2</span> Dynamic coupling of the atmosphere, ocean and sea ice<a class="anchor" aria-label="anchor" href="#dynamic-coupling-of-the-atmosphere-ocean-and-sea-ice"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us now repeat the same exercise but using a different model configuration. In this case we will turn sea ice on and assess how this will affect the local resilience of the equilibrium.</p>
-<div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -271,7 +271,7 @@
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
 <p>Now we spin up the model for this model configuration for 1000 years. As usual, add this line into your curly brackets to avoid the many printouts: <code>r, message = FALSE, warning = FALSE, results = FALSE</code></p>
-<div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W04_config_AOS.rds"</span><span class="op">)</span></span>
@@ -283,7 +283,7 @@
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Let’s have a look at some of the variables to see whether the model is spun up.</p>
-<div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W04_config_AOS.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
@@ -293,14 +293,14 @@
 <span>  <span class="st">"S_ocn_SL"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"S_ocn_DL"</span>, <span class="st">"S_ocn_DH"</span>,</span>
 <span>  <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>, <span class="st">"rho_DL"</span>, <span class="st">"rho_DH"</span></span>
 <span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-111-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-94-1.png" alt="" width="576"></div>
 <p>Let us now find the equilibrium of this spun-up state by perturbing a set of state variables that are active in the current model configuration. Note that compared to the previous experiment, we now also include the state variable fractional sea ice cover (<span class="math inline">\(A_{sic}\)</span>). To avoid printing many messages begin your code chunk with <code>{r, message = FALSE, warning = FALSE, results = FALSE}</code>:</p>
-<div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W04_config_AO.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
 <span><span class="co"># Select state variables that will be perturbed</span></span>
-<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span>, <span class="st">"A_sic"</span><span class="op">)</span> </span>
+<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span>, <span class="st">"A_sic"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Find the equilibria</span></span>
 <span><span class="va">equilibria</span> <span class="op">&lt;-</span> <span class="fu">eval_equilibria</span><span class="op">(</span><span class="va">config</span>, <span class="va">state_eq</span>, select_variables <span class="op">=</span> <span class="va">select_variables</span>, n_starts <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
@@ -308,7 +308,7 @@
 <p><strong>Quiz Question 13:</strong> What is the high-latitude atmospheric surface temperature (T_atm_H)?
 <!-- 270.2811312 (without sea ice we have: 270.2595)--></p>
 <p>Let us now calculate the Jacobian, eigenvalues, and eigenvectors using discrete time mapping with a time step of 50 years.</p>
-<div class="sourceCode" id="cb94"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">stability_results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvalues</span><span class="op">(</span><span class="va">config</span>,</span>
 <span>  equilibria_dimensionless <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">dimensionless</span>,</span>
 <span>  state_eq <span class="op">=</span> <span class="va">state_eq</span>,</span>
@@ -320,7 +320,7 @@
 <p>Again, there is only one equilibrium. Let us start by looking at the Jacobian and find out how the incorporation of dynamic sea ice affects ocean-atmosphere coupling.</p>
 <p><strong>Quiz Question 14:</strong> How does the high-latitude air temperature respond when perturbing high-lat surface ocean temperature?
 <!-- After 50 years, the response equals 0.045624049 times the initial perturbation --></p>
-<p><strong>Quiz Question 15:</strong> Does the dynamic coupling with sea ice enhance or reduce the ocean-atmosphere coupling?
+<p><strong>Quiz Question 15:</strong> Does the dynamic coupling with sea ice enhance or reduce the ocean-atmosphere coupling in the high latitudes?
 <!-- Enhance, sea ice on: 0.045624049, sea ice off: -0.007221849 --></p>
 <p><strong>Quiz Question 16:</strong> Which of the eigenvalues is largest?
 <!--  Eigenvalue 1 --></p>
@@ -354,7 +354,7 @@
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="week-3-ocean-circulation-dynamics.html"><span class="header-section-number">3</span> Week 3: Ocean Circulation Dynamics</a></div>
-<div class="next"><a href="week-4-ocean-carbon-chemistry.html"><span class="header-section-number">5</span> Week 4: Ocean Carbon Chemistry</a></div>
+<div class="next"><a href="week-5-ocean-carbon-chemistry.html"><span class="header-section-number">5</span> Week 5: Ocean Carbon Chemistry</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
       <ul class="nav navbar-nav">
