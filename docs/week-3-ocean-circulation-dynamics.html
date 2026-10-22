@@ -364,9 +364,14 @@
 </h2>
 <p>Let us now characterize the nature of those equilibria based on their eigenvalues. This can be done numerically:</p>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://optimizer.r-forge.r-project.org/">numDeriv</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="co"># constants</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://optimizer.r-forge.r-project.org/">numDeriv</a></span><span class="op">)</span></span></code></pre></div>
+<pre><code>## 
+## Attaching package: 'numDeriv'</code></pre>
+<pre><code>## The following object is masked from 'package:rootSolve':
+## 
+##     hessian</code></pre>
+<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># constants</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
 <span><span class="va">delta</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="fl">6</span></span>
@@ -420,7 +425,7 @@
 </h2>
 <p>Recall that <span class="math inline">\(\lambda\)</span> (-) measures the relative strength of flow resistance to thermal forcing:</p>
 <p><span class="math display">\[\lambda = \left( \frac{c}{4 \rho_0 \alpha \Delta T^*} \right) k\]</span>. The larger <span class="math inline">\(\lambda\)</span>, the weaker the circulation response to temperature contrast. Let us now vary the parameter <span class="math inline">\(\lambda\)</span> and calculate the equilibrium points for different values of <span class="math inline">\(\lambda\)</span>. This will result in the bifurcation diagram below.</p>
-<div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
@@ -512,7 +517,7 @@
 <li><p>If <span class="math inline">\(f&lt;0\)</span> then the circulation is in a temperature-mode (<span class="math inline">\(T\)</span>-mode): the deep branch flow is in the direction set by temperature contrast (from cold to warm = from high to low latitudes)</p></li>
 <li><p>If <span class="math inline">\(f&gt;0\)</span> then the circulation is in a salinity mode (<span class="math inline">\(S\)</span>-mode): the deep branch flow is in the direction set by salinity contrast (from salty to fresh = from low to high latitudes)</p></li>
 </ul>
-<div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">rootSolve</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">R</span> <span class="op">&lt;-</span> <span class="fl">2</span></span>
@@ -606,7 +611,7 @@
 <span class="header-section-number">3.7</span> QUEST<a class="anchor" aria-label="anchor" href="#quest-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>I this exercise we explore how the meridional overturning circulation responds to enhanced freshwater input into high-latitude surface seawater. Such an experiment is also referred to as a freshwater hosing experiment. Let’s begin by copying the configuration file to your local folder to ensure you have the most recent version.</p>
-<div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">myDir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/getwd.html">getwd</a></span><span class="op">(</span><span class="op">)</span>, <span class="st">"run_quest"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/files2.html">dir.create</a></span><span class="op">(</span><span class="va">myDir</span><span class="op">)</span></span>
 <span></span>
@@ -616,7 +621,7 @@
 <span>  recursive <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next, we define our model configuration, turning on only the atmosphere and the ocean.</p>
-<div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -641,7 +646,7 @@
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
 <p>Now we spin up the model for this model configuration for 1000 years. As usual, add this line into your curly brackets to avoid the many printouts: <code>r, message = FALSE, warning = FALSE, results = FALSE</code></p>
-<div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output.rds"</span><span class="op">)</span></span>
@@ -653,7 +658,7 @@
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Let’s have a look at some of the variables to see whether the model is spun up.</p>
-<div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
@@ -671,7 +676,7 @@
 F_{fw,H} = F_0 A_H \left(1 + \gamma_{fw}(T_{atm,H} - T_{ref})\right)
 \]</span>
 where <span class="math inline">\(F_0\)</span> is a reference freshwater flux expressed in m s<span class="math inline">\(^{-1}\)</span>. We increase the freshwater flux by increasing <span class="math inline">\(F_0\)</span> by 30% and run the model for 3000 years. Remember to include <code>message = FALSE, warning = FALSE, results = FALSE</code> inside the curly parenthesis when running the chunk below.</p>
-<div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -687,7 +692,7 @@ where <span class="math inline">\(F_0\)</span> is a reference freshwater flux ex
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output.rds"</span><span class="op">)</span></span></code></pre></div>
 <p>Plot the results</p>
-<div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
 <span>  <span class="st">"T_atm_global"</span>,</span>
@@ -711,7 +716,7 @@ where <span class="math inline">\(F_0\)</span> is a reference freshwater flux ex
 <span class="header-section-number">3.8</span> Graduate students<a class="anchor" aria-label="anchor" href="#graduate-students-2"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us now assess if the model has a hysteresis effect. We do this by continuing the simulation where we left it off, but now using the original reference freshwater flux. Describe your result. Next, repeat the same experiment, but reduce the reference freshwater flux to 20% of its original value. Describe your results.</p>
-<div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Create initialization file from this spinup</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
 <span>  input_file <span class="op">=</span> <span class="st">"output.rds"</span>,</span>
@@ -732,7 +737,7 @@ where <span class="math inline">\(F_0\)</span> is a reference freshwater flux ex
 <span><span class="co"># Run the model</span></span>
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb82"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Q"</span>, <span class="st">"F_fw_H"</span>, <span class="st">"F_fw_L"</span>,</span>
 <span>  <span class="st">"T_atm_global"</span>,</span>
