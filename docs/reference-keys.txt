@@ -72,7 +72,7 @@ reflection-5
 week-7-terrestrial-carbon-cycle
 terrestrial-carbon-fluxes
 global-sensitivity-analysis
-model-parameter-optimization
+parameter-optimization
 eigenanalysis-2
 terrestrial-carbon-cycle-turned-off
 terrestrial-carbon-cycle-turned-on

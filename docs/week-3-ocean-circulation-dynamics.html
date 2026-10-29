@@ -110,7 +110,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.HL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"blue"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># high-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/points.html">points</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>, y <span class="op">=</span> <span class="va">box.LL</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, col <span class="op">=</span> <span class="st">"red"</span>, pch <span class="op">=</span> <span class="fl">16</span><span class="op">)</span> <span class="co"># low-latitude</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-81-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-63-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 1:</strong> The two dots denote conditions representative for the low-latitude and high-latitude boxes. Which one is which?
 <!-- low-latitude = red, high-latitude = blue --></p>
 <p><strong>Quiz Question 2:</strong> The blue dot has a higher density compared to the red dot. Is this due to the salinity contrast or the temperature contrast?
@@ -126,7 +126,7 @@
 \rho = \rho_0 (1 - \alpha (T- T_0)  + \beta (S-S_0)
 \]</span></p>
 <p>where <span class="math inline">\(\rho\)</span> is the sea water density (kg m<span class="math inline">\(^{-3}\)</span>), <span class="math inline">\(T\)</span> and <span class="math inline">\(S\)</span> are temperature and salinity anomalies, respectively and <span class="math inline">\(\alpha\)</span> is the thermal contraction (<span class="math inline">\(\alpha = 1.5 \times 10^{-4}\)</span> K) and <span class="math inline">\(\beta\)</span> is the saline expansion (<span class="math inline">\(\beta = 8 \times10^{-4}\)</span> psu<sup>-1</sup>). The unit psu stands for practical salinity unit, which is a dimensionless unit that expresses the ratio of conductivities. A value of 1 psu roughly correspond 1 g salt per 1 kg sea water. <span class="math inline">\(T_0\)</span> and <span class="math inline">\(S_0\)</span> are reference temperature and salinity (<span class="math inline">\(T_0\)</span> = 10<span class="math inline">\(^{\circ}\)</span>C, <span class="math inline">\(S_0\)</span> = 35 g kg<sup>-1</sup>). Let’s create a T-S diagram with this linearlized version of the equation of state.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-82-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-64-1.png" alt="" width="480"></div>
 <p>You can see that the density values are similar, but not identical. However, using a linearlized equation of state keeps the math below more simple. Let’s now finally get to the Stommel model.</p>
 </div>
 </div>
@@ -215,9 +215,9 @@
 <span>  main <span class="op">=</span> <span class="st">"Temperature"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-83-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-65-1.png" alt="" width="480"></div>
 <p>Change the initial conditions to <span class="math inline">\(x = 0.1\)</span> and <span class="math inline">\(y = 0.1\)</span> to reproduce the figure below.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-84-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-66-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 6:</strong> What do you conclude from these figures?
 <!-- Choosing different initial values causes the model to end up at different equilibrium states --></p>
 </div>
@@ -301,7 +301,7 @@
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-85-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-67-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 7:</strong> What does each line represent?</p>
 <!-- Each line represents the trajectory of x and y over time for different initial conditions. -->
 </div>
@@ -355,7 +355,7 @@
 ## [2,] 0.4321 0.8203
 ## [3,] 0.3518 0.7651</code></pre>
 <p>Let’s plot these three equilibrium points into our phase portrait. Do this by copying the code from above and then add <code>points(x = 0.1350, y = 0.4836), pch = 16, col = "red"</code> below. Do this for all three points.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-87-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-69-1.png" alt="" width="480"></div>
 </div>
 <div id="equilibrium-eigenvalues" class="section level2" number="3.5">
 <h2>
@@ -509,7 +509,7 @@
 <span>  main <span class="op">=</span> <span class="st">"(b) Salinity contrast (y)"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-89-1.png" alt="" width="960"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-71-1.png" alt="" width="960"></div>
 <p>From the equilibrium <span class="math inline">\(x\)</span> (non-dimensional salinity contrast) and <span class="math inline">\(y\)</span> (non-dimensional temperature contrast) values, we can calculated the corresponding dimensionless flow rate <span class="math inline">\(f\)</span>:</p>
 <p><span class="math display">\[f = (-y + Rx) /\lambda \]</span></p>
 <ul>
@@ -601,7 +601,7 @@
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, col <span class="op">=</span> <span class="st">"red"</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-90-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-72-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 10:</strong> Consider you are in the T-mode and <span class="math inline">\(\lambda\)</span> = 0.3. Let’s say that <span class="math inline">\(\lambda\)</span> increases to 0.35. What will happen with the direction of the flow?
 <!-- The system switches from the T-mode to the S-mode and the flow reverses --></p>
 </div>
@@ -667,7 +667,7 @@
 <span>  <span class="st">"S_ocn_SL"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"S_ocn_DL"</span>, <span class="st">"S_ocn_DH"</span>,</span>
 <span>  <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>, <span class="st">"rho_DL"</span>, <span class="st">"rho_DH"</span></span>
 <span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">100</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-94-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-76-1.png" alt="" width="576"></div>
 <p><strong>Quiz Question 11:</strong> In which of the two surface ocean boxes is seawater density larger?
 <!-- high latitude surface ocean box --></p>
 <p>Let us now investigate how the meridional overturning circulation responds to an increase in the freshwater flux into the high-latitude surface ocean. In QUEST, this freshwater flux is calculated as:</p>
@@ -700,7 +700,7 @@ where <span class="math inline">\(F_0\)</span> is a reference freshwater flux ex
 <span>  <span class="st">"S_ocn_SL"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"S_ocn_DL"</span>, <span class="st">"S_ocn_DH"</span>,</span>
 <span>  <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>, <span class="st">"rho_DL"</span>, <span class="st">"rho_DH"</span></span>
 <span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">3000</span>, <span class="fl">0</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-96-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-78-1.png" alt="" width="576"></div>
 <p><strong>Quiz Question 12:</strong> Does the meridional overturning circulation collapse?
 <!-- Yes --></p>
 <p><strong>Quiz Question 13:</strong> In which of the two surface ocean boxes is seawater density larger?

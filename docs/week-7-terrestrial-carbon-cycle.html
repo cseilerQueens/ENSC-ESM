@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="7.1 Terrestrial Carbon Fluxes Net ecosystem productivity (NPP) is the difference between net primary productivity and heterotrophic respiration (R\(_H\)): \[ NEP = NPP - R_H \] where NPP is the...">
-<meta property="og:description" content="7.1 Terrestrial Carbon Fluxes Net ecosystem productivity (NPP) is the difference between net primary productivity and heterotrophic respiration (R\(_H\)): \[ NEP = NPP - R_H \] where NPP is the...">
-<meta name="twitter:description" content="7.1 Terrestrial Carbon Fluxes Net ecosystem productivity (NPP) is the difference between net primary productivity and heterotrophic respiration (R\(_H\)): \[ NEP = NPP - R_H \] where NPP is the...">
+<meta name="description" content="In this tutorial, we will conduct a global sensitivity analysis of the terrestrial carbon cycle to identify which model parameters have the greatest influence on model performance. We will then...">
+<meta property="og:description" content="In this tutorial, we will conduct a global sensitivity analysis of the terrestrial carbon cycle to identify which model parameters have the greatest influence on model performance. We will then...">
+<meta name="twitter:description" content="In this tutorial, we will conduct a global sensitivity analysis of the terrestrial carbon cycle to identify which model parameters have the greatest influence on model performance. We will then...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -68,6 +68,7 @@
 <h1>
 <span class="header-section-number">7</span> Week 7: Terrestrial Carbon Cycle<a class="anchor" aria-label="anchor" href="#week-7-terrestrial-carbon-cycle"><i class="fas fa-link"></i></a>
 </h1>
+<p>In this tutorial, we will conduct a global sensitivity analysis of the terrestrial carbon cycle to identify which model parameters have the greatest influence on model performance. We will then use the results of the sensitivity analysis to optimize the model parameters. Finally, we will perform an eigenanalysis to investigate how the terrestrial carbon cycle influences the climate system’s equilibrium and stability, and assess its impact on atmospheric CO<span class="math inline">\(_2\)</span> concentrations.</p>
 <div id="terrestrial-carbon-fluxes" class="section level2" number="7.1">
 <h2>
 <span class="header-section-number">7.1</span> Terrestrial Carbon Fluxes<a class="anchor" aria-label="anchor" href="#terrestrial-carbon-fluxes"><i class="fas fa-link"></i></a>
@@ -109,8 +110,8 @@ dC_{lnd,L} = NPP_{lnd,L} - RH_L
 <span><span class="co"># Load the parameter values</span></span>
 <span><span class="va">params</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">params</span></span>
 <span></span>
-<span><span class="va">fun_land</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span><span class="op">)</span><span class="op">{</span></span>
-<span><span class="co"># Parameter values</span></span>
+<span><span class="va">fun_land</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="co"># Parameter values</span></span>
 <span>  <span class="va">NPP_0</span> <span class="op">&lt;-</span> <span class="va">params</span><span class="op">$</span><span class="va">NPP_0</span></span>
 <span>  <span class="va">f_lnd_L</span> <span class="op">&lt;-</span> <span class="va">params</span><span class="op">$</span><span class="va">f_lnd_L</span></span>
 <span>  <span class="va">f_lnd_H</span> <span class="op">&lt;-</span> <span class="va">params</span><span class="op">$</span><span class="va">f_lnd_H</span></span>
@@ -128,62 +129,65 @@ dC_{lnd,L} = NPP_{lnd,L} - RH_L
 <span>  <span class="va">C_atm</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[[</span><span class="st">"C_atm"</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">C_lnd_L</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[[</span><span class="st">"C_lnd_L"</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="va">C_lnd_H</span> <span class="op">&lt;-</span> <span class="va">state</span><span class="op">[[</span><span class="st">"C_lnd_H"</span><span class="op">]</span><span class="op">]</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="co"># Convert atmospheric C to ppmv</span></span>
 <span>  <span class="va">C_atm_ppmv</span> <span class="op">&lt;-</span> <span class="va">C_atm</span> <span class="op">/</span> <span class="fl">2.124</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">T_atm_L</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">273</span> <span class="op">-</span> <span class="fl">5</span>, <span class="fl">273</span> <span class="op">+</span> <span class="fl">30</span>, <span class="fl">1</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="co"># Net Primary Productivity (NPP)</span></span>
 <span>  <span class="va">NPP_lnd_L</span> <span class="op">&lt;-</span> <span class="va">f_lnd_L</span> <span class="op">*</span> <span class="va">NPP_0</span> <span class="op">*</span></span>
 <span>    <span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">phi_lnd</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">log</a></span><span class="op">(</span><span class="va">C_atm_ppmv</span> <span class="op">/</span> <span class="va">C_ref</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="op">-</span><span class="op">(</span><span class="va">T_atm_L</span> <span class="op">-</span> <span class="va">T_opt</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">sigma_T</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="co"># Heterotrophic respiration</span></span>
 <span>  <span class="va">RH_L</span> <span class="op">&lt;-</span> <span class="va">C_lnd_L</span> <span class="op">*</span> <span class="va">R_0</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/Log.html">exp</a></span><span class="op">(</span><span class="va">gamma_R</span> <span class="op">*</span> <span class="op">(</span><span class="va">T_atm_L</span> <span class="op">-</span> <span class="va">T_rh</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">secPerYear</span> <span class="op">&lt;-</span> <span class="fl">86400</span> <span class="op">*</span> <span class="fl">365.25</span></span>
 <span></span>
-<span><span class="va">myRange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">NPP_lnd_L</span>, <span class="va">RH_L</span><span class="op">)</span> <span class="op">*</span> <span class="va">secPerYear</span><span class="op">)</span></span>
-<span><span class="va">myRange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span><span class="op">)</span></span>
+<span>  <span class="va">myRange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">NPP_lnd_L</span>, <span class="va">RH_L</span><span class="op">)</span> <span class="op">*</span> <span class="va">secPerYear</span><span class="op">)</span></span>
+<span>  <span class="va">myRange</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">60</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">T_atm_L</span> <span class="op">-</span> <span class="fl">273</span>, y <span class="op">=</span> <span class="va">NPP_lnd_L</span> <span class="op">*</span> <span class="va">secPerYear</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>       xlab <span class="op">=</span> <span class="st">"Temperature (Celsius)"</span>,</span>
-<span>       ylab <span class="op">=</span> <span class="st">"PgC per year"</span>,</span>
-<span>       ylim <span class="op">=</span> <span class="va">myRange</span>,</span>
-<span>       col <span class="op">=</span> <span class="st">"darkgreen"</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">T_atm_L</span> <span class="op">-</span> <span class="fl">273</span>, y <span class="op">=</span> <span class="va">NPP_lnd_L</span> <span class="op">*</span> <span class="va">secPerYear</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="st">"Temperature (Celsius)"</span>,</span>
+<span>    ylab <span class="op">=</span> <span class="st">"PgC per year"</span>,</span>
+<span>    ylim <span class="op">=</span> <span class="va">myRange</span>,</span>
+<span>    col <span class="op">=</span> <span class="st">"darkgreen"</span></span>
+<span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">T_atm_L</span> <span class="op">-</span> <span class="fl">273</span>, y <span class="op">=</span> <span class="va">RH_L</span> <span class="op">*</span> <span class="va">secPerYear</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"orange"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"darkgreen"</span>, <span class="st">"orange"</span><span class="op">)</span>, pch <span class="op">=</span> <span class="fl">16</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"NPP"</span>, <span class="st">"RH"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"top"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">C_atm_ppmv</span><span class="op">)</span>, <span class="st">"ppmv"</span><span class="op">)</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">T_atm_L</span> <span class="op">-</span> <span class="fl">273</span>, y <span class="op">=</span> <span class="op">(</span><span class="va">NPP_lnd_L</span> <span class="op">-</span> <span class="va">RH_L</span><span class="op">)</span> <span class="op">*</span> <span class="va">secPerYear</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>       col <span class="op">=</span> <span class="st">"blue"</span>,</span>
-<span>       xlab <span class="op">=</span> <span class="st">"Temperature (Celsius)"</span>,</span>
-<span>       ylab <span class="op">=</span> <span class="st">"PgC per year"</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>    x <span class="op">=</span> <span class="va">T_atm_L</span> <span class="op">-</span> <span class="fl">273</span>, y <span class="op">=</span> <span class="op">(</span><span class="va">NPP_lnd_L</span> <span class="op">-</span> <span class="va">RH_L</span><span class="op">)</span> <span class="op">*</span> <span class="va">secPerYear</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>    col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>    xlab <span class="op">=</span> <span class="st">"Temperature (Celsius)"</span>,</span>
+<span>    ylab <span class="op">=</span> <span class="st">"PgC per year"</span></span>
+<span>  <span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">C_atm_ppmv</span><span class="op">)</span>, <span class="st">"ppmv"</span><span class="op">)</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"bottomleft"</span>, <span class="st">"NEP = NPP - RH"</span>, pch <span class="op">=</span> <span class="fl">16</span>, col <span class="op">=</span> <span class="st">"blue"</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
-<span>  </span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Let us now plot NPP, RH, and NEP for two different CO<span class="math inline">\(_2\)</span> levels:</p>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu">fun_land</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span><span class="op">)</span></span>
 <span><span class="va">state</span><span class="op">[[</span><span class="st">"C_atm"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">892.08</span> <span class="co"># PgC</span></span>
 <span><span class="fu">fun_land</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-152-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-134-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 1:</strong> How does an increase in atmospheric CO<span class="math inline">\(_2\)</span> concentration from preindustrial levels to present concentrations affect the equilibrium temperature at which the terrestrial carbon cycle switches from a carbon sink to a carbon source as temperature increases?
 <!-- The equilibrium temperature increases --></p>
 <p>Let us now increase the parameter <span class="math inline">\(\sigma_T\)</span> by 50% and assess how this will affect NEP.</p>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>,<span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">params</span><span class="op">$</span><span class="va">sigma_T</span> <span class="op">&lt;-</span> <span class="fl">13.7096</span> <span class="co"># default value</span></span>
 <span><span class="fu">fun_land</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span><span class="op">)</span></span>
 <span><span class="va">params</span><span class="op">$</span><span class="va">sigma_T</span> <span class="op">&lt;-</span> <span class="fl">13.7096</span> <span class="op">*</span> <span class="fl">1.5</span> <span class="co"># increase by 50%</span></span>
 <span><span class="fu">fun_land</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-153-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-135-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 2:</strong> How does the increase in <span class="math inline">\(\sigma_T\)</span> by 50% affect the maximum strength of the carbon sink?
 <!-- The maximum strength of the carbon sink increases --></p>
 <p>We can conclude that our terrestrial carbon fluxes are sensitive to changes in parameter values. In the next section we will conduct a global sensitivity analysis to quantify how the uncertainty of an input parameter affects model output.</p>
@@ -255,17 +259,17 @@ dC_{lnd,L} = NPP_{lnd,L} - RH_L
 <p><span class="math display">\[
 S_i = \frac{V(E(Y|X_i))}{V(Y)}
 \]</span>
-<strong>Question:</strong> What is the meaning of the numerator?
+<strong>Quiz Question 3:</strong> What is the meaning of the numerator?
 <!-- The variance of the conditional means --></p>
-<p><strong>Question:</strong> What is the meaning of the denominator?
+<p><strong>Quiz Question 4:</strong> What is the meaning of the denominator?
 <!-- The total variance --></p>
-<p><strong>Question:</strong> What measures the variance of the conditional means?
+<p><strong>Quiz Question 5:</strong> What measures the variance of the conditional means?
 <!-- The variance of the conditional means measures how much the mean model output changes as parameter Xi varies, while averaging over random combinations of all other parameters. --></p>
-<p><strong>Question:</strong> What is the possible range of the Sobol index?
+<p><strong>Quiz Question 6:</strong> What is the possible range of the Sobol index?
 <!-- From 0 to 1 --></p>
-<p><strong>Question:</strong> If parameter A has a Sobol index of 0.5 and parameter B has a Sobol index of 0.1, can we conclude that parameter A has a greater influence on the model output than parameter B?
+<p><strong>Quiz Question 7:</strong> If parameter A has a Sobol index of 0.5 and parameter B has a Sobol index of 0.1, can we conclude that parameter A has a greater influence on the model output than parameter B?
 <!-- Yes --></p>
-<p><strong>Question:</strong> In our analysis, the model output <span class="math inline">\(Y\)</span> is the normalized root mean square error (NRMSE). What does a high Sobol index tell us about the influence of a parameter on model performance?
+<p><strong>Quiz Question 8:</strong> In our analysis, the model output <span class="math inline">\(Y\)</span> is the normalized root mean square error (NRMSE). What does a high Sobol index tell us about the influence of a parameter on model performance?
 <!-- the parameter has a large influence on model performance --></p>
 <p>Once the code chunk above has finished executing, the results will be saved to <code>sobol_result.rds</code>. Load the saved results and plot the Sobol sensitivity indices.</p>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
@@ -287,7 +291,7 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span><span class="va">Total</span> <span class="op">&lt;-</span> <span class="va">Total</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">Total</span><span class="op">)</span><span class="op">]</span></span>
 <span></span>
 <span><span class="co"># plot</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>,<span class="fl">5</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span></span>
 <span>  height <span class="op">=</span> <span class="va">S</span><span class="op">$</span><span class="va">S</span>,</span>
 <span>  names.arg <span class="op">=</span> <span class="va">S</span><span class="op">$</span><span class="va">parameters</span>,</span>
@@ -298,31 +302,32 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span>  border <span class="op">=</span> <span class="cn">NA</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/box.html">box</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-155-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question 3:</strong> Which are the three most influential parameters?
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-137-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 9:</strong> Which are the three most influential parameters?
 <!-- sigma_T, R_0, NPP_0 --></p>
 <p>Let us now create a scatter plot to explore the relationship between parameter values and model performance. The x-axis represents the parameter values, while the y-axis shows the corresponding normalized root mean square error (NRMSE), which measures model performance.</p>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co"># 1. Extract the specific parameter and the output</span></span>
-<span><span class="va">x_param</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>,<span class="st">"sigma_T"</span><span class="op">]</span></span>
+<span><span class="va">x_param</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="st">"sigma_T"</span><span class="op">]</span></span>
 <span><span class="va">y_output</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">y</span></span>
 <span></span>
 <span><span class="co"># 2. Create the scatterplot</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span>,</span>
-<span>     xlab <span class="op">=</span> <span class="st">"sigma_T"</span>,</span>
-<span>     ylab <span class="op">=</span> <span class="st">"NRMSE"</span><span class="op">)</span></span>
+<span>  xlab <span class="op">=</span> <span class="st">"sigma_T"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"NRMSE"</span></span>
+<span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># 3. Add a smooth trendline (LOWESS) to see the shape of the relationship</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lowess.html">lowess</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-156-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question 4:</strong> Why does this figure tell you that the parameter <span class="math inline">\(\sigma_T\)</span> is a influential parameter?
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-138-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 10:</strong> Why does this figure tell you that the parameter <span class="math inline">\(\sigma_T\)</span> is a influential parameter?
 <!-- The conditional means have a trend, which implies that the variance of the conditional means is high  --></p>
 </div>
-<div id="model-parameter-optimization" class="section level2" number="7.3">
+<div id="parameter-optimization" class="section level2" number="7.3">
 <h2>
-<span class="header-section-number">7.3</span> Model Parameter Optimization<a class="anchor" aria-label="anchor" href="#model-parameter-optimization"><i class="fas fa-link"></i></a>
+<span class="header-section-number">7.3</span> Parameter Optimization<a class="anchor" aria-label="anchor" href="#parameter-optimization"><i class="fas fa-link"></i></a>
 </h2>
 <p>Using the results from the global sensitivity analysis, we can now calibrate the model using the most influential parameters. We will do this using a type of machine learning algorithm referred to as genetic algorithm. Parameter optimization is computationally expensive. To reduce computation time, we apply the same protocol as for the Sobol analysis: we restrict the model to the coupled land–atmosphere system, limit the simulation to a short period (1840–1850) and evaluate only the preindustrial climate state. These simplifications are made for educational purposes. A more comprehensive analysis would simulate the fully coupled system over a much longer period. The code below to optimize the paramters <span class="math inline">\(\sigma_T\)</span>, <span class="math inline">\(R_0\)</span>, and <span class="math inline">\(NPP_0\)</span>:</p>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
@@ -352,7 +357,7 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span><span class="va">param_names_subset</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sigma_T"</span>, <span class="st">"T_opt"</span>, <span class="st">"R_0"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">run_esm_ga</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x_scaled</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/pkg/quest/man/calibr_optim.html">calibr_optim</a></span><span class="op">(</span><span class="va">x_scaled</span>, <span class="va">times</span>, <span class="va">config</span>, <span class="va">param_names_subset</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/quest/man/calibr_optim.html">calibr_optim</a></span><span class="op">(</span><span class="va">x_scaled</span>, <span class="va">times</span>, <span class="va">config</span>, <span class="va">param_names_subset</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co"># Bounds in normalized space</span></span>
@@ -374,39 +379,41 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">best_x_scaled</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">param_names_subset</span></span>
 <span><span class="va">best_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="kw">for</span><span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">param_names_subset</span><span class="op">)</span> <span class="op">{</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="va">param_names_subset</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">pmin</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">params_calib</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">min</span></span>
 <span>  <span class="va">pmax</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">params_calib</span><span class="op">[[</span><span class="va">i</span><span class="op">]</span><span class="op">]</span><span class="op">$</span><span class="va">max</span></span>
-<span>  <span class="va">pscaled</span> <span class="op">&lt;-</span> <span class="va">best_x_scaled</span><span class="op">[</span>,<span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">pscaled</span> <span class="op">&lt;-</span> <span class="va">best_x_scaled</span><span class="op">[</span>, <span class="va">i</span><span class="op">]</span></span>
 <span>  <span class="va">best_x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">pscaled</span> <span class="op">*</span> <span class="op">(</span><span class="va">pmax</span> <span class="op">-</span> <span class="va">pmin</span><span class="op">)</span> <span class="op">+</span> <span class="va">pmin</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="st">"optimized Values"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">best_x</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">ga_result</span>, file <span class="op">=</span> <span class="st">"ga_result.rds"</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 5:</strong> What is the optimized value for sigma_T?
+<p><strong>Quiz Question 11:</strong> What is the optimized value for sigma_T?
 <!-- 10.636 --></p>
-<p><strong>Quiz Question 6:</strong> Inspect the code. How large is the population size?
+<p><strong>Quiz Question 12:</strong> Inspect the code. How large is the population size?
 <!-- 100 --></p>
-<p><strong>Quiz Question 7:</strong> How many generations did you compute?
+<p><strong>Quiz Question 13:</strong> How many generations did you compute?
 <!-- 10 --></p>
-<p><strong>Quiz Question 8:</strong> How many times did the model run?
+<p><strong>Quiz Question 14:</strong> How many times did the model run?
 <!-- 1000 --></p>
 <p>Let us now plot the results.</p>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="va">ga_result</span><span class="op">@</span><span class="va">summary</span></span>
 <span></span>
-<span><span class="va">my.range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="st">"mean"</span><span class="op">]</span>, <span class="va">data</span><span class="op">[</span>,<span class="st">"q1"</span><span class="op">]</span>, <span class="va">data</span><span class="op">[</span>,<span class="st">"q3"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="va">my.range</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="st">"mean"</span><span class="op">]</span>, <span class="va">data</span><span class="op">[</span>, <span class="st">"q1"</span><span class="op">]</span>, <span class="va">data</span><span class="op">[</span>, <span class="st">"q3"</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="st">"mean"</span><span class="op">]</span>, type <span class="op">=</span> <span class="st">"l"</span>, </span>
-<span>     ylim <span class="op">=</span> <span class="va">my.range</span>,</span>
-<span>     xlab <span class="op">=</span> <span class="st">"Generation"</span>,</span>
-<span>     ylab <span class="op">=</span> <span class="st">"(-1) * NRMSE"</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="st">"q3"</span><span class="op">]</span>, lty  <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>,<span class="st">"q1"</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="st">"mean"</span><span class="op">]</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  ylim <span class="op">=</span> <span class="va">my.range</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Generation"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"(-1) * NRMSE"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="st">"q3"</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="va">data</span><span class="op">[</span>, <span class="st">"q1"</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-158-1.png" alt="" width="480"></div>
-<p><strong>Quiz Question 9:</strong> What does this figure show you?
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-140-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 15:</strong> What does this figure show you?
 <!-- This figure shows how model performance improves from generation to generation --></p>
 </div>
 <div id="eigenanalysis-2" class="section level2" number="7.4">
@@ -540,7 +547,7 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">land_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">land_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">delta_jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 10:</strong> How does land affect the response of atmospheric carbon to an atmospheric carbon perturbation?
+<p><strong>Quiz Question 16:</strong> How does land affect the response of atmospheric carbon to an atmospheric carbon perturbation?
 <!-- Enabling land reduces the persistence of atmospheric carbon perturbations, indicating that the system more effectively attenuates deviations from its equilibrium atmospheric carbon concentration. --></p>
 </div>
 <div id="comparing-the-eigenmodes-2" class="section level3" number="7.4.4">
@@ -559,7 +566,7 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">land_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">land_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_timescales</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 11:</strong> How does land affect the time scale of the dominant eigenmode?
+<p><strong>Quiz Question 17:</strong> How does land affect the time scale of the dominant eigenmode?
 <!-- The time scale of the dominant eigenmode decreases by 3 years --></p>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># dominant eigenvector land on</span></span>
@@ -569,9 +576,9 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span><span class="co"># dominant eigenvector land off</span></span>
 <span><span class="va">domVec_land_off</span> <span class="op">&lt;-</span> <span class="va">land_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_land_off</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 12:</strong> Which variable contributes most to the dominant eigenmode when land is turned off?
+<p><strong>Quiz Question 18:</strong> Which variable contributes most to the dominant eigenmode when land is turned off?
 <!-- The largest contribution comes from the low-latitude deep ocean --></p>
-<p><strong>Quiz Question 13:</strong> How does adding land affect the balance between restoring and amplifying processes in the vicinity of the equilibrium?
+<p><strong>Quiz Question 19:</strong> How does adding land affect the balance between restoring and amplifying processes in the vicinity of the equilibrium?
 <!-- land causes a small decrease in the eigenvalue of the dominant mode, corresponding to a shorter decay timescale and hence a modest increase in the stability of the equilibrium. --></p>
 </div>
 </div>
@@ -649,7 +656,7 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span>  <span class="st">"anthr_emissions"</span>, <span class="st">"Carbon_total"</span>, <span class="st">"C_atm_ppmv"</span>,</span>
 <span>  <span class="st">"T_atm_global"</span>, <span class="st">"C_lnd_L"</span>, <span class="st">"C_lnd_H"</span></span>
 <span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Quiz Question 14:</strong> How does the land affect the amount of carbon in the atmosphere?
+<p><strong>Quiz Question 20:</strong> How does the land affect the amount of carbon in the atmosphere?
 <!-- Land reduces the amount of carbon in the atmosphere by about 13% in 2024 --></p>
 </div>
 </div>
@@ -678,7 +685,7 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <li><a class="nav-link" href="#week-7-terrestrial-carbon-cycle"><span class="header-section-number">7</span> Week 7: Terrestrial Carbon Cycle</a></li>
 <li><a class="nav-link" href="#terrestrial-carbon-fluxes"><span class="header-section-number">7.1</span> Terrestrial Carbon Fluxes</a></li>
 <li><a class="nav-link" href="#global-sensitivity-analysis"><span class="header-section-number">7.2</span> Global Sensitivity Analysis</a></li>
-<li><a class="nav-link" href="#model-parameter-optimization"><span class="header-section-number">7.3</span> Model Parameter Optimization</a></li>
+<li><a class="nav-link" href="#parameter-optimization"><span class="header-section-number">7.3</span> Parameter Optimization</a></li>
 <li>
 <a class="nav-link" href="#eigenanalysis-2"><span class="header-section-number">7.4</span> Eigenanalysis</a><ul class="nav navbar-nav">
 <li><a class="nav-link" href="#terrestrial-carbon-cycle-turned-off"><span class="header-section-number">7.4.1</span> Terrestrial carbon cycle turned off</a></li>
