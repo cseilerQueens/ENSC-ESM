@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>Chapter 9 Week 8: Cryosphere | Earth System Modelling</title>
+<meta name="author" content="Christian Seiler">
+<meta name="generator" content="bookdown 0.47 with bs4_book()">
+<meta property="og:title" content="Chapter 9 Week 8: Cryosphere | Earth System Modelling">
+<meta property="og:type" content="book">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Chapter 9 Week 8: Cryosphere | Earth System Modelling">
+<!-- JS --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://kit.fontawesome.com/6ecbd6c532.js" crossorigin="anonymous"></script><script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link href="libs/bootstrap-4.6.0/bootstrap.min.css" rel="stylesheet">
+<script src="libs/bootstrap-4.6.0/bootstrap.bundle.min.js"></script><script src="libs/bs3compat-0.11.0/transition.js"></script><script src="libs/bs3compat-0.11.0/tabs.js"></script><script src="libs/bs3compat-0.11.0/bs3compat.js"></script><link href="libs/bs4_book-1.0.0/bs4_book.css" rel="stylesheet">
+<script src="libs/bs4_book-1.0.0/bs4_book.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- CSS --><style type="text/css">
+    
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  </style>
+<meta name="description" content="The first part of this tutorial focuses on Weertman’s conceptual ice-sheet model. We begin by reproducing the basic geometric features of an ice sheet. Next, we conduct a global sensitivity...">
+<meta property="og:description" content="The first part of this tutorial focuses on Weertman’s conceptual ice-sheet model. We begin by reproducing the basic geometric features of an ice sheet. Next, we conduct a global sensitivity...">
+<meta name="twitter:description" content="The first part of this tutorial focuses on Weertman’s conceptual ice-sheet model. We begin by reproducing the basic geometric features of an ice sheet. Next, we conduct a global sensitivity...">
+</head>
+<body data-spy="scroll" data-target="#toc">
+
+<div class="container-fluid">
+<div class="row">
+  <header class="col-sm-12 col-lg-3 sidebar sidebar-book"><a class="sr-only sr-only-focusable" href="#content">Skip to main content</a>
+
+    <div class="d-flex align-items-start justify-content-between">
+      <h1>
+        <a href="index.html" title="">Earth System Modelling</a>
+      </h1>
+      <button class="btn btn-outline-primary d-lg-none ml-2 mt-1" type="button" data-toggle="collapse" data-target="#main-nav" aria-expanded="true" aria-controls="main-nav"><i class="fas fa-bars"></i><span class="sr-only">Show table of contents</span></button>
+    </div>
+
+    <div id="main-nav" class="collapse-lg">
+      <form role="search">
+        <input id="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
+</form>
+
+      <nav aria-label="Table of contents"><h2>Table of contents</h2>
+        <ul class="book-toc list-unstyled">
+<li><a class="" href="index.html">Earth System Modelling</a></li>
+<li><a class="" href="week-1-building-a-simple-carbon-cycle-model.html"><span class="header-section-number">1</span> Week 1: Building a Simple Carbon Cycle Model</a></li>
+<li><a class="" href="week-2-atmospheric-energy-balance.html"><span class="header-section-number">2</span> Week 2: Atmospheric Energy Balance</a></li>
+<li><a class="" href="week-3-ocean-circulation-dynamics.html"><span class="header-section-number">3</span> Week 3: Ocean Circulation Dynamics</a></li>
+<li><a class="" href="week-4-eigenanalysis.html"><span class="header-section-number">4</span> Week 4: Eigenanalysis</a></li>
+<li><a class="" href="week-5-ocean-carbon-chemistry.html"><span class="header-section-number">5</span> Week 5: Ocean Carbon Chemistry</a></li>
+<li><a class="" href="week-6-marine-biology.html"><span class="header-section-number">6</span> Week 6: Marine Biology</a></li>
+<li><a class="" href="week-7-terrestrial-carbon-cycle.html"><span class="header-section-number">7</span> Week 7: Terrestrial Carbon Cycle</a></li>
+<li><a class="" href="week-8-cryosphere.html"><span class="header-section-number">8</span> Week 8: Cryosphere</a></li>
+<li><a class="active" href="week-8-cryosphere-1.html"><span class="header-section-number">9</span> Week 8: Cryosphere</a></li>
+<li><a class="" href="week-9-earth-system-dynamics.html"><span class="header-section-number">10</span> Week 9: Earth System Dynamics</a></li>
+<li><a class="" href="week-10-paleoclimatic-simulations.html"><span class="header-section-number">11</span> Week 10: Paleoclimatic Simulations</a></li>
+<li><a class="" href="week-11-future-climate-simulations.html"><span class="header-section-number">12</span> Week 11: Future Climate Simulations</a></li>
+<li><a class="" href="week-12-research-project.html"><span class="header-section-number">13</span> Week 12: Research Project</a></li>
+<li><a class="" href="appendix-i-linear-algebra.html"><span class="header-section-number">14</span> Appendix (I): Linear Algebra</a></li>
+<li><a class="" href="appendix-ii-r-programming-language.html"><span class="header-section-number">15</span> Appendix (II): R Programming Language</a></li>
+</ul>
+
+        <div class="book-extra">
+          
+        </div>
+      </nav>
+</div>
+  </header><main class="col-sm-12 col-md-9 col-lg-7" id="content"><div id="week-8-cryosphere-1" class="section level1" number="9">
+<h1>
+<span class="header-section-number">9</span> Week 8: Cryosphere<a class="anchor" aria-label="anchor" href="#week-8-cryosphere-1"><i class="fas fa-link"></i></a>
+</h1>
+<p>The first part of this tutorial focuses on Weertman’s conceptual ice-sheet model. We begin by reproducing the basic geometric features of an ice sheet. Next, we conduct a global sensitivity analysis to identify which model parameters have the greatest influence on mean ice-sheet length over the past 300,000 years. In the second part, we perform an eigenanalysis to investigate how ice sheets influence the climate system’s equilibrium state and stability. Finally, in the third part, we investigate how dynamically coupling ice sheets to the climate system affects climate evolution from 1800 to the present.</p>
+<div id="connceptual-ice-sheet-model-1" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Connceptual Ice Sheet Model<a class="anchor" aria-label="anchor" href="#connceptual-ice-sheet-model-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this section, we build physical intuition for the mechanisms that drive ice sheet growth and retreat using the conceptual model developed by <a href="https://www.nature.com/articles/261017a0">Weertman (1976)</a>. In this two-dimensional model, ice sheet growth and retreat depend on where the snow line intersects the ice surface. We begin by reconstructing the geometry of Weertman’s ice sheet. This geometry is defined as follows:</p>
+<ul>
+<li><p>Upper ice sheet surface: <span class="math inline">\(h(x) = \sqrt{\lambda(L-|x|)}\)</span></p></li>
+<li><p>Maximum height: <span class="math inline">\(h(0) = \sqrt{\lambda L}\)</span></p></li>
+<li><p>Lower ice sheet surface: <span class="math inline">\(h'(x) = \frac{1}{2}h(x)\)</span></p></li>
+<li><p>Snow line elevation: <span class="math inline">\(h_s(x) = h_0 + s(x + L)\)</span></p></li>
+</ul>
+<p>Plot the cross section of an ice sheet using the equations above. Your figure should resemble the figure below.</p>
+<p><img src="figure-html/unnamed-chunk-243-1.png" alt="" width="576"><strong>Quiz Question 1:</strong> What is the direction of this cross section?
+<!-- From north to south --></p>
+<p><strong>Quiz Question 2:</strong> Why is the vertical extent of the ice sheet below zero?
+<!-- Because the mass of the ice sheet pushed the bedrock downwards --></p>
+<p><strong>Quiz Question 3:</strong> How come the snowline has a slope?
+<!-- Meridional temperature gradient  --></p>
+<p><strong>Quiz Question 4:</strong> Where is the firn line?
+<!-- The firn line is the intersection of the snow line and the upper ice surface  --></p>
+<p>Add two additional snow lines in your code, one where the snow line is above the entire ice sheet, and one where it is below. Color each line as follows:</p>
+<ul>
+<li><p>Snow line above upper ice surface: red</p></li>
+<li><p>Snow line intersecting upper ice surface: green</p></li>
+<li><p>Snow line below upper ice surface: blue</p></li>
+</ul>
+<p>You can set the color of a line in R like this <code>lines(x, y, col = "blue")</code></p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-244-1.png" alt="" width="576"></div>
+<p>The Weertman model distinguishes three cases:</p>
+<ul>
+<li><ol style="list-style-type: decimal">
+<li>Flowing ice with full accumulation</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: decimal">
+<li>Flowing ice with partial accumulation</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: decimal">
+<li>Stagnant ice</li>
+</ol></li>
+</ul>
+<p><strong>Quiz Question 5:</strong> What colors correspond to the cases (1), (2), and (3)?</p>
+<!-- Blue, green, red -->
+<p>Let us now focus on the case where we have flowing ice with partial accumulation. The corresponding equation is:</p>
+<p><span class="math display">\[
+\frac{dL}{dt} =
+\frac{2a}{3\sqrt{\lambda}\sqrt{L}}
+\left[
+L -
+\frac{(1+a'/a)\lambda}{4s^2}
+\left(
+-1+\sqrt{1+\frac{4s(h_0+2sL)}{\lambda}}
+\right)^2
+\right]
+\]</span></p>
+<p>where <span class="math inline">\(a\)</span> is accumulation, <span class="math inline">\(a'\)</span> is ablation, <span class="math inline">\(s\)</span> is the slope of the snowline, <span class="math inline">\(h_0\)</span> is the snow line elevation at the northern edge, <span class="math inline">\(\lambda\)</span> relates ice sheet height <span class="math inline">\(h\)</span> and half-length <span class="math inline">\(L\)</span>. The values of these constants are:</p>
+<ul>
+<li><p><span class="math inline">\(s\)</span> = 0.001 m/m is the snowline slope (m/m)</p></li>
+<li><p><span class="math inline">\(\lambda\)</span> = 14 m is ice sheet profile parameter (m)</p></li>
+<li><p><span class="math inline">\(a\)</span> = 1.2 m yr<span class="math inline">\(^{-1}\)</span> is the accumulation rate (m yr-1)</p></li>
+<li><p><span class="math inline">\(a'\)</span> = 2.75 m yr<span class="math inline">\(^{-1}\)</span> is the ablation rate (m yr-1)</p></li>
+<li><p><span class="math inline">\(\Delta Q_0\)</span> = 10 ly per day is the insolation offset</p></li>
+<li><p><span class="math inline">\(\alpha\)</span> = 21000 m <span class="math inline">\(\times\)</span> s (m / (ly per day) is</p></li>
+<li><p><span class="math inline">\(h_0\)</span> = 400 m is the height of the snowline at the northern edge of the ice sheet</p></li>
+</ul>
+<p>Plot this tendency function. Your result should look like the figure below.</p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-245-1.png" alt="" width="480"></div>
+<p><strong>Question 6:</strong> Let’s say our ice sheet has a half-length of 400 km. How will this value change over time?
+<!-- The ice sheet will grow until it reaches a half-length of about 700 km --></p>
+</div>
+<div id="milankovitch-cycle" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Milankovitch Cycle<a class="anchor" aria-label="anchor" href="#milankovitch-cycle"><i class="fas fa-link"></i></a>
+</h2>
+<p>To simulate ice-sheet growth and retreat in response to Milankovitch forcing, we express <span class="math inline">\(h_0\)</span> as a function of insolation anomalies. This way, the Milankovitch cycle shifts the snowline vertically:</p>
+<p><span class="math display">\[
+h_0 = \alpha(\Delta Q + \Delta Q_0)
+\]</span></p>
+<p>where <span class="math inline">\(\Delta Q_0\)</span> is a constant (<span class="math inline">\(\Delta Q_0\)</span> = 10 ly per day) and <span class="math inline">\(\alpha = 21,000\)</span> m ly<span class="math inline">\(^{-1}\)</span> day * <span class="math inline">\(s\)</span>. Recall that <span class="math inline">\(s\)</span> is the snowline slope (<span class="math inline">\(s\)</span> = 0.001 m/m). Plot <span class="math inline">\(h_0\)</span> as a function of <span class="math inline">\(\Delta Q\)</span> for values ranging from -35 to 50 ly per day. Your figure should look lik the the plot below.</p>
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">1e-3</span> <span class="co"># Snowline slope (m/m)</span></span>
+<span><span class="va">delta_Q_0</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="co"># ly d-1</span></span>
+<span><span class="va">delta_Q</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">35</span>, <span class="fl">50</span>, <span class="fl">1</span><span class="op">)</span> <span class="co"># ly d-1</span></span>
+<span><span class="va">alpha</span> <span class="op">&lt;-</span> <span class="fl">21000</span> <span class="op">*</span> <span class="va">s</span></span>
+<span><span class="va">h_0</span> <span class="op">&lt;-</span> <span class="va">alpha</span> <span class="op">*</span> <span class="op">(</span><span class="va">delta_Q</span> <span class="op">+</span> <span class="va">delta_Q_0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">delta_Q</span>, y <span class="op">=</span> <span class="va">h_0</span>, type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Radiation anomalies at 50 Deg N, \n Delta Q (ly per day)"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Snow line elevation \n at northern edge, h0 (m)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-246-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 7:</strong> What does this figure tell you?
+<!-- The more insolation the higher the snowline at the northern edge of the ice sheet --></p>
+<p>Let us now simulate how ice sheets respond to the Milankovitch cycle. The code below considers the three cases of ice sheet growth and retreat (flowing ice with full accumulation, flowing ice with partial accumulation, stagnant ice), as well as ice sheet nucleation. The first code chunk below defines the a function of the Weertman ice sheet model. We then need to numericall integrate this function over time, using incolation anomalies as an external forcing.</p>
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ============================================================</span></span>
+<span><span class="co"># Weertman ice sheet model</span></span>
+<span><span class="co"># ============================================================</span></span>
+<span></span>
+<span><span class="va">weertman_ice</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">L_ice</span>, <span class="va">delta_Q</span>,</span>
+<span>                         <span class="va">s_ice</span>, <span class="va">lambda_ice</span>,</span>
+<span>                         <span class="va">a_acc</span>, <span class="va">a_abl</span>,</span>
+<span>                         <span class="va">delta_Q_0</span>, <span class="va">alpha_ice</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Milankovitch forcing</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="co"># Snowline elevation, Equation (8)</span></span>
+<span>  <span class="va">h_0_ice</span> <span class="op">&lt;-</span> <span class="va">alpha_ice</span> <span class="op">*</span> <span class="op">(</span><span class="va">delta_Q</span> <span class="op">+</span> <span class="va">delta_Q_0</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Case 1: Ice-free state and nucleation</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">L_ice</span> <span class="op">&lt;=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">h_0_ice</span> <span class="op">&lt;</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>      <span class="co"># Weertman's nucleation prescription</span></span>
+<span>      <span class="va">L_ice</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">h_0_ice</span> <span class="op">/</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">s_ice</span><span class="op">)</span></span>
+<span></span>
+<span>      <span class="va">ice_regime</span> <span class="op">&lt;-</span> <span class="st">"Nucleation"</span></span>
+<span></span>
+<span>    <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span></span>
+<span>      <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>        L_ice <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>        H_ice <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>        h_0_ice <span class="op">=</span> <span class="va">h_0_ice</span>,</span>
+<span>        dL_ice <span class="op">=</span> <span class="fl">0</span>,</span>
+<span>        regime <span class="op">=</span> <span class="st">"Ice-free"</span></span>
+<span>      <span class="op">)</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Ice-sheet geometry</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="co"># Maximum ice-sheet elevation (m)</span></span>
+<span>  <span class="va">H_ice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">lambda_ice</span> <span class="op">*</span> <span class="va">L_ice</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Snowline elevation at summit and southern margin</span></span>
+<span>  <span class="va">h_summit</span> <span class="op">&lt;-</span> <span class="va">h_0_ice</span> <span class="op">+</span> <span class="va">s_ice</span> <span class="op">*</span> <span class="va">L_ice</span></span>
+<span>  <span class="va">h_margin</span> <span class="op">&lt;-</span> <span class="va">h_0_ice</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">s_ice</span> <span class="op">*</span> <span class="va">L_ice</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Case 2: Stagnant ice (Eq. 7)</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">h_summit</span> <span class="op">&gt;=</span> <span class="va">H_ice</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="va">dL_ice</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">2</span> <span class="op">*</span> <span class="va">a_abl</span> <span class="op">*</span></span>
+<span>      <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">L_ice</span> <span class="op">/</span> <span class="va">lambda_ice</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">ice_regime</span> <span class="op">&lt;-</span> <span class="st">"Stagnant"</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Case 3: Flowing ice, full accumulation</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="kw">if</span> <span class="op">(</span><span class="va">h_margin</span> <span class="op">&lt;=</span> <span class="fl">0</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="va">dL_ice</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">a_acc</span> <span class="op">*</span> <span class="va">L_ice</span><span class="op">)</span> <span class="op">/</span></span>
+<span>      <span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">lambda_ice</span> <span class="op">*</span> <span class="va">L_ice</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">ice_regime</span> <span class="op">&lt;-</span> <span class="st">"Flowing - full accumulation"</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Case 4: Flowing ice, partial accumulation</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span></span>
+<span><span class="co"># Flowing ice: Weertman's Equation (6)</span></span>
+<span></span>
+<span><span class="va">dL_ice</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">2</span> <span class="op">*</span> <span class="va">a_acc</span> <span class="op">/</span> <span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">lambda_ice</span> <span class="op">*</span> <span class="va">L_ice</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span></span>
+<span>  <span class="op">(</span></span>
+<span>    <span class="va">L_ice</span> <span class="op">-</span></span>
+<span>    <span class="op">(</span><span class="op">(</span><span class="fl">1</span> <span class="op">+</span> <span class="va">a_abl</span> <span class="op">/</span> <span class="va">a_acc</span><span class="op">)</span> <span class="op">*</span> <span class="va">lambda_ice</span> <span class="op">/</span> <span class="op">(</span><span class="fl">4</span> <span class="op">*</span> <span class="va">s_ice</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="op">*</span></span>
+<span>    <span class="op">(</span></span>
+<span>      <span class="op">-</span><span class="fl">1</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span></span>
+<span>        <span class="fl">1</span> <span class="op">+</span> <span class="fl">4</span> <span class="op">*</span> <span class="va">s_ice</span> <span class="op">*</span> <span class="op">(</span><span class="va">h_0_ice</span> <span class="op">+</span> <span class="fl">2</span> <span class="op">*</span> <span class="va">s_ice</span> <span class="op">*</span> <span class="va">L_ice</span><span class="op">)</span> <span class="op">/</span></span>
+<span>          <span class="va">lambda_ice</span></span>
+<span>      <span class="op">)</span></span>
+<span>    <span class="op">)</span><span class="op">^</span><span class="fl">2</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>    <span class="va">ice_regime</span> <span class="op">&lt;-</span> <span class="st">"Flowing - partial accumulation"</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span></span>
+<span>    L_ice <span class="op">=</span> <span class="va">L_ice</span>,</span>
+<span>    H_ice <span class="op">=</span> <span class="va">H_ice</span>,</span>
+<span>    h_0_ice <span class="op">=</span> <span class="va">h_0_ice</span>,</span>
+<span>    dL_ice <span class="op">=</span> <span class="va">dL_ice</span>,</span>
+<span>    regime <span class="op">=</span> <span class="va">ice_regime</span></span>
+<span>  <span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Next we define a function that integrates the Weertman ice sheet model.</p>
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># ============================================================</span></span>
+<span><span class="co"># Euler integration</span></span>
+<span><span class="co"># ============================================================</span></span>
+<span></span>
+<span><span class="va">run_ice</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">L_ice</span>, <span class="va">delta_Q</span>,</span>
+<span>                    <span class="va">s_ice</span>, <span class="va">lambda_ice</span>,</span>
+<span>                    <span class="va">a_acc</span>, <span class="va">a_abl</span>,</span>
+<span>                    <span class="va">delta_Q_0</span>, <span class="va">alpha_ice</span>,</span>
+<span>                    <span class="va">times</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Input checks</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/stopifnot.html">stopifnot</a></span><span class="op">(</span></span>
+<span>    <span class="va">n</span> <span class="op">&gt;=</span> <span class="fl">2</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">delta_Q</span><span class="op">)</span> <span class="op">==</span> <span class="va">n</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>,</span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/base/all.html">all</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">delta_Q</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>    <span class="va">s_ice</span> <span class="op">&gt;</span> <span class="fl">0</span>,</span>
+<span>    <span class="va">lambda_ice</span> <span class="op">&gt;</span> <span class="fl">0</span>,</span>
+<span>    <span class="va">a_acc</span> <span class="op">&gt;</span> <span class="fl">0</span>,</span>
+<span>    <span class="va">a_abl</span> <span class="op">&gt;=</span> <span class="fl">0</span>,</span>
+<span>    <span class="va">L_ice</span> <span class="op">&gt;=</span> <span class="fl">0</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Store results</span></span>
+<span>  <span class="va">L</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">H</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">V</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">h0</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">dL</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span>  <span class="va">regime</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">character</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Euler integration</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_along</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>    <span class="co"># Calculate ice-sheet tendency</span></span>
+<span>    <span class="va">ice</span> <span class="op">&lt;-</span> <span class="fu">weertman_ice</span><span class="op">(</span></span>
+<span>      <span class="va">L_ice</span>, <span class="va">delta_Q</span><span class="op">[</span><span class="va">i</span><span class="op">]</span>,</span>
+<span>      <span class="va">s_ice</span>, <span class="va">lambda_ice</span>,</span>
+<span>      <span class="va">a_acc</span>, <span class="va">a_abl</span>,</span>
+<span>      <span class="va">delta_Q_0</span>, <span class="va">alpha_ice</span></span>
+<span>    <span class="op">)</span></span>
+<span></span>
+<span>    <span class="co"># Account for nucleation</span></span>
+<span>    <span class="va">L_ice</span> <span class="op">&lt;-</span> <span class="va">ice</span><span class="op">$</span><span class="va">L_ice</span></span>
+<span></span>
+<span>    <span class="co"># Store results</span></span>
+<span>    <span class="va">L</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">L_ice</span></span>
+<span>    <span class="va">H</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">ice</span><span class="op">$</span><span class="va">H_ice</span></span>
+<span>    <span class="va">V</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/MathFun.html">sqrt</a></span><span class="op">(</span><span class="va">lambda_ice</span> <span class="op">*</span> <span class="va">L_ice</span><span class="op">^</span><span class="fl">3</span><span class="op">)</span>  <span class="co"># m2</span></span>
+<span>    <span class="va">h0</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">ice</span><span class="op">$</span><span class="va">h_0_ice</span></span>
+<span>    <span class="va">dL</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">ice</span><span class="op">$</span><span class="va">dL_ice</span></span>
+<span>    <span class="va">regime</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">ice</span><span class="op">$</span><span class="va">regime</span></span>
+<span></span>
+<span>    <span class="co"># Euler update</span></span>
+<span>    <span class="kw">if</span> <span class="op">(</span><span class="va">i</span> <span class="op">&lt;</span> <span class="va">n</span><span class="op">)</span> <span class="op">{</span></span>
+<span>      <span class="va">dt</span> <span class="op">&lt;-</span> <span class="va">times</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">times</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>      <span class="va">L_ice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">L_ice</span> <span class="op">+</span> <span class="va">ice</span><span class="op">$</span><span class="va">dL_ice</span> <span class="op">*</span> <span class="va">dt</span><span class="op">)</span></span>
+<span>    <span class="op">}</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span>  <span class="co"># Output</span></span>
+<span>  <span class="co"># -------------------------</span></span>
+<span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>    time <span class="op">=</span> <span class="va">times</span>,</span>
+<span>    delta_Q <span class="op">=</span> <span class="va">delta_Q</span>,</span>
+<span>    h_0_ice <span class="op">=</span> <span class="va">h0</span>,</span>
+<span>    L_ice <span class="op">=</span> <span class="va">L</span>,</span>
+<span>    H_ice <span class="op">=</span> <span class="va">H</span>,</span>
+<span>    V_ice <span class="op">=</span> <span class="va">V</span>,</span>
+<span>    dL_ice <span class="op">=</span> <span class="va">dL</span>,</span>
+<span>    regime <span class="op">=</span> <span class="va">regime</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Now we need to calculate the insolation anomalies that are used as an input in the Weertman model</p>
+<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mcrucifix/palinsol">palinsol</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># -------------------------</span></span>
+<span><span class="co"># Milankovitch forcing at 50 N</span></span>
+<span><span class="co"># High-radiation half-year</span></span>
+<span><span class="co"># -------------------------</span></span>
+<span></span>
+<span><span class="va">lat</span> <span class="op">&lt;-</span> <span class="fl">50</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">180</span>  <span class="co"># Degrees to radians</span></span>
+<span></span>
+<span><span class="co"># -------------------------</span></span>
+<span><span class="co"># Time</span></span>
+<span><span class="co"># -------------------------</span></span>
+<span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">300000</span>, <span class="fl">100000</span>, by <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>  <span class="co"># Years relative to 1950</span></span>
+<span></span>
+<span><span class="co"># Duration of the high-radiation half-year (seconds)</span></span>
+<span><span class="va">summer_seconds</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="fl">365.2422</span> <span class="op">/</span> <span class="fl">2</span><span class="op">)</span> <span class="op">*</span> <span class="fl">86400</span></span>
+<span></span>
+<span><span class="co"># Integrated caloric summer insolation (kJ m-2)</span></span>
+<span><span class="va">Q_integrated</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">sapply</a></span><span class="op">(</span><span class="va">times</span>, <span class="kw">function</span><span class="op">(</span><span class="va">t</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu">palinsol</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/palinsol/man/calins.html">calins</a></span><span class="op">(</span></span>
+<span>    orbit <span class="op">=</span> <span class="fu">palinsol</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/palinsol/man/astro.html">la04</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span>,</span>
+<span>    lat <span class="op">=</span> <span class="va">lat</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Mean summer insolation (W m-2)</span></span>
+<span><span class="va">Q</span> <span class="op">&lt;-</span> <span class="va">Q_integrated</span> <span class="op">*</span> <span class="fl">1000</span> <span class="op">/</span> <span class="va">summer_seconds</span></span>
+<span></span>
+<span><span class="co"># Reference insolation at 1950 CE (W m-2)</span></span>
+<span><span class="va">Q_ref</span> <span class="op">&lt;-</span> <span class="fu">palinsol</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/palinsol/man/calins.html">calins</a></span><span class="op">(</span></span>
+<span>  orbit <span class="op">=</span> <span class="fu">palinsol</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/palinsol/man/astro.html">la04</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span>,</span>
+<span>  lat <span class="op">=</span> <span class="va">lat</span></span>
+<span><span class="op">)</span> <span class="op">*</span> <span class="fl">1000</span> <span class="op">/</span> <span class="va">summer_seconds</span></span>
+<span></span>
+<span><span class="co"># Insolation anomaly (W m-2)</span></span>
+<span><span class="va">delta_Q</span> <span class="op">&lt;-</span> <span class="va">Q</span> <span class="op">-</span> <span class="va">Q_ref</span></span></code></pre></div>
+<p>Let us now integrate the Weertman model forward in time using varying incoming solar radiation. Note that I have changed the original notation of insolation units from langley (ly) per day to W m<span class="math inline">\(^{-2}\)</span>, where 1 ly per day = 41.85 <span class="math inline">\(\times\)</span> 1000 / 86400 s/d = 0.484375 W m<span class="math inline">\(^{-2}\)</span>.</p>
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># -------------------------</span></span>
+<span><span class="co"># Parameters</span></span>
+<span><span class="co"># -------------------------</span></span>
+<span></span>
+<span><span class="va">s_ice</span> <span class="op">&lt;-</span> <span class="fl">1e-3</span>               <span class="co"># Snowline slope (m/m)</span></span>
+<span><span class="va">lambda_ice</span> <span class="op">&lt;-</span> <span class="fl">14</span>            <span class="co"># Ice-sheet profile parameter (m)</span></span>
+<span><span class="va">a_acc</span> <span class="op">&lt;-</span> <span class="fl">1.2</span>                <span class="co"># Accumulation rate (m yr-1)</span></span>
+<span><span class="va">a_abl</span> <span class="op">&lt;-</span> <span class="fl">2.75</span> <span class="op">*</span> <span class="va">a_acc</span>       <span class="co"># Ablation rate (m yr-1)</span></span>
+<span><span class="va">delta_Q_0</span> <span class="op">&lt;-</span> <span class="fl">4.84375</span>        <span class="co"># Insolation offset (W/m2)</span></span>
+<span><span class="va">alpha_ice</span> <span class="op">&lt;-</span> <span class="fl">43354.84</span> <span class="op">*</span> <span class="va">s_ice</span>  <span class="co"># m / (W/m-2)</span></span>
+<span></span>
+<span><span class="co"># -------------------------</span></span>
+<span><span class="co"># Initial conditions</span></span>
+<span><span class="co"># -------------------------</span></span>
+<span><span class="va">L_ice</span> <span class="op">&lt;-</span> <span class="fl">700000</span>            <span class="co"># Ice-sheet half-width (m)</span></span>
+<span></span>
+<span><span class="co"># -------------------------</span></span>
+<span><span class="co"># Run model</span></span>
+<span><span class="co"># -------------------------</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">run_ice</span><span class="op">(</span></span>
+<span>  L_ice <span class="op">=</span> <span class="va">L_ice</span>,</span>
+<span>  delta_Q <span class="op">=</span> <span class="va">delta_Q</span>,</span>
+<span>  s_ice <span class="op">=</span> <span class="va">s_ice</span>,</span>
+<span>  lambda_ice <span class="op">=</span> <span class="va">lambda_ice</span>,</span>
+<span>  a_acc <span class="op">=</span> <span class="va">a_acc</span>,</span>
+<span>  a_abl <span class="op">=</span> <span class="va">a_abl</span>,</span>
+<span>  delta_Q_0 <span class="op">=</span> <span class="va">delta_Q_0</span>,</span>
+<span>  alpha_ice <span class="op">=</span> <span class="va">alpha_ice</span>,</span>
+<span>  times <span class="op">=</span> <span class="va">times</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Plot results</p>
+<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span> <span class="op">(</span><span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">3</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">times</span> <span class="op">/</span> <span class="fl">1000</span>, <span class="va">delta_Q</span>,</span>
+<span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Time (ka relative to 1950)"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Insolation anomaly (ly/day)"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Summer insolation at 50 N"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2026</span><span class="op">-</span><span class="fl">1850</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="co"># vertical line for the year 2026</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">time</span> <span class="op">/</span> <span class="fl">1000</span>, <span class="va">df</span><span class="op">$</span><span class="va">L_ice</span> <span class="op">/</span> <span class="fl">1000</span>,</span>
+<span>     type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Time (ka relative to 1950)"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Ice-sheet half-width (km)"</span>,</span>
+<span>     main <span class="op">=</span> <span class="st">"Ice-sheet evolution"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2026</span><span class="op">-</span><span class="fl">1850</span><span class="op">)</span><span class="op">/</span><span class="fl">1000</span>, col <span class="op">=</span> <span class="st">"blue"</span><span class="op">)</span> <span class="co"># vertical line for the year 2026</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-251-1.png" alt="" width="672"></div>
+<p><strong>Quiz Question 8:</strong> How many times does the model produce periods without any ice sheets?
+<!-- 7 --></p>
+</div>
+<div id="global-sensitivity-analysis-1" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Global Sensitivity Analysis<a class="anchor" aria-label="anchor" href="#global-sensitivity-analysis-1"><i class="fas fa-link"></i></a>
+</h2>
+<p>We will now conduct a global sennsitivity analysis for the Weertman ice sheet model. We begin by defining the parameter ranges.</p>
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">sensitivity</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"s_ice"</span>,</span>
+<span>  <span class="st">"lambda_ice"</span>,</span>
+<span>  <span class="st">"a_acc"</span>,</span>
+<span>  <span class="st">"abl_acc_ratio"</span>,</span>
+<span>  <span class="st">"h0_ref"</span>,</span>
+<span>  <span class="st">"alpha_ice"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">lower</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  s_ice         <span class="op">=</span> <span class="fl">0.0007</span>,</span>
+<span>  lambda_ice    <span class="op">=</span> <span class="fl">7</span>,</span>
+<span>  a_acc         <span class="op">=</span> <span class="fl">0.6</span>,</span>
+<span>  abl_acc_ratio <span class="op">=</span> <span class="fl">2.4</span>,</span>
+<span>  h0_ref        <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  alpha_ice     <span class="op">=</span> <span class="fl">30</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">upper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  s_ice         <span class="op">=</span> <span class="fl">0.0013</span>,</span>
+<span>  lambda_ice    <span class="op">=</span> <span class="fl">21</span>,</span>
+<span>  a_acc         <span class="op">=</span> <span class="fl">1.8</span>,</span>
+<span>  abl_acc_ratio <span class="op">=</span> <span class="fl">3.1</span>,</span>
+<span>  h0_ref        <span class="op">=</span> <span class="fl">350</span>,</span>
+<span>  alpha_ice     <span class="op">=</span> <span class="fl">60</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Next we need to create a wrapper around <code>run_ice()</code>.</p>
+<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">run_weertman_sobol</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">par</span>, <span class="va">output</span> <span class="op">=</span> <span class="st">"L_mean"</span><span class="op">)</span> <span class="op">{</span></span>
+<span></span>
+<span>  <span class="co"># Convert normalized parameters to physical values</span></span>
+<span>  <span class="va">par</span> <span class="op">&lt;-</span> <span class="va">lower</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">par</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="va">upper</span> <span class="op">-</span> <span class="va">lower</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span><span class="op">(</span><span class="va">par</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">param_names</span></span>
+<span></span>
+<span>  <span class="co"># Extract physical parameters</span></span>
+<span>  <span class="va">s_ice</span>         <span class="op">&lt;-</span> <span class="va">par</span><span class="op">[</span><span class="st">"s_ice"</span><span class="op">]</span></span>
+<span>  <span class="va">lambda_ice</span>    <span class="op">&lt;-</span> <span class="va">par</span><span class="op">[</span><span class="st">"lambda_ice"</span><span class="op">]</span></span>
+<span>  <span class="va">a_acc</span>         <span class="op">&lt;-</span> <span class="va">par</span><span class="op">[</span><span class="st">"a_acc"</span><span class="op">]</span></span>
+<span>  <span class="va">abl_acc_ratio</span> <span class="op">&lt;-</span> <span class="va">par</span><span class="op">[</span><span class="st">"abl_acc_ratio"</span><span class="op">]</span></span>
+<span>  <span class="va">h0_ref</span>        <span class="op">&lt;-</span> <span class="va">par</span><span class="op">[</span><span class="st">"h0_ref"</span><span class="op">]</span></span>
+<span>  <span class="va">alpha_ice</span>     <span class="op">&lt;-</span> <span class="va">par</span><span class="op">[</span><span class="st">"alpha_ice"</span><span class="op">]</span></span>
+<span></span>
+<span>  <span class="co"># Derived parameters</span></span>
+<span>  <span class="va">a_abl</span> <span class="op">&lt;-</span> <span class="va">a_acc</span> <span class="op">*</span> <span class="va">abl_acc_ratio</span></span>
+<span>  <span class="va">delta_Q_0</span> <span class="op">&lt;-</span> <span class="va">h0_ref</span> <span class="op">/</span> <span class="va">alpha_ice</span></span>
+<span></span>
+<span>  <span class="co"># Run Weertman model</span></span>
+<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">run_ice</span><span class="op">(</span></span>
+<span>    L_ice <span class="op">=</span> <span class="va">L_ice</span>,</span>
+<span>    delta_Q <span class="op">=</span> <span class="va">delta_Q</span>,</span>
+<span>    s_ice <span class="op">=</span> <span class="va">s_ice</span>,</span>
+<span>    lambda_ice <span class="op">=</span> <span class="va">lambda_ice</span>,</span>
+<span>    a_acc <span class="op">=</span> <span class="va">a_acc</span>,</span>
+<span>    a_abl <span class="op">=</span> <span class="va">a_abl</span>,</span>
+<span>    delta_Q_0 <span class="op">=</span> <span class="va">delta_Q_0</span>,</span>
+<span>    alpha_ice <span class="op">=</span> <span class="va">alpha_ice</span>,</span>
+<span>    times <span class="op">=</span> <span class="va">times</span></span>
+<span>  <span class="op">)</span></span>
+<span></span>
+<span>  <span class="co"># Return mean L in km</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">output</span> <span class="op">==</span> <span class="st">"L_mean"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">L</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">output</span> <span class="op">==</span> <span class="st">"L_final"</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">L</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">/</span> <span class="fl">1000</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Unknown output"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Next, we randomly sample each parameter from a range of 0 to 1. We use this range because all parameter values are normalized before sampling.</p>
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">param_names</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Normalized parameter samples between 0 and 1</span></span>
+<span><span class="va">X1</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">N</span> <span class="op">*</span> <span class="va">p</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="va">N</span>, ncol <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">X2</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html">as.data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span><span class="op">(</span><span class="va">N</span> <span class="op">*</span> <span class="va">p</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="va">N</span>, ncol <span class="op">=</span> <span class="va">p</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">X1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">param_names</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">X2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">param_names</span></span></code></pre></div>
+<p>Now we are ready to run the Sobol analysis.</p>
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">sobol</span> <span class="op">&lt;-</span> <span class="fu">sensitivity</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sensitivity/man/sobolSalt.html">sobolSalt</a></span><span class="op">(</span></span>
+<span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  X1 <span class="op">=</span> <span class="va">X1</span>,</span>
+<span>  X2 <span class="op">=</span> <span class="va">X2</span>,</span>
+<span>  nboot <span class="op">=</span> <span class="fl">100</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Run model for normalized parameter combinations</span></span>
+<span><span class="va">Y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span><span class="op">(</span></span>
+<span>  <span class="va">sobol</span><span class="op">$</span><span class="va">X</span>,</span>
+<span>  <span class="fl">1</span>,</span>
+<span>  <span class="va">run_weertman_sobol</span>,</span>
+<span>  output <span class="op">=</span> <span class="st">"L_mean"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Calculate Sobol indices</span></span>
+<span><span class="va">sobol_result</span> <span class="op">&lt;-</span> <span class="fu">sensitivity</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sensitivity/man/decoupling.html">tell</a></span><span class="op">(</span><span class="va">sobol</span>, <span class="va">Y</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">sobol_result</span><span class="op">$</span><span class="va">X</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">param_names</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span>object <span class="op">=</span> <span class="va">sobol_result</span>, file <span class="op">=</span> <span class="st">"W08_sobol_result.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W08_sobol_result.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="va">data</span><span class="op">$</span><span class="va">S</span><span class="op">$</span><span class="va">original</span></span>
+<span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span><span class="va">S</span>, <span class="va">param_names</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">S</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"S"</span>, <span class="st">"parameter"</span><span class="op">)</span></span>
+<span><span class="va">S</span> <span class="op">&lt;-</span> <span class="va">S</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/order.html">order</a></span><span class="op">(</span><span class="va">S</span><span class="op">$</span><span class="va">S</span>, decreasing <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
+<p>Let’s plot the first-order Sobol indices.</p>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-256-1.png" alt="" width="576"></div>
+<p><strong>Quiz Question 9:</strong> What do the Sobol indices tell you?
+<!-- The uncertainty of the parameters lambda and the slope of the snow line have the largest influence on the mean ice sheet extent --></p>
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x_param</span> <span class="op">&lt;-</span> <span class="va">sobol_result</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="st">"lambda_ice"</span><span class="op">]</span></span>
+<span><span class="va">y_output</span> <span class="op">&lt;-</span> <span class="va">Y</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Normalized lambda_ice"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Mean ice-sheet half-width (km)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lowess.html">lowess</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-257-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 10:</strong> What does this Figure tell you?
+<!-- An increase in lambda produces a taller ice sheet for a given horizontal extent, increasing the fraction of its surface above the snowline. This expands the accumulation zone relative to the ablation zone, allowing the ice sheet to grow to a larger extent. --></p>
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">x_param</span> <span class="op">&lt;-</span> <span class="va">sobol_result</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="st">"s_ice"</span><span class="op">]</span></span>
+<span><span class="va">y_output</span> <span class="op">&lt;-</span> <span class="va">Y</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Normalized snowline slope"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Mean ice-sheet half-width (km)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lowess.html">lowess</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-258-1.png" alt="" width="480"></div>
+<p><strong>Quiz Question 11:</strong> What does this Figure tell you?
+<!-- The larger the snowline slope, the smaller the ice sheet --></p>
+</div>
+<div id="eigenanalysis-3" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Eigenanalysis<a class="anchor" aria-label="anchor" href="#eigenanalysis-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us now investigate how ice sheets influence the equilibrium state of the climate system. In these experiments, we dynamically couple all model modules (except for NPZD to reduce computation time) and compare simulations with the ice-sheet module enabled and disabled:</p>
+<ul>
+<li>Atmosphere</li>
+<li>Ocean</li>
+<li>Air-sea carbon exchange</li>
+<li>Land</li>
+<li>Sea ice</li>
+<li>Ice sheets (on/off)</li>
+</ul>
+<div id="ice-sheets-turned-off" class="section level3" number="9.4.1">
+<h3>
+<span class="header-section-number">9.4.1</span> Ice sheets turned off<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-off"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let’s setup the model configuration.</p>
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
+<p>Now we spin up the model for 10000 years.</p>
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_01.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create initialization file from this spinup</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output_W08_config_01.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init_W08_config_01.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Now we conduct the eigenanalysis for this model configuration.</p>
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span></span>
+<span><span class="co"># Select state variables that will be perturbed</span></span>
+<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Find the equilibria</span></span>
+<span><span class="va">equilibria</span> <span class="op">&lt;-</span> <span class="fu">eval_equilibria</span><span class="op">(</span><span class="va">config</span>, <span class="va">state_eq</span>, select_variables <span class="op">=</span> <span class="va">select_variables</span>, n_starts <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Conduct eigenanalysis</span></span>
+<span><span class="va">stability_results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvalues</span><span class="op">(</span><span class="va">config</span>,</span>
+<span>  equilibria_dimensionless <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">dimensionless</span>,</span>
+<span>  state_eq <span class="op">=</span> <span class="va">state_eq</span>,</span>
+<span>  state_min_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_min_active</span>,</span>
+<span>  state_max_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_max_active</span>,</span>
+<span>  delta_time <span class="op">=</span> <span class="fl">500</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">stability_results_ice_off</span> <span class="op">&lt;-</span> <span class="va">stability_results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">stability_results_ice_off</span>, <span class="st">"W08_stability_results_ice_off.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="ice-sheets-turned-on" class="section level3" number="9.4.2">
+<h3>
+<span class="header-section-number">9.4.2</span> Ice sheets turned on<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-on"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us repeat the same workflow but for terrestrial carbon cycle turned on.</p>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_02.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create initialization file from this spinup</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output_W08_config_02.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init_W08_config_02.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Now we conduct the eigenanalysis for this model configuration.</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span></span>
+<span><span class="co"># Select state variables that will be perturbed</span></span>
+<span><span class="va">select_variables</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"T_atm_L"</span>, <span class="st">"T_atm_H"</span>, <span class="st">"T_ocn_SL"</span>, <span class="st">"T_ocn_SH"</span>, <span class="st">"T_ocn_DL"</span>, <span class="st">"T_ocn_DH"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Find the equilibria</span></span>
+<span><span class="va">equilibria</span> <span class="op">&lt;-</span> <span class="fu">eval_equilibria</span><span class="op">(</span><span class="va">config</span>, <span class="va">state_eq</span>, select_variables <span class="op">=</span> <span class="va">select_variables</span>, n_starts <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Conduct eigenanalysis</span></span>
+<span><span class="va">stability_results</span> <span class="op">&lt;-</span> <span class="fu">eval_eigenvalues</span><span class="op">(</span><span class="va">config</span>,</span>
+<span>  equilibria_dimensionless <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">dimensionless</span>,</span>
+<span>  state_eq <span class="op">=</span> <span class="va">state_eq</span>,</span>
+<span>  state_min_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_min_active</span>,</span>
+<span>  state_max_active <span class="op">=</span> <span class="va">equilibria</span><span class="op">$</span><span class="va">state_max_active</span>,</span>
+<span>  delta_time <span class="op">=</span> <span class="fl">500</span></span>
+<span><span class="op">)</span></span>
+<span><span class="va">stability_results_ice_on</span> <span class="op">&lt;-</span> <span class="va">stability_results</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">stability_results_ice_on</span>, <span class="st">"W08_stability_results_ice_on.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="comparing-the-jacobians-3" class="section level3" number="9.4.3">
+<h3>
+<span class="header-section-number">9.4.3</span> Comparing the Jacobians<a class="anchor" aria-label="anchor" href="#comparing-the-jacobians-3"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us now compare the results from both simulations</p>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># land turned on:</span></span>
+<span><span class="va">ice_on</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W08_stability_results_ice_on.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># land turned off:</span></span>
+<span><span class="va">ice_off</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W08_stability_results_ice_off.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Jacobian</span></span>
+<span><span class="va">delta_jacobian</span> <span class="op">&lt;-</span> <span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span> <span class="op">-</span> <span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">delta_jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 12:</strong> How does dynamic ice sheet coupling affect the Jacobian?
+<!-- When ice sheets are allowed to evolve dynamically, the temperature response to perturbations is generally smaller after 500 years than when ice-sheet thickness is held fixed. --></p>
+</div>
+<div id="comparing-the-eigenmodes-3" class="section level3" number="9.4.4">
+<h3>
+<span class="header-section-number">9.4.4</span> Comparing the eigenmodes<a class="anchor" aria-label="anchor" href="#comparing-the-eigenmodes-3"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Eigenvalues</span></span>
+<span><span class="va">delta_lambda</span> <span class="op">&lt;-</span> <span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_lambda</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Timescales</span></span>
+<span><span class="va">delta_timescales</span> <span class="op">&lt;-</span> <span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">timescales</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_timescales</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 13:</strong> How do ice sheets affect the time scale of the dominant eigenmode?
+<!-- The time scale of the dominant eigenmode decreases by 31 years --></p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># dominant eigenvector land on</span></span>
+<span><span class="va">domVec_ice_on</span> <span class="op">&lt;-</span> <span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_ice_on</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># dominant eigenvector land off</span></span>
+<span><span class="va">domVec_ice_off</span> <span class="op">&lt;-</span> <span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_ice_off</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 14:</strong> Which variable contributes most to the dominant eigenmode when ice sheets are turned off?
+<!-- The largest contribution comes from the low-latitude deep ocean --></p>
+<p><strong>Quiz Question 15:</strong> How does adding ice sheets affect the balance between restoring and amplifying processes in the vicinity of the equilibrium?
+<!-- Ice sheets causes a decrease in the eigenvalue of the dominant mode, corresponding to a shorter decay timescale and hence a modest increase in the stability of the equilibrium. --></p>
+</div>
+</div>
+<div id="anthropogenic-emissions-3" class="section level2" number="9.5">
+<h2>
+<span class="header-section-number">9.5</span> Anthropogenic Emissions<a class="anchor" aria-label="anchor" href="#anthropogenic-emissions-3"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us now simulate how ice sheets affect the climate system during the industrial period.</p>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
+<div id="ice-sheets-turned-off-1" class="section level3" number="9.5.1">
+<h3>
+<span class="header-section-number">9.5.1</span> Ice sheets turned off<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-off-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_calues</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_01_transient.rds"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W08_config_01_transient.rds"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"T_atm_global"</span>, <span class="st">"M"</span>, <span class="st">"F_fw_ice_H"</span>, </span>
+<span>  <span class="st">"h_ice"</span>, <span class="st">"A_ice"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"rho_SH"</span>,</span>
+<span>  <span class="st">"Q"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="ice-sheets-turned-on-1" class="section level3" number="9.5.2">
+<h3>
+<span class="header-section-number">9.5.2</span> Ice sheets turned on<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-on-1"><i class="fas fa-link"></i></a>
+</h3>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_calues</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># Flags</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_02_transient.rds"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W08_config_02_transient.rds"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"T_atm_global"</span>, <span class="st">"M"</span>, <span class="st">"F_fw_ice_H"</span>, </span>
+<span>  <span class="st">"h_ice"</span>, <span class="st">"A_ice"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"rho_SH"</span>,</span>
+<span>  <span class="st">"Q"</span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 16:</strong> How does the dynamic ice sheet coupling affect the strength of the thermohaline circulation since the industrial revolution?
+<!-- The circulation weakens more strongly when ice sheets are dynamically coupled --></p>
+</div>
+</div>
+<div id="graduate-students-7" class="section level2" number="9.6">
+<h2>
+<span class="header-section-number">9.6</span> Graduate Students<a class="anchor" aria-label="anchor" href="#graduate-students-7"><i class="fas fa-link"></i></a>
+</h2>
+<p>Generate a figure with two time series showing the global mean atmospheric temperature with and without ice sheets from your spinup state. Calculate the mean temperature difference and interpret your findings.</p>
+</div>
+<div id="reflection-7" class="section level2" number="9.7">
+<h2>
+<span class="header-section-number">9.7</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection-7"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
+</div>
+</div>
+  <div class="chapter-nav">
+<div class="prev"><a href="week-8-cryosphere.html"><span class="header-section-number">8</span> Week 8: Cryosphere</a></div>
+<div class="next"><a href="week-9-earth-system-dynamics.html"><span class="header-section-number">10</span> Week 9: Earth System Dynamics</a></div>
+</div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
+    <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-8-cryosphere-1"><span class="header-section-number">9</span> Week 8: Cryosphere</a></li>
+<li><a class="nav-link" href="#connceptual-ice-sheet-model-1"><span class="header-section-number">9.1</span> Connceptual Ice Sheet Model</a></li>
+<li><a class="nav-link" href="#milankovitch-cycle"><span class="header-section-number">9.2</span> Milankovitch Cycle</a></li>
+<li><a class="nav-link" href="#global-sensitivity-analysis-1"><span class="header-section-number">9.3</span> Global Sensitivity Analysis</a></li>
+<li>
+<a class="nav-link" href="#eigenanalysis-3"><span class="header-section-number">9.4</span> Eigenanalysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ice-sheets-turned-off"><span class="header-section-number">9.4.1</span> Ice sheets turned off</a></li>
+<li><a class="nav-link" href="#ice-sheets-turned-on"><span class="header-section-number">9.4.2</span> Ice sheets turned on</a></li>
+<li><a class="nav-link" href="#comparing-the-jacobians-3"><span class="header-section-number">9.4.3</span> Comparing the Jacobians</a></li>
+<li><a class="nav-link" href="#comparing-the-eigenmodes-3"><span class="header-section-number">9.4.4</span> Comparing the eigenmodes</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#anthropogenic-emissions-3"><span class="header-section-number">9.5</span> Anthropogenic Emissions</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#ice-sheets-turned-off-1"><span class="header-section-number">9.5.1</span> Ice sheets turned off</a></li>
+<li><a class="nav-link" href="#ice-sheets-turned-on-1"><span class="header-section-number">9.5.2</span> Ice sheets turned on</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#graduate-students-7"><span class="header-section-number">9.6</span> Graduate Students</a></li>
+<li><a class="nav-link" href="#reflection-7"><span class="header-section-number">9.7</span> Reflection</a></li>
+</ul>
+
+      <div class="book-extra">
+        <ul class="list-unstyled">
+          
+        </ul>
+</div>
+    </nav>
+</div>
+
+</div>
+</div> <!-- .container -->
+
+<footer class="bg-primary text-light mt-5"><div class="container"><div class="row">
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>"<strong>Earth System Modelling</strong>" was written by Christian Seiler. </p>
+  </div>
+
+  <div class="col-12 col-md-6 mt-3">
+    <p>This book was built by the <a class="text-light" href="https://bookdown.org">bookdown</a> R package.</p>
+  </div>
+
+</div></div>
+</footer><!-- dynamically load mathjax for compatibility with self-contained --><script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script><script type="text/x-mathjax-config">const popovers = document.querySelectorAll('a.footnote-ref[data-toggle="popover"]');
+for (let popover of popovers) {
+  const div = document.createElement('div');
+  div.setAttribute('style', 'position: absolute; top: 0, left:0; width:0, height:0, overflow: hidden; visibility: hidden;');
+  div.innerHTML = popover.getAttribute('data-content');
+
+  var has_math = div.querySelector("span.math");
+  if (has_math) {
+    document.body.appendChild(div);
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, div]);
+    MathJax.Hub.Queue(function() {
+      popover.setAttribute('data-content', div.innerHTML);
+      document.body.removeChild(div);
+    })
+  }
+}
+</script>
+</body>
+</html>
