@@ -78,7 +78,7 @@
 <span class="header-section-number">6.1.1</span> Load configuration<a class="anchor" aria-label="anchor" href="#load-configuration"><i class="fas fa-link"></i></a>
 </h3>
 <p>We begin by loading the configuration file that contains the initial conditions and parameter values</p>
-<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -95,7 +95,7 @@
 <span class="header-section-number">6.1.2</span> NPZD function<a class="anchor" aria-label="anchor" href="#npzd-function"><i class="fas fa-link"></i></a>
 </h3>
 <p>Next, let’s define an NPZD function for a single ocean box, neglecting transport and coupling to the carbon cycle. This simplified setup allows us to focus on developing an intuitive understanding of how NPZD works.</p>
-<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span>, <span class="va">times</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Parameter values</span></span>
 <span>  <span class="va">a</span> <span class="op">&lt;-</span> <span class="va">params</span><span class="op">$</span><span class="va">a</span></span>
@@ -250,7 +250,7 @@
 <span class="header-section-number">6.1.3</span> NPZD experiment (1): Default setting<a class="anchor" aria-label="anchor" href="#npzd-experiment-1-default-setting"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let us now apply this function for a given set of initial conditions, parameter values, and time steps:</p>
-<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb105"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the initial values</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">initial_values</span></span>
 <span></span>
@@ -263,7 +263,7 @@
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="va">t_end</span>, by <span class="op">=</span> <span class="va">dt</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">run_npzd</span><span class="op">(</span><span class="va">state</span>, <span class="va">params</span>, <span class="va">times</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-125-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-114-1.png" alt="" width="576"></div>
 <p>You can access the <span class="math inline">\(N\)</span>, <span class="math inline">\(P\)</span>, <span class="math inline">\(Z\)</span>, and <span class="math inline">\(D\)</span> values by typing <code>df</code>. You can sum up all nitrogen pools for each time step using <code>rowSums(df)</code>.</p>
 <p><strong>Quiz Question 1:</strong> Does the NPZD model conserve Nitrogen?
 <!-- Yes --></p>
@@ -283,7 +283,7 @@
 <p>Parameter values are difficult to constrain by observations and must be tuned.
 Let us find out what happens if we change a parameter value that controls grazing.
 We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its original value.</p>
-<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the initial values</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">initial_values</span></span>
 <span></span>
@@ -308,7 +308,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span class="header-section-number">6.1.5</span> NPZD experiment (3): Increase ocean temperature<a class="anchor" aria-label="anchor" href="#npzd-experiment-3-increase-ocean-temperature"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s keep the new grazing parameter and also increase the ocean temperature by 10K.</p>
-<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the initial values</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">initial_values</span></span>
 <span></span>
@@ -333,7 +333,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span class="header-section-number">6.1.6</span> NPZD experiment (4): Decrease sea ice extent<a class="anchor" aria-label="anchor" href="#npzd-experiment-4-decrease-sea-ice-extent"><i class="fas fa-link"></i></a>
 </h3>
 <p>In addition to the changes already implemented above, let us now also decrease the sea ice cover fraction from 0.23 to 0.0.</p>
-<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the initial values</span></span>
 <span><span class="va">state</span> <span class="op">&lt;-</span> <span class="va">config</span><span class="op">$</span><span class="va">initial_values</span></span>
 <span></span>
@@ -371,7 +371,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span class="header-section-number">6.2.1</span> Dynamic air-sea carbon exchange turned off<a class="anchor" aria-label="anchor" href="#dynamic-air-sea-carbon-exchange-turned-off-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let’s setup the model configuration.</p>
-<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -396,7 +396,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
 <p>Now we spin up the model for 10000 years.</p>
-<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W06_config_01.rds"</span><span class="op">)</span></span>
@@ -408,7 +408,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now we conduct the eigenanalysis for this model configuration.</p>
-<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W06_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -434,7 +434,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span class="header-section-number">6.2.2</span> NPZD turned on<a class="anchor" aria-label="anchor" href="#npzd-turned-on"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let us repeat the same workflow but for NPZD turned on. The spinup of 10,000 years for QUEST with NPZD turned on takes about 30 minutes. To save you some time, I have spun up the model for you. The spun up state is saved as <code>config_init_W06_config_02.R</code> and is stored in our shared group folder.</p>
-<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W06_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -460,7 +460,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span class="header-section-number">6.2.3</span> Comparing the Jacobians<a class="anchor" aria-label="anchor" href="#comparing-the-jacobians-1"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let us now compare the results from both simulations</p>
-<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># NPZD turned on:</span></span>
 <span><span class="va">NPZD_on</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W06_stability_results_NPZD_on.rds"</span><span class="op">)</span></span>
 <span></span>
@@ -481,7 +481,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <h3>
 <span class="header-section-number">6.2.4</span> Comparing the eigenmodes<a class="anchor" aria-label="anchor" href="#comparing-the-eigenmodes-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Eigenvalues</span></span>
 <span><span class="va">delta_lambda</span> <span class="op">&lt;-</span> <span class="va">NPZD_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">NPZD_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">NPZD_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -495,7 +495,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_timescales</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 12:</strong> How does NPZD affect the time scale of the dominant eigenmode?
 <!-- The time scale of the dominant eigenmode decreases by 47 years --></p>
-<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># dominant eigenvector NPZD on</span></span>
 <span><span class="va">domVec_NPZD_on</span> <span class="op">&lt;-</span> <span class="va">NPZD_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_NPZD_on</span><span class="op">)</span></span>
@@ -514,7 +514,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span class="header-section-number">6.3</span> Anthropogenic Emissions<a class="anchor" aria-label="anchor" href="#anthropogenic-emissions-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us now simulate the effects of historical anthropogenic carbon emissions on ocean carbon chemistry. To do this, we need to make two changes to the model configuration: enable anthropogenic emissions and activate the carbonate-system diagnostics. The following chunk runs the simulation from 1800 to 2024. It may take a few minutes to complete because the carbonate-system diagnostics add substantial computational overhead. Let us first setup the model configuration:</p>
-<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -542,7 +542,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <h3>
 <span class="header-section-number">6.3.1</span> NPZD turned off<a class="anchor" aria-label="anchor" href="#npzd-turned-off"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W06_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">initial_calues</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
@@ -554,7 +554,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W06_config_01.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W06_config_01.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"anthr_emissions"</span>, <span class="st">"Carbon_total"</span>, <span class="st">"C_atm_ppmv"</span>,</span>
@@ -567,7 +567,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <h3>
 <span class="header-section-number">6.3.2</span> NPZD turned on<a class="anchor" aria-label="anchor" href="#npzd-turned-on-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W06_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">initial_calues</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
@@ -579,7 +579,7 @@ We will reduce <span class="math inline">\(\lambda\)</span> to 20% of its origin
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W06_config_02.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W06_config_02.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"anthr_emissions"</span>, <span class="st">"Carbon_total"</span>, <span class="st">"C_atm_ppmv"</span>,</span>

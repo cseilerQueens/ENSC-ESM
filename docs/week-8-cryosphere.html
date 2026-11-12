@@ -81,7 +81,7 @@
 <li><p>Choose <span class="math inline">\(L\)</span> = 300,000 m, <span class="math inline">\(\lambda\)</span> = 10 m, h_0 = 205 m, s = 1e-3 m/m</p></li>
 </ul>
 <p>Plot the cross section of an ice sheet using the equations above. Your figure should resemble the figure below.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-168-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-157-1.png" alt="" width="576"></div>
 <p><strong>Quiz Question 1:</strong> What is the direction of this cross section?
 <!-- From north to south --></p>
 <p><strong>Quiz Question 2:</strong> Why is the vertical extent of the ice sheet below zero?
@@ -97,7 +97,7 @@
 <li><p>Snow line below upper ice surface: blue</p></li>
 </ul>
 <p>You can set the color of a line in R like this <code>lines(x, y, col = "blue")</code></p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-169-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-158-1.png" alt="" width="576"></div>
 <p>The Weertman model distinguishes three cases:</p>
 <ul>
 <li><ol style="list-style-type: decimal">
@@ -135,7 +135,7 @@ L -
 <li><p><span class="math inline">\(h_0\)</span> = 400 m is the height of the snowline at the northern edge of the ice sheet</p></li>
 </ul>
 <p>Plot this tendency function. Your result should look like the figure below.</p>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-170-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-159-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 6:</strong> Let’s say our ice sheet has a half-length of 400 km. How will this value change over time?
 <!-- The ice sheet will grow until it reaches a half-length of about 700 km --></p>
 </div>
@@ -148,7 +148,7 @@ L -
 h_0 = \alpha(\Delta Q + \Delta Q_0)
 \]</span></p>
 <p>where <span class="math inline">\(\Delta Q_0\)</span> is a constant (<span class="math inline">\(\Delta Q_0\)</span> = 10 ly per day) and <span class="math inline">\(\alpha = 21,000\)</span> m ly<span class="math inline">\(^{-1}\)</span> day * <span class="math inline">\(s\)</span>. Recall that <span class="math inline">\(s\)</span> is the snowline slope (<span class="math inline">\(s\)</span> = 0.001 m/m). Plot <span class="math inline">\(h_0\)</span> as a function of <span class="math inline">\(\Delta Q\)</span> for values ranging from -35 to 50 ly per day. Your figure should look lik the the plot below.</p>
-<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">1e-3</span> <span class="co"># Snowline slope (m/m)</span></span>
@@ -163,11 +163,11 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  ylab <span class="op">=</span> <span class="st">"Snow line elevation \n at northern edge, h0 (m)"</span></span>
 <span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-171-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-160-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 7:</strong> What does this figure tell you?
 <!-- The more insolation the higher the snowline at the northern edge of the ice sheet --></p>
 <p>Let us now simulate how ice sheets respond to the Milankovitch cycle. The code below considers the three cases of ice sheet growth and retreat (flowing ice with full accumulation, flowing ice with partial accumulation, stagnant ice), as well as ice sheet nucleation. The first code chunk below defines the a function of the Weertman ice sheet model. We then need to numericall integrate this function over time, using incolation anomalies as an external forcing.</p>
-<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ============================================================</span></span>
 <span><span class="co"># Weertman ice sheet model</span></span>
 <span><span class="co"># ============================================================</span></span>
@@ -264,7 +264,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  <span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Next we define a function that integrates the Weertman ice sheet model.</p>
-<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># ============================================================</span></span>
 <span><span class="co"># Euler integration</span></span>
 <span><span class="co"># ============================================================</span></span>
@@ -344,7 +344,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Now we need to calculate the insolation anomalies that are used as an input in the Weertman model</p>
-<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mcrucifix/palinsol">palinsol</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># -------------------------</span></span>
@@ -383,7 +383,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span><span class="co"># Insolation anomaly (W m-2)</span></span>
 <span><span class="va">delta_Q</span> <span class="op">&lt;-</span> <span class="va">Q</span> <span class="op">-</span> <span class="va">Q_ref</span></span></code></pre></div>
 <p>Let us now integrate the Weertman model forward in time using varying incoming solar radiation. Note that I have changed the original notation of insolation units from langley (ly) per day to W m<span class="math inline">\(^{-2}\)</span>, where 1 ly per day = 41.85 <span class="math inline">\(\times\)</span> 1000 / 86400 s/d = 0.484375 W m<span class="math inline">\(^{-2}\)</span>.</p>
-<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb146"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># -------------------------</span></span>
 <span><span class="co"># Parameters</span></span>
 <span><span class="co"># -------------------------</span></span>
@@ -416,7 +416,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  times <span class="op">=</span> <span class="va">times</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Plot results</p>
-<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">3</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">times</span> <span class="op">/</span> <span class="fl">1000</span>, <span class="va">delta_Q</span>,</span>
 <span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
@@ -441,7 +441,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span class="header-section-number">8.3</span> Global Sensitivity Analysis<a class="anchor" aria-label="anchor" href="#global-sensitivity-analysis-1"><i class="fas fa-link"></i></a>
 </h2>
 <p>We will now conduct a global sennsitivity analysis for the Weertman ice sheet model. We begin by defining the parameter ranges.</p>
-<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">sensitivity</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">param_names</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
@@ -471,7 +471,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  alpha_ice     <span class="op">=</span> <span class="fl">60</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Next we need to create a wrapper around <code>run_ice()</code>.</p>
-<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">run_weertman_sobol</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">par</span>, <span class="va">output</span> <span class="op">=</span> <span class="st">"L_mean"</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="co"># Convert normalized parameters to physical values</span></span>
 <span>  <span class="va">par</span> <span class="op">&lt;-</span> <span class="va">lower</span> <span class="op">+</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span><span class="op">(</span><span class="va">par</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="va">upper</span> <span class="op">-</span> <span class="va">lower</span><span class="op">)</span></span>
@@ -514,7 +514,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"Unknown output"</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>Next, we randomly sample each parameter from a range of 0 to 1. We use this range because all parameter values are normalized before sampling.</p>
-<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb150"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">123</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">N</span> <span class="op">&lt;-</span> <span class="fl">2000</span></span>
@@ -532,7 +532,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">X1</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">param_names</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">X2</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">param_names</span></span></code></pre></div>
 <p>Now we are ready to run the Sobol analysis.</p>
-<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">sobol</span> <span class="op">&lt;-</span> <span class="fu">sensitivity</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/sensitivity/man/sobolSalt.html">sobolSalt</a></span><span class="op">(</span></span>
 <span>  model <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  X1 <span class="op">=</span> <span class="va">X1</span>,</span>
@@ -565,7 +565,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <p><strong>Quiz Question 9:</strong> What do the Sobol indices tell you?
 <!-- The uncertainty of the parameters lambda and the slope of the snow line have the largest influence on the mean ice sheet extent --></p>
 <p>Let us now plot the mean ice sheet half-length against the <span class="math inline">\(\lambda\)</span>.</p>
-<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x_param</span> <span class="op">&lt;-</span> <span class="va">sobol_result</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="st">"lambda_ice"</span><span class="op">]</span></span>
@@ -578,11 +578,11 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lowess.html">lowess</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-182-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-171-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 10:</strong> What does this Figure tell you?
 <!-- An increase in lambda produces a taller ice sheet for a given horizontal extent, increasing the fraction of its surface above the snowline. This expands the accumulation zone relative to the ablation zone, allowing the ice sheet to grow to a larger extent. --></p>
 <p>Let us now plot the mean ice sheet half-length against the slope of the snowline.</p>
-<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">x_param</span> <span class="op">&lt;-</span> <span class="va">sobol_result</span><span class="op">$</span><span class="va">X</span><span class="op">[</span>, <span class="st">"s_ice"</span><span class="op">]</span></span>
@@ -595,7 +595,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/lowess.html">lowess</a></span><span class="op">(</span><span class="va">x_param</span>, <span class="va">y_output</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-183-1.png" alt="" width="480"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-172-1.png" alt="" width="480"></div>
 <p><strong>Quiz Question 11:</strong> What does this Figure tell you?
 <!-- The larger the snowline slope, the smaller the ice sheet --></p>
 </div>
@@ -617,7 +617,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span class="header-section-number">8.4.1</span> Ice sheets turned off<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-off"><i class="fas fa-link"></i></a>
 </h3>
 <p>Turning ice sheets off does not mean there are no ice sheets. It means that the ice sheets are constant and do not dynamically evolve over time. Let’s setup the model configuration.</p>
-<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -642,7 +642,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
 <p>Now we spin up the model for 10000 years.</p>
-<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_01.rds"</span><span class="op">)</span></span>
@@ -654,7 +654,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now we conduct the eigenanalysis for this model configuration.</p>
-<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -681,7 +681,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span class="header-section-number">8.4.2</span> Ice sheets turned on<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-on"><i class="fas fa-link"></i></a>
 </h3>
 <p>Let us repeat the same workflow but for ice sheets turned on.</p>
-<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Load the configuration files:</span></span>
 <span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
 <span></span>
@@ -698,7 +698,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span></code></pre></div>
 <p>Now we spin up the model for 10000 years.</p>
-<div class="sourceCode" id="cb161"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_02.rds"</span><span class="op">)</span></span>
@@ -710,7 +710,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p>Now we conduct the eigenanalysis for this model configuration.</p>
-<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun up state variables</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span></span>
@@ -738,7 +738,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 </h3>
 <p>Let us now compare the results from both simulations</p>
 <!-- ```{r, message=FALSE, warning=FALSE, results='hide', fig.show='hide'} -->
-<div class="sourceCode" id="cb163"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># land turned on:</span></span>
 <span><span class="va">ice_on</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"W08_stability_results_ice_on.rds"</span><span class="op">)</span></span>
 <span></span>
@@ -755,7 +755,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 ## T_ocn_SH       0       0   -0.002   -0.001    0.055    0.026
 ## T_ocn_DL       0       0    0.011    0.008    0.697    0.136
 ## T_ocn_DH       0       0    0.000    0.000    0.044    0.362</code></pre>
-<div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##          T_atm_L T_atm_H T_ocn_SL T_ocn_SH T_ocn_DL T_ocn_DH
 ## T_atm_L        0       0    0.001    0.001    0.057    0.018
@@ -764,7 +764,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 ## T_ocn_SH       0       0    0.000    0.000    0.055    0.026
 ## T_ocn_DL       0       0    0.011    0.008    0.697    0.136
 ## T_ocn_DH       0       0    0.006    0.003    0.046    0.362</code></pre>
-<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html">round</a></span><span class="op">(</span><span class="va">delta_jacobian</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code>##          T_atm_L T_atm_H T_ocn_SL T_ocn_SH T_ocn_DL T_ocn_DH
 ## T_atm_L        0       0   -0.001    0.000    0.000        0
@@ -780,7 +780,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <h3>
 <span class="header-section-number">8.4.4</span> Comparing the eigenmodes<a class="anchor" aria-label="anchor" href="#comparing-the-eigenmodes-3"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Eigenvalues</span></span>
 <span><span class="va">delta_lambda</span> <span class="op">&lt;-</span> <span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">-</span> <span class="va">ice_off</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvalues</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
@@ -794,7 +794,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">delta_timescales</span><span class="op">)</span></span></code></pre></div>
 <p><strong>Quiz Question 13:</strong> How do ice sheets affect the time scale of the dominant eigenmode?
 <!-- The time scale of the dominant eigenmode decreases by 4 years --></p>
-<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># dominant eigenvector land on</span></span>
 <span><span class="va">domVec_ice_on</span> <span class="op">&lt;-</span> <span class="va">ice_on</span><span class="op">$</span><span class="va">equilibrium_1</span><span class="op">$</span><span class="va">eigenvectors</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">domVec_ice_on</span><span class="op">)</span></span>
@@ -813,7 +813,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span class="header-section-number">8.5</span> Anthropogenic Emissions<a class="anchor" aria-label="anchor" href="#anthropogenic-emissions-3"><i class="fas fa-link"></i></a>
 </h2>
 <p>Let us now simulate how ice sheets affect the climate system during the industrial period.</p>
-<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Load the QUEST package:</span></span>
@@ -841,7 +841,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <h3>
 <span class="header-section-number">8.5.1</span> Ice sheets turned off<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-off-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">initial_calues</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
@@ -853,20 +853,20 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_01_transient.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W08_config_01_transient.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"T_atm_global"</span>, <span class="st">"M"</span>, <span class="st">"F_fw_ice_H"</span>,</span>
 <span>  <span class="st">"h_ice"</span>, <span class="st">"A_ice"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"rho_SH"</span>,</span>
 <span>  <span class="st">"Q"</span></span>
 <span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<div class="inline-figure"><img src="figure-html/unnamed-chunk-195-1.png" alt="" width="576"></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-184-1.png" alt="" width="576"></div>
 </div>
 <div id="ice-sheets-turned-on-1" class="section level3" number="8.5.2">
 <h3>
 <span class="header-section-number">8.5.2</span> Ice sheets turned on<a class="anchor" aria-label="anchor" href="#ice-sheets-turned-on-1"><i class="fas fa-link"></i></a>
 </h3>
-<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb171"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Get the spun-up state</span></span>
 <span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"config_init_W08_config_02.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
 <span><span class="va">config</span><span class="op">$</span><span class="va">initial_calues</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
@@ -878,7 +878,7 @@ h_0 = \alpha(\Delta Q + \Delta Q_0)
 <span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W08_config_02_transient.rds"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W08_config_02_transient.rds"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
 <span>  <span class="st">"T_atm_global"</span>, <span class="st">"M"</span>, <span class="st">"F_fw_ice_H"</span>,</span>

@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="In the first part of this tutorial, you will examine how dynamic coupling among climate system components shapes the response of global mean surface temperature to anthropogenic CO2 emissions...">
+<meta property="og:description" content="In the first part of this tutorial, you will examine how dynamic coupling among climate system components shapes the response of global mean surface temperature to anthropogenic CO2 emissions...">
+<meta name="twitter:description" content="In the first part of this tutorial, you will examine how dynamic coupling among climate system components shapes the response of global mean surface temperature to anthropogenic CO2 emissions...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -68,14 +68,876 @@
 <h1>
 <span class="header-section-number">9</span> Week 9: Earth System Dynamics<a class="anchor" aria-label="anchor" href="#week-9-earth-system-dynamics"><i class="fas fa-link"></i></a>
 </h1>
-
+<p>In the first part of this tutorial, you will examine how dynamic coupling among climate system components shapes the response of global mean surface temperature to anthropogenic CO<sub>2</sub> emissions between 1800 and 2024. In the second part, you will calculate feedback factors using a carbon pulse that initially doubles atmospheric CO<sub>2</sub>. In both parts, you will assess each component’s influence by comparing simulations with its dynamic coupling enabled and disabled.</p>
+<div id="contribution-to-warming" class="section level2" number="9.1">
+<h2>
+<span class="header-section-number">9.1</span> Contribution to Warming<a class="anchor" aria-label="anchor" href="#contribution-to-warming"><i class="fas fa-link"></i></a>
+</h2>
+<div id="spinup" class="section level3" number="9.1.1">
+<h3>
+<span class="header-section-number">9.1.1</span> Spinup<a class="anchor" aria-label="anchor" href="#spinup"><i class="fas fa-link"></i></a>
+</h3>
+<p>First we need to produce a spinup for the fully-coupled run. This spinup takes about 30 minutes to complete. To save us some time I have produced the spinup for you. The output is stored in <code>output_W09_config_01.rds</code> and the corresponding initialization file is <code>config_init_W09_config_01.R</code>. The code chunk below shows how I produced the spinup. You don’t need to run it.</p>
+<div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">10000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Create initialization file from this spinup</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_write_new_init.html">utils_write_new_init</a></span><span class="op">(</span></span>
+<span>  input_file <span class="op">=</span> <span class="st">"output_W09_config_01.rds"</span>,</span>
+<span>  output_file <span class="op">=</span> <span class="st">"config_init_W09_config_01.R"</span>,</span>
+<span>  final_year <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p>Let us now read in the spun up state and run the model for the 1800-2024 period with anthropogenic emissions turned on.</p>
+<div class="sourceCode" id="cb174"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_config_all.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>Plot the results for a selection of variables.</p>
+<div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all.rds"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>, variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>  <span class="st">"T_atm_global"</span>, <span class="st">"M"</span>, <span class="st">"F_fw_ice_H"</span>,</span>
+<span>  <span class="st">"h_ice"</span>, <span class="st">"A_ice"</span>, <span class="st">"S_ocn_SH"</span>, <span class="st">"rho_SH"</span>,</span>
+<span>  <span class="st">"Q"</span></span>
+<span><span class="op">)</span>, my.xlim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span><span class="op">)</span>, PNGfile <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-192-1.png" alt="" width="576"></div>
+</div>
+<div id="sea-ice" class="section level3" number="9.1.2">
+<h3>
+<span class="header-section-number">9.1.2</span> Sea Ice<a class="anchor" aria-label="anchor" href="#sea-ice"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next, we will quantify how changes in sea ice affect warming. To do this, we disable the sea ice module, keeping sea ice present while holding its spatial extent, volume, accumulation, and ablation constant at their equilibrium values for the year 1800. Disabling a module prevents QUEST from updating the state variables calculated by that module, leaving them fixed at their initial values. Any diagnostic variables or fluxes normally calculated by the module must be specified explicitly. One example is the fractional area covered by sea ice, <code>A_sic</code>. The results will be saved in a <code>.rds</code> file for later analysis.</p>
+<div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># Get the equilibrium value</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span> <span class="co"># last time step</span></span>
+<span><span class="va">A_sic</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">A_sic</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_values</span><span class="op">$</span><span class="va">A_sic</span> <span class="op">&lt;-</span> <span class="va">A_sic</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_config_all_but_sic.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="ice-sheets" class="section level3" number="9.1.3">
+<h3>
+<span class="header-section-number">9.1.3</span> Ice Sheets<a class="anchor" aria-label="anchor" href="#ice-sheets"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next we turn sea ice back on but uncouple the ice sheets. Again, we need to specify diagnostic and flux variables usually computed by the ice sheet module and save the results for later analysis.</p>
+<div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># Get the equilibrium value</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span> <span class="co"># last time step</span></span>
+<span><span class="va">A_ice</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">A_ice</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">F_fw_ice_L</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_fw_ice_L</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">F_fw_ice_H</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_fw_ice_H</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_values</span><span class="op">$</span><span class="va">A_ice</span> <span class="op">&lt;-</span> <span class="va">A_ice</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_fw_ice_L</span> <span class="op">&lt;-</span> <span class="va">F_fw_ice_L</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_fw_ice_H</span> <span class="op">&lt;-</span> <span class="va">F_fw_ice_H</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_config_all_but_ice.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="air-sea-carbon-exchange" class="section level3" number="9.1.4">
+<h3>
+<span class="header-section-number">9.1.4</span> Air-sea Carbon Exchange<a class="anchor" aria-label="anchor" href="#air-sea-carbon-exchange"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next we turn ice sheets back on but uncouple air-sea carbon exchange.</p>
+<div class="sourceCode" id="cb178"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># Get the equilibrium value</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span> <span class="co"># last time step</span></span>
+<span><span class="va">F_L</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_L</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">F_H</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_H</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_L</span> <span class="op">&lt;-</span> <span class="va">F_L</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_H</span> <span class="op">&lt;-</span> <span class="va">F_H</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_config_all_but_AirSeaCarbon.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="npzd" class="section level3" number="9.1.5">
+<h3>
+<span class="header-section-number">9.1.5</span> NPZD<a class="anchor" aria-label="anchor" href="#npzd"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next we uncouple the biological carbon pump.</p>
+<div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_config_all_but_npzd.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="land" class="section level3" number="9.1.6">
+<h3>
+<span class="header-section-number">9.1.6</span> Land<a class="anchor" aria-label="anchor" href="#land"><i class="fas fa-link"></i></a>
+</h3>
+<p>Finally, we uncouple the biological carbon pump.</p>
+<div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># Get the equilibrium value</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span> <span class="co"># last time step</span></span>
+<span><span class="va">NPP_lnd</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">NPP_lnd</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">RH_lnd</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">RH_lnd</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">NPP_lnd</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># NPP_lnd</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">RH_lnd</span> <span class="op">&lt;-</span> <span class="fl">0</span> <span class="co"># RH_lnd</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1800</span>, <span class="fl">2024</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_config_all_but_lnd.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>This completes our set of experiments for the first part of the tutorial. In the next subsection you will analyze the results.</p>
+</div>
+<div id="compare-against-baseline" class="section level3" number="9.1.7">
+<h3>
+<span class="header-section-number">9.1.7</span> Compare against Baseline<a class="anchor" aria-label="anchor" href="#compare-against-baseline"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us now calculate the differences in temperature between the fully coupled baseline simulation and the uncoupled runs for each time step.</p>
+<div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all.rds"</span><span class="op">)</span><span class="op">$</span><span class="va">times</span></span>
+<span><span class="va">all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all.rds"</span><span class="op">)</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="va">sic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all_but_sic.rds"</span><span class="op">)</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="va">ice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all_but_ice.rds"</span><span class="op">)</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="va">AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all_but_AirSeaCarbon.rds"</span><span class="op">)</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="va">npzd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all_but_npzd.rds"</span><span class="op">)</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="va">lnd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_all_but_lnd.rds"</span><span class="op">)</span><span class="op">$</span><span class="va">T_atm_global</span></span></code></pre></div>
+<p>Plot the results</p>
+<div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette.colors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">6</span>, palette <span class="op">=</span> <span class="st">"Okabe-Ito"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">times</span>, y <span class="op">=</span> <span class="va">all</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Year"</span>, ylab <span class="op">=</span> <span class="fu">latex2exp</span><span class="fu">::</span><span class="fu"><a href="https://www.stefanom.io/latex2exp/reference/TeX.html">TeX</a></span><span class="op">(</span><span class="st">"$\\Delta$ GMST (K)"</span><span class="op">)</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">286.5</span>, <span class="fl">289</span><span class="op">)</span>, lwd <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">times</span>, y <span class="op">=</span> <span class="va">sic</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">2</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">times</span>, y <span class="op">=</span> <span class="va">ice</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">3</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">times</span>, y <span class="op">=</span> <span class="va">AirSeaCarbon</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">4</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">times</span>, y <span class="op">=</span> <span class="va">npzd</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">5</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">times</span>, y <span class="op">=</span> <span class="va">lnd</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">6</span><span class="op">]</span>, lty <span class="op">=</span> <span class="fl">6</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, col <span class="op">=</span> <span class="va">my.col</span>, lty <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">6</span>, lwd <span class="op">=</span> <span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"All"</span>, <span class="st">"Sea ice"</span>, <span class="st">"Ice sheet"</span>, <span class="st">"Air-sea carbon"</span>, <span class="st">"NPZD"</span>, <span class="st">"Land"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-199-1.png" alt="" width="576"></div>
+<p><strong>Quiz Question 1:</strong> Which of the five components has the largest warming effect during the historical period?
+<!-- Sea ice --></p>
+<p><strong>Quiz Question 2:</strong> Which of the five components has the largest cooling effect during the historical period?
+<!-- Land --></p>
+<p><strong>Quiz Question 3:</strong> What spinup did we use for the figure above?
+<!-- The simulations start from a single spinup where all components are dynamically coupled --></p>
+<p><strong>Quiz Question 4:</strong> How did we generate the line called ice sheet?
+<!-- We uncoupled the ice sheet from the rest of the model such that it remains constant from 1800 onwards --></p>
+</div>
+</div>
+<div id="feedback-analysis" class="section level2" number="9.2">
+<h2>
+<span class="header-section-number">9.2</span> Feedback Analysis<a class="anchor" aria-label="anchor" href="#feedback-analysis"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this second section, we will calculate the feedback factors and system gains for each component. Unlike the experiments above, we use a reference simulation in which only the atmosphere and ocean are dynamically coupled. We then quantify the feedback associated with each additional component by enabling its dynamic coupling.</p>
+<p>The atmosphere and ocean remain dynamically coupled in all experiments because most other components interact with the atmosphere through the ocean, and holding ocean temperatures fixed would make the ocean an infinite heat sink. Let us begin by recalling the definition of the feedback factor presented by <a href="https://doi.org/10.1146/annurev.earth.061008.134734">Roe (2009)</a>:</p>
+<p><span class="math display">\[f_i = 1 - \frac{\Delta T_0}{\Delta T_i} \]</span></p>
+<p>Where <span class="math inline">\(\Delta T_0\)</span> is the response in GMST to a sustained forcing of the reference system, and <span class="math inline">\(\Delta T_i\)</span> is the response when component <span class="math inline">\(i\)</span> is dynamically coupled. What exactly does <span class="math inline">\(f\)</span> tell us? Each passage through the feedback loop multiplies the preceding temperature contribution by <span class="math inline">\(f\)</span>:</p>
+<p><span class="math display">\[
+\Delta T = \Delta T_0 + f\Delta T_0 + f^2\Delta T_0 + f^3\Delta T_0 + \cdots
+\]</span></p>
+<p>This can be rewritten as:</p>
+<p><span class="math display">\[
+\Delta T = \Delta T_0 + f \Delta T
+\]</span></p>
+<p>The feedback factor therefore tells us what fraction of the total warming is attributable to feedbacks. If the response is 3K and <span class="math inline">\(f = 0.1\)</span> then 10% of the warming (0.3K) is due to feedbacks. The larger <span class="math inline">\(f\)</span>, the stronger the feedback, the larger the gain in temperature. The feedback factor and system gain are related as follows:</p>
+<p><span class="math display">\[
+\frac{\Delta T}{\Delta T_0} = \frac{1}{1-f} = G
+\]</span></p>
+<p>The gain factor tells us by what factor feedbacks amplify or reduce the reference response. If the reference response is 1.5 K and <span class="math inline">\(G = 2\)</span>, then the total response is 3 K. To summarize, the feedback factor tells us what fraction of the total warming is attributable to feedbacks, while the gain factor tells us by what factor feedbacks amplify or reduce the reference response. Reproduce the figure below for values of <span class="math inline">\(f\)</span> ranging from -0.8 to 0.8.</p>
+<div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">6</span>, <span class="fl">6</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">0.8</span>, <span class="fl">0.8</span>, by <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span>
+<span><span class="va">G</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">f</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  x <span class="op">=</span> <span class="va">f</span>, y <span class="op">=</span> <span class="va">G</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Feedback factor f (-)"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="st">"System Gain G (-)"</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>v <span class="op">=</span> <span class="fl">0</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">1</span>, lty <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-200-1.png" alt="" width="432"></div>
+<p><strong>Quiz Question 5:</strong> Let’s say <span class="math inline">\(\Delta T = 2 K\)</span> and <span class="math inline">\(f = 0.25\)</span>. How much warming is due to feedbacks?
+<!-- 0.5 K --></p>
+<p><strong>Quiz Question 6:</strong> Let’s say <span class="math inline">\(\Delta T_0 = 3 K\)</span> and G = 2. What is the total response?
+<!-- 6 K --></p>
+<div id="reference-system" class="section level3" number="9.2.1">
+<h3>
+<span class="header-section-number">9.2.1</span> Reference system<a class="anchor" aria-label="anchor" href="#reference-system"><i class="fas fa-link"></i></a>
+</h3>
+<p>We begin by defining our reference system where the atmosphere is only coupled with the ocean. We will use the same spinup as above:</p>
+<div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/rm.html">rm</a></span><span class="op">(</span>list <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ls.html">ls</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Load the QUEST package:</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span></span>
+<span></span>
+<span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span></code></pre></div>
+<p>Rather than using anthropogenic emissions, we use a 2 <span class="math inline">\(\times\)</span> CO<sub>2</sub> pulse emission scenario. Below we need to define a function for doubling CO<sub>2</sub> concentration</p>
+<div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">config</span><span class="op">$</span><span class="va">initial_value</span><span class="op">[[</span><span class="st">"C_atm"</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></code></pre></div>
+<pre><code>## [1] 516.8463</code></pre>
+<div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">doubling_CO2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">time</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">C_atm_initial</span> <span class="op">&lt;-</span> <span class="fl">516.8463</span> <span class="co"># Initial atmospheric carbon (PgC)</span></span>
+<span>  <span class="va">start_year</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="va">time</span> <span class="op">&gt;=</span> <span class="va">start_year</span> <span class="op">&amp;&amp;</span> <span class="va">time</span> <span class="op">&lt;</span> <span class="va">start_year</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">C_atm_initial</span> <span class="op">/</span> <span class="op">(</span><span class="fl">365.25</span> <span class="op">*</span> <span class="fl">86400</span><span class="op">)</span> <span class="co"># PgC/s</span></span>
+<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>    <span class="fl">0</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">}</span></span></code></pre></div>
+<p>Next we define a reference system where the atmosphere is only coupled to the ocean. We need to prescribe all diagnostic and flux variables provided by the uncoupled components.</p>
+<div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="co"># Get the equilibrium fluxes</span></span>
+<span></span>
+<span><span class="co"># Sea ice</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span> <span class="co"># last time step</span></span>
+<span><span class="va">A_sic</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">A_sic</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_values</span><span class="op">$</span><span class="va">A_sic</span> <span class="op">&lt;-</span> <span class="va">A_sic</span></span>
+<span></span>
+<span><span class="co"># Ice sheets</span></span>
+<span><span class="va">A_ice</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">A_ice</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">F_fw_ice_L</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_fw_ice_L</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">F_fw_ice_H</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_fw_ice_H</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_values</span><span class="op">$</span><span class="va">A_ice</span> <span class="op">&lt;-</span> <span class="va">A_ice</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_fw_ice_L</span> <span class="op">&lt;-</span> <span class="va">F_fw_ice_L</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_fw_ice_H</span> <span class="op">&lt;-</span> <span class="va">F_fw_ice_H</span></span>
+<span></span>
+<span><span class="co"># Air-sea carbon exchange</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_L</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_H</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span><span class="co"># Land</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">NPP_lnd</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">RH_lnd</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_ref.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="all-feedbacks" class="section level3" number="9.2.2">
+<h3>
+<span class="header-section-number">9.2.2</span> All feedbacks<a class="anchor" aria-label="anchor" href="#all-feedbacks"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next, we conduct a fully coupled experiment:</p>
+<div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_all.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="all-except-carbon-feedbacks" class="section level3" number="9.2.3">
+<h3>
+<span class="header-section-number">9.2.3</span> All except carbon feedbacks<a class="anchor" aria-label="anchor" href="#all-except-carbon-feedbacks"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now we enable all feedbacks except for the carbon cycle feedbacks (air-sea carbon exchange, NPZD, and land)</p>
+<div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Air-sea carbon exchange</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_L</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_H</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span><span class="co"># Land</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">NPP_lnd</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">RH_lnd</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_all_but_carbon.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="only-carbon-feedbacks" class="section level3" number="9.2.4">
+<h3>
+<span class="header-section-number">9.2.4</span> Only carbon feedbacks<a class="anchor" aria-label="anchor" href="#only-carbon-feedbacks"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now we disable all feedbacks except for the carbon cycle feedbacks (air-sea carbon exchange, NPZD, and land)</p>
+<div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Sea ice</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">output</span><span class="op">)</span> <span class="co"># last time step</span></span>
+<span><span class="va">A_sic</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">A_sic</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_values</span><span class="op">$</span><span class="va">A_sic</span> <span class="op">&lt;-</span> <span class="va">A_sic</span></span>
+<span></span>
+<span><span class="co"># Ice sheets</span></span>
+<span><span class="va">A_ice</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">A_ice</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">F_fw_ice_L</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_fw_ice_L</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">F_fw_ice_H</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">$</span><span class="va">F_fw_ice_H</span><span class="op">[</span><span class="va">n</span><span class="op">]</span> <span class="co"># last time step value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_values</span><span class="op">$</span><span class="va">A_ice</span> <span class="op">&lt;-</span> <span class="va">A_ice</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_fw_ice_L</span> <span class="op">&lt;-</span> <span class="va">F_fw_ice_L</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">prescribed_fluxes</span><span class="op">$</span><span class="va">F_fw_ice_H</span> <span class="op">&lt;-</span> <span class="va">F_fw_ice_H</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_carbon.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="sea-ice-feedback" class="section level3" number="9.2.5">
+<h3>
+<span class="header-section-number">9.2.5</span> Sea ice feedback<a class="anchor" aria-label="anchor" href="#sea-ice-feedback"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now we dynamically couple only sea ice.</p>
+<div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_sic.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="ice-sheet-feedback" class="section level3" number="9.2.6">
+<h3>
+<span class="header-section-number">9.2.6</span> Ice sheet feedback<a class="anchor" aria-label="anchor" href="#ice-sheet-feedback"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now we dynamically couple only ice sheets.</p>
+<div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_ice.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="air-sea-carbon-exchange-feedback" class="section level3" number="9.2.7">
+<h3>
+<span class="header-section-number">9.2.7</span> Air-sea carbon exchange feedback<a class="anchor" aria-label="anchor" href="#air-sea-carbon-exchange-feedback"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now we dynamically couple only air-sea carbon exchange.</p>
+<div class="sourceCode" id="cb194"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_AirSeaCarbon.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="npzd-air-sea-carbon-feedback" class="section level3" number="9.2.8">
+<h3>
+<span class="header-section-number">9.2.8</span> NPZD + Air-sea carbon feedback<a class="anchor" aria-label="anchor" href="#npzd-air-sea-carbon-feedback"><i class="fas fa-link"></i></a>
+</h3>
+<p>Now we dynamically couple air-sea carbon exchange and NPZD. We need both because NPZD feeds back to the atmosphere through air-sea carbon exchange.</p>
+<div class="sourceCode" id="cb195"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_npzd.rds"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div id="land-feedback" class="section level3" number="9.2.9">
+<h3>
+<span class="header-section-number">9.2.9</span> Land feedback<a class="anchor" aria-label="anchor" href="#land-feedback"><i class="fas fa-link"></i></a>
+</h3>
+<p>Next we dynamically couple only land.</p>
+<div class="sourceCode" id="cb196"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Read default configuration</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Get the spun-up state</span></span>
+<span><span class="va">state_eq</span> <span class="op">&lt;-</span> <span class="kw"><a href="https://rdrr.io/r/base/source.html">source</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/config_init_W09_config_01.R"</span><span class="op">)</span><span class="op">$</span><span class="va">value</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">initial_values</span> <span class="op">&lt;-</span> <span class="va">state_eq</span></span>
+<span></span>
+<span><span class="co"># flags</span></span>
+<span><span class="co"># Set the flags to what we want</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_atmosphere</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_ocean</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_npzd</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_land</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_sic</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">run_icesheets</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_CO2</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">prescribed_seaice</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">flags</span><span class="op">$</span><span class="va">diagnose_carbonates</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span></span>
+<span><span class="va">config</span><span class="op">$</span><span class="va">forcing</span><span class="op">$</span><span class="va">anthropogenic_emissions</span> <span class="op">&lt;-</span> <span class="va">doubling_CO2</span></span>
+<span></span>
+<span><span class="co"># Run model and save output</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">300</span>, by <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/core_run_esm.html">core_run_esm</a></span><span class="op">(</span>config <span class="op">=</span> <span class="va">config</span>, times <span class="op">=</span> <span class="va">times</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">saveRDS</a></span><span class="op">(</span><span class="va">output</span>, <span class="st">"output_W09_feedback_lnd.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>We have now completed all simulations. In the following subsection we will analyze the results.</p>
+</div>
+<div id="feedback-factors" class="section level3" number="9.2.10">
+<h3>
+<span class="header-section-number">9.2.10</span> Feedback factors<a class="anchor" aria-label="anchor" href="#feedback-factors"><i class="fas fa-link"></i></a>
+</h3>
+<p>Read in the results from each experiment.</p>
+<div class="sourceCode" id="cb197"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Reference GMST</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_config_01.rds"</span><span class="op">)</span></span>
+<span><span class="va">T_1800</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Feedback results</span></span>
+<span><span class="va">ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_ref.rds"</span><span class="op">)</span></span>
+<span><span class="va">all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_all.rds"</span><span class="op">)</span></span>
+<span><span class="va">sic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_sic.rds"</span><span class="op">)</span></span>
+<span><span class="va">ice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_ice.rds"</span><span class="op">)</span></span>
+<span><span class="va">all_but_carbon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_all_but_carbon.rds"</span><span class="op">)</span></span>
+<span><span class="va">carbon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_carbon.rds"</span><span class="op">)</span></span>
+<span><span class="va">AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_AirSeaCarbon.rds"</span><span class="op">)</span></span>
+<span><span class="va">npzd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_npzd.rds"</span><span class="op">)</span></span>
+<span><span class="va">lnd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"output_W09_feedback_lnd.rds"</span><span class="op">)</span></span></code></pre></div>
+<p>Calculate the GMST change for each experiment:</p>
+<div class="sourceCode" id="cb198"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">dT_ref</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">ref</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_all</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">all</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_sic</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">sic</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_ice</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">ice</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_all_but_carbon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">all_but_carbon</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_carbon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">carbon</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">AirSeaCarbon</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_npzd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">npzd</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span>
+<span><span class="va">dT_lnd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="va">lnd</span><span class="op">$</span><span class="va">T_atm_global</span>, <span class="fl">1</span><span class="op">)</span> <span class="op">-</span> <span class="va">T_1800</span></span></code></pre></div>
+<p>Calculate the feedback parameter for each experiment.</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">f_all</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_all</span></span>
+<span><span class="va">f_sic</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_sic</span></span>
+<span><span class="va">f_ice</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_ice</span></span>
+<span><span class="va">f_all_but_carbon</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_all_but_carbon</span></span>
+<span><span class="va">f_carbon</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_carbon</span></span>
+<span><span class="va">f_AirSeaCarbon</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_AirSeaCarbon</span></span>
+<span><span class="va">f_npzd</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_npzd</span></span>
+<span><span class="va">f_lnd</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">-</span> <span class="va">dT_ref</span> <span class="op">/</span> <span class="va">dT_lnd</span></span>
+<span></span>
+<span><span class="va">feedback</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span></span>
+<span>  <span class="va">f_all</span>,</span>
+<span>  <span class="va">f_sic</span>,</span>
+<span>  <span class="va">f_ice</span>,</span>
+<span>  <span class="va">f_all_but_carbon</span>,</span>
+<span>  <span class="va">f_carbon</span>,</span>
+<span>  <span class="va">f_AirSeaCarbon</span>,</span>
+<span>  <span class="va">f_npzd</span>,</span>
+<span>  <span class="va">f_lnd</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span><span class="op">(</span><span class="va">feedback</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"All"</span>, <span class="st">"Sea ice"</span>, <span class="st">"Ice sheet"</span>, <span class="st">"All-but-carbon"</span>, <span class="st">"Carbon"</span>, <span class="st">"Air-sea carbon"</span>, <span class="st">"NPZD"</span>, <span class="st">"Land"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">Gain</span> <span class="op">&lt;-</span> <span class="fl">1</span> <span class="op">/</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">feedback</span><span class="op">)</span></span></code></pre></div>
+<p>Plot the results.</p>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">7</span>, <span class="fl">5</span>, <span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">feedback</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"steelblue"</span>, las <span class="op">=</span> <span class="fl">2</span>, ylab <span class="op">=</span> <span class="st">"Feeback factor f(-)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/box.html">box</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/barplot.html">barplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unlist.html">unlist</a></span><span class="op">(</span><span class="va">Gain</span><span class="op">)</span>, col <span class="op">=</span> <span class="st">"steelblue"</span>, las <span class="op">=</span> <span class="fl">2</span>, ylab <span class="op">=</span> <span class="st">"System Gain G (-)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/box.html">box</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="inline-figure"><img src="figure-html/unnamed-chunk-215-1.png" alt="" width="576"></div>
+<p><strong>Quiz Question 7:</strong> Which component has the largest positive feedback?
+<!-- Sea ice --></p>
+<p><strong>Quiz Question 8:</strong> Which component has the largest negative feedback?
+<!-- NPZD (in combination with Air-sea carbon exchange) --></p>
+<p><strong>Quiz Question 9:</strong> Is the carbon cycle a positive or negative feedback?
+<!-- Negative feedback --></p>
+<p><strong>Quiz Question 10:</strong> Is the final response domnated by positive or negative feedbacks?
+<!-- Negative feedbacks --></p>
+<p><strong>Quiz Question 11:</strong> What is the relative importance of ocean versus land carbon sink?
+<!-- Equal importance --></p>
+<p><strong>Quiz Question 12:</strong> What is the relative importance of sea ice versus ice sheets?
+<!-- Sea ice acts as a stronger positive feedback --></p>
+</div>
+</div>
+<div id="graduate-students-8" class="section level2" number="9.3">
+<h2>
+<span class="header-section-number">9.3</span> Graduate Students<a class="anchor" aria-label="anchor" href="#graduate-students-8"><i class="fas fa-link"></i></a>
+</h2>
+<p>Do you expect that the feedback factor changes if the perturbation changes? Explain your answer.</p>
+</div>
+<div id="reflection-8" class="section level2" number="9.4">
+<h2>
+<span class="header-section-number">9.4</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection-8"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="week-8-cryosphere.html"><span class="header-section-number">8</span> Week 8: Cryosphere</a></div>
 <div class="next"><a href="week-10-paleoclimatic-simulations.html"><span class="header-section-number">10</span> Week 10: Paleoclimatic Simulations</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#week-9-earth-system-dynamics"><span class="header-section-number">9</span> Week 9: Earth System Dynamics</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-9-earth-system-dynamics"><span class="header-section-number">9</span> Week 9: Earth System Dynamics</a></li>
+<li>
+<a class="nav-link" href="#contribution-to-warming"><span class="header-section-number">9.1</span> Contribution to Warming</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#spinup"><span class="header-section-number">9.1.1</span> Spinup</a></li>
+<li><a class="nav-link" href="#sea-ice"><span class="header-section-number">9.1.2</span> Sea Ice</a></li>
+<li><a class="nav-link" href="#ice-sheets"><span class="header-section-number">9.1.3</span> Ice Sheets</a></li>
+<li><a class="nav-link" href="#air-sea-carbon-exchange"><span class="header-section-number">9.1.4</span> Air-sea Carbon Exchange</a></li>
+<li><a class="nav-link" href="#npzd"><span class="header-section-number">9.1.5</span> NPZD</a></li>
+<li><a class="nav-link" href="#land"><span class="header-section-number">9.1.6</span> Land</a></li>
+<li><a class="nav-link" href="#compare-against-baseline"><span class="header-section-number">9.1.7</span> Compare against Baseline</a></li>
+</ul>
+</li>
+<li>
+<a class="nav-link" href="#feedback-analysis"><span class="header-section-number">9.2</span> Feedback Analysis</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#reference-system"><span class="header-section-number">9.2.1</span> Reference system</a></li>
+<li><a class="nav-link" href="#all-feedbacks"><span class="header-section-number">9.2.2</span> All feedbacks</a></li>
+<li><a class="nav-link" href="#all-except-carbon-feedbacks"><span class="header-section-number">9.2.3</span> All except carbon feedbacks</a></li>
+<li><a class="nav-link" href="#only-carbon-feedbacks"><span class="header-section-number">9.2.4</span> Only carbon feedbacks</a></li>
+<li><a class="nav-link" href="#sea-ice-feedback"><span class="header-section-number">9.2.5</span> Sea ice feedback</a></li>
+<li><a class="nav-link" href="#ice-sheet-feedback"><span class="header-section-number">9.2.6</span> Ice sheet feedback</a></li>
+<li><a class="nav-link" href="#air-sea-carbon-exchange-feedback"><span class="header-section-number">9.2.7</span> Air-sea carbon exchange feedback</a></li>
+<li><a class="nav-link" href="#npzd-air-sea-carbon-feedback"><span class="header-section-number">9.2.8</span> NPZD + Air-sea carbon feedback</a></li>
+<li><a class="nav-link" href="#land-feedback"><span class="header-section-number">9.2.9</span> Land feedback</a></li>
+<li><a class="nav-link" href="#feedback-factors"><span class="header-section-number">9.2.10</span> Feedback factors</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#graduate-students-8"><span class="header-section-number">9.3</span> Graduate Students</a></li>
+<li><a class="nav-link" href="#reflection-8"><span class="header-section-number">9.4</span> Reflection</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
