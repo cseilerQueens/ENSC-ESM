@@ -135,6 +135,14 @@ phase-portraits
 graduate-students-9
 reflection-9
 week-11-paleoclimatic-simulations
+saltzman-and-maasch-1990
+quest-2
+radiative-balance
+cryosphere
+ocean
+relationships
+graduate-students-10
+reflection-10
 week-12-research-project
 appendix-i-linear-algebra
 matrix-multiplication

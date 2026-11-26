@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="11.1 Saltzman and Maasch (1990) Let us begin our discussion with a very simple first-order global model of late Cenozoic climatic change developed Saltzman and Maasch (1990) (referred to as SM1990...">
+<meta property="og:description" content="11.1 Saltzman and Maasch (1990) Let us begin our discussion with a very simple first-order global model of late Cenozoic climatic change developed Saltzman and Maasch (1990) (referred to as SM1990...">
+<meta name="twitter:description" content="11.1 Saltzman and Maasch (1990) Let us begin our discussion with a very simple first-order global model of late Cenozoic climatic change developed Saltzman and Maasch (1990) (referred to as SM1990...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -68,14 +68,385 @@
 <h1>
 <span class="header-section-number">11</span> Week 11: Paleoclimatic Simulations<a class="anchor" aria-label="anchor" href="#week-11-paleoclimatic-simulations"><i class="fas fa-link"></i></a>
 </h1>
-
+<div id="saltzman-and-maasch-1990" class="section level2" number="11.1">
+<h2>
+<span class="header-section-number">11.1</span> Saltzman and Maasch (1990)<a class="anchor" aria-label="anchor" href="#saltzman-and-maasch-1990"><i class="fas fa-link"></i></a>
+</h2>
+<p>Let us begin our discussion with a very simple first-order global model of late Cenozoic climatic change developed <a href="https://doi.org/10.1017/S0263593300020824">Saltzman and Maasch (1990)</a> (referred to as SM1990 hereafter). The model has three prognostic variables and one external forcing variable:</p>
+<p><span class="math display">\[ \frac{dX}{dt} = -X - Y - v Z - u R(t)\]</span>
+<span class="math display">\[ \frac{dY}{dt} = - p Z + r Y - s Y^2 - Y^3\]</span></p>
+<p><span class="math display">\[ \frac{dZ}{dt} = -q X - q Z \]</span></p>
+<p>where <span class="math inline">\(X\)</span> is global ice mass, <span class="math inline">\(Y\)</span> is atmospheric CO<span class="math inline">\(_2\)</span> concentration, <span class="math inline">\(Z\)</span> is deep ocean temperature, and <span class="math inline">\(R(t)\)</span> is insolation anomalies (all non-dimensional). The parameters <span class="math inline">\(p, q, r, s, u, v\)</span> all have positive values. Let’s start with the insolation anomalies, which are the June-solstice insolation at 65 Degrees N. Run the code below to show the incoming solar radiation between the last half-million years and today:</p>
+<div class="sourceCode" id="cb199"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/mcrucifix/palinsol">palinsol</a></span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># June-solstice insolation at 65°N, sampled every 10 years</span></span>
+<span><span class="va">year</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="op">-</span><span class="fl">500000</span>, <span class="fl">0</span>, by <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span>
+<span><span class="va">latitude</span> <span class="op">&lt;-</span> <span class="fl">65</span> <span class="op">*</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">180</span></span>
+<span></span>
+<span><span class="va">isl</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">vapply</a></span><span class="op">(</span><span class="va">year</span>, <span class="kw">function</span><span class="op">(</span><span class="va">t_year</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/pkg/palinsol/man/Insol.html">Insol</a></span><span class="op">(</span>orbit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/pkg/palinsol/man/astro.html">ber78</a></span><span class="op">(</span><span class="va">t_year</span><span class="op">)</span>, long <span class="op">=</span> <span class="va">pi</span> <span class="op">/</span> <span class="fl">2</span>, lat <span class="op">=</span> <span class="va">latitude</span><span class="op">)</span></span>
+<span><span class="op">}</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span></span>
+<span>  <span class="va">year</span>, <span class="va">isl</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"l"</span>,</span>
+<span>  main <span class="op">=</span> <span class="st">"Daily mean insolation at the June solstice"</span>,</span>
+<span>  xlab <span class="op">=</span> <span class="st">"Years relative to 1950"</span>,</span>
+<span>  ylab <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/expression.html">expression</a></span><span class="op">(</span><span class="st">"TOA insolation ("</span> <span class="op">*</span> <span class="va">W</span> <span class="op">~</span> <span class="va">m</span><span class="op">^</span><span class="op">{</span><span class="op">-</span><span class="fl">2</span><span class="op">}</span> <span class="op">*</span> <span class="st">")"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"topleft"</span>, <span class="st">"65°N"</span>, bty <span class="op">=</span> <span class="st">"n"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span>h <span class="op">=</span> <span class="fl">480.05</span>, col <span class="op">=</span> <span class="st">"grey"</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 1:</strong> What is the approximate range of incoming solar radiation during this period?
+<!-- 435 to 552 W/m2--></p>
+<p>The SM1990 model uses dimensionless variables. To make the insolation forcing dimensionless, we subtract its mean and divide the result by three times its standard deviation:</p>
+<div class="sourceCode" id="cb200"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Express insolation anomalies in units of three standard deviations</span></span>
+<span><span class="va">isl_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">isl</span><span class="op">)</span></span>
+<span><span class="va">isl_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">isl</span><span class="op">)</span></span>
+<span><span class="va">R</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">isl</span> <span class="op">-</span> <span class="va">isl_mean</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="va">isl_sd</span><span class="op">)</span></span></code></pre></div>
+<p>Let us now integrate the model forward in time using the Euler integration method:</p>
+<div class="sourceCode" id="cb201"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Model parameters</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">1.0</span></span>
+<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fl">2.5</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">1.3</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
+<span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fl">0.5</span></span>
+<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span></span>
+<span><span class="co"># Time in kyr for plotting. The model's time unit is 10 kyr.</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="va">year</span> <span class="op">/</span> <span class="fl">1000</span></span>
+<span><span class="va">dt_model</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">times</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">times</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># R[1] is the forcing at -500 kyr.</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span> <span class="op">!=</span> <span class="va">n</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"R must contain one finite forcing value per time point."</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Preallocate state vectors and set initial conditions</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
+<span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.8</span></span>
+<span><span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.2</span></span>
+<span></span>
+<span><span class="co"># Forward Euler integration</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1L</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">v</span> <span class="op">*</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">u</span> <span class="op">*</span> <span class="va">R</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">p</span> <span class="op">*</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">r</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">s</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">^</span><span class="fl">3</span></span>
+<span>  <span class="va">dz</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">q</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">x</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">dt_model</span> <span class="op">*</span> <span class="va">dx</span></span>
+<span>  <span class="va">y</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">dt_model</span> <span class="op">*</span> <span class="va">dy</span></span>
+<span>  <span class="va">z</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">dt_model</span> <span class="op">*</span> <span class="va">dz</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>time <span class="op">=</span> <span class="va">times</span>, R <span class="op">=</span> <span class="va">R</span>, x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, z <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></code></pre></div>
+<p>We can now plot the data:</p>
+<div class="sourceCode" id="cb202"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">3</span>,<span class="fl">5</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Plot</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette.colors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"Okabe-Ito"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">R</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"Insolation (-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"Ice (-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"CO2 (-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">z</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"Ocean Temp (-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p>For better comparison, let us now overlay <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and <span class="math inline">\(Z\)</span> in a single plot.</p>
+<div class="sourceCode" id="cb203"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">4</span>,<span class="fl">4</span>,<span class="fl">1</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Plot</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette.colors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"Okabe-Ito"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">R</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"Insolation (-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">z</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"top"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, pch <span class="op">=</span> <span class="fl">16</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X = Ice"</span>, <span class="st">"Y = CO2"</span>, <span class="st">"Z = Ocean T"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span>, horiz <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 2:</strong> Do the oscillations in <span class="math inline">\(X\)</span>, <span class="math inline">\(Y\)</span>, and <span class="math inline">\(Z\)</span> match the oscillations of the insolation anomalies?
+<!-- No --></p>
+<p>Let us flip the the global ice mass <span class="math inline">\(X\)</span> by multiplying it with negative one. This way we can see better which variables lag behind:</p>
+<div class="sourceCode" id="cb204"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="op">-</span><span class="fl">1</span> <span class="op">*</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">z</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"top"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, pch <span class="op">=</span> <span class="fl">16</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X = Ice"</span>, <span class="st">"Y = CO2"</span>, <span class="st">"Z = Ocean T"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span>, horiz <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 3:</strong> Does the global ice mass lag behind ocean temperature or vice versa?
+<!-- Ocean temperature lags behind global ice mass --></p>
+<p>We will now turn the Milankovitch cycle off by setting <span class="math inline">\(u = 0\)</span>.</p>
+<div class="sourceCode" id="cb205"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Express insolation anomalies in units of three standard deviations</span></span>
+<span><span class="va">isl_mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">isl</span><span class="op">)</span></span>
+<span><span class="va">isl_sd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/sd.html">sd</a></span><span class="op">(</span><span class="va">isl</span><span class="op">)</span></span>
+<span><span class="va">R</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">isl</span> <span class="op">-</span> <span class="va">isl_mean</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fl">3</span> <span class="op">*</span> <span class="va">isl_sd</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Model parameters</span></span>
+<span><span class="va">p</span> <span class="op">&lt;-</span> <span class="fl">1.0</span></span>
+<span><span class="va">q</span> <span class="op">&lt;-</span> <span class="fl">2.5</span></span>
+<span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fl">1.3</span></span>
+<span><span class="va">s</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
+<span><span class="co"># u &lt;- 0.5</span></span>
+<span><span class="va">u</span> <span class="op">&lt;-</span> <span class="fl">0</span></span>
+<span><span class="va">v</span> <span class="op">&lt;-</span> <span class="fl">0.2</span></span>
+<span></span>
+<span><span class="co"># Time in kyr for plotting. The model's time unit is 10 kyr.</span></span>
+<span><span class="va">times</span> <span class="op">&lt;-</span> <span class="va">year</span> <span class="op">/</span> <span class="fl">1000</span></span>
+<span><span class="va">dt_model</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">times</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span> <span class="op">-</span> <span class="va">times</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span> <span class="op">/</span> <span class="fl">10</span></span>
+<span><span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">times</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># R[1] is the forcing at -500 kyr.</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span> <span class="op">!=</span> <span class="va">n</span> <span class="op">||</span> <span class="fu"><a href="https://rdrr.io/r/base/any.html">any</a></span><span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.finite</a></span><span class="op">(</span><span class="va">R</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw"><a href="https://rdrr.io/r/base/stop.html">stop</a></span><span class="op">(</span><span class="st">"R must contain one finite forcing value per time point."</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="co"># Preallocate state vectors and set initial conditions</span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">y</span> <span class="op">&lt;-</span> <span class="va">z</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">numeric</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
+<span><span class="va">x</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0.6</span></span>
+<span><span class="va">y</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.8</span></span>
+<span><span class="va">z</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="fl">0.2</span></span>
+<span></span>
+<span><span class="co"># Forward Euler integration</span></span>
+<span><span class="kw">for</span> <span class="op">(</span><span class="va">i</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq_len</a></span><span class="op">(</span><span class="va">n</span> <span class="op">-</span> <span class="fl">1L</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">dx</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">v</span> <span class="op">*</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">u</span> <span class="op">*</span> <span class="va">R</span><span class="op">[</span><span class="va">i</span><span class="op">]</span></span>
+<span>  <span class="va">dy</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">p</span> <span class="op">*</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">r</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">-</span> <span class="va">s</span> <span class="op">*</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">^</span><span class="fl">2</span> <span class="op">-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">^</span><span class="fl">3</span></span>
+<span>  <span class="va">dz</span> <span class="op">&lt;-</span> <span class="op">-</span><span class="va">q</span> <span class="op">*</span> <span class="op">(</span><span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span><span class="op">)</span></span>
+<span></span>
+<span>  <span class="va">x</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">x</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">dt_model</span> <span class="op">*</span> <span class="va">dx</span></span>
+<span>  <span class="va">y</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">y</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">dt_model</span> <span class="op">*</span> <span class="va">dy</span></span>
+<span>  <span class="va">z</span><span class="op">[</span><span class="va">i</span> <span class="op">+</span> <span class="fl">1L</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">z</span><span class="op">[</span><span class="va">i</span><span class="op">]</span> <span class="op">+</span> <span class="va">dt_model</span> <span class="op">*</span> <span class="va">dz</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>time <span class="op">=</span> <span class="va">times</span>, R <span class="op">=</span> <span class="va">R</span>, x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span>, z <span class="op">=</span> <span class="va">z</span><span class="op">)</span></span></code></pre></div>
+<p>Plot the data.</p>
+<div class="sourceCode" id="cb206"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span>, mar <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">5</span>,<span class="fl">5</span>,<span class="fl">2</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="co"># Plot</span></span>
+<span></span>
+<span><span class="va">my.col</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/grDevices/palette.html">palette.colors</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">4</span>, palette <span class="op">=</span> <span class="st">"Okabe-Ito"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># plot(x = df$time, y = df$R, type = "l", xlab = "Age (ka)", ylab = "Insolation (-)", col = my.col[1])</span></span>
+<span><span class="co"># grid()</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">x</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span>, ylim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1.5</span>, <span class="fl">1.5</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">y</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/lines.html">lines</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">time</span>, y <span class="op">=</span> <span class="va">df</span><span class="op">$</span><span class="va">z</span>, type <span class="op">=</span> <span class="st">"l"</span>, xlab <span class="op">=</span> <span class="st">"Age (ka)"</span>, ylab <span class="op">=</span> <span class="st">"(-)"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/legend.html">legend</a></span><span class="op">(</span><span class="st">"top"</span>, col <span class="op">=</span> <span class="va">my.col</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span>, pch <span class="op">=</span> <span class="fl">16</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"X = Ice"</span>, <span class="st">" Y = CO2"</span>, <span class="st">"Z = Ocean T"</span><span class="op">)</span>, bty <span class="op">=</span> <span class="st">"n"</span>, horiz <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 4:</strong> In the SM1990 model, are glacial cycles driven primarily by internal oscillations or by the external Milankovitch forcing?</p>
+<!-- internal oscillation -->
+</div>
+<div id="quest-2" class="section level2" number="11.2">
+<h2>
+<span class="header-section-number">11.2</span> QUEST<a class="anchor" aria-label="anchor" href="#quest-2"><i class="fas fa-link"></i></a>
+</h2>
+<p>In this part of the tutorial, you will analyze QUEST simulations of the past 400,000 years. The atmosphere, ocean, and sea ice are dynamically coupled. Atmospheric CO<span class="math inline">\(_2\)</span> concentrations are prescribed from ice-core records, and ice-sheet mass is prescribed from estimates of past sea-level change. The NPZD, land module, and air-sea carbon exchanges, are disabled to reduce computation time. I have completed the simulation for you because it takes about seven hours to complete. Let us begin by reading in the model output file.</p>
+<div class="sourceCode" id="cb207"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">quest</span><span class="op">)</span></span>
+<span><span class="va">output</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/readRDS.html">readRDS</a></span><span class="op">(</span><span class="st">"/global/teaching-project/sg5112000/shared_files/W11_output_paleo_prescr_ice.rds"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># Set the path to the configuration files:</span></span>
+<span><span class="va">config.path</span> <span class="op">&lt;-</span> <span class="st">"/global/teaching-project/sg5112000/shared_files/config"</span></span>
+<span></span>
+<span><span class="co"># Load the configuration files:</span></span>
+<span><span class="va">config</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/quest/man/config_load.html">config_load</a></span><span class="op">(</span>path <span class="op">=</span> <span class="va">config.path</span><span class="op">)</span></span></code></pre></div>
+<div id="radiative-balance" class="section level3" number="11.2.1">
+<h3>
+<span class="header-section-number">11.2.1</span> Radiative balance<a class="anchor" aria-label="anchor" href="#radiative-balance"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us now plot some basic variables. Here are variables associated with atmospheric CO<span class="math inline">\(_2\)</span> and radiative forcing.</p>
+<div class="sourceCode" id="cb208"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>,</span>
+<span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span></span>
+<span>    <span class="st">"C_atm_ppmv"</span>,</span>
+<span>    <span class="st">"F_CO2"</span>, </span>
+<span>    <span class="st">"R_net_TOA"</span>,</span>
+<span>    <span class="st">"T_atm_global"</span>,</span>
+<span>    <span class="st">"T_ocn_global"</span>,</span>
+<span>    <span class="st">"Energy_conserved"</span><span class="op">)</span>, PNG <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 5:</strong> In the last 400,000 years, has the atmospheric CO<span class="math inline">\(_2\)</span> concentration ever exceeded pre-industrial levels?
+<!-- Yes --></p>
+<p><strong>Quiz Question 6:</strong> Why is CO<span class="math inline">\(_2\)</span> radiative forcing negative for most of the simulation?
+<!-- CO2 radiative forcing is calculated relative to the pre-industrial CO2 concentration. For most of the simulation, atmospheric CO2 concentrations are below this reference level, so the forcing is negative. --></p>
+<p><strong>Quiz Question 7:</strong> What is the sign of the net energy balance at TOA?
+<!-- Both negative and positive --></p>
+<p>Let us now investigate how well the model conserves energy over a 400,000 year time period. This can be done as follows:</p>
+<div class="sourceCode" id="cb209"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">my.max</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">Energy_conserved</span><span class="op">)</span></span>
+<span><span class="va">my.min</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">Energy_conserved</span><span class="op">)</span></span>
+<span><span class="va">my.mean</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html">mean</a></span><span class="op">(</span><span class="va">output</span><span class="op">$</span><span class="va">Energy_conserved</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">cons</span> <span class="op">&lt;-</span> <span class="op">(</span><span class="va">my.max</span> <span class="op">-</span> <span class="va">my.min</span><span class="op">)</span> <span class="op">/</span> <span class="va">my.mean</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span><span class="op">(</span><span class="va">cons</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 8:</strong> Based on this value, does the model conserve energy reasonably well?
+<!-- Yes --></p>
+</div>
+<div id="cryosphere" class="section level3" number="11.2.2">
+<h3>
+<span class="header-section-number">11.2.2</span> Cryosphere<a class="anchor" aria-label="anchor" href="#cryosphere"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us now plot some of the key variables of the cryosphere.</p>
+<div class="sourceCode" id="cb210"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>,</span>
+<span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"A_sic"</span>, <span class="st">"A_ice"</span>, <span class="st">"h_ice"</span>, </span>
+<span>                <span class="st">"alpha_H"</span>, <span class="st">"P_acc"</span>, <span class="st">"M"</span><span class="op">)</span>, PNG <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 9:</strong> What is the approximate amplitude of sea ice fraction?
+<!-- About 0.2 to 0.6 --></p>
+<p><strong>Quiz Question 10:</strong> What is the approximate amplitude of ice sheet extent?
+<!-- About 0.2 to 0.6 --></p>
+<p><strong>Quiz Question 11:</strong> What process is faster: the growth or melting of ice sheets?
+<!-- Melting is faster --></p>
+</div>
+<div id="ocean" class="section level3" number="11.2.3">
+<h3>
+<span class="header-section-number">11.2.3</span> Ocean<a class="anchor" aria-label="anchor" href="#ocean"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us now plot some of the key variables of the ocean.</p>
+<div class="sourceCode" id="cb211"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/pkg/quest/man/utils_plot.html">utils_plot</a></span><span class="op">(</span><span class="va">config</span>, <span class="va">output</span>,</span>
+<span>  variables <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Q"</span>, <span class="st">"rho_SL"</span>, <span class="st">"rho_SH"</span>,</span>
+<span>                <span class="st">"T_ocn_SL"</span>,<span class="st">"T_ocn_SH"</span>,<span class="st">"F_fw_ice_H"</span><span class="op">)</span>, PNG <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 12:</strong> Does the thermohaline circulation respond to glacial and interglacial cycles?
+<!-- Yes --></p>
+</div>
+<div id="relationships" class="section level3" number="11.2.4">
+<h3>
+<span class="header-section-number">11.2.4</span> Relationships<a class="anchor" aria-label="anchor" href="#relationships"><i class="fas fa-link"></i></a>
+</h3>
+<p>Let us now explore how the variables relate to one another by plotting them in pairs. We will begin with the strength of the thermohaline circulation and surface ocean density contrasts:</p>
+<div class="sourceCode" id="cb212"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">[</span><span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&gt;=</span> <span class="op">-</span><span class="fl">350000</span> <span class="op">&amp;</span></span>
+<span>            <span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1000</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Sample every 1,000 years.</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">delta_rho</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">rho_SH</span> <span class="op">-</span> <span class="va">d</span><span class="op">$</span><span class="va">rho_SL</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">delta_rho</span>, <span class="va">d</span><span class="op">$</span><span class="va">Q</span> <span class="op">/</span> <span class="fl">1e6</span>, type <span class="op">=</span> <span class="st">"l"</span>, col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"High-lat minus low-lat \n ocean surface water density (kg/m3)"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Thermohaline Circulation (Sv)"</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 13:</strong> Describe the relationship between ocean surface density contrast and the thermohaline circulation
+<!-- The larger ocean surface water density in the high latitudes compared to the low latitudes, the stronger the thermohaline circulation --></p>
+<p>Let us now investigte how sensitive the thermohaline circulation is to warming.</p>
+<div class="sourceCode" id="cb213"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">[</span><span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&gt;=</span> <span class="op">-</span><span class="fl">350000</span> <span class="op">&amp;</span></span>
+<span>            <span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1000</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Sample every 1,000 years.</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">Q</span><span class="op">/</span><span class="fl">1e6</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, pch <span class="op">=</span> <span class="fl">20</span>, col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"GMST (K)"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Thermohaline Circulation (Sv)"</span><span class="op">)</span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 14:</strong> By how much does the thermohaline circulation weaken per degree warming?
+<!-- About -2.1 Sv/K --></p>
+<p>Let us now plot atmospheric temperature against fractional ice sheet area.</p>
+<div class="sourceCode" id="cb214"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">[</span><span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&gt;=</span> <span class="op">-</span><span class="fl">350000</span> <span class="op">&amp;</span></span>
+<span>            <span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1000</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Sample every 1,000 years.</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">A_ice</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, pch <span class="op">=</span> <span class="fl">20</span>, col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"GMST (K)"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"Fractional ice sheet cover"</span><span class="op">)</span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 15:</strong> By how much does the fractional ice sheet cover reduce per degree warming?
+<!-- About -0.09/K  --></p>
+<p>Let us now plot atmospheric temperature against radiative forcing</p>
+<div class="sourceCode" id="cb215"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">output</span><span class="op">[</span><span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&gt;=</span> <span class="op">-</span><span class="fl">350000</span> <span class="op">&amp;</span></span>
+<span>            <span class="va">output</span><span class="op">$</span><span class="va">time</span> <span class="op">&lt;=</span> <span class="op">-</span><span class="fl">1000</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="co"># Sample every 1,000 years.</span></span>
+<span><span class="va">d</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span><span class="op">(</span><span class="va">d</span><span class="op">)</span>, by <span class="op">=</span> <span class="fl">1000</span><span class="op">)</span>, <span class="op">]</span></span>
+<span></span>
+<span><span class="va">x</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">F_CO2</span></span>
+<span><span class="va">y</span> <span class="op">&lt;-</span> <span class="va">d</span><span class="op">$</span><span class="va">T_atm_global</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span>, pch <span class="op">=</span> <span class="fl">20</span>, col <span class="op">=</span> <span class="st">"blue"</span>,</span>
+<span>     xlab <span class="op">=</span> <span class="st">"Radiative Forcing"</span>,</span>
+<span>     ylab <span class="op">=</span> <span class="st">"GMST (K)"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">fit</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html">lm</a></span><span class="op">(</span><span class="va">y</span> <span class="op">~</span> <span class="va">x</span><span class="op">)</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html">abline</a></span><span class="op">(</span><span class="va">fit</span>, col <span class="op">=</span> <span class="st">"red"</span>, lwd <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<span><span class="va">slope</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/coef.html">coef</a></span><span class="op">(</span><span class="va">fit</span><span class="op">)</span><span class="op">[[</span><span class="st">"x"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/grid.html">grid</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><strong>Quiz Question 16:</strong> What is the climate sensitivity per unit of radiative forcing?
+<!-- 1.6 K/(W m-2)--></p>
+<p><strong>Quiz Question 17:</strong> Is this larger or smaller compared to current estimates for anthropogenic climate change?
+<!-- About twice as large. The current estimate is 0.75K/(1 W m-2) --></p>
+</div>
+</div>
+<div id="graduate-students-10" class="section level2" number="11.3">
+<h2>
+<span class="header-section-number">11.3</span> Graduate Students<a class="anchor" aria-label="anchor" href="#graduate-students-10"><i class="fas fa-link"></i></a>
+</h2>
+<p>Why do you think does the climate sensitivity calculated from the paleoclimate simulation differ with modern estimates of climate sensitivity?</p>
+</div>
+<div id="reflection-10" class="section level2" number="11.4">
+<h2>
+<span class="header-section-number">11.4</span> Reflection<a class="anchor" aria-label="anchor" href="#reflection-10"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Summarize the main things you have learned.</p></li>
+<li><p>What concepts are you struggling with?</p></li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="week-10-future-climate-simulations.html"><span class="header-section-number">10</span> Week 10: Future Climate Simulations</a></div>
 <div class="next"><a href="week-12-research-project.html"><span class="header-section-number">12</span> Week 12: Research Project</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#week-11-paleoclimatic-simulations"><span class="header-section-number">11</span> Week 11: Paleoclimatic Simulations</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-11-paleoclimatic-simulations"><span class="header-section-number">11</span> Week 11: Paleoclimatic Simulations</a></li>
+<li><a class="nav-link" href="#saltzman-and-maasch-1990"><span class="header-section-number">11.1</span> Saltzman and Maasch (1990)</a></li>
+<li>
+<a class="nav-link" href="#quest-2"><span class="header-section-number">11.2</span> QUEST</a><ul class="nav navbar-nav">
+<li><a class="nav-link" href="#radiative-balance"><span class="header-section-number">11.2.1</span> Radiative balance</a></li>
+<li><a class="nav-link" href="#cryosphere"><span class="header-section-number">11.2.2</span> Cryosphere</a></li>
+<li><a class="nav-link" href="#ocean"><span class="header-section-number">11.2.3</span> Ocean</a></li>
+<li><a class="nav-link" href="#relationships"><span class="header-section-number">11.2.4</span> Relationships</a></li>
+</ul>
+</li>
+<li><a class="nav-link" href="#graduate-students-10"><span class="header-section-number">11.3</span> Graduate Students</a></li>
+<li><a class="nav-link" href="#reflection-10"><span class="header-section-number">11.4</span> Reflection</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">

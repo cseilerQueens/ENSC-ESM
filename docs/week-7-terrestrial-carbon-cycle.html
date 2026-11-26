@@ -365,7 +365,7 @@ S_i = \frac{V(E(Y|X_i))}{V(Y)}
 <span><span class="va">upper</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span><span class="op">(</span><span class="va">param_names_subset</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Run GA</span></span>
-<span><span class="va">ga_result</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://github.com/luca-scr/GA/reference/ga.html">ga</a></span><span class="op">(</span></span>
+<span><span class="va">ga_result</span> <span class="op">&lt;-</span> <span class="fu">ga</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="st">"real-valued"</span>,</span>
 <span>  fitness <span class="op">=</span> <span class="va">run_esm_ga</span>,</span>
 <span>  lower <span class="op">=</span> <span class="va">lower</span>,</span>
