@@ -144,6 +144,8 @@ relationships
 graduate-students-10
 reflection-10
 week-12-research-project
+example-projects
+report-structure
 appendix-i-linear-algebra
 matrix-multiplication
 matrix-transposition

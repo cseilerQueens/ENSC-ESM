@@ -18,9 +18,9 @@
     
     div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
   </style>
-<meta name="description" content="A book created with bookdown.">
-<meta property="og:description" content="A book created with bookdown.">
-<meta name="twitter:description" content="A book created with bookdown.">
+<meta name="description" content="In this tutorial, you will carry out a short research project on a question that interests you and builds directly on what you have learned in this course. The easiest way to do this is to go to...">
+<meta property="og:description" content="In this tutorial, you will carry out a short research project on a question that interests you and builds directly on what you have learned in this course. The easiest way to do this is to go to...">
+<meta name="twitter:description" content="In this tutorial, you will carry out a short research project on a question that interests you and builds directly on what you have learned in this course. The easiest way to do this is to go to...">
 </head>
 <body data-spy="scroll" data-target="#toc">
 
@@ -68,14 +68,102 @@
 <h1>
 <span class="header-section-number">12</span> Week 12: Research Project<a class="anchor" aria-label="anchor" href="#week-12-research-project"><i class="fas fa-link"></i></a>
 </h1>
-
+<p>In this tutorial, you will carry out a short research project on a question that interests you and builds directly on what you have learned in this course. The easiest way to do this is to go to an exercise of a tutorial that you found most interesting. You can then repeat that same experiment but varying the conditions. For example, assess sensitivity to parameter <span class="math inline">\(b\)</span> instead of <span class="math inline">\(a\)</span>, or assess the sensitivity to wider parameter value ranges, quadruple CO<span class="math inline">\(_2\)</span> emissions instead of doubling them, or use a 25-year discrete map in place of a 50-year map. Below are some example research questions for inspiration. Plan to spend about 2.5 hours on the project, including analysis, figure preparation, and writing. Start by formulating a research question and identifying a baseline for comparison. Run or load the baseline first, then make one targeted change, such as adjusting a parameter, changing a forcing or initial condition, or switching off a model coupling. Use a simple quantitative measure to summarize the difference, illustrate your findings with a figure, and explain what the results tell you about your hypothesis. Submit one knitted PDF report and its source <code>.Rmd</code> file. Set <code>echo=FALSE</code> so that your code is not printed in the PDF. Your report should include:</p>
+<ul>
+<li>Project title</li>
+<li>Abstract (250 words)</li>
+<li>A Research Question</li>
+<li>Methods section that describes your approach</li>
+<li>Results section with one or two clear figures and at least one quantitative result (e.g. a difference in an equilibrium value, eigenvalue, or timescale), an interpretation of the results</li>
+<li>Conclusion section that answers the research question</li>
+<li>All code required to reproduce the analysis</li>
+</ul>
+<div id="example-projects" class="section level2" number="12.1">
+<h2>
+<span class="header-section-number">12.1</span> Example Projects<a class="anchor" aria-label="anchor" href="#example-projects"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li>Parameter sensitivity of Budyko energy-balance model (Week 2)</li>
+</ul>
+<p>How do changes in the Budyko energy-balance model coefficients <span class="math inline">\(A\)</span> and/or <span class="math inline">\(B\)</span> affect the location of the unstable equilibrium?</p>
+<ul>
+<li>Parameter sensitivity of circulation regimes in the Stommel model (Week 3)</li>
+</ul>
+<p>How sensitive is the equilibrium circulation mode to changes in the parameter <span class="math inline">\(R\)</span>, which expresses the relative effect of salinity and temperature on seawater density?</p>
+<ul>
+<li>Freshwater-hosing threshold sensitivity in QUEST (Week 3)</li>
+</ul>
+<p>By how much must QUEST’s reference freshwater flux increase for the thermohaline circulation to collapse?</p>
+<ul>
+<li>Finite-time mapping sensitivity in QUEST eigenanalysis (Week 4)</li>
+</ul>
+<p>How sensitive are the dominant QUEST eigenvalue and its characteristic timescale to changing the discrete mapping interval from 50 years to 25 years?</p>
+<ul>
+<li>Effect of NPZD on historical ocean acidification (Week 5)</li>
+</ul>
+<p>Does enabling QUEST’s NPZD module change the simulated 1800–2024 decline in global ocean pH under the same anthropogenic-emissions forcing?</p>
+<ul>
+<li>Grazing sensitivity in the isolated NPZD model (Week 6)</li>
+</ul>
+<p>How does changing the grazing parameter <span class="math inline">\(\lambda\)</span> affect phytoplankton biomass, zooplankton biomass, and the time required for the isolated NPZD model to approach its final state?</p>
+<ul>
+<li>Temperature-tolerance sensitivity of the terrestrial carbon sink (Week 7)</li>
+</ul>
+<p>How does changes in the terrestrial NPP temperature-width parameter <span class="math inline">\(sigma_T\)</span> affect the temperature at which low-latitude net ecosystem productivity changes from a carbon sink to a carbon source?</p>
+<ul>
+<li>Initial ice-sheet sensitivity in the Weertman model (Week 8)</li>
+</ul>
+<p>Under the same Milankovitch forcing, does the Weertman model retain a long-term memory of its initial conditions with respect to the ice sheet’s half=length <span class="math inline">\(L\)</span>?</p>
+<ul>
+<li>Attribution (Week 9)</li>
+</ul>
+<p>How does the dynamic coupling affect variables other than GMST under SSP5-8.5? Here you can use the already existing data sets, but plot other variables such as atmospheric CO<span class="math inline">\(_2\)</span> concentration, radiative imbalance at TOA, etc.</p>
+<ul>
+<li>Ocean carbon chemistry attribution under SSP5-8.5 (Week 9)</li>
+</ul>
+<p>How will carbon chemistry evolve under SSP5-8.5? Here you can redo future runs turning carbonate diagnostics on: <code>config$flags$diagnose_carbonates = TRUE</code></p>
+<ul>
+<li>Sea-ice attribution under SSP5-8.5 (Week 10)</li>
+</ul>
+<p>How much does dynamic sea ice amplify SSP5-8.5 warming by 2100 and 2200 relative to a simulation in which sea-ice area is held at its initial equilibrium value?</p>
+<ul>
+<li>Time-window sensitivity of a paleoclimate circulation–temperature relationship (Week 11)</li>
+</ul>
+<p>How sensitive is the estimated thermohaline-circulation response to warming to the paleoclimate time window selected for the regression?</p>
+</div>
+<div id="report-structure" class="section level2" number="12.2">
+<h2>
+<span class="header-section-number">12.2</span> Report structure<a class="anchor" aria-label="anchor" href="#report-structure"><i class="fas fa-link"></i></a>
+</h2>
+<ul>
+<li><p>Title: Use a specific scientific title</p></li>
+<li><p>Abstract: A 250-word summary of your research question, your approach, and results.</p></li>
+<li><p>State the selected research question and give a short hypothesis. Identify the expected sign or pattern of the response where possible.</p></li>
+<li>
+<p>Methods: Do not reproduce a long general description of QUEST. Focus on what is needed to understand your experiment. Briefly describe:</p>
+<ul>
+<li>Baseline experiment</li>
+<li>Modified experiment</li>
+<li>Variable changed</li>
+<li>Outputs and quantitative diagnostic</li>
+</ul>
+</li>
+<li><p>Results: Present one or two figures and the required numerical result. Describe the figure. Only write what can be supported by evidence.</p></li>
+<li><p>Discussion: Interpret your findings. Here you have room to speculate on the causes that can not be directly inferred from the data and that would require further analysis or experiments for verification.</p></li>
+<li><p>Conclusion: Answer the research question in two or three sentences and include the most important numerical result.</p></li>
+</ul>
+</div>
 </div>
   <div class="chapter-nav">
 <div class="prev"><a href="week-11-paleoclimatic-simulations.html"><span class="header-section-number">11</span> Week 11: Paleoclimatic Simulations</a></div>
 <div class="next"><a href="appendix-i-linear-algebra.html"><span class="header-section-number">13</span> Appendix (I): Linear Algebra</a></div>
 </div></main><div class="col-md-3 col-lg-2 d-none d-md-block sidebar sidebar-chapter">
     <nav id="toc" data-toggle="toc" aria-label="On this page"><h2>On this page</h2>
-      <ul class="nav navbar-nav"><li><a class="nav-link" href="#week-12-research-project"><span class="header-section-number">12</span> Week 12: Research Project</a></li></ul>
+      <ul class="nav navbar-nav">
+<li><a class="nav-link" href="#week-12-research-project"><span class="header-section-number">12</span> Week 12: Research Project</a></li>
+<li><a class="nav-link" href="#example-projects"><span class="header-section-number">12.1</span> Example Projects</a></li>
+<li><a class="nav-link" href="#report-structure"><span class="header-section-number">12.2</span> Report structure</a></li>
+</ul>
 
       <div class="book-extra">
         <ul class="list-unstyled">
